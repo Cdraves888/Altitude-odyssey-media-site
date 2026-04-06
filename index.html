@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Altitude Odyssey Media</title>
+  <meta name="description" content="Altitude Odyssey Media is a cinematic aerial brand built around atmosphere, motion, and perspective." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --text:#f3ede3;
+      --muted:#b9b09f;
+      --gold:#d7b56f;
+      --line:rgba(215,181,111,.20);
+      --shadow:0 24px 70px rgba(0,0,0,.45);
+      --max:1180px;
+      --radius:28px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top, rgba(215,181,111,.08), transparent 25%),
+        linear-gradient(180deg, #0b0b0b 0%, #080808 100%);
+      font-family:Inter, system-ui, sans-serif;
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .container{width:min(calc(100% - 2rem), var(--max)); margin:0 auto}
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:blur(10px);
+      background:rgba(9,9,9,.75);
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+    .nav{
+      min-height:78px;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    }
+    .brand{display:flex; flex-direction:column}
+    .brand strong{
+      font-family:"Cormorant Garamond", serif;
+      font-size:1.8rem;
+      font-weight:600;
+      letter-spacing:.03em;
+    }
+    .brand span{
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:.68rem;
+    }
+    nav ul{
+      display:flex; gap:1.35rem; list-style:none; margin:0; padding:0;
+      color:var(--muted); font-size:.95rem;
+    }
+    nav a:hover{color:var(--text)}
+    .hero{padding:clamp(4rem,8vw,7rem) 0 4rem}
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:2rem;
+      align-items:center;
+    }
+    .eyebrow{
+      color:var(--gold);
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:.74rem;
+      margin-bottom:1rem;
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+    }
+    .eyebrow::before{
+      content:"";
+      width:40px;
+      height:1px;
+      background:linear-gradient(90deg,var(--gold),transparent);
+      display:inline-block;
+    }
+    h1{
+      margin:0 0 1rem;
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(3.2rem,7vw,5.8rem);
+      line-height:.95;
+      letter-spacing:-.02em;
+      max-width:10ch;
+    }
+    .lead{
+      max-width:620px;
+      color:var(--muted);
+      font-size:1.08rem;
+      margin:0 0 1.9rem;
+    }
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.95rem;
+      margin-bottom:1.5rem;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:.98rem 1.35rem;
+      border-radius:999px;
+      border:1px solid var(--line);
+      font-weight:600;
+      transition:.2s ease;
+    }
+    .btn.primary{
+      background:linear-gradient(180deg, rgba(215,181,111,.18), rgba(215,181,111,.08));
+    }
+    .btn.secondary{
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+    }
+    .btn:hover{transform:translateY(-1px); border-color:rgba(215,181,111,.4)}
+    .micro{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.85rem;
+    }
+    .micro span{
+      padding:.55rem .9rem;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:999px;
+      background:rgba(255,255,255,.02);
+      color:#d9d1c4;
+      font-size:.92rem;
+    }
+    .portrait-wrap{
+      position:relative;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid var(--line);
+      border-radius:32px;
+      padding:1rem;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .portrait-wrap::after{
+      content:"";
+      position:absolute; right:-8%; bottom:-18%;
+      width:220px; height:220px;
+      background:radial-gradient(circle, rgba(215,181,111,.18), transparent 65%);
+      filter:blur(16px);
+    }
+    .portrait{
+      position:relative;
+      border-radius:24px;
+      overflow:hidden;
+      aspect-ratio:4 / 5;
+      background:#1b1b1b;
+    }
+    .portrait img{
+      width:100%; height:100%; object-fit:cover;
+      filter:saturate(.95) contrast(1.02);
+    }
+    .portrait-card{
+      position:absolute;
+      left:1.15rem;
+      bottom:1.15rem;
+      background:rgba(8,8,8,.68);
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);
+      border-radius:18px;
+      padding:.95rem 1rem;
+      max-width:82%;
+    }
+    .portrait-card strong{
+      display:block; font-size:1rem; margin-bottom:.2rem;
+    }
+    .portrait-card span{color:var(--muted); font-size:.9rem}
+    section{padding:1.5rem 0 4.5rem}
+    .section-head{margin-bottom:1.2rem}
+    .section-head h2{
+      margin:.2rem 0 0;
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(2.2rem,4.5vw,3.4rem);
+      font-weight:600;
+    }
+    .statement{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      padding:1.7rem;
+      color:#ded5c7;
+      box-shadow:var(--shadow);
+    }
+    .statement p{
+      margin:0;
+      color:var(--muted);
+      font-size:1.06rem;
+    }
+    .about-grid{
+      display:grid;
+      grid-template-columns:.85fr 1.15fr;
+      gap:1.25rem;
+      align-items:stretch;
+    }
+    .about-photo{
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      background:#111;
+    }
+    .about-photo img{width:100%; height:100%; object-fit:cover}
+    .about-copy{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:28px;
+      padding:1.7rem;
+      box-shadow:var(--shadow);
+    }
+    .about-copy p{margin:.1rem 0 1rem; color:var(--muted)}
+    .about-copy p:last-child{margin-bottom:0}
+    .launch{
+      background:linear-gradient(180deg, rgba(215,181,111,.10), rgba(215,181,111,.03));
+      border:1px solid rgba(215,181,111,.18);
+      border-radius:30px;
+      padding:2rem;
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:1.2rem;
+      align-items:center;
+    }
+    .launch h3{
+      margin:.25rem 0 .6rem;
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(2rem,4vw,3rem);
+      font-weight:600;
+    }
+    .launch p{margin:0; color:var(--muted)}
+    .info{display:grid; gap:.85rem}
+    .info-card{
+      padding:1rem 1.05rem;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.07);
+      background:rgba(0,0,0,.18);
+      color:#dfd5c5;
+    }
+    footer{
+      padding:1.25rem 0 2rem;
+      border-top:1px solid rgba(255,255,255,.05);
+      color:var(--muted);
+      font-size:.93rem;
+    }
+    @media (max-width:960px){
+      .hero-grid,.about-grid,.launch{grid-template-columns:1fr}
+      nav ul{display:none}
+      h1{max-width:12ch}
+    }
+    @media (max-width:640px){
+      .actions{flex-direction:column; align-items:stretch}
+      .btn{width:100%}
+      .hero{padding-top:2.8rem}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <strong>Altitude Odyssey Media</strong>
+        <span>Cinematic Aerial Brand</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#launch">Launch</a></li>
+          <li><a href="https://www.instagram.com/altitudeodyssey_2026/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Altitude Odyssey Media</div>
+          <h1>Refined visuals from above.</h1>
+          <p class="lead">
+            A cinematic aerial brand built on atmosphere, motion, and perspective.
+            Dark, polished, and intentionally minimal from the start.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="https://www.instagram.com/altitudeodyssey_2026/" target="_blank" rel="noopener noreferrer">View Instagram</a>
+            <a class="btn secondary" href="#about">About the founder</a>
+          </div>
+          <div class="micro">
+            <span>Luxury cinematic style</span>
+            <span>Portfolio in progress</span>
+            <span>Built with intention</span>
+          </div>
+        </div>
+
+        <div class="portrait-wrap">
+          <div class="portrait">
+            <img src="assets/img/founder.jpg" alt="Portrait of Conor Draves, founder of Altitude Odyssey Media" />
+            <div class="portrait-card">
+              <strong>Conor Draves</strong>
+              <span>Founder of Altitude Odyssey Media</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="statement">
+          <div class="eyebrow">Brand statement</div>
+          <p>
+            Altitude Odyssey Media is a cinematic aerial brand focused on refined motion, atmosphere, and perspective.
+            Built around a dark, polished visual style, the brand is centered on capturing places, landscapes, and moments
+            from above in a way that feels elevated, immersive, and intentional.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">About</div>
+          <h2>Built on atmosphere, motion, and perspective.</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-photo">
+            <img src="assets/img/founder.jpg" alt="Founder portrait" />
+          </div>
+          <div class="about-copy">
+            <p>
+              I created Altitude Odyssey Media to build something that feels more cinematic than generic — a brand focused on mood,
+              motion, and perspective from above.
+            </p>
+            <p>
+              My goal is to create visuals that feel polished, intentional, and memorable while growing a portfolio that reflects a darker,
+              more refined style.
+            </p>
+            <p>
+              I want the brand to feel premium from the start, with every image, post, and detail matching that standard.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="launch">
+      <div class="container">
+        <div class="launch">
+          <div>
+            <div class="eyebrow">Launch</div>
+            <h3>Portfolio launching soon.</h3>
+            <p>
+              Curated visual work and future releases are on the way.
+              Follow the journey on Instagram as the brand continues to grow.
+            </p>
+            <div class="actions" style="margin-top:1.25rem; margin-bottom:0;">
+              <a class="btn primary" href="https://www.instagram.com/altitudeodyssey_2026/" target="_blank" rel="noopener noreferrer">@altitudeodyssey_2026</a>
+            </div>
+          </div>
+          <div class="info">
+            <div class="info-card"><strong>Brand</strong><br/>Altitude Odyssey Media</div>
+            <div class="info-card"><strong>Focus</strong><br/>Cinematic aerial identity, atmosphere, and visual direction</div>
+            <div class="info-card"><strong>Status</strong><br/>Portfolio in progress</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Altitude Odyssey Media · Follow the journey on Instagram
+    </div>
+  </footer>
+</body>
+</html>

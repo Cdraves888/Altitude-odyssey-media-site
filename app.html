@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#0a0806"/>
+<title>AO Media — Client Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --gold:#c9a84c;--gold-light:#e2c47a;--gold-dim:#7a6030;
+  --black:#0a0806;--dark:#111009;--card:rgba(255,255,255,0.04);
+  --border:rgba(201,168,76,0.18);--text:#d4c9b0;--text-dim:#7a7260;
+  --white:#fffaf4;--green:#2d6a4f;--red:#8b2020;
+  --nav-h:68px;--tab-h:72px;
+}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--black);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;display:flex;flex-direction:column;max-width:430px;margin:0 auto;position:relative;}
+
+/* NOISE */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.03;pointer-events:none;z-index:9000;}
+
+/* TOP BAR */
+.topbar{height:var(--nav-h);background:rgba(10,8,6,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;position:sticky;top:0;z-index:100;}
+.tb-logo{display:flex;align-items:center;gap:10px;}
+.tb-logo-icon{width:28px;height:28px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.tb-logo-icon svg{width:16px;height:16px;}
+.tb-brand{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;}
+.tb-right{display:flex;align-items:center;gap:12px;}
+.tb-notify{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;}
+.tb-notify-dot{position:absolute;top:8px;right:8px;width:7px;height:7px;background:var(--gold);border-radius:50%;border:1px solid var(--black);}
+.tb-avatar{width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:11px;color:var(--black);cursor:pointer;}
+
+/* MAIN SCROLL AREA */
+.main{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab-h) + 16px);}
+.main::-webkit-scrollbar{display:none;}
+
+/* SCREENS */
+.screen{display:none;padding:20px;}
+.screen.active{display:block;}
+
+/* TAB BAR */
+.tabbar{height:var(--tab-h);background:rgba(10,8,6,0.97);backdrop-filter:blur(16px);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;padding:0 8px;padding-bottom:env(safe-area-inset-bottom);flex-shrink:0;position:sticky;bottom:0;z-index:100;}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 4px;cursor:pointer;transition:opacity .2s;}
+.tab-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;position:relative;}
+.tab-icon svg{width:20px;height:20px;stroke:var(--text-dim);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s;}
+.tab-label{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);transition:color .2s;}
+.tab.active .tab-icon svg{stroke:var(--gold);}
+.tab.active .tab-label{color:var(--gold);}
+.tab-active-dot{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:0;transition:opacity .2s;}
+.tab.active .tab-active-dot{opacity:1;}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:20px;margin-bottom:14px;transition:border-color .3s;}
+.card:active{border-color:var(--gold-dim);}
+.card-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--white);margin-bottom:4px;}
+.card-sub{font-size:11px;color:var(--text-dim);letter-spacing:.06em;}
+
+/* SCREEN: HOME */
+.home-hero{background:linear-gradient(135deg,rgba(201,168,76,.06),transparent);border:1px solid var(--border);padding:28px 20px;margin-bottom:16px;position:relative;overflow:hidden;}
+.home-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border:1px solid rgba(201,168,76,.08);border-radius:50%;}
+.home-hero::after{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;border:1px solid rgba(201,168,76,.06);border-radius:50%;}
+.hh-greeting{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px;}
+.hh-title{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);margin-bottom:4px;line-height:1.1;}
+.hh-sub{font-size:11px;color:var(--text-dim);}
+
+.quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.qa{background:var(--card);border:1px solid var(--border);padding:16px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:border-color .3s,background .3s;}
+.qa:active{border-color:var(--gold);background:rgba(201,168,76,.05);}
+.qa-icon{width:32px;height:32px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;}
+.qa-icon svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.qa-name{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--text);}
+.qa-desc{font-size:10px;color:var(--text-dim);line-height:1.5;}
+
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;margin-top:4px;}
+.sh-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);}
+.sh-link{font-size:10px;color:var(--text-dim);letter-spacing:.05em;cursor:pointer;transition:color .2s;}
+.sh-link:active{color:var(--gold);}
+
+.status-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(201,168,76,.08);}
+.status-item:last-child{border-bottom:none;}
+.si-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.si-dot.active{background:var(--gold);}
+.si-dot.done{background:var(--green);}
+.si-dot.pending{background:var(--text-dim);}
+.si-info{flex:1;}
+.si-name{font-size:13px;color:var(--white);margin-bottom:2px;}
+.si-meta{font-size:10px;color:var(--text-dim);}
+.si-badge{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;padding:4px 10px;border-radius:0;}
+.si-badge.active{background:rgba(201,168,76,.12);color:var(--gold);border:1px solid rgba(201,168,76,.25);}
+.si-badge.done{background:rgba(45,106,79,.15);color:#5aad7a;border:1px solid rgba(45,106,79,.25);}
+.si-badge.pending{background:rgba(255,255,255,.05);color:var(--text-dim);border:1px solid var(--border);}
+
+/* SCREEN: QUOTE BUILDER */
+.qb-service{display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--card);border:1px solid var(--border);margin-bottom:8px;cursor:pointer;transition:all .2s;}
+.qb-service.selected{border-color:var(--gold);background:rgba(201,168,76,.06);}
+.qbs-left{display:flex;align-items:center;gap:14px;}
+.qbs-icon{width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.qbs-icon svg{width:18px;height:18px;stroke:var(--gold-dim);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s;}
+.qb-service.selected .qbs-icon svg{stroke:var(--gold);}
+.qbs-name{font-size:14px;color:var(--white);}
+.qbs-price{font-size:11px;color:var(--text-dim);margin-top:2px;}
+.qbs-check{width:20px;height:20px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+.qb-service.selected .qbs-check{background:var(--gold);border-color:var(--gold);}
+.qbs-check svg{width:10px;height:10px;stroke:var(--black);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .2s;}
+.qb-service.selected .qbs-check svg{opacity:1;}
+
+.qb-total{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);padding:20px;margin:16px 0;}
+.qbt-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px;}
+.qbt-amount{font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--gold-light);line-height:1;}
+.qbt-note{font-size:10px;color:var(--text-dim);margin-top:6px;}
+
+.form-field{margin-bottom:14px;}
+.form-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;}
+.form-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--white);padding:12px 14px;font-family:'Raleway',sans-serif;font-size:14px;outline:none;transition:border-color .3s;border-radius:0;}
+.form-input:focus{border-color:var(--gold);}
+.form-input::placeholder{color:var(--text-dim);}
+.form-select{appearance:none;-webkit-appearance:none;background:rgba(255,255,255,.04) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a6030' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;}
+.form-select option{background:#111009;}
+textarea.form-input{min-height:80px;resize:none;}
+
+.btn-full{width:100%;background:var(--gold);color:var(--black);border:none;padding:15px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:8px;}
+.btn-full:active{background:var(--gold-light);}
+.btn-outline-full{width:100%;background:transparent;color:var(--gold);border:1px solid var(--border);padding:14px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:8px;}
+.btn-outline-full:active{border-color:var(--gold);}
+
+/* SCREEN: PROJECTS */
+.project-card{background:var(--card);border:1px solid var(--border);padding:20px;margin-bottom:12px;cursor:pointer;transition:border-color .3s;}
+.project-card:active{border-color:var(--gold-dim);}
+.pc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+.pc-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);line-height:1.2;}
+.pc-type{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim);margin-top:4px;}
+.pc-status{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;padding:5px 10px;border:1px solid;}
+.pc-status.building{color:var(--gold);border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.08);}
+.pc-status.review{color:#7ab8e0;border-color:rgba(122,184,224,.3);background:rgba(122,184,224,.08);}
+.pc-status.live{color:#5aad7a;border-color:rgba(90,173,122,.3);background:rgba(90,173,122,.08);}
+.pc-status.planning{color:var(--text-dim);border-color:var(--border);background:var(--card);}
+
+.progress-bar{height:2px;background:rgba(255,255,255,.06);margin-bottom:12px;position:relative;}
+.progress-fill{height:100%;background:linear-gradient(to right,var(--gold-dim),var(--gold));transition:width .6s ease;}
+.pc-progress-label{display:flex;justify-content:space-between;font-size:10px;color:var(--text-dim);margin-bottom:8px;}
+
+.pc-milestones{display:flex;gap:6px;flex-wrap:wrap;}
+.pc-milestone{font-size:9px;padding:4px 8px;border:1px solid var(--border);color:var(--text-dim);}
+.pc-milestone.done{border-color:rgba(90,173,122,.3);color:#5aad7a;background:rgba(90,173,122,.06);}
+.pc-milestone.active{border-color:rgba(201,168,76,.3);color:var(--gold);background:rgba(201,168,76,.06);}
+
+/* SCREEN: INVOICES */
+.invoice-card{background:var(--card);border:1px solid var(--border);padding:18px 20px;margin-bottom:10px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:border-color .3s;}
+.invoice-card:active{border-color:var(--gold-dim);}
+.inv-icon{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.inv-icon svg{width:18px;height:18px;stroke:var(--gold-dim);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.inv-info{flex:1;}
+.inv-name{font-size:14px;color:var(--white);margin-bottom:2px;}
+.inv-date{font-size:10px;color:var(--text-dim);}
+.inv-right{text-align:right;}
+.inv-amount{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);}
+.inv-status{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;margin-top:3px;}
+.inv-status.paid{color:#5aad7a;}
+.inv-status.pending{color:var(--gold);}
+.inv-status.overdue{color:#e07a7a;}
+
+.inv-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;border:1px solid var(--border);margin-bottom:16px;}
+.is-item{padding:16px 12px;background:var(--card);text-align:center;}
+.is-num{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold-light);}
+.is-label{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-top:4px;}
+
+/* SCREEN: CONTACT */
+.contact-method{display:flex;align-items:center;gap:16px;padding:16px;background:var(--card);border:1px solid var(--border);margin-bottom:10px;cursor:pointer;transition:all .2s;text-decoration:none;}
+.contact-method:active{border-color:var(--gold);background:rgba(201,168,76,.05);}
+.cm-icon{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cm-icon svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.cm-info{flex:1;}
+.cm-name{font-size:14px;color:var(--white);margin-bottom:2px;}
+.cm-detail{font-size:10px;color:var(--text-dim);}
+.cm-arrow{color:var(--text-dim);font-size:18px;}
+
+.faq-item{border-bottom:1px solid rgba(201,168,76,.08);padding:16px 0;cursor:pointer;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--white);}
+.faq-toggle{color:var(--gold-dim);font-size:18px;transition:transform .3s;flex-shrink:0;margin-left:12px;}
+.faq-item.open .faq-toggle{transform:rotate(45deg);}
+.faq-a{font-size:11px;color:var(--text-dim);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;}
+.faq-item.open .faq-a{max-height:200px;padding-top:12px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:calc(var(--tab-h) + 16px);left:50%;transform:translateX(-50%) translateY(20px);background:rgba(17,16,9,.97);border:1px solid var(--gold);color:var(--gold-light);font-family:'Cinzel',serif;font-size:9px;letter-spacing:.25em;text-transform:uppercase;padding:12px 24px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap;z-index:9999;max-width:calc(100% - 40px);text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* MODAL SHEET */
+.sheet-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:800;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px);}
+.sheet-overlay.open{opacity:1;pointer-events:all;}
+.sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:430px;background:var(--dark);border-top:1px solid var(--border);z-index:801;transition:transform .4s cubic-bezier(.16,1,.3,1);padding:24px 20px calc(env(safe-area-inset-bottom) + 24px);max-height:80vh;overflow-y:auto;}
+.sheet.open{transform:translateX(-50%) translateY(0);}
+.sheet-handle{width:36px;height:3px;background:var(--border);border-radius:2px;margin:0 auto 20px;}
+.sheet-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold-light);font-style:italic;margin-bottom:4px;}
+.sheet-sub{font-size:11px;color:var(--text-dim);margin-bottom:24px;}
+
+/* SUCCESS STATE */
+.success-state{text-align:center;padding:40px 20px;}
+.ss-mark{width:60px;height:60px;border:1px solid rgba(201,168,76,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
+.ss-mark svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.ss-title{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold-light);font-style:italic;margin-bottom:8px;}
+.ss-text{font-size:12px;color:var(--text-dim);line-height:1.8;}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:16px 0;}
+.divider-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:var(--text-dim);text-align:center;padding:0 12px;background:var(--black);width:fit-content;margin:-1px auto 0;position:relative;}
+
+/* PAGE TITLES */
+.page-title{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--white);margin-bottom:4px;}
+.page-sub{font-size:11px;color:var(--text-dim);margin-bottom:20px;letter-spacing:.05em;}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="tb-logo">
+    <div class="tb-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12,2 22,20 2,20"/>
+        <circle cx="12" cy="13" r="3"/>
+      </svg>
+    </div>
+    <span class="tb-brand">AO Media</span>
+  </div>
+  <div class="tb-right">
+    <div class="tb-notify" onclick="showToast('No new notifications')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7a7260" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <div class="tb-notify-dot"></div>
+    </div>
+    <div class="tb-avatar">CD</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- HOME -->
+  <div class="screen active" id="screen-home">
+    <div class="home-hero">
+      <div class="hh-greeting">Welcome back</div>
+      <div class="hh-title">Conor Draves</div>
+      <div class="hh-sub">Altitude Odyssey Media · Client Portal</div>
+    </div>
+
+    <div class="quick-actions">
+      <div class="qa" onclick="switchTab('quote')">
+        <div class="qa-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="qa-name">Get a Quote</div>
+        <div class="qa-desc">Build your custom project estimate</div>
+      </div>
+      <div class="qa" onclick="switchTab('projects')">
+        <div class="qa-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="qa-name">My Projects</div>
+        <div class="qa-desc">Track your active builds</div>
+      </div>
+      <div class="qa" onclick="switchTab('invoices')">
+        <div class="qa-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="qa-name">Invoices</div>
+        <div class="qa-desc">View payments & history</div>
+      </div>
+      <div class="qa" onclick="switchTab('contact')">
+        <div class="qa-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="qa-name">Contact</div>
+        <div class="qa-desc">Message the team directly</div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <div class="sh-title">Active Projects</div>
+      <div class="sh-link" onclick="switchTab('projects')">View all</div>
+    </div>
+    <div class="card" style="padding:16px 20px;">
+      <div class="status-item">
+        <div class="si-dot active"></div>
+        <div class="si-info"><div class="si-name">Brand Website Rebuild</div><div class="si-meta">Web Design · The Presence</div></div>
+        <div class="si-badge active">Building</div>
+      </div>
+      <div class="status-item">
+        <div class="si-dot done"></div>
+        <div class="si-info"><div class="si-name">OG Social Preview</div><div class="si-meta">Visual Identity</div></div>
+        <div class="si-badge done">Complete</div>
+      </div>
+      <div class="status-item">
+        <div class="si-dot pending"></div>
+        <div class="si-info"><div class="si-name">Services Page</div><div class="si-meta">Web Design · Add-on</div></div>
+        <div class="si-badge pending">In Review</div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:8px;">
+      <div class="sh-title">Quick Links</div>
+    </div>
+    <div class="card" style="padding:0;">
+      <div class="status-item" style="padding:14px 16px;cursor:pointer;" onclick="window.open('https://altitudeodysseymedia.com','_blank')">
+        <div class="si-info"><div class="si-name">Live Website</div><div class="si-meta">altitudeodysseymedia.com</div></div>
+        <div style="color:var(--text-dim);font-size:18px;">›</div>
+      </div>
+      <div class="status-item" style="padding:14px 16px;cursor:pointer;" onclick="window.open('https://instagram.com/altitudeodyssey_2026','_blank')">
+        <div class="si-info"><div class="si-name">Instagram</div><div class="si-meta">@altitudeodyssey_2026</div></div>
+        <div style="color:var(--text-dim);font-size:18px;">›</div>
+      </div>
+      <div class="status-item" style="padding:14px 16px;cursor:pointer;border-bottom:none;" onclick="switchTab('quote')">
+        <div class="si-info"><div class="si-name">Start a New Project</div><div class="si-meta">Build a custom quote</div></div>
+        <div style="color:var(--gold);font-size:18px;">›</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE BUILDER -->
+  <div class="screen" id="screen-quote">
+    <div class="page-title">Quote Builder</div>
+    <div class="page-sub">Select services to estimate your project cost.</div>
+
+    <div id="quote-services">
+      <div class="section-head"><div class="sh-title">Web Design</div></div>
+      <div class="qb-service" onclick="toggleService(this, 399, 'The Landing — Single Page')" data-price="399" data-name="The Landing">
+        <div class="qbs-left"><div class="qbs-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></div><div><div class="qbs-name">The Landing</div><div class="qbs-price">From $399 · Single page</div></div></div>
+        <div class="qbs-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="qb-service" onclick="toggleService(this, 799, 'The Presence — Full Site')" data-price="799" data-name="The Presence">
+        <div class="qbs-left"><div class="qbs-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div><div class="qbs-name">The Presence</div><div class="qbs-price">From $799 · Full site + animations</div></div></div>
+        <div class="qbs-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="qb-service" onclick="toggleService(this, 1500, 'The Platform — Custom Build')" data-price="1500" data-name="The Platform">
+        <div class="qbs-left"><div class="qbs-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9M15 21V9"/></svg></div><div><div class="qbs-name">The Platform</div><div class="qbs-price">From $1,500 · Custom platform</div></div></div>
+        <div class="qbs-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+
+      <div class="section-head" style="margin-top:16px;"><div class="sh-title">Aerial & Drone</div></div>
+      <div class="qb-service" onclick="toggleService(this, 299, 'The Flyover — Aerial Shoot')" data-price="299" data-name="The Flyover">
+        <div class="qbs-left"><div class="qbs-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5"/></svg></div><div><div class="qbs-name">The Flyover</div><div class="qbs-price">From $299 · 1hr, photos + clip</div></div></div>
+        <div class="qbs-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="qb-service" onclick="toggleService(this, 599, 'The Cinematic — Aerial Session')" data-price="599" data-name="The Cinematic">
+        <div class="qbs-left"><div class="qbs-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div><div class="qbs-name">The Cinematic</div><div class="qbs-price">From $599 · 3hr, full edit</div></div></div>
+        <div class="qbs-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+
+      <div class="section-head" style="margin-top:16px;"><div class="sh-title">Add-Ons</div></div>
+      <div class="qb-service" onclick="toggleService(this, 75, 'Social Preview Card')" data-price="75" data-name="Social Preview Card">
+        <div class="qbs-left"><div class="qbs-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 20h18"/></svg></div><div><div class="qbs-name">Social Preview Card</div><div class="qbs-price">$75 · OG image for link sharing</div></div></div>
+        <div class="qbs-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="qb-service" onclick="toggleService(this, 350, '3D Render — Single Scene')" data-price="350" data-name="3D Render">
+        <div class="qbs-left"><div class="qbs-icon"><svg viewBox="0 0 24 24"><path d="M12 2l9 4.9V17L12 22 3 17V6.9L12 2z"/></svg></div><div><div class="qbs-name">3D Render</div><div class="qbs-price">$350 · Single scene</div></div></div>
+        <div class="qbs-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="qb-service" onclick="toggleService(this, 120, 'Monthly Maintenance')" data-price="120" data-name="Monthly Maintenance">
+        <div class="qbs-left"><div class="qbs-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div><div class="qbs-name">Monthly Maintenance</div><div class="qbs-price">$120/mo · Updates & support</div></div></div>
+        <div class="qbs-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+    </div>
+
+    <div class="qb-total">
+      <div class="qbt-label">Estimated Total</div>
+      <div class="qbt-amount" id="qb-total-amount">$0</div>
+      <div class="qbt-note" id="qb-total-note">Select services above to build your estimate</div>
+    </div>
+
+    <div id="qb-form-section" style="display:none;">
+      <div class="divider"></div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Your Details</div>
+      <div class="form-field"><label class="form-label">Name</label><input class="form-input" type="text" placeholder="Your name" id="qb-name"/></div>
+      <div class="form-field"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="your@email.com" id="qb-email"/></div>
+      <div class="form-field"><label class="form-label">Timeline</label>
+        <select class="form-input form-select" id="qb-timeline">
+          <option>ASAP</option><option>Within 2 weeks</option><option>Within a month</option><option>No rush</option>
+        </select>
+      </div>
+      <div class="form-field"><label class="form-label">Additional Notes</label><textarea class="form-input" placeholder="Anything else we should know..." id="qb-notes"></textarea></div>
+      <button class="btn-full" onclick="submitQuote()">Send Quote Request</button>
+      <button class="btn-outline-full" onclick="resetQuote()">Start Over</button>
+    </div>
+
+    <div id="qb-success" style="display:none;">
+      <div class="success-state">
+        <div class="ss-mark"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="ss-title">Quote Sent!</div>
+        <p class="ss-text">Your estimate has been submitted. Expect a detailed quote within 24 hours.</p>
+        <button class="btn-full" style="margin-top:24px;" onclick="resetQuote()">Build Another Quote</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="screen" id="screen-projects">
+    <div class="page-title">My Projects</div>
+    <div class="page-sub">Track your active and completed builds.</div>
+
+    <div class="project-card" onclick="openProject(0)">
+      <div class="pc-header">
+        <div><div class="pc-name">Brand Website Rebuild</div><div class="pc-type">Web Design · The Presence</div></div>
+        <div class="pc-status building">Building</div>
+      </div>
+      <div class="pc-progress-label"><span>Progress</span><span>65%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div>
+      <div class="pc-milestones">
+        <div class="pc-milestone done">Scoped</div>
+        <div class="pc-milestone done">Deposit Paid</div>
+        <div class="pc-milestone done">Design</div>
+        <div class="pc-milestone active">Build</div>
+        <div class="pc-milestone">Review</div>
+        <div class="pc-milestone">Launch</div>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openProject(1)">
+      <div class="pc-header">
+        <div><div class="pc-name">Services & Pricing Page</div><div class="pc-type">Web Design · Add-on Page</div></div>
+        <div class="pc-status review">In Review</div>
+      </div>
+      <div class="pc-progress-label"><span>Progress</span><span>90%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
+      <div class="pc-milestones">
+        <div class="pc-milestone done">Scoped</div>
+        <div class="pc-milestone done">Deposit Paid</div>
+        <div class="pc-milestone done">Design</div>
+        <div class="pc-milestone done">Build</div>
+        <div class="pc-milestone active">Review</div>
+        <div class="pc-milestone">Launch</div>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openProject(2)">
+      <div class="pc-header">
+        <div><div class="pc-name">Social Preview Card</div><div class="pc-type">Visual Identity · OG Image</div></div>
+        <div class="pc-status live">Live</div>
+      </div>
+      <div class="pc-progress-label"><span>Progress</span><span>100%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+      <div class="pc-milestones">
+        <div class="pc-milestone done">Scoped</div>
+        <div class="pc-milestone done">Paid</div>
+        <div class="pc-milestone done">Design</div>
+        <div class="pc-milestone done">Delivered</div>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openProject(3)">
+      <div class="pc-header">
+        <div><div class="pc-name">Client Portal App</div><div class="pc-type">Web App · PWA</div></div>
+        <div class="pc-status planning">Planning</div>
+      </div>
+      <div class="pc-progress-label"><span>Progress</span><span>20%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
+      <div class="pc-milestones">
+        <div class="pc-milestone done">Scoped</div>
+        <div class="pc-milestone active">Deposit</div>
+        <div class="pc-milestone">Design</div>
+        <div class="pc-milestone">Build</div>
+        <div class="pc-milestone">Launch</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVOICES -->
+  <div class="screen" id="screen-invoices">
+    <div class="page-title">Invoices</div>
+    <div class="page-sub">Payment history and outstanding balances.</div>
+
+    <div class="inv-summary">
+      <div class="is-item"><div class="is-num">$1,597</div><div class="is-label">Total Paid</div></div>
+      <div class="is-item"><div class="is-num">$399</div><div class="is-label">Outstanding</div></div>
+      <div class="is-item"><div class="is-num">3</div><div class="is-label">Invoices</div></div>
+    </div>
+
+    <div class="section-head"><div class="sh-title">Recent</div></div>
+
+    <div class="invoice-card" onclick="openInvoice(0)">
+      <div class="inv-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="inv-info"><div class="inv-name">INV-001 · Brand Website</div><div class="inv-date">Apr 2, 2026 · Deposit 50%</div></div>
+      <div class="inv-right"><div class="inv-amount">$399</div><div class="inv-status paid">Paid</div></div>
+    </div>
+    <div class="invoice-card" onclick="openInvoice(1)">
+      <div class="inv-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="inv-info"><div class="inv-name">INV-002 · Social Preview</div><div class="inv-date">Apr 5, 2026 · Full payment</div></div>
+      <div class="inv-right"><div class="inv-amount">$75</div><div class="inv-status paid">Paid</div></div>
+    </div>
+    <div class="invoice-card" onclick="openInvoice(2)">
+      <div class="inv-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="inv-info"><div class="inv-name">INV-003 · Services Page</div><div class="inv-date">Apr 8, 2026 · Balance due</div></div>
+      <div class="inv-right"><div class="inv-amount">$399</div><div class="inv-status pending">Due</div></div>
+    </div>
+
+    <button class="btn-outline-full" style="margin-top:8px;" onclick="showToast('Payment portal coming soon')">Pay Balance · $399</button>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="screen" id="screen-contact">
+    <div class="page-title">Contact</div>
+    <div class="page-sub">Reach out directly — response within 24 hours.</div>
+
+    <a class="contact-method" href="mailto:hello@altitudeodysseymedia.com">
+      <div class="cm-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <div class="cm-info"><div class="cm-name">Email</div><div class="cm-detail">hello@altitudeodysseymedia.com</div></div>
+      <div class="cm-arrow">›</div>
+    </a>
+    <a class="contact-method" href="https://instagram.com/altitudeodyssey_2026" target="_blank">
+      <div class="cm-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#c9a84c" stroke="none"/></svg></div>
+      <div class="cm-info"><div class="cm-name">Instagram</div><div class="cm-detail">@altitudeodyssey_2026</div></div>
+      <div class="cm-arrow">›</div>
+    </a>
+    <div class="contact-method" onclick="openMessageSheet()">
+      <div class="cm-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <div class="cm-info"><div class="cm-name">Send a Message</div><div class="cm-detail">Quick message — we reply fast</div></div>
+      <div class="cm-arrow">›</div>
+    </div>
+    <div class="contact-method" onclick="switchTab('quote')">
+      <div class="cm-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="cm-info"><div class="cm-name">Start a New Project</div><div class="cm-detail">Build a quote in 60 seconds</div></div>
+      <div class="cm-arrow" style="color:var(--gold);">›</div>
+    </div>
+
+    <div class="divider" style="margin:20px 0;"></div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;">FAQ</div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How long does a website take? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">The Landing (single page) takes 3–5 days. The Presence (full site) takes 7–14 days. The Platform and custom builds are scoped per project.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Do I own everything you build? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Yes. Once final payment is received you have full ownership of all delivered files, code, and assets.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Is a deposit required? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Yes — 50% upfront to begin, 50% on completion before final delivery.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Are drone services available now? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Available with commercial licensing upon Part 107 certification. Web design is fully available now with no restrictions.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TAB BAR -->
+<div class="tabbar">
+  <div class="tab active" onclick="switchTab('home')" id="tab-home">
+    <div class="tab-icon">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <div class="tab-active-dot"></div>
+    </div>
+    <div class="tab-label">Home</div>
+  </div>
+  <div class="tab" onclick="switchTab('quote')" id="tab-quote">
+    <div class="tab-icon">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      <div class="tab-active-dot"></div>
+    </div>
+    <div class="tab-label">Quote</div>
+  </div>
+  <div class="tab" onclick="switchTab('projects')" id="tab-projects">
+    <div class="tab-icon">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <div class="tab-active-dot"></div>
+    </div>
+    <div class="tab-label">Projects</div>
+  </div>
+  <div class="tab" onclick="switchTab('invoices')" id="tab-invoices">
+    <div class="tab-icon">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <div class="tab-active-dot"></div>
+    </div>
+    <div class="tab-label">Invoices</div>
+  </div>
+  <div class="tab" onclick="switchTab('contact')" id="tab-contact">
+    <div class="tab-icon">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <div class="tab-active-dot"></div>
+    </div>
+    <div class="tab-label">Contact</div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- MESSAGE SHEET -->
+<div class="sheet-overlay" id="sheet-overlay" onclick="closeSheet()"></div>
+<div class="sheet" id="message-sheet">
+  <div class="sheet-handle"></div>
+  <div id="sheet-form-wrap">
+    <div class="sheet-title">Send a Message</div>
+    <p class="sheet-sub">We'll respond within 24 hours.</p>
+    <div class="form-field"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="Name" id="msg-name"/></div>
+    <div class="form-field"><label class="form-label">Message</label><textarea class="form-input" placeholder="What's on your mind?" id="msg-body" style="min-height:100px;"></textarea></div>
+    <button class="btn-full" onclick="sendMessage()">Send Message</button>
+    <button class="btn-outline-full" onclick="closeSheet()">Cancel</button>
+  </div>
+  <div id="sheet-success" style="display:none;">
+    <div class="success-state">
+      <div class="ss-mark"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="ss-title">Message Sent!</div>
+      <p class="ss-text">We'll be in touch within 24 hours.</p>
+      <button class="btn-full" style="margin-top:20px;" onclick="closeSheet()">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// TAB SWITCHING
+function switchTab(tab) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('screen-' + tab).classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelector('.main').scrollTop = 0;
+}
+
+// QUOTE BUILDER
+let selectedServices = [], totalPrice = 0;
+function toggleService(el, price, name) {
+  el.classList.toggle('selected');
+  if (el.classList.contains('selected')) {
+    selectedServices.push({name, price});
+    totalPrice += price;
+  } else {
+    selectedServices = selectedServices.filter(s => s.name !== name);
+    totalPrice -= price;
+  }
+  updateTotal();
+}
+function updateTotal() {
+  const amt = document.getElementById('qb-total-amount');
+  const note = document.getElementById('qb-total-note');
+  const formSection = document.getElementById('qb-form-section');
+  amt.textContent = '$' + totalPrice.toLocaleString();
+  if (selectedServices.length === 0) {
+    note.textContent = 'Select services above to build your estimate';
+    formSection.style.display = 'none';
+  } else {
+    const names = selectedServices.map(s => s.name).join(' + ');
+    note.textContent = names;
+    formSection.style.display = 'block';
+  }
+}
+function submitQuote() {
+  const name = document.getElementById('qb-name').value;
+  if (!name) { showToast('Please enter your name'); return; }
+  document.getElementById('qb-form-section').style.display = 'none';
+  document.getElementById('qb-total').style.display = 'none';
+  document.getElementById('quote-services').style.display = 'none';
+  document.getElementById('qb-success').style.display = 'block';
+}
+function resetQuote() {
+  document.querySelectorAll('.qb-service.selected').forEach(el => el.classList.remove('selected'));
+  selectedServices = []; totalPrice = 0;
+  document.getElementById('qb-name').value = '';
+  document.getElementById('qb-email').value = '';
+  document.getElementById('qb-notes').value = '';
+  document.getElementById('qb-success').style.display = 'none';
+  document.getElementById('qb-form-section').style.display = 'none';
+  document.getElementById('qb-total').style.display = 'block';
+  document.getElementById('quote-services').style.display = 'block';
+  updateTotal();
+  document.querySelector('.main').scrollTop = 0;
+}
+
+// PROJECTS
+function openProject(i) {
+  const names = ['Brand Website Rebuild', 'Services & Pricing Page', 'Social Preview Card', 'Client Portal App'];
+  showToast('Opening: ' + names[i]);
+}
+
+// INVOICES
+function openInvoice(i) {
+  const names = ['INV-001 · $399 · Paid', 'INV-002 · $75 · Paid', 'INV-003 · $399 · Due Apr 15'];
+  showToast(names[i]);
+}
+
+// SHEET
+function openMessageSheet() {
+  document.getElementById('sheet-overlay').classList.add('open');
+  document.getElementById('message-sheet').classList.add('open');
+  document.getElementById('sheet-form-wrap').style.display = '';
+  document.getElementById('sheet-success').style.display = 'none';
+}
+function closeSheet() {
+  document.getElementById('sheet-overlay').classList.remove('open');
+  document.getElementById('message-sheet').classList.remove('open');
+}
+function sendMessage() {
+  const name = document.getElementById('msg-name').value;
+  if (!name) { showToast('Please enter your name'); return; }
+  document.getElementById('sheet-form-wrap').style.display = 'none';
+  document.getElementById('sheet-success').style.display = 'block';
+}
+
+// FAQ
+function toggleFaq(el) { el.classList.toggle('open'); }
+
+// TOAST
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// HAPTIC (mobile)
+function haptic() { if (navigator.vibrate) navigator.vibrate(8); }
+document.querySelectorAll('.tab,.qa,.qb-service,.contact-method,.invoice-card,.project-card').forEach(el => {
+  el.addEventListener('touchstart', haptic, {passive: true});
+});
+</script>
+</body>
+</html>

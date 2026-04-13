@@ -4,6 +4,10 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Services & Pricing — Altitude Odyssey Media</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -126,6 +130,26 @@ nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color
 .ac-item-name{font-size:13px;color:var(--text);}
 .ac-item-note{font-size:10px;color:var(--text-dim);margin-top:2px;letter-spacing:.04em;}
 .ac-item-price{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold-light);white-space:nowrap;margin-left:20px;flex-shrink:0;}
+
+/* AC CALCULATOR */
+.ac-item[data-price]{cursor:pointer;user-select:none;}
+.ac-item[data-price]:hover{background:rgba(201,168,76,.06);}
+.ac-item.selected{background:rgba(201,168,76,.09)!important;}
+.ac-check{width:16px;height:16px;border:1px solid var(--border);border-radius:50%;flex-shrink:0;margin-right:14px;transition:all .25s;display:flex;align-items:center;justify-content:center;}
+.ac-item.selected .ac-check{background:var(--gold);border-color:var(--gold);}
+.ac-check-inner{width:6px;height:6px;border-radius:50%;background:var(--black);opacity:0;transition:opacity .2s;}
+.ac-item.selected .ac-check-inner{opacity:1;}
+.ac-total-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(17,16,9,.97);border-top:1px solid var(--border);padding:18px 10vw;display:flex;align-items:center;justify-content:space-between;z-index:200;transform:translateY(100%);transition:transform .45s cubic-bezier(.16,1,.3,1);backdrop-filter:blur(12px);}
+.ac-total-bar.visible{transform:translateY(0);}
+.ac-total-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;}
+.ac-total-amount{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold-light);line-height:1.1;}
+.ac-total-note{font-size:10px;color:var(--text-dim);letter-spacing:.05em;margin-top:3px;}
+.ac-total-actions{display:flex;align-items:center;gap:12px;}
+.ac-clear-btn{background:transparent;border:1px solid var(--border);color:var(--text-dim);padding:10px 18px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;cursor:pointer;transition:all .3s;text-transform:uppercase;}
+.ac-clear-btn:hover{border-color:var(--gold-dim);color:var(--text);}
+.ac-quote-btn{background:var(--gold);color:var(--black);border:none;padding:14px 28px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.35em;cursor:pointer;transition:background .3s;text-transform:uppercase;}
+.ac-quote-btn:hover{background:var(--gold-light);}
+@media(max-width:768px){.ac-total-bar{padding:16px 6vw;flex-direction:column;align-items:flex-start;gap:14px;}.ac-total-actions{width:100%;}.ac-quote-btn{flex:1;}}
 
 /* BUNDLES */
 .bundles{padding:100px 10vw;background:var(--dark);}
@@ -427,23 +451,36 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
     <div class="ac-cat">
       <div class="ac-cat-header"><span class="ac-cat-icon"></span><span class="ac-cat-name">Aerial & Drone</span></div>
       <div class="ac-items">
-        <div class="ac-item"><div><div class="ac-item-name">Additional Hour On Location</div><div class="ac-item-note">Beyond package time</div></div><div class="ac-item-price">$85</div></div>
-        <div class="ac-item"><div><div class="ac-item-name">Extra Edited Photos</div><div class="ac-item-note">Per 10 additional photos</div></div><div class="ac-item-price">$60</div></div>
-        <div class="ac-item"><div><div class="ac-item-name">Additional Short-Form Cut</div><div class="ac-item-note">30–60 second edit</div></div><div class="ac-item-price">$120</div></div>
-        <div class="ac-item"><div><div class="ac-item-name">Raw Footage Add-On</div><div class="ac-item-note">Unedited files delivered</div></div><div class="ac-item-price">$150</div></div>
-        <div class="ac-item"><div><div class="ac-item-name">Rush Delivery</div><div class="ac-item-note">Within 48 hours</div></div><div class="ac-item-price">+$200</div></div>
-        <div class="ac-item"><div><div class="ac-item-name">Travel Fee</div><div class="ac-item-note">Outside 25-mile radius</div></div><div class="ac-item-price">$0.55/mi</div></div>
+        <div class="ac-item" data-price="85"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Additional Hour On Location</div><div class="ac-item-note">Beyond package time</div></div><div class="ac-item-price">$85</div></div>
+        <div class="ac-item" data-price="60"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Extra Edited Photos</div><div class="ac-item-note">Per 10 additional photos</div></div><div class="ac-item-price">$60</div></div>
+        <div class="ac-item" data-price="120"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Additional Short-Form Cut</div><div class="ac-item-note">30–60 second edit</div></div><div class="ac-item-price">$120</div></div>
+        <div class="ac-item" data-price="150"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Raw Footage Add-On</div><div class="ac-item-note">Unedited files delivered</div></div><div class="ac-item-price">$150</div></div>
+        <div class="ac-item" data-price="200"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Rush Delivery</div><div class="ac-item-note">Within 48 hours</div></div><div class="ac-item-price">+$200</div></div>
+        <div class="ac-item"><div><div class="ac-item-name">Travel Fee</div><div class="ac-item-note">Outside 25-mile radius · quoted per trip</div></div><div class="ac-item-price">$0.55/mi</div></div>
       </div>
     </div>
     <div class="ac-cat">
       <div class="ac-cat-header"><span class="ac-cat-icon"></span><span class="ac-cat-name">Web & Digital</span></div>
       <div class="ac-items">
-        <div class="ac-item"><div><div class="ac-item-name">Social Preview (OG Image)</div><div class="ac-item-note">Standalone branded card</div></div><div class="ac-item-price">$75</div></div>
+        <div class="ac-item" data-price="75"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Social Preview (OG Image)</div><div class="ac-item-note">Standalone branded card</div></div><div class="ac-item-price">$75</div></div>
         <div class="ac-item"><div><div class="ac-item-name">Website Update / Revision</div><div class="ac-item-note">Copy, layout, or feature changes</div><div class="ac-item-note" style="opacity:0.55;font-size:0.85em;margin-top:2px;">Included free with Monthly Maintenance</div></div><div class="ac-item-price">$60/hr</div></div>
-        <div class="ac-item"><div><div class="ac-item-name">Additional Web Page</div><div class="ac-item-note">Added to existing site</div></div><div class="ac-item-price">$200</div></div>
-        <div class="ac-item"><div><div class="ac-item-name">Domain Setup & Deployment</div><div class="ac-item-note">DNS config, Fully deployed</div></div><div class="ac-item-price">$80</div></div>
-        <div class="ac-item"><div><div class="ac-item-name">Monthly Maintenance</div><div class="ac-item-note">Updates, changes, support</div></div><div class="ac-item-price">$120/mo</div></div>
+        <div class="ac-item" data-price="200"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Additional Web Page</div><div class="ac-item-note">Added to existing site</div></div><div class="ac-item-price">$200</div></div>
+        <div class="ac-item" data-price="80"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Domain Setup & Deployment</div><div class="ac-item-note">DNS config, Fully deployed</div></div><div class="ac-item-price">$80</div></div>
+        <div class="ac-item" data-price="120"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Monthly Maintenance</div><div class="ac-item-note">Updates, changes, support</div></div><div class="ac-item-price">$120/mo</div></div>
       </div>
+    </div>
+  </div>
+
+  <!-- AC TOTAL BAR -->
+  <div class="ac-total-bar" id="ac-total-bar">
+    <div>
+      <div class="ac-total-label">Estimated Total</div>
+      <div class="ac-total-amount" id="ac-total-amount">$0</div>
+      <div class="ac-total-note" id="ac-total-note">0 services selected</div>
+    </div>
+    <div class="ac-total-actions">
+      <button class="ac-clear-btn" onclick="clearAcSelection()">Clear</button>
+      <button class="ac-quote-btn" onclick="openModal(event)">Request Quote →</button>
     </div>
   </div>
 </section>
@@ -627,12 +664,12 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
       <div class="modal-title">Get a Free Quote</div>
       <p class="modal-sub">Tell me about your project and I'll respond with a detailed quote within 24 hours. No obligation.</p>
       <div class="mf-row">
-        <div class="mf"><label>Name</label><input type="text" id="sq-name" placeholder="Your name"/></div>
-        <div class="mf"><label>Email</label><input type="email" id="sq-email" placeholder="your@email.com"/></div>
+        <div class="mf"><label>Name</label><input id="qf-name" type="text" placeholder="Your name"/></div>
+        <div class="mf"><label>Email</label><input id="qf-email" type="email" placeholder="your@email.com"/></div>
       </div>
-      <div class="mf"><label>Phone (optional)</label><input type="tel" id="sq-phone" placeholder="+1 (555) 000-0000"/></div>
+      <div class="mf"><label>Phone (optional)</label><input id="qf-phone" type="tel" placeholder="+1 (555) 000-0000"/></div>
       <div class="mf"><label>Service Interested In</label>
-        <select id="sq-service">
+        <select id="qf-service">
           <option>Aerial Photography / Drone Shoot</option>
           <option>Web Design — The Landing ($399)</option>
           <option>Web Design — The Presence ($799)</option>
@@ -646,7 +683,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         </select>
       </div>
       <div class="mf"><label>Budget Range</label>
-        <select id="sq-budget">
+        <select id="qf-budget">
           <option>Under $500</option>
           <option>$500 – $1,000</option>
           <option>$1,000 – $2,000</option>
@@ -655,7 +692,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         </select>
       </div>
       <div class="mf"><label>Timeline</label>
-        <select id="sq-timeline">
+        <select id="qf-timeline">
           <option>ASAP / Rush</option>
           <option>Within 2 weeks</option>
           <option>Within a month</option>
@@ -663,7 +700,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         </select>
       </div>
       <div class="mf"><label>Tell me about your project</label>
-        <textarea id="sq-message" placeholder="What are you looking for? The more detail, the better your quote will be..."></textarea>
+        <textarea id="qf-message" placeholder="What are you looking for? The more detail, the better your quote will be..."></textarea>
       </div>
       <button class="modal-submit" onclick="submitQuote()">Send Quote Request →</button>
     </div>
@@ -675,6 +712,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 // CURSOR
 const cur=document.getElementById('cur'),cr=document.getElementById('cur-r');
@@ -700,6 +738,14 @@ function toggleFaq(el){
   el.classList.toggle('open');
 }
 
+// EMAILJS CONFIG — fill in your credentials from emailjs.com
+const EJS = {
+  publicKey:  'YOUR_PUBLIC_KEY',   // Account → API Keys
+  serviceId:  'YOUR_SERVICE_ID',   // Email Services tab
+  templateId: 'YOUR_TEMPLATE_ID',  // Email Templates tab
+};
+emailjs.init(EJS.publicKey);
+
 // MODAL
 function openModal(e){
   if(e)e.preventDefault();
@@ -715,29 +761,30 @@ function closeModal(e){
   }
 }
 function submitQuote(){
-  const name = document.getElementById('sq-name').value.trim();
-  const email = document.getElementById('sq-email').value.trim();
-  if (!name || !email) { alert('Please enter your name and email.'); return; }
-
+  const btn = document.querySelector('.modal-submit');
+  const name    = document.getElementById('qf-name').value.trim();
+  const email   = document.getElementById('qf-email').value.trim();
+  if(!name || !email){ alert('Please enter your name and email.'); return; }
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
   const params = {
-    from_name:    name,
-    from_email:   email,
-    from_phone:   document.getElementById('sq-phone').value.trim() || 'Not provided',
-    service:      document.getElementById('sq-service').value,
-    budget:       document.getElementById('sq-budget').value,
-    timeline:     document.getElementById('sq-timeline').value,
-    message:      document.getElementById('sq-message').value.trim() || 'No details provided',
-    to_email:     'eaglelover888@gmail.com'
+    from_name: name,
+    from_email: email,
+    phone:    document.getElementById('qf-phone').value.trim() || 'Not provided',
+    service:  document.getElementById('qf-service').value,
+    budget:   document.getElementById('qf-budget').value,
+    timeline: document.getElementById('qf-timeline').value,
+    message:  document.getElementById('qf-message').value.trim() || 'No message provided',
   };
-
-  emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', params)
+  emailjs.send(EJS.serviceId, EJS.templateId, params)
     .then(() => {
       document.getElementById('quote-form').style.display='none';
       document.getElementById('quote-success').classList.add('show');
     })
-    .catch(err => {
-      console.error('EmailJS error:', err);
-      alert('Sorry, something went wrong. Please try again.');
+    .catch(() => {
+      btn.textContent = 'Send Quote Request →';
+      btn.disabled = false;
+      alert('Something went wrong. Please try again or email directly.');
     });
 }
 
@@ -748,9 +795,27 @@ document.addEventListener('keydown',e=>{
     document.body.style.overflow='';
   }
 });
+
+// À LA CARTE CALCULATOR
+document.querySelectorAll('.ac-item[data-price]').forEach(item=>{
+  item.addEventListener('click',()=>{
+    item.classList.toggle('selected');
+    updateAcTotal();
+  });
+});
+function updateAcTotal(){
+  const selected=[...document.querySelectorAll('.ac-item.selected')];
+  const total=selected.reduce((sum,el)=>sum+parseFloat(el.dataset.price),0);
+  const bar=document.getElementById('ac-total-bar');
+  document.getElementById('ac-total-amount').textContent='$'+total.toLocaleString();
+  document.getElementById('ac-total-note').textContent=selected.length+' service'+(selected.length!==1?'s':'')+' selected';
+  bar.classList.toggle('visible',selected.length>0);
+}
+function clearAcSelection(){
+  document.querySelectorAll('.ac-item.selected').forEach(el=>el.classList.remove('selected'));
+  updateAcTotal();
+}
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>emailjs.init('YOUR_PUBLIC_KEY');</script>
 <script src="particles.js"></script>
 </body>
 </html>

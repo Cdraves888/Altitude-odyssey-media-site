@@ -647,12 +647,33 @@ function updateTotal() {
   }
 }
 function submitQuote() {
-  const name = document.getElementById('qb-name').value;
+  const name = document.getElementById('qb-name').value.trim();
+  const email = document.getElementById('qb-email').value.trim();
   if (!name) { showToast('Please enter your name'); return; }
-  document.getElementById('qb-form-section').style.display = 'none';
-  document.getElementById('qb-total').style.display = 'none';
-  document.getElementById('quote-services').style.display = 'none';
-  document.getElementById('qb-success').style.display = 'block';
+  if (!email) { showToast('Please enter your email'); return; }
+
+  const servicesList = selectedServices.map(s => s.name + ' (' + s.price + ')').join(', ') || 'None selected';
+  const params = {
+    from_name:   name,
+    from_email:  email,
+    timeline:    document.getElementById('qb-timeline').value,
+    message:     document.getElementById('qb-notes').value.trim() || 'No notes provided',
+    services:    servicesList,
+    total_price: '$' + totalPrice,
+    to_email:    'eaglelover888@gmail.com'
+  };
+
+  emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', params)
+    .then(() => {
+      document.getElementById('qb-form-section').style.display = 'none';
+      document.getElementById('qb-total').style.display = 'none';
+      document.getElementById('quote-services').style.display = 'none';
+      document.getElementById('qb-success').style.display = 'block';
+    })
+    .catch(err => {
+      console.error('EmailJS error:', err);
+      showToast('Something went wrong. Please try again.');
+    });
 }
 function resetQuote() {
   document.querySelectorAll('.qb-service.selected').forEach(el => el.classList.remove('selected'));
@@ -692,10 +713,24 @@ function closeSheet() {
   document.getElementById('message-sheet').classList.remove('open');
 }
 function sendMessage() {
-  const name = document.getElementById('msg-name').value;
+  const name = document.getElementById('msg-name').value.trim();
   if (!name) { showToast('Please enter your name'); return; }
-  document.getElementById('sheet-form-wrap').style.display = 'none';
-  document.getElementById('sheet-success').style.display = 'block';
+
+  const params = {
+    from_name:  name,
+    message:    document.getElementById('msg-body').value.trim() || 'No message provided',
+    to_email:   'eaglelover888@gmail.com'
+  };
+
+  emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', params)
+    .then(() => {
+      document.getElementById('sheet-form-wrap').style.display = 'none';
+      document.getElementById('sheet-success').style.display = 'block';
+    })
+    .catch(err => {
+      console.error('EmailJS error:', err);
+      showToast('Something went wrong. Please try again.');
+    });
 }
 
 // FAQ
@@ -717,6 +752,8 @@ document.querySelectorAll('.tab,.qa,.qb-service,.contact-method,.invoice-card,.p
   el.addEventListener('touchstart', haptic, {passive: true});
 });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('YOUR_PUBLIC_KEY');</script>
 <script src="particles.js"></script>
 </body>
 </html>

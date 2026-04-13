@@ -627,12 +627,12 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
       <div class="modal-title">Get a Free Quote</div>
       <p class="modal-sub">Tell me about your project and I'll respond with a detailed quote within 24 hours. No obligation.</p>
       <div class="mf-row">
-        <div class="mf"><label>Name</label><input type="text" placeholder="Your name"/></div>
-        <div class="mf"><label>Email</label><input type="email" placeholder="your@email.com"/></div>
+        <div class="mf"><label>Name</label><input type="text" id="sq-name" placeholder="Your name"/></div>
+        <div class="mf"><label>Email</label><input type="email" id="sq-email" placeholder="your@email.com"/></div>
       </div>
-      <div class="mf"><label>Phone (optional)</label><input type="tel" placeholder="+1 (555) 000-0000"/></div>
+      <div class="mf"><label>Phone (optional)</label><input type="tel" id="sq-phone" placeholder="+1 (555) 000-0000"/></div>
       <div class="mf"><label>Service Interested In</label>
-        <select>
+        <select id="sq-service">
           <option>Aerial Photography / Drone Shoot</option>
           <option>Web Design — The Landing ($399)</option>
           <option>Web Design — The Presence ($799)</option>
@@ -646,7 +646,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         </select>
       </div>
       <div class="mf"><label>Budget Range</label>
-        <select>
+        <select id="sq-budget">
           <option>Under $500</option>
           <option>$500 – $1,000</option>
           <option>$1,000 – $2,000</option>
@@ -655,7 +655,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         </select>
       </div>
       <div class="mf"><label>Timeline</label>
-        <select>
+        <select id="sq-timeline">
           <option>ASAP / Rush</option>
           <option>Within 2 weeks</option>
           <option>Within a month</option>
@@ -663,7 +663,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         </select>
       </div>
       <div class="mf"><label>Tell me about your project</label>
-        <textarea placeholder="What are you looking for? The more detail, the better your quote will be..."></textarea>
+        <textarea id="sq-message" placeholder="What are you looking for? The more detail, the better your quote will be..."></textarea>
       </div>
       <button class="modal-submit" onclick="submitQuote()">Send Quote Request →</button>
     </div>
@@ -715,8 +715,30 @@ function closeModal(e){
   }
 }
 function submitQuote(){
-  document.getElementById('quote-form').style.display='none';
-  document.getElementById('quote-success').classList.add('show');
+  const name = document.getElementById('sq-name').value.trim();
+  const email = document.getElementById('sq-email').value.trim();
+  if (!name || !email) { alert('Please enter your name and email.'); return; }
+
+  const params = {
+    from_name:    name,
+    from_email:   email,
+    from_phone:   document.getElementById('sq-phone').value.trim() || 'Not provided',
+    service:      document.getElementById('sq-service').value,
+    budget:       document.getElementById('sq-budget').value,
+    timeline:     document.getElementById('sq-timeline').value,
+    message:      document.getElementById('sq-message').value.trim() || 'No details provided',
+    to_email:     'eaglelover888@gmail.com'
+  };
+
+  emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', params)
+    .then(() => {
+      document.getElementById('quote-form').style.display='none';
+      document.getElementById('quote-success').classList.add('show');
+    })
+    .catch(err => {
+      console.error('EmailJS error:', err);
+      alert('Sorry, something went wrong. Please try again.');
+    });
 }
 
 // ESC
@@ -727,6 +749,8 @@ document.addEventListener('keydown',e=>{
   }
 });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('YOUR_PUBLIC_KEY');</script>
 <script src="particles.js"></script>
 </body>
 </html>

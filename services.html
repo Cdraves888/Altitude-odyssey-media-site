@@ -664,12 +664,12 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
       <div class="modal-title">Get a Free Quote</div>
       <p class="modal-sub">Tell me about your project and I'll respond with a detailed quote within 24 hours. No obligation.</p>
       <div class="mf-row">
-        <div class="mf"><label>Name</label><input id="qf-name" type="text" placeholder="Your name"/></div>
-        <div class="mf"><label>Email</label><input id="qf-email" type="email" placeholder="your@email.com"/></div>
+        <div class="mf"><label>Name</label><input id="qf-name" name="name" type="text" placeholder="Your name"/></div>
+        <div class="mf"><label>Email</label><input id="qf-email" name="email" type="email" placeholder="your@email.com"/></div>
       </div>
-      <div class="mf"><label>Phone (optional)</label><input id="qf-phone" type="tel" placeholder="+1 (555) 000-0000"/></div>
+      <div class="mf"><label>Phone (optional)</label><input id="qf-phone" name="phone" type="tel" placeholder="+1 (555) 000-0000"/></div>
       <div class="mf"><label>Service Interested In</label>
-        <select id="qf-service">
+        <select id="qf-service" name="service">
           <option>Aerial Photography / Drone Shoot</option>
           <option>Web Design — The Landing ($399)</option>
           <option>Web Design — The Presence ($799)</option>
@@ -683,7 +683,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         </select>
       </div>
       <div class="mf"><label>Budget Range</label>
-        <select id="qf-budget">
+        <select id="qf-budget" name="budget">
           <option>Under $500</option>
           <option>$500 – $1,000</option>
           <option>$1,000 – $2,000</option>
@@ -692,7 +692,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         </select>
       </div>
       <div class="mf"><label>Timeline</label>
-        <select id="qf-timeline">
+        <select id="qf-timeline" name="timeline">
           <option>ASAP / Rush</option>
           <option>Within 2 weeks</option>
           <option>Within a month</option>
@@ -700,7 +700,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         </select>
       </div>
       <div class="mf"><label>Tell me about your project</label>
-        <textarea id="qf-message" placeholder="What are you looking for? The more detail, the better your quote will be..."></textarea>
+        <textarea id="qf-message" name="message" placeholder="What are you looking for? The more detail, the better your quote will be..."></textarea>
       </div>
       <button class="modal-submit" onclick="submitQuote()">Send Quote Request →</button>
     </div>
@@ -712,7 +712,6 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 // CURSOR
 const cur=document.getElementById('cur'),cr=document.getElementById('cur-r');
@@ -738,14 +737,6 @@ function toggleFaq(el){
   el.classList.toggle('open');
 }
 
-// EMAILJS CONFIG — fill in your credentials from emailjs.com
-const EJS = {
-  publicKey:  'YOUR_PUBLIC_KEY',   // Account → API Keys
-  serviceId:  'YOUR_SERVICE_ID',   // Email Services tab
-  templateId: 'YOUR_TEMPLATE_ID',  // Email Templates tab
-};
-emailjs.init(EJS.publicKey);
-
 // MODAL
 function openModal(e){
   if(e)e.preventDefault();
@@ -767,19 +758,28 @@ function submitQuote(){
   if(!name || !email){ alert('Please enter your name and email.'); return; }
   btn.textContent = 'Sending…';
   btn.disabled = true;
-  const params = {
-    from_name: name,
-    from_email: email,
+  const data = {
+    name:     name,
+    email:    email,
     phone:    document.getElementById('qf-phone').value.trim() || 'Not provided',
     service:  document.getElementById('qf-service').value,
     budget:   document.getElementById('qf-budget').value,
     timeline: document.getElementById('qf-timeline').value,
     message:  document.getElementById('qf-message').value.trim() || 'No message provided',
   };
-  emailjs.send(EJS.serviceId, EJS.templateId, params)
-    .then(() => {
-      document.getElementById('quote-form').style.display='none';
-      document.getElementById('quote-success').classList.add('show');
+  fetch('https://formspree.io/f/xaqayyrr', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+    .then(r => r.json())
+    .then(res => {
+      if(res.ok){
+        document.getElementById('quote-form').style.display='none';
+        document.getElementById('quote-success').classList.add('show');
+      } else {
+        throw new Error('error');
+      }
     })
     .catch(() => {
       btn.textContent = 'Send Quote Request →';

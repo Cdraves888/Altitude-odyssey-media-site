@@ -2,7 +2,7 @@
 // Powered by Claude (Anthropic)
 
 (function () {
-  const WORKER_URL = 'https://aom-chat.YOUR_SUBDOMAIN.workers.dev';
+  const WORKER_URL = 'https://aom-chat.eaglelover888.workers.dev';
 
   const messages = [];
 

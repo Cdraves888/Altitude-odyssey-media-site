@@ -203,6 +203,32 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
+/* MAINTENANCE PLANS */
+.maintenance{padding:100px 10vw;background:var(--dark);}
+.maint-divider{width:48px;height:2px;background:var(--gold);margin:16px 0 0;}
+.maint-subtitle{font-size:13px;color:var(--text-dim);line-height:1.9;max-width:520px;margin:20px 0 52px;letter-spacing:.05em;}
+.maint-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--border);}
+.maint-card{padding:44px 36px;background:var(--card);border-right:1px solid var(--border);position:relative;transition:background .4s;}
+.maint-card:last-child{border-right:none;}
+.maint-card.featured{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.35);}
+.maint-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:6px 18px;white-space:nowrap;}
+.maint-plan{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;margin-top:8px;}
+.maint-price{font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--gold-light);line-height:1;margin-bottom:4px;}
+.maint-price-note{font-size:11px;color:var(--text-dim);letter-spacing:.1em;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border);}
+.maint-feature{display:flex;align-items:flex-start;gap:12px;font-size:12px;color:var(--text-dim);margin-bottom:12px;line-height:1.5;}
+.maint-feature::before{content:'';color:var(--gold);font-size:9px;margin-top:2px;flex-shrink:0;}
+.btn-maintenance-cta{width:100%;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;padding:14px;cursor:pointer;margin-top:28px;transition:all .3s;display:block;text-align:center;text-decoration:none;border:none;}
+.maint-card.featured .btn-maintenance-cta{background:var(--gold);color:var(--black);}
+.maint-card.featured .btn-maintenance-cta:hover{background:var(--gold-light);}
+.maint-card:not(.featured) .btn-maintenance-cta{background:transparent;color:var(--gold);border:1px solid var(--border);}
+.maint-card:not(.featured) .btn-maintenance-cta:hover{border-color:var(--gold);}
+@media(max-width:768px){
+  .maintenance{padding-left:6vw;padding-right:6vw;}
+  .maint-grid{grid-template-columns:1fr;}
+  .maint-card{border-right:none;border-bottom:1px solid var(--border);}
+  .maint-card:last-child{border-bottom:none;}
+}
+
 /* CONTACT MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
 .modal-overlay.open{display:flex;}
@@ -637,6 +663,59 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         <div class="faq-a">Web and digital services are available nationwide — everything is done remotely. Aerial services are local. Reach out and let's discuss your location and project scope.</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- MAINTENANCE PLANS -->
+<section class="maintenance sec" id="maintenance">
+  <div class="reveal">
+    <div class="ey">Maintenance Plans</div>
+    <h2 class="sh">Website <em>Maintenance</em><br>Plans</h2>
+    <div class="maint-divider"></div>
+    <p class="maint-subtitle">Keep your site fast, secure, and up to date — without lifting a finger.</p>
+  </div>
+  <div class="maint-grid reveal">
+
+    <!-- BASIC -->
+    <div class="maint-card">
+      <div class="maint-plan">Basic</div>
+      <div class="maint-price">$60</div>
+      <div class="maint-price-note">per month</div>
+      <div class="maint-feature">3 updates/month</div>
+      <div class="maint-feature">Domain renewal included</div>
+      <div class="maint-feature">Email support</div>
+      <div class="maint-feature">24hr response time</div>
+      <a href="#" class="btn-maintenance-cta" data-plan="basic">Get Started</a>
+    </div>
+
+    <!-- STANDARD -->
+    <div class="maint-card featured">
+      <div class="maint-badge">Most Popular</div>
+      <div class="maint-plan">Standard</div>
+      <div class="maint-price">$110</div>
+      <div class="maint-price-note">per month</div>
+      <div class="maint-feature">Unlimited small updates (24hr turnaround)</div>
+      <div class="maint-feature">Domain + hosting + renewal included</div>
+      <div class="maint-feature">24/7 uptime monitoring</div>
+      <div class="maint-feature">Basic SEO maintenance</div>
+      <div class="maint-feature">Google Analytics setup</div>
+      <a href="#" class="btn-maintenance-cta" data-plan="standard">Get Started</a>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="maint-card">
+      <div class="maint-plan">Premium</div>
+      <div class="maint-price">$160</div>
+      <div class="maint-price-note">per month</div>
+      <div class="maint-feature">Same-day updates (4hr turnaround)</div>
+      <div class="maint-feature">Domain + hosting + renewal included</div>
+      <div class="maint-feature">24/7 uptime monitoring</div>
+      <div class="maint-feature">Basic SEO maintenance</div>
+      <div class="maint-feature">One free new page per quarter</div>
+      <div class="maint-feature">Priority text/call support</div>
+      <a href="#" class="btn-maintenance-cta" data-plan="premium">Get Started</a>
+    </div>
+
   </div>
 </section>
 

@@ -1,9 +1,7 @@
 // Altitude Odyssey Media — AI Chat Bubble
 // Powered by Claude (Anthropic)
-
 (function () {
   const WORKER_URL = 'https://aom-chat.eaglelover888.workers.dev';
-
   const messages = [];
 
   // Inject styles
@@ -16,7 +14,6 @@
       z-index: 9999;
       font-family: 'Raleway', sans-serif;
     }
-
     #aom-chat-toggle {
       width: 58px;
       height: 58px;
@@ -31,18 +28,15 @@
       transition: transform 0.2s, box-shadow 0.2s;
       margin-left: auto;
     }
-
     #aom-chat-toggle:hover {
       transform: scale(1.08);
       box-shadow: 0 6px 28px rgba(201,168,76,0.55);
     }
-
     #aom-chat-toggle svg {
       width: 26px;
       height: 26px;
       fill: #0a0806;
     }
-
     #aom-chat-window {
       display: none;
       flex-direction: column;
@@ -55,11 +49,9 @@
       box-shadow: 0 12px 48px rgba(0,0,0,0.6);
       margin-bottom: 12px;
     }
-
     #aom-chat-window.open {
       display: flex;
     }
-
     #aom-chat-header {
       background: linear-gradient(135deg, #1a1508, #0f0d0a);
       border-bottom: 1px solid rgba(201,168,76,0.2);
@@ -68,7 +60,6 @@
       align-items: center;
       gap: 10px;
     }
-
     #aom-chat-header .aom-avatar {
       width: 32px;
       height: 32px;
@@ -81,7 +72,6 @@
       color: #0a0806;
       font-weight: 700;
     }
-
     #aom-chat-header .aom-header-text h4 {
       margin: 0;
       font-family: 'Cinzel', serif;
@@ -89,13 +79,11 @@
       color: #c9a84c;
       letter-spacing: 0.05em;
     }
-
     #aom-chat-header .aom-header-text p {
       margin: 0;
       font-size: 11px;
       color: rgba(212,201,176,0.5);
     }
-
     #aom-chat-header .aom-close {
       margin-left: auto;
       background: none;
@@ -106,11 +94,9 @@
       line-height: 1;
       padding: 0;
     }
-
     #aom-chat-header .aom-close:hover {
       color: #c9a84c;
     }
-
     #aom-chat-messages {
       flex: 1;
       overflow-y: auto;
@@ -121,7 +107,6 @@
       scrollbar-width: thin;
       scrollbar-color: rgba(201,168,76,0.2) transparent;
     }
-
     .aom-msg {
       max-width: 85%;
       padding: 10px 14px;
@@ -129,7 +114,6 @@
       font-size: 13px;
       line-height: 1.5;
     }
-
     .aom-msg.bot {
       background: rgba(201,168,76,0.08);
       border: 1px solid rgba(201,168,76,0.15);
@@ -137,21 +121,18 @@
       align-self: flex-start;
       border-bottom-left-radius: 4px;
     }
-
     .aom-msg.user {
       background: rgba(201,168,76,0.18);
       color: #fffaf4;
       align-self: flex-end;
       border-bottom-right-radius: 4px;
     }
-
     .aom-typing {
       display: flex;
       gap: 4px;
       padding: 10px 14px;
       align-self: flex-start;
     }
-
     .aom-typing span {
       width: 6px;
       height: 6px;
@@ -160,15 +141,12 @@
       opacity: 0.5;
       animation: aomDot 1.2s infinite;
     }
-
     .aom-typing span:nth-child(2) { animation-delay: 0.2s; }
     .aom-typing span:nth-child(3) { animation-delay: 0.4s; }
-
     @keyframes aomDot {
       0%, 80%, 100% { transform: scale(0.8); opacity: 0.3; }
       40% { transform: scale(1.1); opacity: 1; }
     }
-
     #aom-chat-input-row {
       border-top: 1px solid rgba(201,168,76,0.15);
       padding: 12px 14px;
@@ -177,7 +155,6 @@
       align-items: center;
       background: #0a0806;
     }
-
     #aom-chat-input {
       flex: 1;
       background: rgba(201,168,76,0.06);
@@ -192,10 +169,8 @@
       height: 38px;
       line-height: 1.4;
     }
-
     #aom-chat-input::placeholder { color: rgba(212,201,176,0.35); }
     #aom-chat-input:focus { border-color: rgba(201,168,76,0.45); }
-
     #aom-chat-send {
       width: 36px;
       height: 36px;
@@ -209,14 +184,75 @@
       flex-shrink: 0;
       transition: opacity 0.2s;
     }
-
     #aom-chat-send:hover { opacity: 0.85; }
     #aom-chat-send:disabled { opacity: 0.4; cursor: default; }
-
     #aom-chat-send svg {
       width: 16px;
       height: 16px;
       fill: #0a0806;
+    }
+
+    /* ── Mobile: compact floating window, NOT full-screen ── */
+    @media (max-width: 768px) {
+      #aom-chat-bubble {
+        bottom: 16px;
+        right: 16px;
+      }
+      #aom-chat-window {
+        width: calc(100vw - 32px);
+        max-width: 420px;
+        height: 420px;
+        margin-bottom: 10px;
+        border-radius: 14px;
+      }
+      #aom-chat-header {
+        padding: 10px 14px;
+      }
+      #aom-chat-header .aom-avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+      }
+      #aom-chat-header .aom-header-text h4 {
+        font-size: 12px;
+      }
+      #aom-chat-header .aom-header-text p {
+        font-size: 10px;
+      }
+      #aom-chat-messages {
+        padding: 12px;
+        gap: 8px;
+      }
+      .aom-msg {
+        font-size: 12px;
+        padding: 8px 11px;
+        max-width: 88%;
+      }
+      #aom-chat-input-row {
+        padding: 8px 10px;
+        gap: 6px;
+      }
+      #aom-chat-input {
+        font-size: 12px;
+        padding: 7px 10px;
+        height: 34px;
+      }
+      #aom-chat-send {
+        width: 32px;
+        height: 32px;
+      }
+      #aom-chat-send svg {
+        width: 14px;
+        height: 14px;
+      }
+      #aom-chat-toggle {
+        width: 52px;
+        height: 52px;
+      }
+      #aom-chat-toggle svg {
+        width: 22px;
+        height: 22px;
+      }
     }
   `;
   document.head.appendChild(style);
@@ -249,11 +285,11 @@
   document.body.appendChild(bubble);
 
   const chatWindow = document.getElementById('aom-chat-window');
-  const toggleBtn = document.getElementById('aom-chat-toggle');
-  const closeBtn = document.getElementById('aom-close-btn');
+  const toggleBtn  = document.getElementById('aom-chat-toggle');
+  const closeBtn   = document.getElementById('aom-close-btn');
   const messagesEl = document.getElementById('aom-chat-messages');
-  const input = document.getElementById('aom-chat-input');
-  const sendBtn = document.getElementById('aom-chat-send');
+  const input      = document.getElementById('aom-chat-input');
+  const sendBtn    = document.getElementById('aom-chat-send');
 
   function addMessage(role, text) {
     const div = document.createElement('div');
@@ -287,24 +323,19 @@
   async function sendMessage() {
     const text = input.value.trim();
     if (!text) return;
-
     input.value = '';
     sendBtn.disabled = true;
     addMessage('user', text);
     messages.push({ role: 'user', content: text });
-
     const typing = showTyping();
-
     try {
       const res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages }),
       });
-
       const data = await res.json();
       const reply = data.content?.[0]?.text || 'Sorry, something went wrong. Please email studio@altitudeodysseymedia.com directly.';
-
       typing.remove();
       addMessage('bot', reply);
       messages.push({ role: 'assistant', content: reply });
@@ -312,7 +343,6 @@
       typing.remove();
       addMessage('bot', 'Connection issue — please email studio@altitudeodysseymedia.com directly.');
     }
-
     sendBtn.disabled = false;
     input.focus();
   }

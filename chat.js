@@ -192,66 +192,32 @@
       fill: #0a0806;
     }
 
-    /* ── Mobile: compact floating window, NOT full-screen ── */
-    @media (max-width: 768px) {
+    @media (max-width: 480px) {
       #aom-chat-bubble {
-        bottom: 16px;
-        right: 16px;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
       }
+
       #aom-chat-window {
-        width: calc(100vw - 32px);
-        max-width: 420px;
-        height: 420px;
-        margin-bottom: 10px;
-        border-radius: 14px;
+        width: 100%;
+        height: 100dvh;
+        border-radius: 0;
+        border: none;
+        margin-bottom: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
       }
-      #aom-chat-header {
-        padding: 10px 14px;
-      }
-      #aom-chat-header .aom-avatar {
-        width: 28px;
-        height: 28px;
-        font-size: 12px;
-      }
-      #aom-chat-header .aom-header-text h4 {
-        font-size: 12px;
-      }
-      #aom-chat-header .aom-header-text p {
-        font-size: 10px;
-      }
-      #aom-chat-messages {
-        padding: 12px;
-        gap: 8px;
-      }
-      .aom-msg {
-        font-size: 12px;
-        padding: 8px 11px;
-        max-width: 88%;
-      }
-      #aom-chat-input-row {
-        padding: 8px 10px;
-        gap: 6px;
-      }
-      #aom-chat-input {
-        font-size: 12px;
-        padding: 7px 10px;
-        height: 34px;
-      }
-      #aom-chat-send {
-        width: 32px;
-        height: 32px;
-      }
-      #aom-chat-send svg {
-        width: 14px;
-        height: 14px;
-      }
+
       #aom-chat-toggle {
-        width: 52px;
-        height: 52px;
-      }
-      #aom-chat-toggle svg {
-        width: 22px;
-        height: 22px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        margin-left: 0;
       }
     }
   `;
@@ -263,9 +229,9 @@
   bubble.innerHTML = `
     <div id="aom-chat-window">
       <div id="aom-chat-header">
-        <div class="aom-avatar">A</div>
+        <div class="aom-avatar">J</div>
         <div class="aom-header-text">
-          <h4>Altitude Odyssey</h4>
+          <h4>Jess</h4>
           <p>AI Assistant · Usually replies instantly</p>
         </div>
         <button class="aom-close" id="aom-close-btn">&times;</button>
@@ -312,7 +278,7 @@
   function openChat() {
     chatWindow.classList.add('open');
     if (messages.length === 0) {
-      addMessage('bot', 'Hi! I\'m the Altitude Odyssey AI assistant. Ask me anything about our web design services, pricing, or how to get started. 🌟');
+      addMessage('bot', 'Hi! I\'m Jess, the Altitude Odyssey Media AI assistant. Ask me anything about our web design services, pricing, or how to get started. 🌟');
     }
     input.focus();
   }

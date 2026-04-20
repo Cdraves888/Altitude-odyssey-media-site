@@ -1,5 +1,6 @@
 // Altitude Odyssey Media — AI Chat Bubble
 // Powered by Claude (Anthropic)
+// chat.js — Jess AI widget v1.0 | updated 2026-04-19
 (function () {
   const WORKER_URL = 'https://aom-chat.eaglelover888.workers.dev';
   const messages = [];

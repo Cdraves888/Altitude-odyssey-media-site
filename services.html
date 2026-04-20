@@ -117,39 +117,29 @@ nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color
 
 /* A LA CARTE */
 .alacarte{padding:100px 10vw;background:var(--black);}
-.ac-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;border:1px solid var(--border);margin-top:52px;}
-.ac-cat{padding:0;border-right:1px solid var(--border);}
-.ac-cat:last-child{border-right:none;}
-.ac-cat-header{padding:28px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;}
-.ac-cat-icon{font-size:22px;}
-.ac-cat-name{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);}
-.ac-items{padding:8px 0;}
-.ac-item{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;border-bottom:1px solid rgba(201,168,76,.08);transition:background .3s;}
-.ac-item:last-child{border-bottom:none;}
-.ac-item:hover{background:rgba(201,168,76,.04);}
-.ac-item-name{font-size:13px;color:var(--text);}
-.ac-item-note{font-size:10px;color:var(--text-dim);margin-top:2px;letter-spacing:.04em;}
-.ac-item-price{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold-light);white-space:nowrap;margin-left:20px;flex-shrink:0;}
-
-/* AC CALCULATOR */
-.ac-item[data-price]{cursor:pointer;user-select:none;}
-.ac-item[data-price]:hover{background:rgba(201,168,76,.06);}
-.ac-item.selected{background:rgba(201,168,76,.09)!important;}
-.ac-check{width:16px;height:16px;border:1px solid var(--border);border-radius:50%;flex-shrink:0;margin-right:14px;transition:all .25s;display:flex;align-items:center;justify-content:center;}
-.ac-item.selected .ac-check{background:var(--gold);border-color:var(--gold);}
-.ac-check-inner{width:6px;height:6px;border-radius:50%;background:var(--black);opacity:0;transition:opacity .2s;}
-.ac-item.selected .ac-check-inner{opacity:1;}
-.ac-total-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(17,16,9,.97);border-top:1px solid var(--border);padding:18px 10vw;display:flex;align-items:center;justify-content:space-between;z-index:200;transform:translateY(100%);transition:transform .45s cubic-bezier(.16,1,.3,1);backdrop-filter:blur(12px);}
-.ac-total-bar.visible{transform:translateY(0);}
-.ac-total-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;}
-.ac-total-amount{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold-light);line-height:1.1;}
-.ac-total-note{font-size:10px;color:var(--text-dim);letter-spacing:.05em;margin-top:3px;}
-.ac-total-actions{display:flex;align-items:center;gap:12px;}
-.ac-clear-btn{background:transparent;border:1px solid var(--border);color:var(--text-dim);padding:10px 18px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;cursor:pointer;transition:all .3s;text-transform:uppercase;}
-.ac-clear-btn:hover{border-color:var(--gold-dim);color:var(--text);}
-.ac-quote-btn{background:var(--gold);color:var(--black);border:none;padding:14px 28px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.35em;cursor:pointer;transition:background .3s;text-transform:uppercase;}
-.ac-quote-btn:hover{background:var(--gold-light);}
-@media(max-width:768px){.ac-total-bar{padding:16px 6vw;flex-direction:column;align-items:flex-start;gap:14px;}.ac-total-actions{width:100%;}.ac-quote-btn{flex:1;}}
+.ac-subsections{margin-top:52px;display:flex;flex-direction:column;gap:56px;}
+.ac-sub-header{display:flex;align-items:baseline;gap:16px;margin-bottom:10px;}
+.ac-sub-numeral{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.4em;color:var(--gold-dim);text-transform:uppercase;}
+.ac-sub-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;}
+.ac-sub-rule{width:100%;height:1px;background:linear-gradient(to right,rgba(201,168,76,.45),transparent);margin-bottom:0;}
+.ac-row{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid rgba(201,168,76,.08);transition:background .3s;}
+.ac-row:last-child{border-bottom:none;}
+.ac-row:hover{background:rgba(201,168,76,.03);}
+.ac-row-info{flex:1;padding-right:24px;}
+.ac-row-name{font-size:14px;color:var(--text);letter-spacing:.03em;}
+.ac-row-desc{font-size:11px;color:var(--text-dim);margin-top:3px;letter-spacing:.04em;}
+.ac-row-incl{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:var(--gold-dim);margin-top:5px;letter-spacing:.02em;}
+.ac-row-price-block{text-align:right;flex-shrink:0;}
+.ac-row-price{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold-light);line-height:1;font-feature-settings:"tnum" 1,"lnum" 1;}
+.ac-price-mod{font-family:'Cinzel',serif;font-size:11px;color:var(--gold);vertical-align:super;margin-right:1px;font-style:normal;}
+.ac-row-unit{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim);margin-top:4px;}
+.ac-price-secondary{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:var(--text-dim);margin-top:4px;letter-spacing:.02em;}
+.ac-plans-link{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px;transition:color .3s,border-color .3s;white-space:nowrap;}
+.ac-plans-link:hover{color:var(--gold-light);border-color:var(--gold);}
+.ac-cta{margin-top:72px;text-align:center;padding:52px 40px;border:1px solid var(--border);}
+.ac-cta-question{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--text-dim);margin-bottom:10px;}
+.ac-cta-sub{font-size:13px;color:var(--text-dim);letter-spacing:.05em;margin-bottom:32px;line-height:1.8;}
+@media(max-width:768px){.ac-subsections{gap:40px;}.ac-row{flex-direction:column;align-items:flex-start;gap:10px;}.ac-row-price-block{text-align:left;}.ac-cta{padding:36px 20px;}}
 
 /* BUNDLES */
 .bundles{padding:100px 10vw;background:var(--dark);}
@@ -257,7 +247,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   nav{padding:18px 20px;}
   .nm,.nav-cta{display:none;}
   .hero,.what,.packages,.alacarte,.bundles,.process,.faq,.cta-section{padding-left:6vw;padding-right:6vw;}
-  .what-intro,.pkg-grid,.ac-grid,.bundle-grid,.faq-grid{grid-template-columns:1fr;}
+  .what-intro,.pkg-grid,.bundle-grid,.faq-grid{grid-template-columns:1fr;}
   .pillars,.process-steps{grid-template-columns:1fr;}
   .pillar{border-right:none;border-bottom:1px solid var(--border);}
   .process-steps::before{display:none;}
@@ -473,43 +463,150 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
     <h2 class="sh">Just need<br><em>one thing?</em></h2>
     <p class="ss">Add individual services to any package or book them standalone. All prices are starting points &mdash; final quote based on scope.</p>
   </div>
-  <div class="ac-grid reveal">
-    <div class="ac-cat">
-      <div class="ac-cat-header"><span class="ac-cat-icon"></span><span class="ac-cat-name">Aerial & Drone</span></div>
-      <div class="ac-items">
-        <div class="ac-item" data-price="85"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Additional Hour On Location</div><div class="ac-item-note">Beyond package time</div></div><div class="ac-item-price">$85</div></div>
-        <div class="ac-item" data-price="60"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Extra Edited Photos</div><div class="ac-item-note">Per 10 additional photos</div></div><div class="ac-item-price">$60</div></div>
-        <div class="ac-item" data-price="120"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Additional Short-Form Cut</div><div class="ac-item-note">30&ndash;60 second edit</div></div><div class="ac-item-price">$120</div></div>
-        <div class="ac-item" data-price="150"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Raw Footage Add-On</div><div class="ac-item-note">Unedited files delivered</div></div><div class="ac-item-price">$150</div></div>
-        <div class="ac-item" data-price="200"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Rush Delivery</div><div class="ac-item-note">Within 48 hours</div></div><div class="ac-item-price">+$200</div></div>
-        <div class="ac-item"><div><div class="ac-item-name">Travel Fee</div><div class="ac-item-note">Outside 25-mile radius &middot; quoted per trip</div></div><div class="ac-item-price">$0.55/mi</div></div>
+
+  <div class="ac-subsections reveal">
+
+    <!-- I. Aerial Add-Ons -->
+    <div class="ac-subsection">
+      <div class="ac-sub-header">
+        <span class="ac-sub-numeral">I&nbsp;&nbsp;&nbsp;</span>
+        <span class="ac-sub-title">Aerial Add-Ons</span>
+      </div>
+      <div class="ac-sub-rule"></div>
+      <div class="ac-rows">
+        <div class="ac-row">
+          <div class="ac-row-info">
+            <div class="ac-row-name">Extra Edited Photos</div>
+            <div class="ac-row-desc">Per additional photo delivered</div>
+          </div>
+          <div class="ac-row-price-block">
+            <div class="ac-row-price">$60</div>
+            <div class="ac-row-unit">per photo</div>
+          </div>
+        </div>
+        <div class="ac-row">
+          <div class="ac-row-info">
+            <div class="ac-row-name">Raw Footage Delivery</div>
+            <div class="ac-row-desc">All unedited files delivered</div>
+          </div>
+          <div class="ac-row-price-block">
+            <div class="ac-row-price">$150</div>
+          </div>
+        </div>
+        <div class="ac-row">
+          <div class="ac-row-info">
+            <div class="ac-row-name">Rush Delivery</div>
+            <div class="ac-row-desc">Turnaround within 48 hours</div>
+          </div>
+          <div class="ac-row-price-block">
+            <div class="ac-row-price"><span class="ac-price-mod">+</span>$200</div>
+            <div class="ac-row-unit">add-on fee</div>
+          </div>
+        </div>
+        <div class="ac-row">
+          <div class="ac-row-info">
+            <div class="ac-row-name">Travel Fee</div>
+            <div class="ac-row-desc">Beyond 25-mile radius</div>
+          </div>
+          <div class="ac-row-price-block">
+            <div class="ac-row-price">$0.55</div>
+            <div class="ac-row-unit">per mile</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="ac-cat">
-      <div class="ac-cat-header"><span class="ac-cat-icon"></span><span class="ac-cat-name">Web & Digital</span></div>
-      <div class="ac-items">
-        <div class="ac-item" data-price="75"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Social Preview (OG Image)</div><div class="ac-item-note">Standalone branded card</div></div><div class="ac-item-price">$75</div></div>
-        <div class="ac-item"><div><div class="ac-item-name">Website Update / Revision</div><div class="ac-item-note">Copy, layout, or feature changes</div><div class="ac-item-note" style="opacity:0.55;font-size:0.85em;margin-top:2px;">Included free with Monthly Maintenance</div></div><div class="ac-item-price">$60/hr</div></div>
-        <div class="ac-item" data-price="200"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Additional Web Page</div><div class="ac-item-note">Added to existing site</div></div><div class="ac-item-price">$200</div></div>
-        <div class="ac-item" data-price="80"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Domain Setup & Deployment</div><div class="ac-item-note">DNS config, Fully deployed</div></div><div class="ac-item-price">$80</div></div>
-        <div class="ac-item" data-price="120"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Monthly Maintenance</div><div class="ac-item-note">Updates, changes, support</div></div><div class="ac-item-price">$120/mo</div></div>
-        <div class="ac-item" data-price="150"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">AI Chatbot</div><div class="ac-item-note">Setup + $30/mo hosting</div></div><div class="ac-item-price">$150 + $30/mo</div></div>
+
+    <!-- II. Web & Digital -->
+    <div class="ac-subsection">
+      <div class="ac-sub-header">
+        <span class="ac-sub-numeral">II&nbsp;&nbsp;</span>
+        <span class="ac-sub-title">Web &amp; Digital</span>
+      </div>
+      <div class="ac-sub-rule"></div>
+      <div class="ac-rows">
+        <div class="ac-row">
+          <div class="ac-row-info">
+            <div class="ac-row-name">Additional Web Page</div>
+            <div class="ac-row-desc">Added to an existing site</div>
+          </div>
+          <div class="ac-row-price-block">
+            <div class="ac-row-price">$200</div>
+            <div class="ac-row-unit">per page</div>
+          </div>
+        </div>
+        <div class="ac-row">
+          <div class="ac-row-info">
+            <div class="ac-row-name">Social Preview Card</div>
+            <div class="ac-row-desc">Standalone OG image for link sharing</div>
+          </div>
+          <div class="ac-row-price-block">
+            <div class="ac-row-price">$75</div>
+          </div>
+        </div>
+        <div class="ac-row">
+          <div class="ac-row-info">
+            <div class="ac-row-name">Domain Setup &amp; Deployment</div>
+            <div class="ac-row-desc">DNS configuration, fully deployed</div>
+          </div>
+          <div class="ac-row-price-block">
+            <div class="ac-row-price">$80</div>
+            <div class="ac-row-unit">flat fee</div>
+          </div>
+        </div>
+        <div class="ac-row">
+          <div class="ac-row-info">
+            <div class="ac-row-name">Website Update / Revision</div>
+            <div class="ac-row-desc">Copy, layout, or feature changes</div>
+            <div class="ac-row-incl">Included with any maintenance plan</div>
+          </div>
+          <div class="ac-row-price-block">
+            <div class="ac-row-price">$60</div>
+            <div class="ac-row-unit">per hour</div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- III. Ongoing Services -->
+    <div class="ac-subsection">
+      <div class="ac-sub-header">
+        <span class="ac-sub-numeral">III&nbsp;</span>
+        <span class="ac-sub-title">Ongoing Services</span>
+      </div>
+      <div class="ac-sub-rule"></div>
+      <div class="ac-rows">
+        <div class="ac-row">
+          <div class="ac-row-info">
+            <div class="ac-row-name">AI Chat Widget</div>
+            <div class="ac-row-desc">Custom branded assistant for your site</div>
+          </div>
+          <div class="ac-row-price-block">
+            <div class="ac-row-price">$150</div>
+            <div class="ac-row-unit">Setup</div>
+            <div class="ac-price-secondary">then $30 / mo</div>
+          </div>
+        </div>
+        <div class="ac-row">
+          <div class="ac-row-info">
+            <div class="ac-row-name">Monthly Maintenance Plans</div>
+            <div class="ac-row-desc">Ongoing updates, hosting, and support &mdash; three tiers available</div>
+          </div>
+          <div class="ac-row-price-block">
+            <a href="#maintenance" class="ac-plans-link">See Plans &rsaquo;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- AC TOTAL BAR -->
-  <div class="ac-total-bar" id="ac-total-bar">
-    <div>
-      <div class="ac-total-label">Estimated Total</div>
-      <div class="ac-total-amount" id="ac-total-amount">$0</div>
-      <div class="ac-total-note" id="ac-total-note">0 services selected</div>
-    </div>
-    <div class="ac-total-actions">
-      <button class="ac-clear-btn" onclick="clearAcSelection()">Clear</button>
-      <button class="ac-quote-btn" onclick="openModal(event)">Request Quote &rarr;</button>
-    </div>
+  <!-- CLOSING CTA -->
+  <div class="ac-cta reveal">
+    <p class="ac-cta-question">Not sure what you need?</p>
+    <p class="ac-cta-sub">Tell me about the project and I&rsquo;ll put together a custom quote.</p>
+    <a href="/intake.html?source=ala-carte" class="btn btn-out">Request a Quote</a>
   </div>
+
 </section>
 
 <!-- BUNDLES -->
@@ -879,25 +976,6 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-// &Agrave; LA CARTE CALCULATOR
-document.querySelectorAll('.ac-item[data-price]').forEach(item=>{
-  item.addEventListener('click',()=>{
-    item.classList.toggle('selected');
-    updateAcTotal();
-  });
-});
-function updateAcTotal(){
-  const selected=[...document.querySelectorAll('.ac-item.selected')];
-  const total=selected.reduce((sum,el)=>sum+parseFloat(el.dataset.price),0);
-  const bar=document.getElementById('ac-total-bar');
-  document.getElementById('ac-total-amount').textContent='$'+total.toLocaleString();
-  document.getElementById('ac-total-note').textContent=selected.length+' service'+(selected.length!==1?'s':'')+' selected';
-  bar.classList.toggle('visible',selected.length>0);
-}
-function clearAcSelection(){
-  document.querySelectorAll('.ac-item.selected').forEach(el=>el.classList.remove('selected'));
-  updateAcTotal();
-}
 </script>
 <script src="particles.js"></script>
 <script src="chat.js?v=3"></script>

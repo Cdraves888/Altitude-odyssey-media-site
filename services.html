@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Services & Pricing â Altitude Odyssey Media</title>
+<title>Services & Pricing &mdash; Altitude Odyssey Media</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico"/>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
 <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@200;300;400;500&subset=latin,latin-ext&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
@@ -19,7 +19,7 @@
   --white:#fffaf4;
 }
 html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--text);font-family:'Raleway','Helvetica Neue',Arial,sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+body{background:var(--black);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
 
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:9000;}
 
@@ -29,20 +29,20 @@ body.h #cur-r{width:52px;height:52px;border-color:var(--gold);}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:22px 48px;transition:background .4s,border-color .4s;border-bottom:1px solid transparent;}
 nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color:var(--border);}
-.nl{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:10px;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:8px;}
 .nl img{width:22px;height:22px;opacity:.85;}
 .nm{display:flex;gap:32px;list-style:none;}
 .nm a{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .3s;cursor:none;}
 .nm a:hover{color:var(--gold);}
-.nav-cta{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:10px 24px;text-decoration:none;cursor:none;transition:background .3s;}
+.nav-cta{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:10px 24px;text-decoration:none;cursor:none;transition:background .3s;}
 .nav-cta:hover{background:var(--gold-light);}
 
 /* HERO */
 .hero{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 10vw;position:relative;overflow:hidden;}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(201,168,76,.07) 0%,transparent 65%);}
-.hero-pre{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fu 1s ease .3s forwards;display:flex;align-items:center;gap:14px;}
+.hero-pre{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fu 1s ease .3s forwards;display:flex;align-items:center;gap:14px;}
 .hero-pre::before,.hero-pre::after{content:'';width:32px;height:1px;background:var(--gold);}
-.hero-h1{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-weight:300;font-size:clamp(52px,8vw,100px);line-height:.95;color:var(--white);margin-bottom:28px;}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(52px,8vw,100px);line-height:.95;color:var(--white);margin-bottom:28px;}
 .w{display:inline-block;overflow:hidden;}
 .w span{display:inline-block;transform:translateY(110%);animation:wr .9s cubic-bezier(.16,1,.3,1) forwards;}
 .w:nth-child(1) span{animation-delay:.4s;}
@@ -55,7 +55,7 @@ nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color
 @keyframes fu{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 
 /* BTN */
-.btn{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.35em;text-transform:uppercase;padding:14px 36px;cursor:none;text-decoration:none;display:inline-block;transition:all .3s;position:relative;overflow:hidden;}
+.btn{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;text-transform:uppercase;padding:14px 36px;cursor:none;text-decoration:none;display:inline-block;transition:all .3s;position:relative;overflow:hidden;}
 .btn-gold{background:var(--gold);color:var(--black);}
 .btn-gold:hover{background:var(--gold-light);}
 .btn-out{background:transparent;color:var(--gold);border:1px solid var(--border);}
@@ -63,9 +63,9 @@ nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color
 
 /* SECTIONS */
 .sec{position:relative;z-index:2;}
-.ey{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.ey{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:16px;}
 .ey::before{content:'';width:28px;height:1px;background:var(--gold);}
-.sh{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-weight:300;font-size:clamp(32px,4vw,58px);line-height:1.05;color:var(--white);margin-bottom:14px;}
+.sh{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(32px,4vw,58px);line-height:1.05;color:var(--white);margin-bottom:14px;}
 .sh em{font-style:italic;color:var(--gold-light);}
 .ss{font-size:13px;color:var(--text-dim);line-height:1.9;max-width:520px;margin-bottom:52px;letter-spacing:.05em;}
 
@@ -73,14 +73,14 @@ nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color
 .marquee{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 0;position:relative;z-index:2;}
 .mi{display:flex;animation:mq 20s linear infinite;white-space:nowrap;}
 .mi:hover{animation-play-state:paused;}
-.mitem{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.4em;color:var(--text-dim);text-transform:uppercase;padding:0 36px;display:flex;align-items:center;gap:18px;}
+.mitem{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;color:var(--text-dim);text-transform:uppercase;padding:0 36px;display:flex;align-items:center;gap:18px;}
 .mitem::after{content:'';color:var(--gold);font-size:8px;}
 @keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
 /* WHAT I DO */
 .what{padding:100px 10vw;background:var(--black);}
 .what-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:80px;}
-.wi-quote{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:clamp(22px,2.8vw,38px);line-height:1.5;color:var(--white);font-style:italic;}
+.wi-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.8vw,38px);line-height:1.5;color:var(--white);font-style:italic;}
 .wi-quote em{color:var(--gold-light);font-style:normal;}
 .wi-text p{font-size:13px;line-height:2;color:var(--text-dim);margin-bottom:16px;letter-spacing:.04em;}
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--border);}
@@ -90,7 +90,7 @@ nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color
 .pillar:hover{background:rgba(201,168,76,.03);}
 .pillar:hover::after{transform:scaleX(1);}
 .pillar-icon{font-size:28px;margin-bottom:20px;}
-.pillar-name{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:11px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.pillar-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
 .pillar-desc{font-size:12px;line-height:1.9;color:var(--text-dim);}
 
 /* PACKAGES */
@@ -99,17 +99,17 @@ nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color
 .pkg{padding:48px 36px;background:var(--card);border-right:1px solid var(--border);position:relative;transition:background .4s;}
 .pkg:last-child{border-right:none;}
 .pkg.featured{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.35);}
-.pkg-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:6px 18px;white-space:nowrap;}
-.pkg-tier{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.45em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;margin-top:8px;}
-.pkg-name{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:28px;color:var(--white);margin-bottom:8px;}
-.pkg-price{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:48px;color:var(--gold-light);line-height:1;margin-bottom:4px;}
+.pkg-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:6px 18px;white-space:nowrap;}
+.pkg-tier{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.45em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;margin-top:8px;}
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);margin-bottom:8px;}
+.pkg-price{font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--gold-light);line-height:1;margin-bottom:4px;}
 .pkg-price-note{font-size:11px;color:var(--text-dim);letter-spacing:.1em;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border);}
-.pkg-includes{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;}
+.pkg-includes{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;}
 .pkg-feature{display:flex;align-items:flex-start;gap:12px;font-size:12px;color:var(--text-dim);margin-bottom:12px;line-height:1.5;}
 .pkg-feature::before{content:'';color:var(--gold);font-size:9px;margin-top:2px;flex-shrink:0;}
 .pkg-feature.no{opacity:.4;}
-.pkg-feature.no::before{content:'â';color:var(--text-dim);}
-.pkg-cta{width:100%;font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;padding:14px;border:none;cursor:pointer;margin-top:28px;transition:all .3s;display:block;text-align:center;text-decoration:none;}
+.pkg-feature.no::before{content:'\2014';color:var(--text-dim);}
+.pkg-cta{width:100%;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;padding:14px;border:none;cursor:pointer;margin-top:28px;transition:all .3s;display:block;text-align:center;text-decoration:none;}
 .pkg-cta-gold{background:var(--gold);color:var(--black);}
 .pkg-cta-gold:hover{background:var(--gold-light);}
 .pkg-cta-out{background:transparent;color:var(--gold);border:1px solid var(--border);}
@@ -122,14 +122,14 @@ nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color
 .ac-cat:last-child{border-right:none;}
 .ac-cat-header{padding:28px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;}
 .ac-cat-icon{font-size:22px;}
-.ac-cat-name{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);}
+.ac-cat-name{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);}
 .ac-items{padding:8px 0;}
 .ac-item{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;border-bottom:1px solid rgba(201,168,76,.08);transition:background .3s;}
 .ac-item:last-child{border-bottom:none;}
 .ac-item:hover{background:rgba(201,168,76,.04);}
 .ac-item-name{font-size:13px;color:var(--text);}
 .ac-item-note{font-size:10px;color:var(--text-dim);margin-top:2px;letter-spacing:.04em;}
-.ac-item-price{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:20px;color:var(--gold-light);white-space:nowrap;margin-left:20px;flex-shrink:0;}
+.ac-item-price{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold-light);white-space:nowrap;margin-left:20px;flex-shrink:0;}
 
 /* AC CALCULATOR */
 .ac-item[data-price]{cursor:pointer;user-select:none;}
@@ -141,13 +141,13 @@ nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color
 .ac-item.selected .ac-check-inner{opacity:1;}
 .ac-total-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(17,16,9,.97);border-top:1px solid var(--border);padding:18px 10vw;display:flex;align-items:center;justify-content:space-between;z-index:200;transform:translateY(100%);transition:transform .45s cubic-bezier(.16,1,.3,1);backdrop-filter:blur(12px);}
 .ac-total-bar.visible{transform:translateY(0);}
-.ac-total-label{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;}
-.ac-total-amount{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:34px;color:var(--gold-light);line-height:1.1;}
+.ac-total-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;}
+.ac-total-amount{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold-light);line-height:1.1;}
 .ac-total-note{font-size:10px;color:var(--text-dim);letter-spacing:.05em;margin-top:3px;}
 .ac-total-actions{display:flex;align-items:center;gap:12px;}
-.ac-clear-btn{background:transparent;border:1px solid var(--border);color:var(--text-dim);padding:10px 18px;font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:8px;letter-spacing:.3em;cursor:pointer;transition:all .3s;text-transform:uppercase;}
+.ac-clear-btn{background:transparent;border:1px solid var(--border);color:var(--text-dim);padding:10px 18px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;cursor:pointer;transition:all .3s;text-transform:uppercase;}
 .ac-clear-btn:hover{border-color:var(--gold-dim);color:var(--text);}
-.ac-quote-btn{background:var(--gold);color:var(--black);border:none;padding:14px 28px;font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:8px;letter-spacing:.35em;cursor:pointer;transition:background .3s;text-transform:uppercase;}
+.ac-quote-btn{background:var(--gold);color:var(--black);border:none;padding:14px 28px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.35em;cursor:pointer;transition:background .3s;text-transform:uppercase;}
 .ac-quote-btn:hover{background:var(--gold-light);}
 @media(max-width:768px){.ac-total-bar{padding:16px 6vw;flex-direction:column;align-items:flex-start;gap:14px;}.ac-total-actions{width:100%;}.ac-quote-btn{flex:1;}}
 
@@ -156,25 +156,25 @@ nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color
 .bundle-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:52px;}
 .bundle{background:var(--card);border:1px solid var(--border);padding:40px;position:relative;overflow:hidden;transition:border-color .4s,background .4s;}
 .bundle:hover{border-color:var(--gold-dim);background:rgba(201,168,76,.03);}
-.bundle-tag{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:5px 14px;display:inline-block;margin-bottom:20px;}
-.bundle-name{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:26px;color:var(--white);margin-bottom:8px;font-style:italic;}
-.bundle-who{font-size:11px;color:var(--gold-dim);letter-spacing:.1em;margin-bottom:20px;text-transform:uppercase;font-family:'Cinzel',Georgia,'Times New Roman',serif;}
+.bundle-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:5px 14px;display:inline-block;margin-bottom:20px;}
+.bundle-name{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--white);margin-bottom:8px;font-style:italic;}
+.bundle-who{font-size:11px;color:var(--gold-dim);letter-spacing:.1em;margin-bottom:20px;text-transform:uppercase;font-family:'Cinzel',serif;}
 .bundle-items{margin-bottom:24px;}
 .bundle-item{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-dim);margin-bottom:10px;}
 .bundle-item::before{content:'';color:var(--gold);font-size:8px;}
 .bundle-pricing{display:flex;align-items:baseline;gap:12px;padding-top:20px;border-top:1px solid var(--border);}
-.bundle-price{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:36px;color:var(--gold-light);}
+.bundle-price{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold-light);}
 .bundle-was{font-size:14px;color:var(--text-dim);text-decoration:line-through;}
-.bundle-save{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);padding:4px 10px;margin-left:auto;}
+.bundle-save{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);padding:4px 10px;margin-left:auto;}
 
 /* PROCESS */
 .process{padding:100px 10vw;background:var(--black);}
 .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;position:relative;}
 .process-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:var(--border);}
 .step{padding:0 24px;text-align:center;position:relative;}
-.step-num{width:56px;height:56px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:22px;color:var(--gold-light);margin:0 auto 24px;background:var(--black);position:relative;z-index:1;transition:border-color .3s,background .3s;}
+.step-num{width:56px;height:56px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold-light);margin:0 auto 24px;background:var(--black);position:relative;z-index:1;transition:border-color .3s,background .3s;}
 .step:hover .step-num{border-color:var(--gold);background:rgba(201,168,76,.08);}
-.step-name{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.step-name{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
 .step-desc{font-size:12px;color:var(--text-dim);line-height:1.8;}
 
 /* FAQ */
@@ -195,8 +195,8 @@ nav.s{background:rgba(10,8,6,.94);backdrop-filter:blur(14px);border-bottom-color
 
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;}
-.fl{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.3em;color:var(--gold);}
-.fc{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-style:italic;font-size:13px;color:var(--text-dim);}
+.fl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;color:var(--gold);}
+.fc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--text-dim);}
 .fr{font-size:9px;letter-spacing:.12em;color:var(--text-dim);}
 
 /* REVEAL */
@@ -211,13 +211,13 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 .maint-card{padding:44px 36px;background:var(--card);border-right:1px solid var(--border);position:relative;transition:background .4s;}
 .maint-card:last-child{border-right:none;}
 .maint-card.featured{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.35);}
-.maint-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:6px 18px;white-space:nowrap;}
-.maint-plan{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;margin-top:8px;}
-.maint-price{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:48px;color:var(--gold-light);line-height:1;margin-bottom:4px;}
+.maint-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:6px 18px;white-space:nowrap;}
+.maint-plan{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;margin-top:8px;}
+.maint-price{font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--gold-light);line-height:1;margin-bottom:4px;}
 .maint-price-note{font-size:11px;color:var(--text-dim);letter-spacing:.1em;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border);}
 .maint-feature{display:flex;align-items:flex-start;gap:12px;font-size:12px;color:var(--text-dim);margin-bottom:12px;line-height:1.5;}
 .maint-feature::before{content:'';color:var(--gold);font-size:9px;margin-top:2px;flex-shrink:0;}
-.btn-maintenance-cta{width:100%;font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;padding:14px;cursor:pointer;margin-top:28px;transition:all .3s;display:block;text-align:center;text-decoration:none;border:none;}
+.btn-maintenance-cta{width:100%;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;padding:14px;cursor:pointer;margin-top:28px;transition:all .3s;display:block;text-align:center;text-decoration:none;border:none;}
 .maint-card.featured .btn-maintenance-cta{background:var(--gold);color:var(--black);}
 .maint-card.featured .btn-maintenance-cta:hover{background:var(--gold-light);}
 .maint-card:not(.featured) .btn-maintenance-cta{background:transparent;color:var(--gold);border:1px solid var(--border);}
@@ -236,21 +236,21 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 @keyframes mop{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 .modal-x{position:absolute;top:20px;right:20px;background:transparent;border:1px solid var(--border);color:var(--text-dim);width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .3s;}
 .modal-x:hover{border-color:var(--gold);color:var(--gold);}
-.modal-title{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:30px;color:var(--gold-light);font-style:italic;margin-bottom:6px;}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold-light);font-style:italic;margin-bottom:6px;}
 .modal-sub{font-size:11px;color:var(--text-dim);margin-bottom:32px;letter-spacing:.05em;}
 .mf{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
-.mf label{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:8px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);}
-.mf input,.mf select,.mf textarea{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-family:'Raleway','Helvetica Neue',Arial,sans-serif;font-size:14px;outline:none;transition:border-color .3s;width:100%;}
+.mf label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);}
+.mf input,.mf select,.mf textarea{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-family:'Raleway',sans-serif;font-size:14px;outline:none;transition:border-color .3s;width:100%;}
 .mf input:focus,.mf select:focus,.mf textarea:focus{border-color:var(--gold);}
 .mf select option{background:var(--dark);}
 .mf textarea{min-height:90px;resize:vertical;}
 .mf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.modal-submit{width:100%;background:var(--gold);color:var(--black);border:none;padding:15px;font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.35em;text-transform:uppercase;cursor:pointer;transition:background .3s;margin-top:8px;}
+.modal-submit{width:100%;background:var(--gold);color:var(--black);border:none;padding:15px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;text-transform:uppercase;cursor:pointer;transition:background .3s;margin-top:8px;}
 .modal-submit:hover{background:var(--gold-light);}
 .modal-success{text-align:center;padding:40px 0;display:none;}
 .modal-success.show{display:block;}
 .ms-icon{font-size:52px;margin-bottom:16px;}
-.ms-title{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:28px;color:var(--gold-light);margin-bottom:12px;}
+.ms-title{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold-light);margin-bottom:12px;}
 .ms-text{font-size:13px;color:var(--text-dim);line-height:1.9;}
 
 @media(max-width:768px){
@@ -290,13 +290,13 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-pre">Services & Pricing Â&middot; 2026</div>
+  <div class="hero-pre">Services & Pricing &middot; 2026</div>
   <h1 class="hero-h1">
     <div class="w"><span>What</span></div>&nbsp;
     <div class="w"><span>We</span></div>&nbsp;
     <div class="w"><span><em>Offer.</em></span></div>
   </h1>
-  <p class="hero-sub">From cinematic aerial visuals to full digital presence â Altitude Odyssey Media delivers premium creative work at mid-range pricing. No fluff. Just results.</p>
+  <p class="hero-sub">From cinematic aerial visuals to full digital presence &mdash; Altitude Odyssey Media delivers premium creative work at mid-range pricing. No fluff. Just results.</p>
   <div class="hero-ctas">
     <a href="#packages" class="btn btn-gold">View Packages</a>
     <a href="#" class="btn btn-out" onclick="openModal(event)">Get a Custom Quote</a>
@@ -326,9 +326,9 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
     <h2 class="sh">Two disciplines.<br><em>One standard.</em></h2>
   </div>
   <div class="what-intro reveal">
-    <div class="wi-quote">"Every client deserves visuals that feel <em>intentional</em> â not just captured."</div>
+    <div class="wi-quote">"Every client deserves visuals that feel <em>intentional</em> &mdash; not just captured."</div>
     <div class="wi-text">
-      <p>Altitude Odyssey Media operates at the intersection of aerial cinematography and digital design. Whether you need breathtaking footage from above or a website that commands attention â the standard is the same.</p>
+      <p>Altitude Odyssey Media operates at the intersection of aerial cinematography and digital design. Whether you need breathtaking footage from above or a website that commands attention &mdash; the standard is the same.</p>
       <p>Currently pursuing FAA Part 107 certification for full commercial availability. Web and design services are available now.</p>
     </div>
   </div>
@@ -341,7 +341,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
     <div class="pillar">
       <div class="pillar-icon"></div>
       <div class="pillar-name">Web Design</div>
-      <p class="pillar-desc">Custom websites built from scratch â no templates, no drag-and-drop. Interactive, branded, and deployed. From landing pages to full multi-section sites.</p>
+      <p class="pillar-desc">Custom websites built from scratch &mdash; no templates, no drag-and-drop. Interactive, branded, and deployed. From landing pages to full multi-section sites.</p>
     </div>
     <div class="pillar">
       <div class="pillar-icon"></div>
@@ -356,71 +356,71 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   <div class="reveal" style="margin-bottom:52px;">
     <div class="ey">Packages</div>
     <h2 class="sh">Choose your<br><em>starting point.</em></h2>
-    <p class="ss">All packages are starting points â every project is scoped to your exact needs. These give you a baseline to work from.</p>
+    <p class="ss">All packages are starting points &mdash; every project is scoped to your exact needs. These give you a baseline to work from.</p>
   </div>
 
   <!-- AERIAL PACKAGES -->
   <div class="reveal" style="margin-bottom:16px;">
-    <div style="font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);"> Aerial & Drone Packages</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);"> Aerial & Drone Packages</div>
     <div class="pkg-grid">
       <div class="pkg reveal">
         <div class="pkg-tier">Tier 01</div>
         <div class="pkg-name">The Flyover</div>
         <div class="pkg-price">$299</div>
-        <div class="pkg-price-note">Starting price Â&middot; Location dependent</div>
+        <div class="pkg-price-note">Starting price &middot; Location dependent</div>
         <div class="pkg-includes">What's included</div>
         <div class="pkg-feature">Up to 1 hour on location</div>
-        <div class="pkg-feature">10â15 edited aerial photos</div>
+        <div class="pkg-feature">10&ndash;15 edited aerial photos</div>
         <div class="pkg-feature">1 short-form video clip (60 sec)</div>
         <div class="pkg-feature">Color graded, cinematic style</div>
         <div class="pkg-feature">Delivered within 5 business days</div>
         <div class="pkg-feature no">No licensed commercial use</div>
         <div class="pkg-feature no">No raw footage included</div>
-        <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get Started â</a>
+        <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get Started &rarr;</a>
       </div>
       <div class="pkg featured reveal">
         <div class="pkg-badge">Most Popular</div>
         <div class="pkg-tier">Tier 02</div>
         <div class="pkg-name">The Cinematic</div>
         <div class="pkg-price">$599</div>
-        <div class="pkg-price-note">Starting price Â&middot; 2â3 hour session</div>
+        <div class="pkg-price-note">Starting price &middot; 2&ndash;3 hour session</div>
         <div class="pkg-includes">What's included</div>
         <div class="pkg-feature">Up to 3 hours on location</div>
-        <div class="pkg-feature">25â35 edited aerial photos</div>
-        <div class="pkg-feature">1 fully edited video (2â3 min)</div>
-        <div class="pkg-feature">1 short-form cut (30â60 sec)</div>
+        <div class="pkg-feature">25&ndash;35 edited aerial photos</div>
+        <div class="pkg-feature">1 fully edited video (2&ndash;3 min)</div>
+        <div class="pkg-feature">1 short-form cut (30&ndash;60 sec)</div>
         <div class="pkg-feature">Color graded, cinematic grade</div>
         <div class="pkg-feature">Licensed commercial use included</div>
         <div class="pkg-feature">Delivered within 7 business days</div>
-        <a href="#" class="pkg-cta pkg-cta-gold" onclick="openModal(event)">Get Started â</a>
+        <a href="#" class="pkg-cta pkg-cta-gold" onclick="openModal(event)">Get Started &rarr;</a>
       </div>
       <div class="pkg reveal">
         <div class="pkg-tier">Tier 03</div>
         <div class="pkg-name">The Full Production</div>
         <div class="pkg-price">$1,200+</div>
-        <div class="pkg-price-note">Custom quote Â&middot; Full day sessions</div>
+        <div class="pkg-price-note">Custom quote &middot; Full day sessions</div>
         <div class="pkg-includes">What's included</div>
-        <div class="pkg-feature">Full day on location (6â8 hrs)</div>
+        <div class="pkg-feature">Full day on location (6&ndash;8 hrs)</div>
         <div class="pkg-feature">50+ edited aerial photos</div>
-        <div class="pkg-feature">Full cinematic video (3â5 min)</div>
+        <div class="pkg-feature">Full cinematic video (3&ndash;5 min)</div>
         <div class="pkg-feature">Multiple short-form cuts</div>
         <div class="pkg-feature">Raw footage delivered</div>
         <div class="pkg-feature">Full commercial licensing</div>
         <div class="pkg-feature">Rush delivery available</div>
-        <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get a Quote â</a>
+        <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get a Quote &rarr;</a>
       </div>
     </div>
   </div>
 
   <!-- WEB PACKAGES -->
   <div class="reveal" style="margin-top:56px;margin-bottom:16px;">
-    <div style="font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);"> Web Design Packages</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);"> Web Design Packages</div>
     <div class="pkg-grid">
       <div class="pkg reveal">
         <div class="pkg-tier">Tier 01</div>
         <div class="pkg-name">The Landing</div>
         <div class="pkg-price">$399</div>
-        <div class="pkg-price-note">Single page Â&middot; 1 week delivery</div>
+        <div class="pkg-price-note">Single page &middot; 1 week delivery</div>
         <div class="pkg-includes">What's included</div>
         <div class="pkg-feature">Single-page website</div>
         <div class="pkg-feature">Mobile responsive design</div>
@@ -429,14 +429,14 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         <div class="pkg-feature">Fully deployed & live</div>
         <div class="pkg-feature">Contact form or CTA button</div>
         <div class="pkg-feature no">No animations or interactions</div>
-        <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get Started â</a>
+        <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get Started &rarr;</a>
       </div>
       <div class="pkg featured reveal">
         <div class="pkg-badge">Most Popular</div>
         <div class="pkg-tier">Tier 02</div>
         <div class="pkg-name">The Presence</div>
         <div class="pkg-price">$799</div>
-        <div class="pkg-price-note">Full site Â&middot; 1â2 week delivery</div>
+        <div class="pkg-price-note">Full site &middot; 1&ndash;2 week delivery</div>
         <div class="pkg-includes">What's included</div>
         <div class="pkg-feature">Multi-section full website</div>
         <div class="pkg-feature">Custom animations & interactions</div>
@@ -445,13 +445,13 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         <div class="pkg-feature">Fully deployed & live</div>
         <div class="pkg-feature">Custom cursor & particle effects</div>
         <div class="pkg-feature">Scroll reveal animations</div>
-        <a href="#" class="pkg-cta pkg-cta-gold" onclick="openModal(event)">Get Started â</a>
+        <a href="#" class="pkg-cta pkg-cta-gold" onclick="openModal(event)">Get Started &rarr;</a>
       </div>
       <div class="pkg reveal">
         <div class="pkg-tier">Tier 03</div>
         <div class="pkg-name">The Platform</div>
         <div class="pkg-price">$1,500+</div>
-        <div class="pkg-price-note">Custom build Â&middot; 2â4 week delivery</div>
+        <div class="pkg-price-note">Custom build &middot; 2&ndash;4 week delivery</div>
         <div class="pkg-includes">What's included</div>
         <div class="pkg-feature">Everything in The Presence</div>
         <div class="pkg-feature">Interactive tools (calculators, forms)</div>
@@ -460,7 +460,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         <div class="pkg-feature">Custom domain setup assistance</div>
         <div class="pkg-feature">30-day post-launch support</div>
         <div class="pkg-feature">Revisions included</div>
-        <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get a Quote â</a>
+        <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get a Quote &rarr;</a>
       </div>
     </div>
   </div>
@@ -469,9 +469,9 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 <!-- A LA CARTE -->
 <section class="alacarte sec" id="alacarte">
   <div class="reveal">
-    <div class="ey">Ã La Carte</div>
+    <div class="ey">&Agrave; La Carte</div>
     <h2 class="sh">Just need<br><em>one thing?</em></h2>
-    <p class="ss">Add individual services to any package or book them standalone. All prices are starting points â final quote based on scope.</p>
+    <p class="ss">Add individual services to any package or book them standalone. All prices are starting points &mdash; final quote based on scope.</p>
   </div>
   <div class="ac-grid reveal">
     <div class="ac-cat">
@@ -479,10 +479,10 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
       <div class="ac-items">
         <div class="ac-item" data-price="85"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Additional Hour On Location</div><div class="ac-item-note">Beyond package time</div></div><div class="ac-item-price">$85</div></div>
         <div class="ac-item" data-price="60"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Extra Edited Photos</div><div class="ac-item-note">Per 10 additional photos</div></div><div class="ac-item-price">$60</div></div>
-        <div class="ac-item" data-price="120"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Additional Short-Form Cut</div><div class="ac-item-note">30â60 second edit</div></div><div class="ac-item-price">$120</div></div>
+        <div class="ac-item" data-price="120"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Additional Short-Form Cut</div><div class="ac-item-note">30&ndash;60 second edit</div></div><div class="ac-item-price">$120</div></div>
         <div class="ac-item" data-price="150"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Raw Footage Add-On</div><div class="ac-item-note">Unedited files delivered</div></div><div class="ac-item-price">$150</div></div>
         <div class="ac-item" data-price="200"><div class="ac-check"><div class="ac-check-inner"></div></div><div><div class="ac-item-name">Rush Delivery</div><div class="ac-item-note">Within 48 hours</div></div><div class="ac-item-price">+$200</div></div>
-        <div class="ac-item"><div><div class="ac-item-name">Travel Fee</div><div class="ac-item-note">Outside 25-mile radius Â&middot; quoted per trip</div></div><div class="ac-item-price">$0.55/mi</div></div>
+        <div class="ac-item"><div><div class="ac-item-name">Travel Fee</div><div class="ac-item-note">Outside 25-mile radius &middot; quoted per trip</div></div><div class="ac-item-price">$0.55/mi</div></div>
       </div>
     </div>
     <div class="ac-cat">
@@ -507,7 +507,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
     </div>
     <div class="ac-total-actions">
       <button class="ac-clear-btn" onclick="clearAcSelection()">Clear</button>
-      <button class="ac-quote-btn" onclick="openModal(event)">Request Quote â</button>
+      <button class="ac-quote-btn" onclick="openModal(event)">Request Quote &rarr;</button>
     </div>
   </div>
 </section>
@@ -526,7 +526,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
       <div class="bundle-who">For: Realtors, Developers, Homeowners</div>
       <div class="bundle-items">
         <div class="bundle-item">Aerial photo session (25+ photos)</div>
-        <div class="bundle-item">Property walkthrough video (60â90 sec)</div>
+        <div class="bundle-item">Property walkthrough video (60&ndash;90 sec)</div>
         <div class="bundle-item">Single-page property website</div>
         <div class="bundle-item">Social preview card for sharing</div>
         <div class="bundle-item">Commercial license included</div>
@@ -606,7 +606,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
     <div class="step reveal">
       <div class="step-num">02</div>
       <div class="step-name">Scope & Quote</div>
-      <p class="step-desc">We talk through your project, goals, and timeline. You get a clear, itemized quote â no surprises.</p>
+      <p class="step-desc">We talk through your project, goals, and timeline. You get a clear, itemized quote &mdash; no surprises.</p>
     </div>
     <div class="step reveal">
       <div class="step-num">03</div>
@@ -649,19 +649,19 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
     <div>
       <div class="faq-item" onclick="toggleFaq(this)">
         <div class="faq-q">How long do websites take to build? <span class="faq-arrow">+</span></div>
-        <div class="faq-a">The Landing (single page) typically takes 3â5 days. The Presence (full site) takes 7â14 days. The Platform and custom builds are scoped per project. Rush timelines available for an additional fee.</div>
+        <div class="faq-a">The Landing (single page) typically takes 3&ndash;5 days. The Presence (full site) takes 7&ndash;14 days. The Platform and custom builds are scoped per project. Rush timelines available for an additional fee.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
         <div class="faq-q">Do you require a deposit? <span class="faq-arrow">+</span></div>
-        <div class="faq-a">Yes â 50% upfront to begin the project, 50% upon completion before final delivery. This protects both parties and keeps timelines committed.</div>
+        <div class="faq-a">Yes &mdash; 50% upfront to begin the project, 50% upon completion before final delivery. This protects both parties and keeps timelines committed.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
         <div class="faq-q">Can I combine aerial and web services? <span class="faq-arrow">+</span></div>
-        <div class="faq-a">Absolutely â that's what the bundles are designed for. Combining services saves you money and means everything is visually consistent from your footage to your website.</div>
+        <div class="faq-a">Absolutely &mdash; that's what the bundles are designed for. Combining services saves you money and means everything is visually consistent from your footage to your website.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
         <div class="faq-q">What areas do you currently serve? <span class="faq-arrow">+</span></div>
-        <div class="faq-a">Web and digital services are available nationwide â everything is done remotely. Aerial services are local. Reach out and let's discuss your location and project scope.</div>
+        <div class="faq-a">Web and digital services are available nationwide &mdash; everything is done remotely. Aerial services are local. Reach out and let's discuss your location and project scope.</div>
       </div>
     </div>
   </div>
@@ -673,7 +673,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
     <div class="ey">Maintenance Plans</div>
     <h2 class="sh">Website <em>Maintenance</em><br>Plans</h2>
     <div class="maint-divider"></div>
-    <p class="maint-subtitle">Keep your site fast, secure, and up to date â without lifting a finger.</p>
+    <p class="maint-subtitle">Keep your site fast, secure, and up to date &mdash; without lifting a finger.</p>
   </div>
   <div class="maint-grid reveal">
 
@@ -724,19 +724,19 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 <section class="cta-section sec reveal">
   <div class="ey" style="justify-content:center;">Ready to Start?</div>
   <h2 class="sh">Let's build<br><em>something great.</em></h2>
-  <p class="ss" style="margin:16px auto 40px;">Whether it's a drone shoot, a website, or a full brand package â fill out the form and I'll get back to you within 24 hours.</p>
+  <p class="ss" style="margin:16px auto 40px;">Whether it's a drone shoot, a website, or a full brand package &mdash; fill out the form and I'll get back to you within 24 hours.</p>
   <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
     <a href="#" class="btn btn-gold" onclick="openModal(event)">Get a Free Quote</a>
     <a href="intake.html" class="btn btn-out">Start Your Project Brief</a>
   </div>
-  <p class="cta-note">No commitment required Â&middot; Response within 24 hours Â&middot; All budgets considered</p>
+  <p class="cta-note">No commitment required &middot; Response within 24 hours &middot; All budgets considered</p>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="fl">Altitude Odyssey Media</div>
   <div class="fc">Refined visuals from above</div>
-  <div class="fr">Â© 2026 Â&middot; Services & Pricing</div>
+  <div class="fr">&copy; 2026 &middot; Services & Pricing</div>
 </footer>
 
 <!-- QUOTE MODAL -->
@@ -754,22 +754,22 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
       <div class="mf"><label>Service Interested In</label>
         <select id="qf-service" name="service">
           <option>Aerial Photography / Drone Shoot</option>
-          <option>Web Design â The Landing ($399)</option>
-          <option>Web Design â The Presence ($799)</option>
-          <option>Web Design â The Platform ($1,500+)</option>
-          <option>Bundle â The Listing Package ($899)</option>
-          <option>Bundle â The Car Meet Package ($749)</option>
-          <option>Bundle â The Brand Debut ($1,099)</option>
-          <option>Bundle â The Artist Package ($1,299)</option>
-          <option>Ã La Carte / Custom</option>
+          <option>Web Design &mdash; The Landing ($399)</option>
+          <option>Web Design &mdash; The Presence ($799)</option>
+          <option>Web Design &mdash; The Platform ($1,500+)</option>
+          <option>Bundle &mdash; The Listing Package ($899)</option>
+          <option>Bundle &mdash; The Car Meet Package ($749)</option>
+          <option>Bundle &mdash; The Brand Debut ($1,099)</option>
+          <option>Bundle &mdash; The Artist Package ($1,299)</option>
+          <option>&Agrave; La Carte / Custom</option>
           <option>Not Sure Yet</option>
         </select>
       </div>
       <div class="mf"><label>Budget Range</label>
         <select id="qf-budget" name="budget">
           <option>Under $500</option>
-          <option>$500 â $1,000</option>
-          <option>$1,000 â $2,000</option>
+          <option>$500 &ndash; $1,000</option>
+          <option>$1,000 &ndash; $2,000</option>
           <option>$2,000+</option>
           <option>Flexible / Not Sure</option>
         </select>
@@ -779,18 +779,18 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           <option>ASAP / Rush</option>
           <option>Within 2 weeks</option>
           <option>Within a month</option>
-          <option>No rush â planning ahead</option>
+          <option>No rush &mdash; planning ahead</option>
         </select>
       </div>
       <div class="mf"><label>Tell me about your project</label>
         <textarea id="qf-message" name="message" placeholder="What are you looking for? The more detail, the better your quote will be..."></textarea>
       </div>
-      <button class="modal-submit" onclick="submitQuote()">Send Quote Request â</button>
+      <button class="modal-submit" onclick="submitQuote()">Send Quote Request &rarr;</button>
     </div>
     <div class="modal-success" id="quote-success">
       <div class="ms-icon"></div>
       <div class="ms-title">Quote Request Sent!</div>
-      <p class="ms-text">Thank you for reaching out. I'll review your project details and send a personalized quote within 24 hours.<br><br>Keep an eye on your inbox â and follow <strong style="color:var(--gold);">@altitudeodyssey_2026</strong> on Instagram in the meantime.</p>
+      <p class="ms-text">Thank you for reaching out. I'll review your project details and send a personalized quote within 24 hours.<br><br>Keep an eye on your inbox &mdash; and follow <strong style="color:var(--gold);">@altitudeodyssey_2026</strong> on Instagram in the meantime.</p>
     </div>
   </div>
 </div>
@@ -839,7 +839,7 @@ function submitQuote(){
   const name    = document.getElementById('qf-name').value.trim();
   const email   = document.getElementById('qf-email').value.trim();
   if(!name || !email){ alert('Please enter your name and email.'); return; }
-  btn.textContent = 'Sendingâ¦';
+  btn.textContent = 'Sending&hellip;';
   btn.disabled = true;
   const data = {
     name:     name,
@@ -865,7 +865,7 @@ function submitQuote(){
       }
     })
     .catch(() => {
-      btn.textContent = 'Send Quote Request â';
+      btn.textContent = 'Send Quote Request &rarr;';
       btn.disabled = false;
       alert('Something went wrong. Please try again or email directly.');
     });
@@ -879,7 +879,7 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-// Ã LA CARTE CALCULATOR
+// &Agrave; LA CARTE CALCULATOR
 document.querySelectorAll('.ac-item[data-price]').forEach(item=>{
   item.addEventListener('click',()=>{
     item.classList.toggle('selected');

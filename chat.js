@@ -193,29 +193,38 @@
       fill: #0a0806;
     }
 
-    @media (max-width: 480px) {
+    /* Backdrop overlay — hidden by default, shown when chat opens on mobile */
+    #aom-chat-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 9998;
+    }
+
+    @media (max-width: 768px) {
       #aom-chat-bubble {
-        bottom: 12px;
-        right: 12px;
+        bottom: 16px;
+        right: 16px;
         left: auto;
         width: auto;
       }
 
+      /* Do NOT set display:flex here — that would auto-open the window.
+         The .open class (added by JS) handles display:flex. */
       #aom-chat-window {
-        width: 92vw;
-        max-width: 360px;
-        max-height: 55vh;
-        height: 55vh;
-        border-radius: 14px;
-        margin-bottom: 10px;
-        position: static;
-        top: auto;
+        position: fixed;
+        bottom: 84px; /* sit above the 58px toggle + 16px margin + gap */
+        right: 16px;
         left: auto;
-        right: auto;
-        bottom: auto;
+        width: 90vw;
+        max-width: 360px;
+        height: auto;
+        max-height: 80vh;
+        border-radius: 14px;
+        margin-bottom: 0;
         overflow: hidden;
-        display: flex;
-        flex-direction: column;
+        overflow-x: hidden;
       }
 
       #aom-chat-messages {
@@ -235,6 +244,16 @@
 
       #aom-chat-header {
         padding: 10px 14px;
+      }
+
+      /* 44×44px minimum tap target for close button */
+      #aom-chat-header .aom-close {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
       }
 
       #aom-chat-header .aom-header-text h4 {
@@ -287,12 +306,34 @@
   `;
   document.body.appendChild(bubble);
 
+  // Backdrop overlay (inserted once into body)
+  const backdrop = document.createElement('div');
+  backdrop.id = 'aom-chat-backdrop';
+  document.body.appendChild(backdrop);
+
   const chatWindow = document.getElementById('aom-chat-window');
   const toggleBtn  = document.getElementById('aom-chat-toggle');
   const closeBtn   = document.getElementById('aom-close-btn');
   const messagesEl = document.getElementById('aom-chat-messages');
   const input      = document.getElementById('aom-chat-input');
   const sendBtn    = document.getElementById('aom-chat-send');
+
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  function showBackdrop() {
+    if (isMobile()) backdrop.style.display = 'block';
+  }
+
+  function hideBackdrop() {
+    backdrop.style.display = 'none';
+  }
+
+  function closeChat() {
+    chatWindow.classList.remove('open');
+    hideBackdrop();
+  }
 
   function addMessage(role, text) {
     const div = document.createElement('div');
@@ -314,6 +355,7 @@
 
   function openChat() {
     chatWindow.classList.add('open');
+    showBackdrop();
     if (messages.length === 0) {
       addMessage('bot', 'Hi! I\'m Jess, the Altitude Odyssey Media AI assistant. Ask me anything about our web design services, pricing, or how to get started. 🌟');
     }
@@ -321,7 +363,8 @@
   }
 
   toggleBtn.addEventListener('click', openChat);
-  closeBtn.addEventListener('click', () => chatWindow.classList.remove('open'));
+  closeBtn.addEventListener('click', closeChat);
+  backdrop.addEventListener('click', closeChat);
 
   async function sendMessage() {
     const text = input.value.trim();
@@ -366,12 +409,12 @@
       const viewportHeight = window.visualViewport.height;
       const viewportOffsetTop = window.visualViewport.offsetTop;
 
-      if (window.innerWidth <= 480) {
+      if (window.innerWidth <= 768) {
         // Keyboard is open — anchor window to visible viewport
         chatWindow.style.position = 'fixed';
         chatWindow.style.top = 'auto';
-        chatWindow.style.right = '12px';
-        chatWindow.style.width = Math.min(window.innerWidth * 0.92, 360) + 'px';
+        chatWindow.style.right = '16px';
+        chatWindow.style.width = Math.min(window.innerWidth * 0.9, 360) + 'px';
         chatWindow.style.bottom = (window.innerHeight - viewportHeight - viewportOffsetTop + 12) + 'px';
         chatWindow.style.height = (viewportHeight - 70) + 'px'; // 70px = toggle button + gap
         chatWindow.style.maxHeight = (viewportHeight - 70) + 'px';
@@ -381,7 +424,7 @@
 
   // Reset chat window position when keyboard closes
   input.addEventListener('blur', function() {
-    if (chatWindow && window.innerWidth <= 480) {
+    if (chatWindow && window.innerWidth <= 768) {
       chatWindow.style.position = '';
       chatWindow.style.top = '';
       chatWindow.style.right = '';

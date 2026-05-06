@@ -212,6 +212,19 @@
         left: 0;
         right: 0;
         bottom: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #aom-chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #aom-chat-input-row {
+        flex-shrink: 0;
       }
 
       #aom-chat-toggle {
@@ -319,6 +332,36 @@
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
+    }
+  });
+
+  // iOS keyboard: anchor chat window above keyboard when it opens
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', function() {
+      if (!chatWindow || !chatWindow.classList.contains('open')) return;
+
+      const viewportHeight = window.visualViewport.height;
+      const viewportOffsetTop = window.visualViewport.offsetTop;
+
+      if (window.innerWidth <= 480) {
+        // Keyboard is open — anchor window to visible viewport
+        chatWindow.style.position = 'fixed';
+        chatWindow.style.top = 'auto';
+        chatWindow.style.bottom = (window.innerHeight - viewportHeight - viewportOffsetTop + 12) + 'px';
+        chatWindow.style.height = (viewportHeight - 70) + 'px'; // 70px = toggle button + gap
+        chatWindow.style.maxHeight = (viewportHeight - 70) + 'px';
+      }
+    });
+  }
+
+  // Reset chat window position when keyboard closes
+  input.addEventListener('blur', function() {
+    if (chatWindow && window.innerWidth <= 480) {
+      chatWindow.style.position = '';
+      chatWindow.style.top = '';
+      chatWindow.style.bottom = '';
+      chatWindow.style.height = '';
+      chatWindow.style.maxHeight = '';
     }
   });
 })();

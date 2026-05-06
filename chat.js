@@ -213,6 +213,20 @@
         left: auto;
         right: auto;
         bottom: auto;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #aom-chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #aom-chat-input-row {
+        flex-shrink: 0;
+        align-items: center;
       }
 
       #aom-chat-toggle {
@@ -241,10 +255,6 @@
         width: 36px;
         height: 36px;
         flex-shrink: 0;
-      }
-
-      #aom-chat-input-row {
-        align-items: center;
       }
     }
   `;
@@ -345,6 +355,40 @@
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
+    }
+  });
+
+  // iOS keyboard: anchor chat window above keyboard when it opens
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', function() {
+      if (!chatWindow || !chatWindow.classList.contains('open')) return;
+
+      const viewportHeight = window.visualViewport.height;
+      const viewportOffsetTop = window.visualViewport.offsetTop;
+
+      if (window.innerWidth <= 480) {
+        // Keyboard is open — anchor window to visible viewport
+        chatWindow.style.position = 'fixed';
+        chatWindow.style.top = 'auto';
+        chatWindow.style.right = '12px';
+        chatWindow.style.width = Math.min(window.innerWidth * 0.92, 360) + 'px';
+        chatWindow.style.bottom = (window.innerHeight - viewportHeight - viewportOffsetTop + 12) + 'px';
+        chatWindow.style.height = (viewportHeight - 70) + 'px'; // 70px = toggle button + gap
+        chatWindow.style.maxHeight = (viewportHeight - 70) + 'px';
+      }
+    });
+  }
+
+  // Reset chat window position when keyboard closes
+  input.addEventListener('blur', function() {
+    if (chatWindow && window.innerWidth <= 480) {
+      chatWindow.style.position = '';
+      chatWindow.style.top = '';
+      chatWindow.style.right = '';
+      chatWindow.style.width = '';
+      chatWindow.style.bottom = '';
+      chatWindow.style.height = '';
+      chatWindow.style.maxHeight = '';
     }
   });
 })();

@@ -195,30 +195,56 @@
 
     @media (max-width: 480px) {
       #aom-chat-bubble {
-        bottom: 0;
-        right: 0;
-        left: 0;
-        width: 100%;
+        bottom: 12px;
+        right: 12px;
+        left: auto;
+        width: auto;
       }
 
       #aom-chat-window {
-        width: 100%;
-        height: 100dvh;
-        border-radius: 0;
-        border: none;
-        margin-bottom: 0;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        width: 92vw;
+        max-width: 360px;
+        max-height: 55vh;
+        height: 55vh;
+        border-radius: 14px;
+        margin-bottom: 10px;
+        position: static;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
       }
 
       #aom-chat-toggle {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        margin-left: 0;
+        margin-left: auto;
+      }
+
+      #aom-chat-header {
+        padding: 10px 14px;
+      }
+
+      #aom-chat-header .aom-header-text h4 {
+        font-size: 14px;
+      }
+
+      .aom-msg {
+        font-size: 14px;
+      }
+
+      #aom-chat-input {
+        height: 36px;
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+
+      #aom-chat-send {
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+      }
+
+      #aom-chat-input-row {
+        align-items: center;
       }
     }
   `;

@@ -304,8 +304,8 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 .maint-faq__title em { color:#c9973d; font-style:italic; }
 .maint-faq__item { border-bottom:1px solid rgba(201,151,61,0.15); }
 .maint-faq__q { width:100%; background:none; border:none; text-align:left; padding:1.25rem 0; font-family:'Cormorant Garamond',Georgia,serif; font-size:1.15rem; color:#e8e3d8; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
-.maint-faq__q::after { content:'\25C6'; color:#c9973d; font-size:0.5rem; transition:transform 0.3s; flex-shrink:0; margin-left:1rem; }
-.maint-faq__item.open .maint-faq__q::after { transform:rotate(90deg); }
+.maint-faq__q::after { content:'+'; color:#c9973d; font-size:1.1rem; font-weight:300; transition:transform 0.3s; flex-shrink:0; margin-left:1rem; font-family:'Raleway',sans-serif; line-height:1; }
+.maint-faq__item.open .maint-faq__q::after { content:'\00D7'; transform:none; }
 .maint-faq__a { padding:0 0 1.25rem; }
 .maint-faq__a p { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:1.05rem; line-height:1.7; color:#a89e85; }
 

@@ -244,6 +244,69 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 .ms-title{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold-light);margin-bottom:12px;}
 .ms-text{font-size:13px;color:var(--text-dim);line-height:1.9;}
 
+.pkg-maintenance-hook {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-dim, #a89e85);
+  background: rgba(201,151,61,0.06);
+  border-left: 2px solid #c9973d;
+  padding: 1rem;
+  border-radius: 0 4px 4px 0;
+  margin: 1.5rem 0;
+}
+.pkg-hook-support strong {
+  color: #c9973d;
+  font-style: normal;
+}
+
+/* Maintenance Section Redesign */
+.maint-reframe { max-width:720px; margin:0 auto 4rem; text-align:center; padding:0 1.5rem; }
+.maint-reframe__mark { font-family:'Cormorant Garamond',Georgia,serif; font-size:4rem; line-height:1; color:rgba(201,151,61,0.4); margin-bottom:0.5rem; }
+.maint-reframe__text { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:clamp(1.5rem,3vw,1.85rem); color:#e8e3d8; line-height:1.5; }
+.maint-reframe__coda { color:#c9973d; }
+
+.maint-compare { max-width:900px; margin:5rem auto; padding:0 1rem; }
+.maint-compare__title { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(1.6rem,3vw,2.2rem); color:#e8e3d8; margin:0.5rem 0 1rem; }
+.maint-compare__title em { color:#c9973d; }
+.maint-compare__sub { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:1.05rem; color:#a89e85; text-align:center; margin-bottom:2rem; }
+.maint-compare__table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.maint-compare__table { width:100%; border-collapse:collapse; background:#111; border:1px solid rgba(201,151,61,0.2); border-radius:4px; font-family:'Cormorant Garamond',Georgia,serif; }
+.maint-compare__table thead th { padding:1rem 1.5rem; font-family:'Cinzel',Georgia,serif; font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; }
+.col-diy { background:rgba(239,68,68,0.04); color:#a89e85; border-right:1px solid rgba(201,151,61,0.15); }
+.col-aom { background:rgba(201,151,61,0.06); color:#c9973d; }
+.maint-compare__table tbody tr { border-top:1px dashed rgba(201,151,61,0.1); }
+.maint-compare__table tbody td { padding:0.9rem 1.5rem; font-size:1rem; line-height:1.5; }
+.maint-compare__table tbody tr td:first-child { font-style:italic; color:#7a7260; border-right:1px solid rgba(201,151,61,0.15); }
+.maint-compare__table tbody tr td:last-child { color:#d4c9b0; }
+.totals-row td { padding:1.25rem 1.5rem; border-top:1px solid rgba(201,151,61,0.25) !important; background:rgba(0,0,0,0.3); font-size:clamp(1rem,2vw,1.3rem); }
+.total-diy { font-style:italic; color:#6a6356; border-right:1px solid rgba(201,151,61,0.15); }
+.total-aom { font-style:italic; color:#c9973d; }
+
+.maint-founder-quote { max-width:760px; margin:5rem auto; padding:3rem 1.5rem; border-top:1px solid rgba(201,151,61,0.15); border-bottom:1px solid rgba(201,151,61,0.15); text-align:center; }
+.maint-founder-ornament { display:flex; justify-content:center; gap:1rem; color:#c9973d; font-size:0.7rem; margin:1.5rem 0; opacity:0.7; }
+.maint-founder-ornament .big { font-size:1rem; opacity:1; }
+.maint-founder-quote__text { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:clamp(1.2rem,2.5vw,1.4rem); color:#e8e3d8; line-height:1.7; margin:0; }
+.maint-founder-quote__text strong { font-style:normal; color:#c9973d; }
+.maint-founder-quote__text em { color:#c9973d; }
+.maint-founder-attr { margin-top:2rem; }
+.maint-founder-name { display:block; font-family:'Cinzel',Georgia,serif; font-size:0.85rem; letter-spacing:0.3em; color:#c9973d; }
+.maint-founder-title { display:block; font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:0.95rem; color:#6e6a5e; margin-top:0.25rem; }
+
+.maint-faq { max-width:700px; margin:5rem auto; padding:0 1rem; }
+.maint-faq__title { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(1.6rem,3vw,2rem); color:#e8e3d8; margin:0.5rem 0 2.5rem; }
+.maint-faq__title em { color:#c9973d; font-style:italic; }
+.maint-faq__item { border-bottom:1px solid rgba(201,151,61,0.15); }
+.maint-faq__q { width:100%; background:none; border:none; text-align:left; padding:1.25rem 0; font-family:'Cormorant Garamond',Georgia,serif; font-size:1.15rem; color:#e8e3d8; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.maint-faq__q::after { content:'&#9670;'; color:#c9973d; font-size:0.5rem; transition:transform 0.3s; flex-shrink:0; margin-left:1rem; }
+.maint-faq__item.open .maint-faq__q::after { transform:rotate(90deg); }
+.maint-faq__a { padding:0 0 1.25rem; }
+.maint-faq__a p { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:1.05rem; line-height:1.7; color:#a89e85; }
+
+/* Pricing card subheads */
+.pkg-price-sub { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:0.85rem; color:#6e6a5e; margin:0.35rem 0 1rem; }
+
 @media(max-width:768px){
   nav{padding:18px 20px;}
   .nm,.nav-cta{display:none;}
@@ -367,6 +430,10 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         <div class="pkg-feature">Fully deployed & live</div>
         <div class="pkg-feature">Contact form or CTA button</div>
         <div class="pkg-feature no">No animations or interactions</div>
+        <div class="pkg-maintenance-hook">
+          <span class="pkg-hook-support"><strong>30 days</strong> of post-launch support.</span>
+          Continue with a <em>Basic Maintenance Plan ($60/mo)</em> — your site stays fast, secure, and current.
+        </div>
         <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get Started &rarr;</a>
       </div>
       <div class="pkg featured reveal">
@@ -383,6 +450,10 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         <div class="pkg-feature">Fully deployed & live</div>
         <div class="pkg-feature">Custom cursor & particle effects</div>
         <div class="pkg-feature">Scroll reveal animations</div>
+        <div class="pkg-maintenance-hook">
+          <span class="pkg-hook-support"><strong>30 days</strong> of post-launch support.</span>
+          Most clients continue with a <em>Standard Maintenance Plan ($110/mo)</em> — full-service stewardship.
+        </div>
         <a href="#" class="pkg-cta pkg-cta-gold" onclick="openModal(event)">Get Started &rarr;</a>
       </div>
       <div class="pkg reveal">
@@ -398,6 +469,10 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         <div class="pkg-feature">Custom domain setup assistance</div>
         <div class="pkg-feature">30-day post-launch support</div>
         <div class="pkg-feature">Revisions included</div>
+        <div class="pkg-maintenance-hook">
+          <span class="pkg-hook-support"><strong>30 days</strong> of post-launch support.</span>
+          <em>Premium Maintenance Plan ($160/mo)</em> recommended for ongoing growth and same-day response.
+        </div>
         <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get a Quote &rarr;</a>
       </div>
     </div>
@@ -406,18 +481,25 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 
 <!-- MAINTENANCE PLANS -->
 <section class="maintenance sec" id="maintenance">
-  <div class="reveal">
-    <div class="ey">Maintenance Plans</div>
-    <h2 class="sh">Website <em>Maintenance</em><br>Plans</h2>
-    <div class="maint-divider"></div>
-    <p class="maint-subtitle">Keep your site fast, secure, and up to date &mdash; without lifting a finger.</p>
+  <!-- ELEMENT A: Reframe Quote -->
+  <div class="maint-reframe">
+    <div class="maint-reframe__mark">&ldquo;</div>
+    <p class="maint-reframe__text">Most websites die slowly &mdash; broken plugins, expired domains, security warnings, dead links. <em class="maint-reframe__coda">Yours doesn&rsquo;t have to.</em></p>
   </div>
+
+  <!-- ELEMENT B: Section Title -->
+  <div class="section-label">Maintenance Plans</div>
+  <h2 class="section-title">Ongoing <em>Stewardship.</em></h2>
+  <p class="section-subtitle">Three tiers, each with predictable monthly pricing. Cancel anytime.</p>
+
+  <!-- ELEMENT C: Three Pricing Cards -->
   <div class="maint-grid reveal">
 
     <!-- BASIC -->
     <div class="maint-card">
       <div class="maint-plan">Basic</div>
       <div class="maint-price">$60</div>
+      <p class="pkg-price-sub">Light maintenance, peace of mind</p>
       <div class="maint-price-note">per month</div>
       <div class="maint-feature">3 updates/month</div>
       <div class="maint-feature">Domain renewal included</div>
@@ -431,6 +513,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
       <div class="maint-badge">Most Popular</div>
       <div class="maint-plan">Standard</div>
       <div class="maint-price">$110</div>
+      <p class="pkg-price-sub">Full-service site stewardship</p>
       <div class="maint-price-note">per month</div>
       <div class="maint-feature">Unlimited small updates (24hr turnaround)</div>
       <div class="maint-feature">Domain + hosting + renewal included</div>
@@ -444,6 +527,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
     <div class="maint-card">
       <div class="maint-plan">Premium</div>
       <div class="maint-price">$160</div>
+      <p class="pkg-price-sub">Priority service &amp; growth</p>
       <div class="maint-price-note">per month</div>
       <div class="maint-feature">Same-day updates (4hr turnaround)</div>
       <div class="maint-feature">Domain + hosting + renewal included</div>
@@ -454,6 +538,89 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
       <a href="#" class="btn-maintenance-cta" data-plan="premium">Get Started</a>
     </div>
 
+  </div>
+
+  <!-- ELEMENT D: Comparison Table -->
+  <div class="maint-compare">
+    <div class="section-label">The Real Math</div>
+    <h3 class="maint-compare__title">DIY vs. <em>Stewardship.</em></h3>
+    <p class="maint-compare__sub">Most prospects underestimate what running a website actually costs. Here&rsquo;s the honest comparison.</p>
+    <div class="maint-compare__table-wrap">
+      <table class="maint-compare__table">
+        <thead>
+          <tr>
+            <th class="col-diy">Without a Plan</th>
+            <th class="col-aom">AOM Standard ($110/mo)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>$15/mo for hosting (you manage)</td><td>&#9670; Hosting included</td></tr>
+          <tr><td>$15/yr for domain (you remember)</td><td>&#9670; Domain + renewal handled</td></tr>
+          <tr><td>Your time, every month, for updates</td><td>&#9670; Unlimited small updates &middot; 24hr turnaround</td></tr>
+          <tr><td>No SEO upkeep &mdash; rankings drift</td><td>&#9670; Basic SEO maintenance ongoing</td></tr>
+          <tr><td>Hope nothing breaks at 2 a.m.</td><td>&#9670; 24/7 uptime monitoring</td></tr>
+          <tr><td>Security patches when you remember</td><td>&#9670; Watched &mdash; quietly, continuously</td></tr>
+        </tbody>
+        <tfoot>
+          <tr class="totals-row">
+            <td class="total-diy"><em>A second job<br>plus risk</em></td>
+            <td class="total-aom"><em>$110/mo<br>peace of mind</em></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- ELEMENT E: Founder Quote -->
+  <div class="maint-founder-quote">
+    <div class="section-label">Why This Matters &middot; From the Founder</div>
+    <div class="maint-founder-ornament"><span>&#9670;</span><span class="big">&#9670;</span><span>&#9670;</span></div>
+    <blockquote class="maint-founder-quote__text">
+      Our own infrastructure was targeted by a domain squatter recently. I noticed within hours, traced the issue, and <strong>hardened our server configuration permanently</strong> &mdash; every site we host is now protected from that class of attack. Your business shouldn&rsquo;t have to worry about things you&rsquo;ve never heard of. <em>That&rsquo;s what maintenance is for.</em>
+    </blockquote>
+    <div class="maint-founder-ornament"><span>&#9670;</span><span class="big">&#9670;</span><span>&#9670;</span></div>
+    <div class="maint-founder-attr">
+      <span class="maint-founder-name">CONOR DRAVES</span>
+      <span class="maint-founder-title">Founder &middot; Altitude Odyssey Media LLC</span>
+    </div>
+  </div>
+
+  <!-- ELEMENT F: Maintenance FAQ -->
+  <div class="maint-faq">
+    <div class="section-label">Maintenance FAQ</div>
+    <h3 class="maint-faq__title">Common <em>Questions</em></h3>
+    <div class="maint-faq__list">
+      <div class="maint-faq__item open">
+        <button class="maint-faq__q" aria-expanded="true">What counts as an &ldquo;update&rdquo;?</button>
+        <div class="maint-faq__a">
+          <p>Small updates include: copy changes, image swaps, new sections added to existing pages, link fixes, contact info updates, schema and SEO tag adjustments, plugin updates, and security patches. Anything under roughly an hour of work counts as one update.</p>
+        </div>
+      </div>
+      <div class="maint-faq__item">
+        <button class="maint-faq__q" aria-expanded="false">What does &ldquo;30 days of post-launch support&rdquo; include?</button>
+        <div class="maint-faq__a" hidden>
+          <p>During the first 30 days after launch, I&rsquo;ll fix anything that doesn&rsquo;t work as specified in our project agreement &mdash; broken links, mobile display bugs, deployment issues, missing assets. Changes to scope (new pages, new features, content additions) are billed separately at $60/hr or covered automatically by a maintenance plan.</p>
+        </div>
+      </div>
+      <div class="maint-faq__item">
+        <button class="maint-faq__q" aria-expanded="false">Can I cancel anytime?</button>
+        <div class="maint-faq__a" hidden>
+          <p>Yes. Maintenance plans are month-to-month. Cancel anytime with no penalty. If you cancel mid-month, the plan remains active through the paid period.</p>
+        </div>
+      </div>
+      <div class="maint-faq__item">
+        <button class="maint-faq__q" aria-expanded="false">Do you offer maintenance for sites you didn&rsquo;t build?</button>
+        <div class="maint-faq__a" hidden>
+          <p>Yes. After a brief site audit ($250 one-time), existing sites can be onboarded onto any maintenance plan. The audit identifies issues, deploys initial fixes, and ensures the site is in stable shape before ongoing maintenance begins.</p>
+        </div>
+      </div>
+      <div class="maint-faq__item">
+        <button class="maint-faq__q" aria-expanded="false">What if my site goes down at 2 a.m.?</button>
+        <div class="maint-faq__a" hidden>
+          <p>Standard and Premium plans include 24/7 uptime monitoring. If your site goes down outside business hours, I&rsquo;m notified immediately and respond as soon as I&rsquo;m awake &mdash; typically within hours. Premium clients get priority text/call support for urgent situations.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -975,6 +1142,27 @@ function submitQuote(){
       alert('Something went wrong. Please try again or email directly.');
     });
 }
+
+// Maintenance FAQ accordion
+document.querySelectorAll('.maint-faq__q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.maint-faq__item');
+    const answer = item.querySelector('.maint-faq__a');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.maint-faq__item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.maint-faq__q').setAttribute('aria-expanded', 'false');
+      i.querySelector('.maint-faq__a').hidden = true;
+    });
+    // Open clicked if it was closed
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      answer.hidden = false;
+    }
+  });
+});
 
 // ESC
 document.addEventListener('keydown',e=>{

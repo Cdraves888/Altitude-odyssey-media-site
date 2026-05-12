@@ -3,27 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>International Stylez | Premium Barbershop — Surf City & Topsail Beach, NC</title>
-  <meta name="description" content="International Stylez is a premium barbershop serving Surf City and Topsail Beach, NC. Classic cuts, fades, tapers, shape-ups, and full-service beard work.">
+  <title>International Stylez | Unisex Salon — Wilmington, NC</title>
+  <meta name="description" content="International Stylez is a unisex salon in Wilmington, NC offering premium cuts, color, natural hair, braids, and styling for men and women. 3710 S College Rd, Unit 127.">
   <link rel="canonical" href="https://altitudeodysseymedia.com/international-stylez.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap&subset=latin,latin-ext" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     /* ── Reset & Base ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0d0d0d;
-      --surface:   #161616;
+      --bg:        #0f1a1a;
+      --surface:   #1a2a2a;
+      --teal:      #3abfbf;
+      --teal-dim:  rgba(58,191,191,0.12);
+      --sage:      #a8c090;
       --gold:      #c9973d;
-      --gold-lt:   #d4af5b;
-      --cream:     #e8e0d0;
-      --muted:     #9a968e;
-      --dim:       #5a5650;
-      --border:    rgba(201,151,61,0.15);
+      --cream:     #f0ede6;
+      --muted:     #8fa89a;
+      --dim:       #4a6060;
+      --border:    rgba(58,191,191,0.15);
     }
 
     html { scroll-behavior: smooth; }
@@ -31,8 +33,9 @@
     body {
       background: var(--bg);
       color: var(--cream);
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 18px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 17px;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
@@ -46,53 +49,56 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 2rem;
-      height: 64px;
-      background: rgba(13,13,13,0.88);
-      backdrop-filter: blur(10px);
+      height: 66px;
+      background: rgba(15,26,26,0.92);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
 
     .nav-logo {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.28em;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--cream);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .nav-logo span { color: var(--gold); }
+    .nav-logo .globe { font-size: 1rem; }
 
     .nav-links {
       display: flex;
-      gap: 2.4rem;
+      gap: 2.2rem;
       list-style: none;
     }
     .nav-links a {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.62rem;
-      font-weight: 400;
-      letter-spacing: 0.22em;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--muted);
       transition: color 0.25s;
     }
-    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover { color: var(--teal); }
 
     .nav-cta {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--bg);
-      background: var(--gold);
-      padding: 0.55rem 1.2rem;
+      background: var(--teal);
+      padding: 0.55rem 1.3rem;
       transition: background 0.25s;
     }
-    .nav-cta:hover { background: var(--gold-lt); }
+    .nav-cta:hover { background: #4dd0d0; }
 
     /* ── Hero ─────────────────────────────────────────── */
     .hero {
@@ -101,33 +107,39 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 7rem 1.5rem 5rem;
+      padding: 8rem 1.5rem 6rem;
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(ellipse 60% 40% at 50% 60%, rgba(201,151,61,0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 80% 20%, rgba(201,151,61,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(58,191,191,0.09) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 70% at 20% 80%, rgba(201,151,61,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 50% at 80% 10%, rgba(168,192,144,0.05) 0%, transparent 50%),
         var(--bg);
     }
 
-    /* Diagonal rule accent */
+    /* Meridian grid lines */
     .hero::before {
       content: '';
       position: absolute;
-      right: 10%;
-      top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(180deg, transparent 0%, rgba(201,151,61,0.18) 40%, rgba(201,151,61,0.18) 60%, transparent 100%);
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(58,191,191,0.04) 80px),
+        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(58,191,191,0.04) 80px);
       pointer-events: none;
     }
 
-    /* Noise texture */
-    .hero::after {
-      content: '';
+    /* Decorative globe */
+    .hero-globe-bg {
       position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/></svg>");
+      font-size: 38vw;
+      line-height: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.055;
       pointer-events: none;
+      user-select: none;
+      z-index: 0;
     }
 
     .hero-inner {
@@ -137,69 +149,89 @@
     }
 
     .hero-eyebrow {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.62rem;
-      font-weight: 400;
-      letter-spacing: 0.42em;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.7rem;
+      letter-spacing: 0.36em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--teal);
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 1rem;
-      margin-bottom: 1.8rem;
+      margin-bottom: 2rem;
     }
     .hero-eyebrow::before,
     .hero-eyebrow::after {
       content: '';
-      width: 40px;
+      width: 36px;
       height: 1px;
-      background: var(--gold);
+      background: var(--teal);
       opacity: 0.5;
     }
 
     .hero h1 {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: clamp(2.6rem, 7vw, 5.5rem);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 400;
       color: var(--cream);
-      line-height: 1.05;
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 span {
-      display: block;
-      color: var(--gold);
+      line-height: 1.08;
+      letter-spacing: 0.01em;
+      margin-bottom: 1.6rem;
     }
 
     .hero-sub {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 1.25rem;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 1.1rem;
       color: var(--muted);
-      letter-spacing: 0.03em;
-      margin-bottom: 2.8rem;
-      max-width: 480px;
+      letter-spacing: 0.04em;
+      margin-bottom: 3rem;
+      max-width: 520px;
       margin-left: auto;
       margin-right: auto;
     }
 
+    .hero-ctas {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
     .btn-primary {
       display: inline-block;
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--bg);
-      background: var(--gold);
-      padding: 1rem 2.4rem;
+      background: var(--teal);
+      padding: 1rem 2.2rem;
       transition: background 0.25s, transform 0.2s;
     }
     .btn-primary:hover {
-      background: var(--gold-lt);
+      background: #4dd0d0;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+      padding: 1rem 2.2rem;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+    .btn-outline:hover {
+      background: var(--teal-dim);
       transform: translateY(-2px);
     }
 
@@ -211,97 +243,101 @@
     .section-header { text-align: center; margin-bottom: 3.5rem; }
 
     .section-eyebrow {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.6rem;
-      font-weight: 400;
-      letter-spacing: 0.4em;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.65rem;
+      letter-spacing: 0.36em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.8rem;
+      color: var(--teal);
+      margin-bottom: 0.7rem;
     }
 
     .section-title {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
-      font-weight: 500;
-      letter-spacing: 0.06em;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 400;
       color: var(--cream);
-      text-transform: uppercase;
+      line-height: 1.2;
     }
 
     .section-rule {
       width: 48px;
-      height: 1px;
-      background: var(--gold);
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--sage));
       margin: 1.2rem auto 0;
-      opacity: 0.6;
+      opacity: 0.7;
     }
 
     /* ── Services ─────────────────────────────────────── */
     #services { background: var(--surface); }
 
-    .services-grid {
+    .services-split {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5px;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
     }
 
-    .service-card {
+    .services-column-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--teal);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .services-column-title .col-icon {
+      font-size: 1.1rem;
+    }
+
+    .service-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .service-item {
       background: var(--bg);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      border: 1px solid rgba(201,151,61,0.1);
-      transition: border-color 0.3s, transform 0.3s;
+      border: 1px solid rgba(58,191,191,0.1);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color 0.3s, transform 0.25s;
       position: relative;
       overflow: hidden;
     }
-    .service-card::after {
+    .service-item::after {
       content: '';
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--teal), var(--sage));
       opacity: 0;
       transition: opacity 0.3s;
     }
-    .service-card:hover {
-      border-color: rgba(201,151,61,0.35);
-      transform: translateY(-4px);
+    .service-item:hover {
+      border-color: rgba(58,191,191,0.3);
+      transform: translateX(4px);
     }
-    .service-card:hover::after { opacity: 1; }
+    .service-item:hover::after { opacity: 1; }
 
-    .service-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--gold);
-      line-height: 1;
+    .service-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      opacity: 0.7;
     }
 
     .service-name {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.75rem;
+      font-family: 'Raleway', sans-serif;
       font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      font-size: 0.92rem;
       color: var(--cream);
-      margin-bottom: 0.6rem;
-    }
-
-    .service-desc {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin-bottom: 1.2rem;
-      min-height: 2.4em;
-    }
-
-    .service-price {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 1.35rem;
-      font-weight: 400;
-      color: var(--gold);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
     }
 
     /* ── About ────────────────────────────────────────── */
@@ -310,154 +346,158 @@
       position: relative;
       overflow: hidden;
     }
-    #about::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(180deg, transparent, rgba(201,151,61,0.2), transparent);
-      pointer-events: none;
-    }
 
     .about-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 5rem;
       align-items: center;
     }
 
     .about-text h3 {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 400;
       color: var(--cream);
-      margin-bottom: 1.4rem;
-    }
-    .about-text h3 em {
-      display: block;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.1rem;
-      font-style: italic;
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: var(--gold);
-      text-transform: none;
-      margin-bottom: 0.3rem;
+      line-height: 1.3;
+      margin-bottom: 1.6rem;
     }
 
     .about-text p {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 1.1rem;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
       color: var(--muted);
-      line-height: 1.8;
+      line-height: 1.85;
     }
-    .about-text p + p { margin-top: 1rem; }
 
     .about-visual {
       position: relative;
-      height: 320px;
+      height: 340px;
       background: var(--surface);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
-    .about-visual-inner {
-      text-align: center;
-    }
-    .about-visual-glyph {
-      font-size: 5rem;
-      color: var(--gold);
-      opacity: 0.25;
+    .about-globe-deco {
+      font-size: 10rem;
+      opacity: 0.12;
+      line-height: 1;
       display: block;
-      margin-bottom: 0.5rem;
     }
     .about-visual-label {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.35em;
+      position: absolute;
+      bottom: 1.5rem;
+      left: 0; right: 0;
+      text-align: center;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--dim);
     }
 
-    /* ── Testimonials ─────────────────────────────────── */
-    #testimonials { background: var(--surface); }
+    /* ── Hours & Location ─────────────────────────────── */
+    #hours { background: var(--surface); }
 
-    .testimonials-grid {
+    .hours-layout {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
     }
 
-    .testimonial-card {
-      background: var(--bg);
-      border: 1px solid rgba(201,151,61,0.1);
-      padding: 2.5rem 2rem;
-      position: relative;
-    }
-    .testimonial-card::before {
-      content: '\201C';
-      position: absolute;
-      top: 1rem; left: 1.5rem;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 4rem;
-      line-height: 1;
-      color: var(--gold);
-      opacity: 0.2;
+    .hours-block h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 1.6rem;
     }
 
-    .testimonial-text {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 1.1rem;
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours-table tr + tr td {
+      border-top: 1px solid rgba(58,191,191,0.08);
+    }
+    .hours-table td {
+      padding: 0.7rem 0;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.93rem;
+    }
+    .hours-table .day {
       color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-      padding-top: 1rem;
+      padding-right: 1.5rem;
+    }
+    .hours-table .time {
+      color: var(--cream);
+      text-align: right;
+    }
+    .hours-table .closed { color: var(--dim); }
+
+    .location-block h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 1.6rem;
     }
 
-    .testimonial-meta {
+    .location-detail {
       display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.3rem;
     }
-    .testimonial-avatar {
-      width: 38px;
-      height: 38px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
+    .location-icon {
+      color: var(--teal);
+      font-size: 1rem;
+      margin-top: 0.1em;
       flex-shrink: 0;
     }
-    .testimonial-name {
-      font-family: 'Cinzel', Georgia, serif;
+    .location-text {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.93rem;
+    }
+    .location-text strong {
+      display: block;
+      font-weight: 600;
       font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.2rem;
+    }
+    .location-text a {
       color: var(--cream);
+      text-decoration: none;
     }
-    .testimonial-location {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 0.85rem;
-      color: var(--dim);
+    .location-text a:hover { color: var(--teal); }
+
+    .payments-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.2rem;
     }
-    .testimonial-stars {
-      color: var(--gold);
-      font-size: 0.75rem;
+    .payment-badge {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.7rem;
       letter-spacing: 0.1em;
-      margin-top: 0.15rem;
+      color: var(--bg);
+      background: var(--sage);
+      padding: 0.3rem 0.75rem;
+      border-radius: 2px;
     }
 
-    /* ── Book / Contact ───────────────────────────────── */
+    /* ── Book ────────────────────────────────────────── */
     #book {
       background: var(--bg);
       border-top: 1px solid var(--border);
@@ -465,56 +505,26 @@
 
     .book-layout {
       display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 4rem;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
       align-items: start;
     }
 
     .book-info h3 {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.62rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.6rem;
       font-weight: 400;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      color: var(--gold);
+      color: var(--cream);
       margin-bottom: 1rem;
     }
 
     .book-info p {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 1.05rem;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
       color: var(--muted);
       line-height: 1.8;
       margin-bottom: 2rem;
-    }
-
-    .contact-detail {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.9rem;
-      margin-bottom: 1.1rem;
-    }
-    .contact-detail-icon {
-      color: var(--gold);
-      font-size: 1rem;
-      margin-top: 0.1em;
-      flex-shrink: 0;
-    }
-    .contact-detail-text {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1rem;
-      color: var(--muted);
-    }
-    .contact-detail-text strong {
-      display: block;
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--cream);
-      font-weight: 500;
-      margin-bottom: 0.15rem;
     }
 
     .book-form {
@@ -536,10 +546,10 @@
     }
 
     .form-group label {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.58rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
     }
@@ -548,92 +558,103 @@
     .form-group select,
     .form-group textarea {
       background: var(--surface);
-      border: 1px solid rgba(201,151,61,0.18);
+      border: 1px solid rgba(58,191,191,0.18);
       color: var(--cream);
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1rem;
-      padding: 0.8rem 1rem;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      padding: 0.85rem 1rem;
       outline: none;
       transition: border-color 0.25s;
       -webkit-appearance: none;
     }
     .form-group input::placeholder,
-    .form-group textarea::placeholder { color: var(--dim); font-style: italic; }
+    .form-group textarea::placeholder { color: var(--dim); }
 
     .form-group select {
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M0 0l6 8 6-8z' fill='%23c9973d' opacity='0.6'/></svg>");
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M0 0l6 8 6-8z' fill='%233abfbf' opacity='0.6'/></svg>");
       background-repeat: no-repeat;
       background-position: right 1rem center;
+      background-color: var(--surface);
       padding-right: 2.5rem;
       cursor: pointer;
     }
-    .form-group select option { background: #1a1a1a; }
+    .form-group select option { background: #1a2a2a; }
 
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border-color: rgba(201,151,61,0.5);
+      border-color: rgba(58,191,191,0.5);
     }
 
     .form-group textarea { resize: vertical; min-height: 110px; }
 
-    .form-note {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 0.88rem;
-      color: var(--dim);
-      letter-spacing: 0.01em;
-    }
-
     .btn-submit {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--bg);
-      background: var(--gold);
+      background: var(--teal);
       border: none;
       padding: 1rem 2.4rem;
       cursor: pointer;
       transition: background 0.25s;
       align-self: flex-start;
     }
-    .btn-submit:hover { background: var(--gold-lt); }
+    .btn-submit:hover { background: #4dd0d0; }
+
+    .form-note {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.82rem;
+      color: var(--dim);
+    }
 
     /* ── Footer ───────────────────────────────────────── */
     footer {
-      background: #080808;
+      background: #0a1212;
       border-top: 1px solid var(--border);
-      padding: 2.2rem 1.5rem;
+      padding: 2.4rem 1.5rem;
       text-align: center;
     }
     footer p {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 0.58rem;
-      letter-spacing: 0.3em;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--dim);
     }
+    footer a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
 
     /* ── Responsive ───────────────────────────────────── */
     @media (max-width: 900px) {
       .about-layout,
-      .book-layout {
+      .book-layout,
+      .hours-layout,
+      .services-split {
         grid-template-columns: 1fr;
       }
-      .about-visual { height: 200px; }
+      .about-visual { height: 220px; }
     }
 
     @media (max-width: 640px) {
       nav { padding: 0 1rem; }
       .nav-links { display: none; }
-      .nav-logo { font-size: 0.68rem; letter-spacing: 0.18em; }
+      .nav-logo { font-size: 0.7rem; letter-spacing: 0.14em; }
 
-      .hero h1 { letter-spacing: 0.04em; }
-      .hero-sub { font-size: 1.05rem; }
+      section { padding: 4.5rem 1.25rem; }
 
-      section { padding: 4rem 1.25rem; }
+      .hero h1 { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+      .hero-globe-bg { font-size: 60vw; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
 
       .form-row { grid-template-columns: 1fr; }
       .btn-submit { width: 100%; text-align: center; }
@@ -645,26 +666,29 @@
 
 <!-- ── Nav ──────────────────────────────────────────────── -->
 <nav>
-  <a href="#" class="nav-logo">International <span>Stylez</span></a>
+  <a href="#" class="nav-logo">
+    <span class="globe">🌍</span> International Stylez
+  </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#hours">Hours</a></li>
     <li><a href="#book">Book</a></li>
+    <li><a href="#book">Contact</a></li>
   </ul>
   <a href="#book" class="nav-cta">Book Now</a>
 </nav>
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section class="hero">
+  <span class="hero-globe-bg" aria-hidden="true">🌍</span>
   <div class="hero-inner">
-    <p class="hero-eyebrow">Surf City &amp; Topsail Beach, NC</p>
-    <h1>
-      Sharp Cuts.
-      <span>Clean Fades.</span>
-    </h1>
-    <p class="hero-sub">Premium barbershop serving Surf City &amp; Topsail Beach, NC.</p>
-    <a href="#book" class="btn-primary">Book Your Appointment &rarr;</a>
+    <p class="hero-eyebrow">Wilmington, NC · Unisex Salon</p>
+    <h1>Style Without Borders.</h1>
+    <p class="hero-sub">Premium cuts, color, and styling for everyone — in Wilmington, NC.</p>
+    <div class="hero-ctas">
+      <a href="#book" class="btn-primary">Book Appointment</a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
   </div>
 </section>
 
@@ -673,38 +697,68 @@
   <div class="section-inner">
     <div class="section-header">
       <p class="section-eyebrow">What We Offer</p>
-      <h2 class="section-title">Services</h2>
+      <h2 class="section-title">Services for Everyone</h2>
       <div class="section-rule"></div>
     </div>
 
-    <div class="services-grid">
+    <div class="services-split">
 
-      <div class="service-card">
-        <div class="service-icon">&#9999;&#65039;</div>
-        <p class="service-name">Classic Cut</p>
-        <p class="service-desc">Traditional scissor & clipper cut, finished to perfection.</p>
-        <p class="service-price">$25</p>
+      <!-- Men's -->
+      <div>
+        <p class="services-column-title">
+          <span class="col-icon">✂️</span> Men's Services
+        </p>
+        <div class="service-list">
+          <div class="service-item">
+            <div class="service-dot"></div>
+            <span class="service-name">Haircut &amp; Style</span>
+          </div>
+          <div class="service-item">
+            <div class="service-dot"></div>
+            <span class="service-name">Fade &amp; Taper</span>
+          </div>
+          <div class="service-item">
+            <div class="service-dot"></div>
+            <span class="service-name">Beard Trim &amp; Shape</span>
+          </div>
+          <div class="service-item">
+            <div class="service-dot"></div>
+            <span class="service-name">Hot Towel Shave</span>
+          </div>
+        </div>
       </div>
 
-      <div class="service-card">
-        <div class="service-icon">&#10022;</div>
-        <p class="service-name">Fade &amp; Taper</p>
-        <p class="service-desc">Smooth skin fade or soft taper — your style, dialed in.</p>
-        <p class="service-price">$30</p>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">&#9670;</div>
-        <p class="service-name">Shape Up &amp; Edge</p>
-        <p class="service-desc">Crisp hairline, sharp edges — the finishing touch.</p>
-        <p class="service-price">$20</p>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">&#9733;</div>
-        <p class="service-name">Full Service</p>
-        <p class="service-desc">Cut + beard trim & shaping. The complete experience.</p>
-        <p class="service-price">$45</p>
+      <!-- Women's -->
+      <div>
+        <p class="services-column-title">
+          <span class="col-icon">💇</span> Women's Services
+        </p>
+        <div class="service-list">
+          <div class="service-item">
+            <div class="service-dot"></div>
+            <span class="service-name">Haircut &amp; Style</span>
+          </div>
+          <div class="service-item">
+            <div class="service-dot"></div>
+            <span class="service-name">Natural Hair Care</span>
+          </div>
+          <div class="service-item">
+            <div class="service-dot"></div>
+            <span class="service-name">Braids &amp; Protective Styles</span>
+          </div>
+          <div class="service-item">
+            <div class="service-dot"></div>
+            <span class="service-name">Color &amp; Highlights</span>
+          </div>
+          <div class="service-item">
+            <div class="service-dot"></div>
+            <span class="service-name">Relaxer Services</span>
+          </div>
+          <div class="service-item">
+            <div class="service-dot"></div>
+            <span class="service-name">Silk Press</span>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -717,72 +771,103 @@
     <div class="about-layout">
 
       <div class="about-text">
-        <h3>
-          <em>The craft behind the cut</em>
-          We Take Pride in Every Cut.
-        </h3>
-        <p>At International Stylez, every client leaves the chair looking and feeling their best — because we treat each cut as a craft, not a commodity. From classic tapers to skin fades, our work speaks for itself.</p>
-        <p>Rooted in the Surf City and Topsail Beach community, we're the neighborhood shop that holds the line on quality. Whether you're a regular or walking in for the first time, you'll leave looking sharp.</p>
+        <h3>Where Every Culture Is Welcome.</h3>
+        <p>International Stylez brings world-class hair care to Wilmington. Whether you're coming in for a fresh fade or a full transformation, we treat every client with the skill and care your hair deserves.</p>
       </div>
 
       <div class="about-visual">
-        <div class="about-visual-inner">
-          <span class="about-visual-glyph">&#9999;</span>
-          <p class="about-visual-label">International Stylez</p>
-        </div>
+        <span class="about-globe-deco" aria-hidden="true">🌍</span>
+        <p class="about-visual-label">International Stylez · Wilmington, NC</p>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ── Testimonials ──────────────────────────────────────── -->
-<section id="testimonials">
+<!-- ── Hours & Location ───────────────────────────────────── -->
+<section id="hours">
   <div class="section-inner">
     <div class="section-header">
-      <p class="section-eyebrow">What Clients Say</p>
-      <h2 class="section-title">Reviews</h2>
+      <p class="section-eyebrow">Visit Us</p>
+      <h2 class="section-title">Hours &amp; Location</h2>
       <div class="section-rule"></div>
     </div>
 
-    <div class="testimonials-grid">
+    <div class="hours-layout">
 
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Best fade I've had since moving to the area. Tight lines, clean work, and the vibe in the shop is unmatched. This is my spot now."</p>
-        <div class="testimonial-meta">
-          <div class="testimonial-avatar">&#128113;</div>
-          <div>
-            <p class="testimonial-name">Marcus T.</p>
-            <p class="testimonial-location">Surf City, NC</p>
-            <p class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-          </div>
-        </div>
+      <div class="hours-block">
+        <h3>Hours of Operation</h3>
+        <table class="hours-table">
+          <tr>
+            <td class="day">Monday</td>
+            <td class="time">9:00 AM – 7:00 PM</td>
+          </tr>
+          <tr>
+            <td class="day">Tuesday</td>
+            <td class="time">9:00 AM – 7:00 PM</td>
+          </tr>
+          <tr>
+            <td class="day">Wednesday</td>
+            <td class="time">9:00 AM – 6:00 PM</td>
+          </tr>
+          <tr>
+            <td class="day">Thursday</td>
+            <td class="time">9:00 AM – 7:00 PM</td>
+          </tr>
+          <tr>
+            <td class="day">Friday</td>
+            <td class="time">9:00 AM – 7:00 PM</td>
+          </tr>
+          <tr>
+            <td class="day">Saturday</td>
+            <td class="time">9:00 AM – 7:00 PM</td>
+          </tr>
+          <tr>
+            <td class="day">Sunday</td>
+            <td class="time closed">Closed</td>
+          </tr>
+        </table>
       </div>
 
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Came in for a shape-up before a job interview. Left looking professional as ever. These guys know what they're doing — no guesswork, all precision."</p>
-        <div class="testimonial-meta">
-          <div class="testimonial-avatar">&#128112;</div>
-          <div>
-            <p class="testimonial-name">DeShawn R.</p>
-            <p class="testimonial-location">Topsail Beach, NC</p>
-            <p class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+      <div class="location-block">
+        <h3>Find Us</h3>
+
+        <div class="location-detail">
+          <span class="location-icon">📍</span>
+          <div class="location-text">
+            <strong>Address</strong>
+            3710 S College Rd, Unit 127<br>Wilmington, NC 28412
           </div>
         </div>
-      </div>
 
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Got the full service — cut and beard — for a wedding. Everyone was asking who cut my hair. Couldn't recommend International Stylez enough."</p>
-        <div class="testimonial-meta">
-          <div class="testimonial-avatar">&#128113;</div>
-          <div>
-            <p class="testimonial-name">Jordan K.</p>
-            <p class="testimonial-location">Hampstead, NC</p>
-            <p class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <div class="location-detail">
+          <span class="location-icon">📞</span>
+          <div class="location-text">
+            <strong>Phone</strong>
+            <a href="tel:+19103997685">(910) 399-7685</a>
           </div>
         </div>
-      </div>
 
+        <div class="location-detail">
+          <span class="location-icon">🌐</span>
+          <div class="location-text">
+            <strong>Facebook</strong>
+            <a href="https://facebook.com/INT.STYLEZ" target="_blank" rel="noopener">facebook.com/INT.STYLEZ</a>
+          </div>
+        </div>
+
+        <div class="location-detail">
+          <span class="location-icon">💳</span>
+          <div class="location-text">
+            <strong>Payments Accepted</strong>
+            <div class="payments-row">
+              <span class="payment-badge">Apple Pay</span>
+              <span class="payment-badge">Contactless</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -790,42 +875,27 @@
 <!-- ── Book ──────────────────────────────────────────────── -->
 <section id="book">
   <div class="section-inner">
+    <div class="section-header">
+      <p class="section-eyebrow">Get In Touch</p>
+      <h2 class="section-title">Book an Appointment</h2>
+      <div class="section-rule"></div>
+    </div>
+
     <div class="book-layout">
 
       <div class="book-info">
-        <h3>Request an Appointment</h3>
-        <p>Ready to get sharp? Fill out the form and we'll reach out to confirm your slot.</p>
-
-        <div class="contact-detail">
-          <span class="contact-detail-icon">&#9670;</span>
-          <div class="contact-detail-text">
-            <strong>Location</strong>
-            Surf City, NC
-          </div>
-        </div>
-
-        <div class="contact-detail">
-          <span class="contact-detail-icon">&#9670;</span>
-          <div class="contact-detail-text">
-            <strong>Hours</strong>
-            Mon – Sat: 9 AM – 7 PM
-          </div>
-        </div>
-
-        <div class="contact-detail">
-          <span class="contact-detail-icon">&#9670;</span>
-          <div class="contact-detail-text">
-            <strong>Walk-ins</strong>
-            Welcome when available
-          </div>
-        </div>
+        <h3>Ready to come in?</h3>
+        <p>Fill out the form and we'll reach out to confirm your appointment. We look forward to seeing you.</p>
+        <p style="margin-top: -0.5rem;">Call us directly at <a href="tel:+19103997685" style="color:var(--teal);text-decoration:none;">(910) 399-7685</a>.</p>
       </div>
 
-      <form class="book-form" onsubmit="return false;">
+      <form class="book-form" action="https://formspree.io/f/xaqayyrr" method="POST">
+        <input type="hidden" name="_subject" value="International Stylez — Booking Request">
+
         <div class="form-row">
           <div class="form-group">
             <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name">
+            <input type="text" id="name" name="name" placeholder="Your name" required>
           </div>
           <div class="form-group">
             <label for="phone">Phone</label>
@@ -834,22 +904,36 @@
         </div>
 
         <div class="form-group">
-          <label for="service">Preferred Service</label>
-          <select id="service" name="service">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="service">Service</label>
+          <select id="service" name="service" required>
             <option value="" disabled selected>Select a service</option>
-            <option value="classic">Classic Cut — $25</option>
-            <option value="fade">Fade &amp; Taper — $30</option>
-            <option value="shapeup">Shape Up &amp; Edge — $20</option>
-            <option value="full">Full Service (Cut + Beard) — $45</option>
+            <option value="mens-cut">Men's Cut</option>
+            <option value="fade">Fade</option>
+            <option value="beard-trim">Beard Trim</option>
+            <option value="womens-cut">Women's Cut</option>
+            <option value="natural-hair">Natural Hair</option>
+            <option value="braids">Braids</option>
+            <option value="color">Color</option>
+            <option value="other">Other</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="message">Additional Notes</label>
-          <textarea id="message" name="message" placeholder="Anything we should know? Preferred time, style details…"></textarea>
+          <label for="date">Preferred Date</label>
+          <input type="date" id="date" name="preferred_date">
         </div>
 
-        <p class="form-note">Booking requests sent directly to the shop. We'll confirm via phone.</p>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Anything else we should know?"></textarea>
+        </div>
+
+        <p class="form-note">We'll confirm your appointment via phone or email.</p>
         <button type="submit" class="btn-submit">Send Request &rarr;</button>
       </form>
 
@@ -859,7 +943,7 @@
 
 <!-- ── Footer ────────────────────────────────────────────── -->
 <footer>
-  <p>&copy; 2026 International Stylez &middot; Surf City, NC</p>
+  <p>&copy; 2026 International Stylez &middot; Wilmington, NC &middot; <a href="https://facebook.com/INT.STYLEZ" target="_blank" rel="noopener">facebook.com/INT.STYLEZ</a></p>
 </footer>
 
 <!-- ============================================
@@ -911,19 +995,12 @@
 
 <style>
   .preview-notice {
-    background: #0a0a0a;
-    border-top: 1px solid rgba(201, 151, 61, 0.25);
+    background: #080f0f;
+    border-top: 1px solid rgba(58,191,191,0.2);
     padding: 5rem 1.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
-  }
-  .preview-notice::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/></svg>");
-    pointer-events: none;
   }
   .preview-notice::after {
     content: '';
@@ -932,7 +1009,7 @@
     left: 10%;
     right: 10%;
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(201, 151, 61, 0.5) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(58,191,191,0.4) 50%, transparent 100%);
   }
   .preview-notice__inner {
     max-width: 640px;
@@ -947,66 +1024,64 @@
     align-items: center;
     gap: 0.75rem;
     margin-bottom: 1.5rem;
-    color: #c9973d;
+    color: #3abfbf;
     font-size: 0.75rem;
   }
-  .preview-notice__ornament span { opacity: 0.6; }
+  .preview-notice__ornament span { opacity: 0.5; }
   .preview-notice__ornament span:nth-child(2) {
     transform: scale(1.5);
-    opacity: 1;
-    color: #d4af5b;
+    opacity: 0.9;
+    color: #c9973d;
   }
   .preview-notice__heading {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Playfair Display', Georgia, serif;
     font-size: 1.75rem;
     font-weight: 400;
-    color: #e8e3d8;
-    letter-spacing: 0.04em;
+    color: #f0ede6;
+    letter-spacing: 0.02em;
     line-height: 1.4;
     margin-bottom: 2rem;
   }
   .preview-notice__heading em {
     font-style: italic;
-    color: #c9973d;
+    color: #3abfbf;
   }
   .preview-notice__body {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic;
-    font-size: 1.05rem;
-    color: #9a968e;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: #8fa89a;
     line-height: 1.8;
     max-width: 520px;
     margin: 0 auto 1.5rem;
-    letter-spacing: 0.01em;
   }
   .preview-notice__body strong {
-    font-style: normal;
-    color: #d4af5b;
-    font-weight: 500;
-    letter-spacing: 0.05em;
+    font-weight: 600;
+    color: #3abfbf;
   }
   .preview-notice__entity {
-    font-family: 'Cinzel', Georgia, serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #e8e3d8;
-    margin: 1.75rem 0;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
+    color: #f0ede6;
+    margin: 1.75rem 0;
   }
   .preview-notice__copyright {
-    font-family: 'Cinzel', Georgia, serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #5a5650;
+    color: #4a6060;
     margin-top: 1.5rem;
   }
   @media (max-width: 640px) {
     .preview-notice { padding: 3.5rem 1.25rem; }
     .preview-notice__heading { font-size: 1.4rem; }
-    .preview-notice__body { font-size: 0.98rem; line-height: 1.7; }
-    .preview-notice__entity { font-size: 0.95rem; letter-spacing: 0.2em; }
-    .preview-notice__copyright { font-size: 0.6rem; letter-spacing: 0.25em; }
+    .preview-notice__body { font-size: 0.9rem; }
+    .preview-notice__entity { font-size: 0.68rem; letter-spacing: 0.2em; }
   }
 </style>
 

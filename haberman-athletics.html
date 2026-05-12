@@ -7,21 +7,21 @@
   <title>Haberman Athletics &mdash; Charlotte, NC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap&subset=latin,latin-ext" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --red: #CC0000;
-      --red-light: #e60000;
-      --ink: #0a0a0a;
-      --ink-mid: #111111;
-      --ink-soft: #1a1a1a;
-      --cream: #ffffff;
-      --muted: #cccccc;
-      --dim: #777777;
-      --steel: #333333;
-      --accent: #CC0000;
+      --gold: #c9973d;
+      --gold-light: #d4af5b;
+      --ink: #080c10;
+      --ink-mid: #0d1117;
+      --ink-soft: #141a22;
+      --cream: #e8e3d8;
+      --muted: #a8adb5;
+      --dim: #555d68;
+      --steel: #2a3340;
+      --accent: #c9973d;
     }
 
     html { scroll-behavior: smooth; }
@@ -29,7 +29,7 @@
     body {
       background: var(--ink);
       color: var(--cream);
-      font-family: system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Cormorant Garamond', Georgia, serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -43,22 +43,22 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(10,10,10,0.96);
+      background: rgba(8,12,16,0.94);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(204,0,0,0.2);
+      border-bottom: 1px solid rgba(201,151,61,0.12);
     }
 
     .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.3rem;
-      letter-spacing: 0.12em;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       color: var(--cream);
       text-transform: uppercase;
       text-decoration: none;
-      line-height: 1;
     }
 
-    .nav-logo span { color: var(--red); }
+    .nav-logo span { color: var(--gold); }
 
     .nav-links {
       display: flex;
@@ -67,8 +67,8 @@
     }
 
     .nav-links a {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.85rem;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.65rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
@@ -76,21 +76,21 @@
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--red); }
+    .nav-links a:hover { color: var(--gold); }
 
     .nav-cta {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.85rem;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.65rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--cream);
-      background: var(--red);
+      color: var(--ink);
+      background: var(--gold);
       padding: 0.6rem 1.4rem;
       text-decoration: none;
       transition: background 0.2s;
     }
 
-    .nav-cta:hover { background: var(--red-light); }
+    .nav-cta:hover { background: var(--gold-light); }
 
     /* ── HERO ── */
     .hero {
@@ -108,24 +108,25 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at 70% 40%, rgba(204,0,0,0.08) 0%, transparent 55%),
-        radial-gradient(ellipse at 10% 80%, rgba(204,0,0,0.04) 0%, transparent 45%);
+        radial-gradient(ellipse at 70% 40%, rgba(201,151,61,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse at 10% 80%, rgba(201,151,61,0.04) 0%, transparent 45%);
     }
 
     .hero::after {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/></svg>");
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/></svg>");
       pointer-events: none;
     }
 
+    /* diagonal rule line for athletic feel */
     .hero__rule {
       position: absolute;
       top: 0; bottom: 0;
       right: 12%;
       width: 1px;
-      background: linear-gradient(180deg, transparent 0%, rgba(204,0,0,0.18) 30%, rgba(204,0,0,0.18) 70%, transparent 100%);
+      background: linear-gradient(180deg, transparent 0%, rgba(201,151,61,0.15) 30%, rgba(201,151,61,0.15) 70%, transparent 100%);
     }
 
     .hero__content {
@@ -135,11 +136,11 @@
     }
 
     .hero__eyebrow {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 0.4em;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: var(--red);
+      color: var(--gold);
       margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
@@ -151,66 +152,72 @@
       display: block;
       width: 4rem;
       height: 1px;
-      background: rgba(204,0,0,0.5);
+      background: rgba(201,151,61,0.5);
     }
 
     .hero__title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 12vw, 9rem);
-      letter-spacing: 0.05em;
-      font-weight: 400;
-      line-height: 0.92;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(2.8rem, 8vw, 6.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
       color: var(--cream);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero__title em {
+      display: block;
+      font-style: normal;
+      color: var(--gold);
+      font-weight: 400;
+      font-size: 0.55em;
+      letter-spacing: 0.25em;
+      margin-top: 0.5rem;
     }
 
     .hero__tagline {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      font-style: italic;
       color: var(--muted);
-      line-height: 1.7;
-      max-width: 480px;
-      margin: 0 0 3rem;
-      font-weight: 400;
+      line-height: 1.75;
+      max-width: 500px;
+      margin: 2rem 0 3rem;
     }
 
     .btn {
       display: inline-block;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 0.2em;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       text-decoration: none;
-      padding: 0.85rem 2.5rem;
-      transition: all 0.2s;
+      padding: 1rem 2.5rem;
+      transition: all 0.25s;
     }
 
     .btn--primary {
-      background: transparent;
-      color: var(--red);
-      border: 2px solid var(--red);
+      background: var(--gold);
+      color: var(--ink);
     }
 
-    .btn--primary:hover {
-      background: var(--red);
-      color: var(--cream);
-    }
+    .btn--primary:hover { background: var(--gold-light); }
 
     .btn--outline {
-      border: 2px solid rgba(204,0,0,0.3);
+      border: 1px solid rgba(201,151,61,0.4);
       color: var(--muted);
       margin-left: 1rem;
     }
 
     .btn--outline:hover {
-      border-color: var(--red);
-      color: var(--cream);
+      border-color: var(--gold);
+      color: var(--gold);
     }
 
     /* ── STATS ── */
     .stats {
       padding: 4rem 2rem;
-      border-top: 1px solid rgba(204,0,0,0.15);
-      border-bottom: 1px solid rgba(204,0,0,0.15);
+      border-top: 1px solid rgba(201,151,61,0.12);
+      border-bottom: 1px solid rgba(201,151,61,0.12);
       background: var(--ink-mid);
     }
 
@@ -224,17 +231,17 @@
     }
 
     .stat__number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3rem;
-      letter-spacing: 0.05em;
-      color: var(--red);
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
       line-height: 1;
       margin-bottom: 0.5rem;
     }
 
     .stat__label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.75rem;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.6rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--dim);
@@ -250,34 +257,35 @@
     }
 
     .section-eyebrow {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.85rem;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.6rem;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: var(--red);
+      color: var(--gold);
       margin-bottom: 1rem;
     }
 
     .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      letter-spacing: 0.05em;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 400;
       color: var(--cream);
-      line-height: 1.0;
+      line-height: 1.3;
     }
 
     .section-body {
-      font-size: 1rem;
+      font-size: 1.05rem;
+      font-style: italic;
       color: var(--muted);
-      line-height: 1.75;
+      line-height: 1.8;
       margin-top: 1.25rem;
     }
 
     /* ── ABOUT ── */
     .about {
       background: var(--ink-mid);
-      border-top: 1px solid rgba(204,0,0,0.1);
-      border-bottom: 1px solid rgba(204,0,0,0.1);
+      border-top: 1px solid rgba(201,151,61,0.1);
+      border-bottom: 1px solid rgba(201,151,61,0.1);
     }
 
     .about__inner {
@@ -290,52 +298,52 @@
     }
 
     .about__text h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: 0.05em;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.9rem;
+      font-weight: 400;
       color: var(--cream);
       margin-bottom: 1.5rem;
-      line-height: 1.05;
+      line-height: 1.3;
     }
 
     .about__text p {
-      font-size: 1rem;
+      font-size: 1.05rem;
+      font-style: italic;
       color: var(--muted);
-      line-height: 1.8;
+      line-height: 1.85;
       margin-bottom: 1.25rem;
     }
 
     .about__credential {
       margin-top: 2.5rem;
       padding: 1.5rem;
-      border-left: 3px solid var(--red);
-      background: rgba(204,0,0,0.04);
+      border-left: 2px solid var(--gold);
+      background: rgba(201,151,61,0.04);
     }
 
     .about__credential p {
       font-size: 0.95rem;
       margin-bottom: 0.5rem;
-      color: var(--muted);
     }
 
     .about__credential-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--red);
+      color: var(--gold);
       font-style: normal !important;
     }
 
     .about__image {
       aspect-ratio: 4/5;
       background: var(--ink-soft);
-      border: 1px solid rgba(204,0,0,0.15);
+      border: 1px solid rgba(201,151,61,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.75rem;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.6rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--dim);
@@ -344,13 +352,10 @@
     }
 
     .about__image::before {
-      content: 'HA';
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 10rem;
-      letter-spacing: 0.05em;
-      opacity: 0.04;
+      content: '&#9651;';
+      font-size: 6rem;
+      opacity: 0.06;
       position: absolute;
-      color: var(--red);
     }
 
     /* ── PROGRAMS ── */
@@ -364,45 +369,45 @@
 
     .program-card {
       background: var(--ink-mid);
-      border: 1px solid rgba(204,0,0,0.15);
+      border: 1px solid rgba(201,151,61,0.12);
       padding: 2.5rem 2rem;
       position: relative;
       transition: border-color 0.25s;
     }
 
-    .program-card:hover { border-color: rgba(204,0,0,0.45); }
+    .program-card:hover { border-color: rgba(201,151,61,0.35); }
 
     .program-card--featured {
-      border-color: rgba(204,0,0,0.35);
-      background: linear-gradient(135deg, var(--ink-mid) 0%, rgba(204,0,0,0.05) 100%);
+      border-color: rgba(201,151,61,0.3);
+      background: linear-gradient(135deg, var(--ink-mid) 0%, rgba(201,151,61,0.04) 100%);
     }
 
     .program-card__badge {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.7rem;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.55rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--red);
-      background: rgba(204,0,0,0.1);
+      color: var(--gold);
+      background: rgba(201,151,61,0.1);
       display: inline-block;
       padding: 0.25rem 0.75rem;
       margin-bottom: 1.5rem;
-      border: 1px solid rgba(204,0,0,0.2);
     }
 
     .program-card__name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      letter-spacing: 0.05em;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 500;
       color: var(--cream);
       margin-bottom: 1rem;
-      line-height: 1.1;
+      line-height: 1.3;
     }
 
     .program-card__desc {
-      font-size: 0.95rem;
+      font-size: 0.98rem;
+      font-style: italic;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.75;
       margin-bottom: 1.5rem;
     }
 
@@ -414,9 +419,9 @@
     }
 
     .program-card__details li {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--dim);
       display: flex;
@@ -426,16 +431,16 @@
 
     .program-card__details li::before {
       content: '&#9670;';
-      color: var(--red);
+      color: var(--gold);
       font-size: 0.5rem;
-      opacity: 0.8;
+      opacity: 0.7;
     }
 
     /* ── TESTIMONIALS ── */
     .testimonials {
       background: var(--ink-mid);
-      border-top: 1px solid rgba(204,0,0,0.1);
-      border-bottom: 1px solid rgba(204,0,0,0.1);
+      border-top: 1px solid rgba(201,151,61,0.1);
+      border-bottom: 1px solid rgba(201,151,61,0.1);
     }
 
     .testimonials__grid {
@@ -448,7 +453,7 @@
 
     .testimonial {
       padding: 2rem;
-      border: 1px solid rgba(204,0,0,0.12);
+      border: 1px solid rgba(201,151,61,0.1);
       background: var(--ink);
       position: relative;
     }
@@ -459,29 +464,31 @@
       top: 0.5rem;
       left: 1.25rem;
       font-size: 4rem;
-      color: var(--red);
-      opacity: 0.2;
+      color: var(--gold);
+      opacity: 0.15;
       font-family: Georgia, serif;
       line-height: 1;
     }
 
     .testimonial__body {
-      font-size: 0.95rem;
+      font-size: 0.98rem;
+      font-style: italic;
       color: var(--muted);
       line-height: 1.75;
       margin-bottom: 1.25rem;
     }
 
     .testimonial__name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--red);
+      color: var(--gold);
     }
 
     .testimonial__role {
       font-size: 0.8rem;
+      font-style: italic;
       color: var(--dim);
       margin-top: 0.25rem;
     }
@@ -496,28 +503,19 @@
     }
 
     .contact__info h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      letter-spacing: 0.05em;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: var(--cream);
-      margin-bottom: 0.25rem;
-    }
-
-    .contact__info .contact__sub {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.3em;
-      color: var(--red);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
     }
 
     .contact__detail { margin-bottom: 1.25rem; }
 
     .contact__detail-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.7rem;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.6rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--dim);
@@ -525,7 +523,8 @@
     }
 
     .contact__detail-value {
-      font-size: 0.95rem;
+      font-size: 1rem;
+      font-style: italic;
       color: var(--muted);
     }
 
@@ -535,10 +534,10 @@
     .contact__form select,
     .contact__form textarea {
       background: var(--ink-soft);
-      border: 1px solid rgba(204,0,0,0.2);
+      border: 1px solid rgba(201,151,61,0.18);
       color: var(--cream);
-      font-family: system-ui, sans-serif;
-      font-size: 0.95rem;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
       padding: 0.75rem 1rem;
       outline: none;
       transition: border-color 0.2s;
@@ -548,12 +547,12 @@
 
     .contact__form input:focus,
     .contact__form select:focus,
-    .contact__form textarea:focus { border-color: rgba(204,0,0,0.55); }
+    .contact__form textarea:focus { border-color: rgba(201,151,61,0.45); }
 
     .contact__form textarea { resize: vertical; min-height: 100px; }
 
     .contact__form input::placeholder,
-    .contact__form textarea::placeholder { color: var(--dim); }
+    .contact__form textarea::placeholder { color: var(--dim); font-style: italic; }
 
     .contact__form select { color: var(--dim); }
     .contact__form select option { background: var(--ink-soft); }
@@ -562,18 +561,134 @@
     footer {
       padding: 3rem 2rem;
       text-align: center;
-      border-top: 1px solid rgba(204,0,0,0.12);
+      border-top: 1px solid rgba(201,151,61,0.1);
     }
 
     footer p {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.3em;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--dim);
     }
 
     /* ── RESPONSIVE ── */
+    /* ── APPLY ── */
+    .apply {
+      background: var(--ink-mid);
+      border-top: 1px solid rgba(201,151,61,0.1);
+      border-bottom: 1px solid rgba(201,151,61,0.1);
+    }
+
+    .apply__form {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .form-label {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .apply__form input[type="text"],
+    .apply__form input[type="email"],
+    .apply__form textarea {
+      background: var(--ink-soft);
+      border: 1px solid rgba(201,151,61,0.18);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .apply__form input[type="text"]:focus,
+    .apply__form input[type="email"]:focus,
+    .apply__form textarea:focus { border-color: rgba(201,151,61,0.45); }
+
+    .apply__form textarea { resize: vertical; min-height: 110px; }
+
+    .apply__form input::placeholder,
+    .apply__form textarea::placeholder { color: var(--dim); font-style: italic; }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-top: 0.2rem;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+
+    .radio-option input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 1rem;
+      height: 1rem;
+      border: 1px solid rgba(201,151,61,0.35);
+      background: var(--ink-soft);
+      flex-shrink: 0;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .radio-option input[type="radio"]:checked { border-color: var(--gold); }
+
+    .radio-option input[type="radio"]:checked::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: var(--gold);
+    }
+
+    .radio-option span {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .other-reveal {
+      margin-top: 0.5rem;
+      margin-left: 1.75rem;
+      display: none;
+    }
+
+    .other-reveal input {
+      background: var(--ink-soft);
+      border: 1px solid rgba(201,151,61,0.18);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      padding: 0.65rem 1rem;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+
+    .other-reveal input:focus { border-color: rgba(201,151,61,0.45); }
+    .other-reveal input::placeholder { color: var(--dim); font-style: italic; }
+
     @media (max-width: 768px) {
       nav { padding: 1rem 1.25rem; }
       .nav-links { display: none; }
@@ -591,28 +706,34 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo"><span>HA</span> Haberman Athletics</a>
+    <a href="#" class="nav-logo">Haberman <span>Athletics</span></a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#programs">Programs</a></li>
       <li><a href="#testimonials">Results</a></li>
+      <li><a href="#contact">Contact</a></li>
       <li><a href="#apply">Apply</a></li>
     </ul>
-    <a href="#apply" class="nav-cta">Apply Now</a>
+    <a href="#contact" class="nav-cta">Start Training</a>
   </nav>
 
   <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero__rule" aria-hidden="true"></div>
     <div class="hero__content">
-      <p class="hero__eyebrow">Strength &middot; Conditioning &middot; Performance</p>
-      <h1 class="hero__title">TRAIN WITH<br>PURPOSE.</h1>
+      <p class="hero__eyebrow">Performance Coaching &middot; Charlotte, NC</p>
+      <h1 class="hero__title">
+        Haberman
+        <em>Athletics</em>
+      </h1>
       <p class="hero__tagline">
-        No templates. No guesswork. Real programming built around your goals.
+        Precision training programs for athletes who are serious about performance.
+        Strength, speed, and sport-specific development &mdash; built around your goals,
+        not a generic template.
       </p>
       <div>
-        <a href="#apply" class="btn btn--primary">APPLY NOW &rarr;</a>
-        <a href="#programs" class="btn btn--outline">VIEW PROGRAMS</a>
+        <a href="#contact" class="btn btn--primary">Start Training</a>
+        <a href="#programs" class="btn btn--outline">View Programs</a>
       </div>
     </div>
   </section>
@@ -643,19 +764,21 @@
   <section class="about" id="about">
     <div class="about__inner">
       <div class="about__text">
-        <h2>STRENGTH IS BUILT UNDER LOAD.</h2>
+        <h2>Training Built on Results, Not Trends</h2>
         <p>
-          No fluff. No cookie-cutter templates. Haberman Athletics was built on one
-          principle: if you train with purpose, results follow. Period.
+          Haberman Athletics was founded on a straightforward idea: athletes perform
+          better when their training is intentional, progressive, and specific to their
+          sport and body. No one-size-fits-all programs. No fluff.
         </p>
         <p>
-          Every athlete gets a full assessment, a custom program, and a coach who
-          tracks progress week over week. Whether you&rsquo;re chasing a PR, preparing
-          for your season, or building from the ground up &mdash; the work gets done here.
+          Every athlete who walks in gets a full assessment, a custom training plan,
+          and a coach who tracks their progress week over week. Whether you&rsquo;re
+          preparing for your sport&rsquo;s season, recovering from injury, or just
+          trying to reach the next level &mdash; this is where that work happens.
         </p>
         <div class="about__credential">
           <p class="about__credential-name">Dan Haberman &mdash; Head Coach &amp; Owner</p>
-          <p>NSCA-CSCS Certified &middot; Charlotte, NC &middot; @the_dan_haberman</p>
+          <p>NSCA-CSCS Certified &middot; Charlotte, NC</p>
         </div>
       </div>
       <div class="about__image">
@@ -667,11 +790,11 @@
   <!-- PROGRAMS -->
   <section id="programs">
     <div class="section-header">
-      <p class="section-eyebrow">The Work</p>
-      <h2 class="section-title">YOU ONLY HAVE AN HOUR.</h2>
+      <p class="section-eyebrow">Training Programs</p>
+      <h2 class="section-title">Built for Your Sport. Built for You.</h2>
       <p class="section-body">
-        Make it count. Every program is built around your sport, your body, your timeline.
-        No wasted reps.
+        Every program starts with an assessment. From there, it&rsquo;s all specific &mdash;
+        your sport, your position, your timeline, your goals.
       </p>
     </div>
     <div class="programs__grid">
@@ -679,8 +802,8 @@
         <span class="program-card__badge">Popular</span>
         <h3 class="program-card__name">Sport Performance</h3>
         <p class="program-card__desc">
-          In-season and off-season training blocks built around your sport&rsquo;s
-          demands. Speed, power, agility, and injury prevention &mdash; built in.
+          In-season and off-season training blocks tailored to your sport&rsquo;s
+          demands. Speed, power, agility, and injury prevention built in.
         </p>
         <ul class="program-card__details">
           <li>Sport-specific assessment</li>
@@ -693,8 +816,8 @@
         <span class="program-card__badge">Flagship</span>
         <h3 class="program-card__name">1-on-1 Private Coaching</h3>
         <p class="program-card__desc">
-          Highest level of access. Private sessions, custom programming, and
-          direct line to Dan for every question in between.
+          The highest level of access. Private sessions, custom programming, and
+          direct communication with Dan for every question in between.
         </p>
         <ul class="program-card__details">
           <li>Full intake &amp; movement screen</li>
@@ -708,7 +831,7 @@
         <h3 class="program-card__name">Youth Athlete Development</h3>
         <p class="program-card__desc">
           Long-term athletic development for youth athletes (ages 12&ndash;18).
-          Build the foundation. Move right. Compete with confidence.
+          Building the foundation of movement, confidence, and competitive readiness.
         </p>
         <ul class="program-card__details">
           <li>Age-appropriate programming</li>
@@ -721,8 +844,8 @@
         <span class="program-card__badge">Remote</span>
         <h3 class="program-card__name">Online Programming</h3>
         <p class="program-card__desc">
-          Custom training programs for athletes who train on their schedule.
-          All the structure of in-person. Built for remote execution.
+          Custom training programs for athletes who train on their own schedule.
+          All the structure of in-person, built for remote execution.
         </p>
         <ul class="program-card__details">
           <li>Written program delivery</li>
@@ -735,7 +858,7 @@
         <span class="program-card__badge">Combine Prep</span>
         <h3 class="program-card__name">Combine &amp; Showcase Prep</h3>
         <p class="program-card__desc">
-          Targeted short-term programs for athletes preparing for recruiting
+          Targeted short-term programs for athletes preparing for college recruiting
           showcases, regional combines, or athletic testing events.
         </p>
         <ul class="program-card__details">
@@ -750,7 +873,7 @@
         <h3 class="program-card__name">Team &amp; Group Training</h3>
         <p class="program-card__desc">
           Group programming for teams, position groups, or training partners.
-          Structured. Coach-led. Competitive environment.
+          Collaborative environment with structured, coach-led sessions.
         </p>
         <ul class="program-card__details">
           <li>Groups of 2&ndash;12 athletes</li>
@@ -766,7 +889,7 @@
   <section class="testimonials" id="testimonials">
     <div class="section-header">
       <p class="section-eyebrow">Athlete Results</p>
-      <h2 class="section-title">DISCIPLINE. RESULTS.</h2>
+      <h2 class="section-title">The Work Speaks</h2>
     </div>
     <div class="testimonials__grid">
       <div class="testimonial">
@@ -796,12 +919,11 @@
     </div>
   </section>
 
-  <!-- CONTACT / APPLY -->
-  <section id="apply">
+  <!-- CONTACT -->
+  <section id="contact">
     <div class="contact__inner">
       <div class="contact__info">
-        <h3>TRAIN BEFORE<br>THE REST.</h3>
-        <p class="contact__sub">Apply to Work With Dan</p>
+        <h3>Get in Touch</h3>
         <div class="contact__detail">
           <p class="contact__detail-label">Location</p>
           <p class="contact__detail-value">Charlotte Area, North Carolina</p>
@@ -832,9 +954,179 @@
           <option>Team / Group Training</option>
         </select>
         <textarea placeholder="Tell me about your athletic background and goals..."></textarea>
-        <button type="submit" class="btn btn--primary" style="cursor:pointer; border:2px solid var(--red); background:transparent; color:var(--red); text-align:center; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.2em;">SEND IT &rarr;</button>
+        <button type="submit" class="btn btn--primary" style="cursor:pointer; border:none; text-align:center;">Send Inquiry</button>
       </form>
     </div>
+  </section>
+
+  <!-- APPLY -->
+  <section class="apply" id="apply">
+    <div class="section-header">
+      <p class="section-eyebrow">Coaching Application</p>
+      <h2 class="section-title">Coaching for you and your goals.</h2>
+    </div>
+    <form class="apply__form" action="https://formspree.io/f/xaqayyrr" method="POST">
+      <input type="hidden" name="_subject" value="Haberman Athletics — Coaching Application">
+      <input type="hidden" name="source" value="haberman-coaching-application">
+
+      <!-- 1. Name -->
+      <div class="form-group">
+        <label class="form-label" for="apply-name">Name</label>
+        <input type="text" id="apply-name" name="name" placeholder="Your full name" required>
+      </div>
+
+      <!-- 2. Email -->
+      <div class="form-group">
+        <label class="form-label" for="apply-email">Email</label>
+        <input type="email" id="apply-email" name="email" placeholder="Your email address" required>
+      </div>
+
+      <!-- 3. Age -->
+      <div class="form-group">
+        <label class="form-label" for="apply-age">Age</label>
+        <input type="text" id="apply-age" name="age" placeholder="Your age" required>
+      </div>
+
+      <!-- 4. Coaching type -->
+      <div class="form-group">
+        <p class="form-label">What kind of coaching are you interested in?</p>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="coaching_type" value="1-1 Personalized CrossFit Coaching" required>
+            <span>1-1 Personalized CrossFit Coaching</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="coaching_type" value="Weightlifting Coaching">
+            <span>Weightlifting Coaching</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="coaching_type" value="Military Fitness">
+            <span>Military Fitness</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="coaching_type" value="General Fitness">
+            <span>General Fitness</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="coaching_type" value="Other" id="coaching-other-radio">
+            <span>Other</span>
+          </label>
+          <div class="other-reveal" id="coaching-other-reveal">
+            <input type="text" name="coaching_type_other" placeholder="Please describe...">
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Fitness level -->
+      <div class="form-group">
+        <p class="form-label">What fitness level / experience would you consider yourself?</p>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="fitness_level" value="Beginner" required>
+            <span>Beginner</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="fitness_level" value="Intermediate">
+            <span>Intermediate</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="fitness_level" value="Advanced">
+            <span>Advanced</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 6. Goals -->
+      <div class="form-group">
+        <label class="form-label" for="apply-goals">What are your main goals?</label>
+        <textarea id="apply-goals" name="goals" placeholder="Strength gain, increase fitness, overall health increase..." required></textarea>
+      </div>
+
+      <!-- 7. Struggles -->
+      <div class="form-group">
+        <label class="form-label" for="apply-struggles">What do you struggle with right now in your training?</label>
+        <textarea id="apply-struggles" name="struggles" required></textarea>
+      </div>
+
+      <!-- 8. Training days -->
+      <div class="form-group">
+        <p class="form-label">How many days per week can you train?</p>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="training_days" value="3" required>
+            <span>3</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="training_days" value="4">
+            <span>4</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="training_days" value="5+">
+            <span>5+</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 9. Structured programming -->
+      <div class="form-group">
+        <p class="form-label">Are you willing to follow structured programming?</p>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="structured_programming" value="Yes" required>
+            <span>Yes</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="structured_programming" value="No">
+            <span>No</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 10. Injuries -->
+      <div class="form-group">
+        <label class="form-label" for="apply-injuries">Are you currently dealing with any injuries?</label>
+        <textarea id="apply-injuries" name="injuries" required></textarea>
+      </div>
+
+      <!-- 11. Why a coach -->
+      <div class="form-group">
+        <label class="form-label" for="apply-why-coach">Why do you want a coach instead of doing it on your own?</label>
+        <textarea id="apply-why-coach" name="why_coach" required></textarea>
+      </div>
+
+      <!-- 12. Seriousness -->
+      <div class="form-group">
+        <p class="form-label">How serious are you about reaching your goals?</p>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="seriousness" value="Just exploring" required>
+            <span>Just exploring</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="seriousness" value="Somewhat serious">
+            <span>Somewhat serious</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="seriousness" value="Very serious">
+            <span>Very serious</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="seriousness" value="All in">
+            <span>All in</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 13. Contact preference -->
+      <div class="form-group">
+        <label class="form-label" for="apply-contact">What is the best way to get in contact with you? Leave whichever is most comfortable.</label>
+        <textarea id="apply-contact" name="contact_preference" required></textarea>
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn--primary" style="cursor:pointer; border:none;">Submit Application</button>
+      </div>
+    </form>
   </section>
 
   <!-- FOOTER -->
@@ -994,5 +1286,13 @@
   }
 </style>
 
+<script>
+  document.querySelectorAll('input[name="coaching_type"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      var reveal = document.getElementById('coaching-other-reveal');
+      reveal.style.display = this.value === 'Other' ? 'block' : 'none';
+    });
+  });
+</script>
 </body>
 </html>

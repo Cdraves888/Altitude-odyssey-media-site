@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>International Stylez | Premium Barbershop — Surf City & Topsail Beach, NC</title>
+  <meta name="description" content="International Stylez is a premium barbershop serving Surf City and Topsail Beach, NC. Classic cuts, fades, tapers, shape-ups, and full-service beard work.">
+  <link rel="canonical" href="https://altitudeodysseymedia.com/international-stylez.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap&subset=latin,latin-ext" rel="stylesheet">
+
+  <style>
+    /* ── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0d0d;
+      --surface:   #161616;
+      --gold:      #c9973d;
+      --gold-lt:   #d4af5b;
+      --cream:     #e8e0d0;
+      --muted:     #9a968e;
+      --dim:       #5a5650;
+      --border:    rgba(201,151,61,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ──────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+      background: rgba(13,13,13,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--cream);
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.4rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 0.55rem 1.2rem;
+      transition: background 0.25s;
+    }
+    .nav-cta:hover { background: var(--gold-lt); }
+
+    /* ── Hero ─────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7rem 1.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 60%, rgba(201,151,61,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 80% 20%, rgba(201,151,61,0.05) 0%, transparent 60%),
+        var(--bg);
+    }
+
+    /* Diagonal rule accent */
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: 10%;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, rgba(201,151,61,0.18) 40%, rgba(201,151,61,0.18) 60%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Noise texture */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/></svg>");
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 span {
+      display: block;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      margin-bottom: 2.8rem;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 1rem 2.4rem;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--gold-lt);
+      transform: translateY(-2px);
+    }
+
+    /* ── Section Base ─────────────────────────────────── */
+    section { padding: 6rem 1.5rem; }
+
+    .section-inner { max-width: 1080px; margin: 0 auto; }
+
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+
+    .section-eyebrow {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+      text-transform: uppercase;
+    }
+
+    .section-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.2rem auto 0;
+      opacity: 0.6;
+    }
+
+    /* ── Services ─────────────────────────────────────── */
+    #services { background: var(--surface); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5px;
+    }
+
+    .service-card {
+      background: var(--bg);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border: 1px solid rgba(201,151,61,0.1);
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .service-card:hover {
+      border-color: rgba(201,151,61,0.35);
+      transform: translateY(-4px);
+    }
+    .service-card:hover::after { opacity: 1; }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .service-name {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+    }
+
+    .service-desc {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      min-height: 2.4em;
+    }
+
+    .service-price {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── About ────────────────────────────────────────── */
+    #about {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    #about::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(201,151,61,0.2), transparent);
+      pointer-events: none;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text h3 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 1.4rem;
+    }
+    .about-text h3 em {
+      display: block;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      text-transform: none;
+      margin-bottom: 0.3rem;
+    }
+
+    .about-text p {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .about-text p + p { margin-top: 1rem; }
+
+    .about-visual {
+      position: relative;
+      height: 320px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-visual-inner {
+      text-align: center;
+    }
+    .about-visual-glyph {
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: 0.25;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .about-visual-label {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    /* ── Testimonials ─────────────────────────────────── */
+    #testimonials { background: var(--surface); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: var(--bg);
+      border: 1px solid rgba(201,151,61,0.1);
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 1rem; left: 1.5rem;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--gold);
+      opacity: 0.2;
+    }
+
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      padding-top: 1rem;
+    }
+
+    .testimonial-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .testimonial-avatar {
+      width: 38px;
+      height: 38px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+    .testimonial-location {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--dim);
+    }
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      margin-top: 0.15rem;
+    }
+
+    /* ── Book / Contact ───────────────────────────────── */
+    #book {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .book-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .book-info h3 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .book-info p {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      margin-bottom: 1.1rem;
+    }
+    .contact-detail-icon {
+      color: var(--gold);
+      font-size: 1rem;
+      margin-top: 0.1em;
+      flex-shrink: 0;
+    }
+    .contact-detail-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+    .contact-detail-text strong {
+      display: block;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+    }
+
+    .book-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--surface);
+      border: 1px solid rgba(201,151,61,0.18);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      padding: 0.8rem 1rem;
+      outline: none;
+      transition: border-color 0.25s;
+      -webkit-appearance: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--dim); font-style: italic; }
+
+    .form-group select {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M0 0l6 8 6-8z' fill='%23c9973d' opacity='0.6'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+    .form-group select option { background: #1a1a1a; }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: rgba(201,151,61,0.5);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-note {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 0.88rem;
+      color: var(--dim);
+      letter-spacing: 0.01em;
+    }
+
+    .btn-submit {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      border: none;
+      padding: 1rem 2.4rem;
+      cursor: pointer;
+      transition: background 0.25s;
+      align-self: flex-start;
+    }
+    .btn-submit:hover { background: var(--gold-lt); }
+
+    /* ── Footer ───────────────────────────────────────── */
+    footer {
+      background: #080808;
+      border-top: 1px solid var(--border);
+      padding: 2.2rem 1.5rem;
+      text-align: center;
+    }
+    footer p {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    /* ── Responsive ───────────────────────────────────── */
+    @media (max-width: 900px) {
+      .about-layout,
+      .book-layout {
+        grid-template-columns: 1fr;
+      }
+      .about-visual { height: 200px; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .nav-logo { font-size: 0.68rem; letter-spacing: 0.18em; }
+
+      .hero h1 { letter-spacing: 0.04em; }
+      .hero-sub { font-size: 1.05rem; }
+
+      section { padding: 4rem 1.25rem; }
+
+      .form-row { grid-template-columns: 1fr; }
+      .btn-submit { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ── Nav ──────────────────────────────────────────────── -->
+<nav>
+  <a href="#" class="nav-logo">International <span>Stylez</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#book">Book</a></li>
+  </ul>
+  <a href="#book" class="nav-cta">Book Now</a>
+</nav>
+
+<!-- ── Hero ─────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Surf City &amp; Topsail Beach, NC</p>
+    <h1>
+      Sharp Cuts.
+      <span>Clean Fades.</span>
+    </h1>
+    <p class="hero-sub">Premium barbershop serving Surf City &amp; Topsail Beach, NC.</p>
+    <a href="#book" class="btn-primary">Book Your Appointment &rarr;</a>
+  </div>
+</section>
+
+<!-- ── Services ─────────────────────────────────────────── -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-eyebrow">What We Offer</p>
+      <h2 class="section-title">Services</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">&#9999;&#65039;</div>
+        <p class="service-name">Classic Cut</p>
+        <p class="service-desc">Traditional scissor & clipper cut, finished to perfection.</p>
+        <p class="service-price">$25</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">&#10022;</div>
+        <p class="service-name">Fade &amp; Taper</p>
+        <p class="service-desc">Smooth skin fade or soft taper — your style, dialed in.</p>
+        <p class="service-price">$30</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">&#9670;</div>
+        <p class="service-name">Shape Up &amp; Edge</p>
+        <p class="service-desc">Crisp hairline, sharp edges — the finishing touch.</p>
+        <p class="service-price">$20</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">&#9733;</div>
+        <p class="service-name">Full Service</p>
+        <p class="service-desc">Cut + beard trim & shaping. The complete experience.</p>
+        <p class="service-price">$45</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── About ─────────────────────────────────────────────── -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-layout">
+
+      <div class="about-text">
+        <h3>
+          <em>The craft behind the cut</em>
+          We Take Pride in Every Cut.
+        </h3>
+        <p>At International Stylez, every client leaves the chair looking and feeling their best — because we treat each cut as a craft, not a commodity. From classic tapers to skin fades, our work speaks for itself.</p>
+        <p>Rooted in the Surf City and Topsail Beach community, we're the neighborhood shop that holds the line on quality. Whether you're a regular or walking in for the first time, you'll leave looking sharp.</p>
+      </div>
+
+      <div class="about-visual">
+        <div class="about-visual-inner">
+          <span class="about-visual-glyph">&#9999;</span>
+          <p class="about-visual-label">International Stylez</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Testimonials ──────────────────────────────────────── -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-eyebrow">What Clients Say</p>
+      <h2 class="section-title">Reviews</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Best fade I've had since moving to the area. Tight lines, clean work, and the vibe in the shop is unmatched. This is my spot now."</p>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar">&#128113;</div>
+          <div>
+            <p class="testimonial-name">Marcus T.</p>
+            <p class="testimonial-location">Surf City, NC</p>
+            <p class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Came in for a shape-up before a job interview. Left looking professional as ever. These guys know what they're doing — no guesswork, all precision."</p>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar">&#128112;</div>
+          <div>
+            <p class="testimonial-name">DeShawn R.</p>
+            <p class="testimonial-location">Topsail Beach, NC</p>
+            <p class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Got the full service — cut and beard — for a wedding. Everyone was asking who cut my hair. Couldn't recommend International Stylez enough."</p>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar">&#128113;</div>
+          <div>
+            <p class="testimonial-name">Jordan K.</p>
+            <p class="testimonial-location">Hampstead, NC</p>
+            <p class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Book ──────────────────────────────────────────────── -->
+<section id="book">
+  <div class="section-inner">
+    <div class="book-layout">
+
+      <div class="book-info">
+        <h3>Request an Appointment</h3>
+        <p>Ready to get sharp? Fill out the form and we'll reach out to confirm your slot.</p>
+
+        <div class="contact-detail">
+          <span class="contact-detail-icon">&#9670;</span>
+          <div class="contact-detail-text">
+            <strong>Location</strong>
+            Surf City, NC
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <span class="contact-detail-icon">&#9670;</span>
+          <div class="contact-detail-text">
+            <strong>Hours</strong>
+            Mon – Sat: 9 AM – 7 PM
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <span class="contact-detail-icon">&#9670;</span>
+          <div class="contact-detail-text">
+            <strong>Walk-ins</strong>
+            Welcome when available
+          </div>
+        </div>
+      </div>
+
+      <form class="book-form" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(910) 000-0000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="service">Preferred Service</label>
+          <select id="service" name="service">
+            <option value="" disabled selected>Select a service</option>
+            <option value="classic">Classic Cut — $25</option>
+            <option value="fade">Fade &amp; Taper — $30</option>
+            <option value="shapeup">Shape Up &amp; Edge — $20</option>
+            <option value="full">Full Service (Cut + Beard) — $45</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Additional Notes</label>
+          <textarea id="message" name="message" placeholder="Anything we should know? Preferred time, style details…"></textarea>
+        </div>
+
+        <p class="form-note">Booking requests sent directly to the shop. We'll confirm via phone.</p>
+        <button type="submit" class="btn-submit">Send Request &rarr;</button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────── -->
+<footer>
+  <p>&copy; 2026 International Stylez &middot; Surf City, NC</p>
+</footer>
+
+<!-- ============================================
+     PREVIEW NOTICE BLOCK
+     Use on: cold outreach demos + Platform tier
+     client sites during build window.
+     Remove within 24hr of final payment.
+     ============================================ -->
+<section class="preview-notice">
+  <div class="preview-notice__inner">
+
+    <div class="preview-notice__ornament" aria-hidden="true">
+      <span>&#9670;</span><span>&#9670;</span><span>&#9670;</span>
+    </div>
+
+    <h2 class="preview-notice__heading">
+      <em>Design Preview</em> &middot; For Review Only
+    </h2>
+
+    <p class="preview-notice__body">
+      This site is a custom design preview prepared exclusively for
+      <strong>International Stylez</strong>. All design elements, layout,
+      code, copy, and creative direction shown here are the sole
+      intellectual property of
+    </p>
+
+    <p class="preview-notice__entity">
+      Altitude Odyssey Media LLC
+    </p>
+
+    <p class="preview-notice__body">
+      Reproduction, redistribution, or use of any portion of this
+      preview without a signed engagement agreement and full payment
+      is strictly prohibited. Preview hosting is temporary and may be
+      removed at any time. Final design transfers to client only upon
+      completion of contracted payment terms.
+    </p>
+
+    <div class="preview-notice__ornament" aria-hidden="true">
+      <span>&#9670;</span><span>&#9670;</span><span>&#9670;</span>
+    </div>
+
+    <p class="preview-notice__copyright">
+      &copy; 2026 Altitude Odyssey Media LLC &middot; All Rights Reserved
+    </p>
+
+  </div>
+</section>
+
+<style>
+  .preview-notice {
+    background: #0a0a0a;
+    border-top: 1px solid rgba(201, 151, 61, 0.25);
+    padding: 5rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .preview-notice::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/></svg>");
+    pointer-events: none;
+  }
+  .preview-notice::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(201, 151, 61, 0.5) 50%, transparent 100%);
+  }
+  .preview-notice__inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .preview-notice__ornament {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    color: #c9973d;
+    font-size: 0.75rem;
+  }
+  .preview-notice__ornament span { opacity: 0.6; }
+  .preview-notice__ornament span:nth-child(2) {
+    transform: scale(1.5);
+    opacity: 1;
+    color: #d4af5b;
+  }
+  .preview-notice__heading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #e8e3d8;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+  }
+  .preview-notice__heading em {
+    font-style: italic;
+    color: #c9973d;
+  }
+  .preview-notice__body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #9a968e;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto 1.5rem;
+    letter-spacing: 0.01em;
+  }
+  .preview-notice__body strong {
+    font-style: normal;
+    color: #d4af5b;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .preview-notice__entity {
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #e8e3d8;
+    margin: 1.75rem 0;
+    text-transform: uppercase;
+  }
+  .preview-notice__copyright {
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #5a5650;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 640px) {
+    .preview-notice { padding: 3.5rem 1.25rem; }
+    .preview-notice__heading { font-size: 1.4rem; }
+    .preview-notice__body { font-size: 0.98rem; line-height: 1.7; }
+    .preview-notice__entity { font-size: 0.95rem; letter-spacing: 0.2em; }
+    .preview-notice__copyright { font-size: 0.6rem; letter-spacing: 0.25em; }
+  }
+</style>
+
+</body>
+</html>

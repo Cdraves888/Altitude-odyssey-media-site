@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Buddy's Crab House &amp; Oyster Bar | Waterfront Seafood — Surf City, NC</title>
-  <meta name="description" content="Buddy's Crab House &amp; Oyster Bar — fresh seafood, raw oyster bar, and waterfront deck dining in Surf City, NC on Topsail Island.">
+  <meta name="description" content="Buddy's Crab House &amp; Oyster Bar — fresh seafood, steam buckets, and waterfront deck dining next to Surf City Fishing Pier on Topsail Island.">
   <link rel="canonical" href="https://previews.altitudeodysseymedia.com/buddys-crab-house/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -293,10 +293,124 @@
       line-height: 1.6;
     }
 
+    /* ── Menu ─────────────────────────────────────────── */
+    #menu {
+      padding: 7rem 2rem;
+      background: var(--card);
+      border-top: 1px solid rgba(42,138,156,0.1);
+    }
+
+    .menu-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8rem;
+      margin-top: 3.5rem;
+    }
+
+    .menu-category {
+      background: var(--bg);
+      border: 1px solid rgba(42,138,156,0.15);
+      padding: 2.2rem 2rem;
+    }
+
+    .menu-category-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .menu-category-subtitle {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.6rem;
+      opacity: 0.8;
+    }
+
+    .menu-divider {
+      width: 36px;
+      height: 1px;
+      background: rgba(212,168,75,0.35);
+      margin-bottom: 1.6rem;
+    }
+
+    .menu-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .menu-item-name {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--cream);
+    }
+
+    .menu-item-note {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .menu-item-sep {
+      width: 100%;
+      height: 1px;
+      background: rgba(42,138,156,0.08);
+      margin-top: 0.4rem;
+    }
+
+    /* Sides row full-width */
+    .menu-category--full {
+      grid-column: 1 / -1;
+    }
+
+    .menu-sides-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 2.5rem;
+    }
+
+    .menu-sides-list span {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.97rem;
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    .menu-server-note {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--muted);
+      margin-top: 2rem;
+      text-align: center;
+      opacity: 0.7;
+    }
+
     /* ── About ────────────────────────────────────────── */
     #about {
       padding: 7rem 2rem;
-      background: var(--card);
+      background: var(--bg);
     }
 
     .about-inner {
@@ -338,6 +452,21 @@
       margin-bottom: 1.5rem;
     }
 
+    .about-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: rgba(42,138,156,0.06);
+      border-left: 2px solid rgba(212,168,75,0.45);
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-detail p {
+      margin-bottom: 0;
+      font-size: 0.92rem;
+    }
+
     .about-grade {
       display: inline-block;
       font-family: 'Raleway', sans-serif;
@@ -348,6 +477,7 @@
       color: var(--accent);
       border: 1px solid rgba(212,168,75,0.35);
       padding: 0.5rem 1.1rem;
+      margin-top: 0.5rem;
     }
 
     .about-right img {
@@ -362,8 +492,9 @@
     /* ── Hours & Location ─────────────────────────────── */
     #hours {
       padding: 6rem 2rem;
-      background: var(--bg);
+      background: var(--card);
       text-align: center;
+      border-top: 1px solid rgba(42,138,156,0.1);
     }
 
     .hours-inner {
@@ -430,144 +561,70 @@
     }
     .btn-directions:hover { background: #35a4b8; transform: translateY(-2px); }
 
-    /* ── Contact Form ─────────────────────────────────── */
-    #contact {
-      padding: 6rem 2rem;
-      background: var(--card);
+    /* ── Reviews ──────────────────────────────────────── */
+    #reviews {
+      padding: 7rem 2rem;
+      background: var(--bg);
+      border-top: 1px solid rgba(42,138,156,0.1);
     }
 
-    .contact-inner {
-      max-width: 680px;
+    .reviews-inner {
+      max-width: 1100px;
       margin: 0 auto;
     }
 
-    .contact-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .form-row {
+    .reviews-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      margin-top: 3.5rem;
+    }
+
+    .review-card {
+      background: var(--card);
+      border: 1px solid rgba(42,138,156,0.15);
+      padding: 2.2rem 2rem;
+      display: flex;
+      flex-direction: column;
       gap: 1.2rem;
     }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+    .review-stars {
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
     }
 
-    .form-group label {
+    .review-stars .star-empty {
+      opacity: 0.28;
+    }
+
+    .review-source {
       font-family: 'Raleway', sans-serif;
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       font-weight: 600;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: rgba(250,243,224,0.5);
+      color: var(--teal);
     }
 
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(42,138,156,0.2);
-      color: var(--cream);
-      font-family: 'Raleway', sans-serif;
-      font-size: 0.95rem;
-      padding: 0.85rem 1rem;
-      outline: none;
-      transition: border-color 0.25s;
-      -webkit-appearance: none;
-      border-radius: 0;
-    }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: rgba(250,243,224,0.22);
-    }
-    .form-group select {
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M0 0l6 8 6-8z' fill='%232a8a9c' opacity='0.7'/></svg>");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-      background-color: rgba(255,255,255,0.04);
-      padding-right: 2.5rem;
-      cursor: pointer;
-    }
-    .form-group select option { background: #122030; }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: rgba(42,138,156,0.55);
-    }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-
-    /* Radio group */
-    .radio-group {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .radio-group label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'Raleway', sans-serif;
-      font-size: 0.88rem;
+    .review-quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-style: italic;
       font-weight: 400;
-      color: rgba(250,243,224,0.8);
-      text-transform: none;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-    }
-    .radio-group input[type="radio"] {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 16px;
-      height: 16px;
-      border: 1px solid rgba(42,138,156,0.4);
-      border-radius: 50%;
-      background: rgba(255,255,255,0.04);
-      padding: 0;
-      flex-shrink: 0;
-      position: relative;
-      cursor: pointer;
-      transition: border-color 0.2s;
-    }
-    .radio-group input[type="radio"]:checked {
-      border-color: var(--teal);
-      background: var(--teal);
-    }
-    .radio-group input[type="radio"]:checked::after {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--bg);
+      color: var(--cream);
+      line-height: 1.7;
+      flex: 1;
     }
 
-    .btn-submit {
+    .review-attribution {
       font-family: 'Raleway', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--bg);
-      background: var(--accent);
-      border: none;
-      padding: 1rem 2.4rem;
-      cursor: pointer;
-      transition: background 0.25s, transform 0.2s;
-      align-self: flex-start;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(250,243,224,0.45);
+      letter-spacing: 0.06em;
     }
-    .btn-submit:hover { background: #e0ba63; transform: translateY(-2px); }
 
     /* ── Footer ───────────────────────────────────────── */
     footer {
@@ -584,15 +641,15 @@
     }
 
     /* ── Responsive ───────────────────────────────────── */
+    @media (max-width: 960px) {
+      .menu-grid { grid-template-columns: 1fr; }
+      .menu-category--full { grid-column: auto; }
+    }
+
     @media (max-width: 900px) {
-      .featured-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-      .about-inner {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
+      .featured-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .reviews-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     }
 
     @media (max-width: 640px) {
@@ -602,10 +659,8 @@
 
       .hero { background-attachment: scroll; }
 
-      #featured, #about, #hours, #contact { padding: 4rem 1.25rem; }
+      #featured, #menu, #about, #hours, #reviews { padding: 4rem 1.25rem; }
 
-      .form-row { grid-template-columns: 1fr; }
-      .btn-submit { width: 100%; text-align: center; }
       .about-left blockquote::before { left: -0.5rem; }
     }
   </style>
@@ -620,18 +675,19 @@
     <span class="logo-sub">Crab House &amp; Oyster Bar</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#featured">Menu</a></li>
+    <li><a href="#featured">Highlights</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#hours">Hours</a></li>
-    <li><a href="#contact">Order</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#reviews">Reviews</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Order Now</a>
+  <a href="#hours" class="nav-cta">Find Us</a>
 </nav>
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section class="hero">
   <div class="hero-inner">
-    <p class="hero-eyebrow">Surf City, NC &nbsp;&middot;&nbsp; Waterfront Dining</p>
+    <p class="hero-eyebrow">Surf City, NC &nbsp;&middot;&nbsp; Next to the Fishing Pier</p>
     <h1>
       <span>Fresh.</span>
       <span>Local.</span>
@@ -640,7 +696,7 @@
     </h1>
     <div class="hero-rule"></div>
     <div class="hero-ctas">
-      <a href="#featured" class="btn-gold">View Menu</a>
+      <a href="#menu" class="btn-gold">View Menu</a>
       <a href="https://maps.google.com/?q=101+Roland+Ave+Surf+City+NC" target="_blank" rel="noopener" class="btn-outline">Get Directions</a>
     </div>
   </div>
@@ -650,17 +706,19 @@
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-track">
     <span>FRESH SEAFOOD</span><span>&middot;</span>
+    <span>STEAM BUCKETS</span><span>&middot;</span>
     <span>OYSTER BAR</span><span>&middot;</span>
     <span>OUTDOOR DECK</span><span>&middot;</span>
     <span>SURF CITY NC</span><span>&middot;</span>
-    <span>TAKEOUT AVAILABLE</span><span>&middot;</span>
+    <span>NEXT TO THE PIER</span><span>&middot;</span>
     <span>OPEN DAILY</span><span>&middot;</span>
     <!-- duplicate for seamless loop -->
     <span>FRESH SEAFOOD</span><span>&middot;</span>
+    <span>STEAM BUCKETS</span><span>&middot;</span>
     <span>OYSTER BAR</span><span>&middot;</span>
     <span>OUTDOOR DECK</span><span>&middot;</span>
     <span>SURF CITY NC</span><span>&middot;</span>
-    <span>TAKEOUT AVAILABLE</span><span>&middot;</span>
+    <span>NEXT TO THE PIER</span><span>&middot;</span>
     <span>OPEN DAILY</span><span>&middot;</span>
   </div>
 </div>
@@ -678,8 +736,8 @@
       <div class="feature-card">
         <img src="https://images.unsplash.com/photo-1534482421-64566f976cfa?w=900&q=80" alt="Fresh crab and seafood" loading="lazy">
         <div class="feature-card-body">
-          <h3 class="feature-card-title">Crab &amp; Seafood</h3>
-          <p class="feature-card-desc">Hook-to-table freshness — whole crabs, shrimp, fish, and the catch of the day served the way the coast intended.</p>
+          <h3 class="feature-card-title">Steam Buckets</h3>
+          <p class="feature-card-desc">The signature. Oysters, snow crab legs, and the house combo &mdash; shrimp, clams, and oysters with corn on the cob and potatoes, steamed to order.</p>
         </div>
       </div>
 
@@ -687,7 +745,7 @@
         <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?w=900&q=80" alt="Fresh raw oysters" loading="lazy">
         <div class="feature-card-body">
           <h3 class="feature-card-title">Raw Oyster Bar</h3>
-          <p class="feature-card-desc">Shucked to order — East Coast oysters served on the half shell with classic mignonette and cocktail sauce.</p>
+          <p class="feature-card-desc">Shucked to order &mdash; East Coast oysters served on the half shell with classic mignonette and cocktail sauce.</p>
         </div>
       </div>
 
@@ -695,11 +753,111 @@
         <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80" alt="Coastal bar with ocean view" loading="lazy">
         <div class="feature-card-body">
           <h3 class="feature-card-title">Waterfront Views</h3>
-          <p class="feature-card-desc">Dine on our open-air deck overlooking the water. The ocean breeze and sunset views are complimentary.</p>
+          <p class="feature-card-desc">Dine on our open-air deck right next to the Surf City Fishing Pier. The ocean breeze and sunset views are complimentary.</p>
         </div>
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- ── Menu ──────────────────────────────────────────────── -->
+<section id="menu">
+  <div class="menu-inner">
+    <div class="section-header">
+      <p class="section-eyebrow">What's Cooking</p>
+      <h2 class="section-title">The Menu</h2>
+    </div>
+
+    <div class="menu-grid">
+
+      <!-- Steam Buckets -->
+      <div class="menu-category">
+        <h3 class="menu-category-title">Steam Buckets</h3>
+        <p class="menu-category-subtitle">The Signature</p>
+        <div class="menu-divider"></div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <span class="menu-item-name">Oyster Bucket</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Snow Crab Legs Bucket</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Steamer Combo</span>
+            <span class="menu-item-note">Shrimp, Clams &amp; Oysters with corn on the cob and potatoes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seafood Plates -->
+      <div class="menu-category">
+        <h3 class="menu-category-title">Seafood Plates</h3>
+        <p class="menu-category-subtitle">Served with choice of side</p>
+        <div class="menu-divider"></div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <span class="menu-item-name">Mahi Mahi</span>
+            <span class="menu-item-note">Grilled, Blackened, or Fried</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Grouper</span>
+            <span class="menu-item-note">Grilled, Blackened, or Fried</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Soft Shell Crab</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Coconut Shrimp</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Fish Tacos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Land & Sea -->
+      <div class="menu-category">
+        <h3 class="menu-category-title">Land &amp; Sea</h3>
+        <p class="menu-category-subtitle">Something for everyone</p>
+        <div class="menu-divider"></div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <span class="menu-item-name">Hand Cut Prime Angus Ribeye</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Chicken</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">BBQ Ribs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sides -->
+      <div class="menu-category">
+        <h3 class="menu-category-title">Sides</h3>
+        <p class="menu-category-subtitle">Choose your accompaniment</p>
+        <div class="menu-divider"></div>
+        <div class="menu-sides-list">
+          <span>Fries</span>
+          <span>Salad</span>
+          <span>Cole Slaw</span>
+          <span>Mac &amp; Cheese</span>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="menu-server-note">Pricing not listed &mdash; ask your server for today's selections and market prices.</p>
   </div>
 </section>
 
@@ -709,7 +867,13 @@
 
     <div class="about-left">
       <blockquote>Right on the water. Right in Surf City.</blockquote>
-      <p>Buddy's Crab House &amp; Oyster Bar has been a Surf City staple for locals and visitors alike. Catch the ocean breeze from our waterfront deck while you dig into the freshest seafood on Topsail Island.</p>
+
+      <p>Buddy's Crab House &amp; Oyster Bar is a Surf City staple &mdash; right next to the Surf City Fishing Pier with one of the best views on Topsail Island. Catch the ocean breeze from our waterfront deck while you dig into the freshest seafood the coast has to offer.</p>
+
+      <div class="about-detail">
+        <p>The walls are covered in signed dollar bills &mdash; a Buddy's tradition going back years, all mounted on cedar wood sourced from the Cape Fear River. Each bill tells a story. Add yours.</p>
+      </div>
+
       <span class="about-grade">Sanitation Grade: A &nbsp;&middot;&nbsp; 95.5 ✓</span>
     </div>
 
@@ -730,18 +894,23 @@
     <table class="hours-table">
       <tbody>
         <tr>
-          <td>Sun &ndash; Thu</td>
+          <td>Mon &ndash; Thu</td>
           <td>11:00 AM &ndash; 10:00 PM</td>
         </tr>
         <tr>
           <td>Fri &ndash; Sat</td>
           <td>11:00 AM &ndash; 11:00 PM</td>
         </tr>
+        <tr>
+          <td>Sunday</td>
+          <td>11:00 AM &ndash; 10:00 PM</td>
+        </tr>
       </tbody>
     </table>
 
     <div class="hours-details">
       <span>101 Roland Ave &nbsp;&middot;&nbsp; Surf City, NC 28445</span>
+      <span>Next to Surf City Fishing Pier</span>
       <span><a href="tel:9103281515" style="color:var(--teal);text-decoration:none;">(910) 328-1515</a></span>
       <span>Apple Pay &nbsp;&middot;&nbsp; Contactless &nbsp;&middot;&nbsp; Cash</span>
     </div>
@@ -750,61 +919,50 @@
   </div>
 </section>
 
-<!-- ── Contact / Order Form ──────────────────────────────── -->
-<section id="contact">
-  <div class="contact-inner">
-    <div class="contact-header">
-      <p class="section-eyebrow">Reach Out</p>
-      <h2 class="section-title">Contact &amp; Order</h2>
+<!-- ── Reviews ────────────────────────────────────────────── -->
+<section id="reviews">
+  <div class="reviews-inner">
+    <div class="section-header">
+      <p class="section-eyebrow">What People Are Saying</p>
+      <h2 class="section-title">Guest Reviews</h2>
     </div>
 
-    <form class="contact-form" action="https://formspree.io/f/xaqayyrr" method="POST">
-      <input type="hidden" name="_subject" value="Buddy's Crab House — Inquiry">
-      <input type="hidden" name="source" value="buddys-crab-house-preview">
+    <div class="reviews-grid">
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Your name" required>
+      <div class="review-card">
+        <div>
+          <p class="review-source">TripAdvisor &middot; April 2025</p>
         </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input type="tel" id="phone" name="phone" placeholder="(910) 000-0000">
+        <div class="review-stars">
+          &#9733;&#9733;&#9733;&#9733;&#9733;
         </div>
+        <p class="review-quote">&ldquo;A chill joint to hangout. Amazing staff &mdash; they are always friendly. Right on the water with the best view in Surf City.&rdquo;</p>
+        <p class="review-attribution">&mdash; TripAdvisor Visitor, April 2025</p>
       </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" required>
-      </div>
-
-      <div class="form-group">
-        <label>Order Type</label>
-        <div class="radio-group">
-          <label><input type="radio" name="order_type" value="Dine In"> Dine In</label>
-          <label><input type="radio" name="order_type" value="Takeout"> Takeout</label>
-          <label><input type="radio" name="order_type" value="Large Party Reservation"> Large Party Reservation</label>
+      <div class="review-card">
+        <div>
+          <p class="review-source">TripAdvisor</p>
         </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="party_size">Party Size</label>
-          <input type="number" id="party_size" name="party_size" placeholder="e.g. 4" min="1">
+        <div class="review-stars">
+          &#9733;&#9733;&#9733;&#9733;<span class="star-empty">&#9733;</span>
         </div>
-        <div class="form-group">
-          <label for="preferred_time">Preferred Time</label>
-          <input type="time" id="preferred_time" name="preferred_time">
+        <p class="review-quote">&ldquo;Come for the atmosphere. The dollar bills on the walls, the ocean breeze, the sound of the pier &mdash; there&rsquo;s nothing else like it on Topsail Island.&rdquo;</p>
+        <p class="review-attribution">&mdash; TripAdvisor Visitor</p>
+      </div>
+
+      <div class="review-card">
+        <div>
+          <p class="review-source">Yelp</p>
         </div>
+        <div class="review-stars">
+          &#9733;&#9733;&#9733;&#9733;<span class="star-empty">&#9733;</span>
+        </div>
+        <p class="review-quote">&ldquo;Great crab legs and cold drinks. Sat on the deck for hours watching the beach. Will definitely be back.&rdquo;</p>
+        <p class="review-attribution">&mdash; Yelp Reviewer</p>
       </div>
 
-      <div class="form-group">
-        <label for="message">Special Requests</label>
-        <textarea id="message" name="message" placeholder="Allergies, seating preferences, special occasions…"></textarea>
-      </div>
-
-      <button type="submit" class="btn-submit">Send Message</button>
-    </form>
+    </div>
   </div>
 </section>
 

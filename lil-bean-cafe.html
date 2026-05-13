@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lil' Bean Café | Good Eats. Good Coffee. Good People. — Jacksonville, NC</title>
+  <meta name="description" content="Lil' Bean Café — Latin family-owned café in Jacksonville, NC. Specialty lattes, best matcha in town, fresh pastries, breakfast burritos, and lunch. Two locations.">
+  <link rel="canonical" href="https://previews.altitudeodysseymedia.com/lil-bean-cafe/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #1a1208;
+      --accent:  #d4945a;
+      --sage:    #8fbc6e;
+      --cream:   #faf5ec;
+      --card:    #241a0e;
+      --muted:   rgba(250,245,236,0.6);
+      --border:  rgba(212,148,90,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ──────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 72px;
+      background: transparent;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    nav.scrolled {
+      background: #1a1208;
+      box-shadow: 0 1px 0 rgba(212,148,90,0.15);
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+    .nav-logo .logo-main {
+      display: block;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(250,245,236,0.75);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .nav-cta:hover { background: #e0a870; transform: translateY(-1px); }
+
+    /* ── Hero ─────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(26,18,8,0.6);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1.0;
+      color: #ffffff;
+      margin-bottom: 0;
+    }
+    .hero h1 .line-plain { display: block; }
+    .hero h1 .line-italic {
+      display: block;
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-rule {
+      width: 80px;
+      height: 1px;
+      background: var(--accent);
+      margin: 2rem auto 2.4rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-latte {
+      display: inline-block;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 1rem 2.2rem;
+      border-radius: 2px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-latte:hover { background: #e0a870; transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-block;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 1rem 2.2rem;
+      border-radius: 2px;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-outline:hover { border-color: #fff; color: #fff; }
+
+    /* ── Marquee ──────────────────────────────────────── */
+    .marquee-strip {
+      background: var(--accent);
+      overflow: hidden;
+      padding: 0.85rem 0;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 36s linear infinite;
+    }
+    .marquee-track span {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--bg);
+      padding: 0 1.2rem;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── Shared Section Styles ────────────────────────── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    /* ── Menu Section ─────────────────────────────────── */
+    #menu {
+      padding: 7rem 2rem;
+      background: var(--card);
+      border-top: 1px solid rgba(212,148,90,0.1);
+    }
+
+    .menu-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .menu-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.8rem;
+      margin-top: 3.5rem;
+    }
+
+    .menu-col {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 2.2rem 2rem;
+    }
+
+    .menu-col-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .menu-col-tag {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1.4rem;
+      opacity: 0.85;
+    }
+
+    .menu-divider {
+      width: 36px;
+      height: 1px;
+      background: rgba(212,148,90,0.35);
+      margin-bottom: 1.4rem;
+    }
+
+    .menu-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .menu-item-name {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--cream);
+    }
+
+    .menu-item-note {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .menu-item-badge {
+      display: inline-block;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--sage);
+      padding: 0.15rem 0.55rem;
+      border-radius: 2px;
+      margin-top: 0.25rem;
+      width: fit-content;
+    }
+
+    .menu-item-sep {
+      width: 100%;
+      height: 1px;
+      background: rgba(212,148,90,0.08);
+      margin-top: 0.35rem;
+    }
+
+    .menu-time-note {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(212,148,90,0.7);
+      margin-top: 1.4rem;
+    }
+
+    /* ── Quote Section ────────────────────────────────── */
+    #quotes {
+      padding: 7rem 2rem;
+      background: var(--bg);
+      border-top: 1px solid rgba(212,148,90,0.1);
+      text-align: center;
+    }
+
+    .quotes-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .pull-quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .pull-quote-attr {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.85;
+    }
+
+    .quote-divider {
+      width: 60px;
+      height: 1px;
+      background: rgba(212,148,90,0.4);
+      margin: 3.5rem auto;
+    }
+
+    .motto-quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .motto-sub {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    /* ── Locations Section ────────────────────────────── */
+    #locations {
+      padding: 7rem 2rem;
+      background: var(--card);
+      border-top: 1px solid rgba(212,148,90,0.1);
+    }
+
+    .locations-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    @media(max-width:700px){ .locations-grid { grid-template-columns: 1fr; } }
+
+    .location-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 2.2rem 2rem;
+    }
+
+    .location-card-eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.5rem;
+    }
+
+    .location-card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+    }
+
+    .location-detail-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .location-detail-row span {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .location-detail-row span strong {
+      color: var(--cream);
+      font-weight: 700;
+    }
+
+    .location-detail-row a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .location-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .location-tag {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(212,148,90,0.35);
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+    }
+
+    .location-map-embed {
+      margin-top: 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(212,148,90,0.3);
+    }
+    .location-map-embed iframe {
+      display: block;
+      filter: sepia(0.2) contrast(1.05);
+    }
+
+    /* ── About Section ────────────────────────────────── */
+    #about {
+      padding: 7rem 2rem;
+      background: var(--bg);
+      border-top: 1px solid rgba(212,148,90,0.1);
+    }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-left .about-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 500;
+      color: var(--cream);
+      line-height: 1.25;
+      margin-bottom: 1.8rem;
+    }
+
+    .about-left p {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.98rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 1.4rem;
+    }
+
+    .about-left .about-community {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: rgba(143,188,110,0.07);
+      border-left: 2px solid rgba(143,188,110,0.5);
+      padding: 1rem 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .about-left .about-community p {
+      margin-bottom: 0;
+      font-size: 0.92rem;
+    }
+
+    .about-right img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+      border-radius: 4px;
+      border: 1px solid rgba(212,148,90,0.2);
+    }
+
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(212,148,90,0.35);
+      padding: 0.55rem 1.1rem;
+      border-radius: 2px;
+      margin-top: 1.2rem;
+    }
+
+    /* ── Footer ───────────────────────────────────────── */
+    footer {
+      background: #100c05;
+      border-top: 1px solid rgba(212,148,90,0.1);
+      padding: 2.4rem 1.5rem;
+      text-align: center;
+    }
+    footer p {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: rgba(250,245,236,0.32);
+      margin-bottom: 0.4rem;
+    }
+    footer p:last-child { margin-bottom: 0; }
+    footer a {
+      color: rgba(212,148,90,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--accent); }
+
+    /* ── Responsive ───────────────────────────────────── */
+    @media (max-width: 960px) {
+      .menu-columns { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 860px) {
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hero { background-attachment: scroll; }
+      #menu, #quotes, #locations, #about { padding: 4rem 1.25rem; }
+      .menu-columns { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ── Nav ──────────────────────────────────────────────── -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <span class="logo-main">LIL' BEAN CAF&Eacute;</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#locations">Locations</a></li>
+    <li><a href="#locations">Hours</a></li>
+  </ul>
+  <a href="#menu" class="nav-cta">Order</a>
+</nav>
+
+<!-- ── Hero ─────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Jacksonville, NC &nbsp;&middot;&nbsp; Family Owned</p>
+    <h1>
+      <span class="line-plain">Good Eats.</span>
+      <span class="line-plain">Good Coffee.</span>
+      <span class="line-italic">Good People.</span>
+    </h1>
+    <div class="hero-rule"></div>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn-latte">View Menu</a>
+      <a href="#locations" class="btn-outline">Find a Location</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Marquee ───────────────────────────────────────────── -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>SPECIALTY LATTES</span><span>&middot;</span>
+    <span>FRESH MATCHA</span><span>&middot;</span>
+    <span>BREAKFAST TILL 11</span><span>&middot;</span>
+    <span>LOCALLY OWNED</span><span>&middot;</span>
+    <span>BURRITOS</span><span>&middot;</span>
+    <span>AVOCADO TOAST</span><span>&middot;</span>
+    <span>OPEN DAILY</span><span>&middot;</span>
+    <!-- duplicate for seamless loop -->
+    <span>SPECIALTY LATTES</span><span>&middot;</span>
+    <span>FRESH MATCHA</span><span>&middot;</span>
+    <span>BREAKFAST TILL 11</span><span>&middot;</span>
+    <span>LOCALLY OWNED</span><span>&middot;</span>
+    <span>BURRITOS</span><span>&middot;</span>
+    <span>AVOCADO TOAST</span><span>&middot;</span>
+    <span>OPEN DAILY</span><span>&middot;</span>
+  </div>
+</div>
+
+<!-- ── Menu ──────────────────────────────────────────────── -->
+<section id="menu">
+  <div class="menu-inner">
+    <div class="section-header">
+      <p class="section-eyebrow">Daily from 6am &ndash; 4pm</p>
+      <h2 class="section-title">What We're Serving</h2>
+    </div>
+
+    <div class="menu-columns">
+
+      <!-- Morning -->
+      <div class="menu-col">
+        <h3 class="menu-col-title">Morning</h3>
+        <p class="menu-col-tag">Breakfast</p>
+        <div class="menu-divider"></div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <span class="menu-item-name">Avocado Toast</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Breakfast Burritos</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Breakfast Sandwiches</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Fresh Baked Muffins</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Scones &amp; Croissants</span>
+          </div>
+        </div>
+        <p class="menu-time-note">Served till 11am daily</p>
+      </div>
+
+      <!-- Afternoon -->
+      <div class="menu-col">
+        <h3 class="menu-col-title">Afternoon</h3>
+        <p class="menu-col-tag">Lunch</p>
+        <div class="menu-divider"></div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <span class="menu-item-name">Lunch Sandwiches</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Burritos</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Seasonal Specials</span>
+            <span class="menu-item-note">Ask about today's selection</span>
+          </div>
+        </div>
+        <p class="menu-time-note">Served till 4pm daily</p>
+      </div>
+
+      <!-- Drinks -->
+      <div class="menu-col">
+        <h3 class="menu-col-title">Drinks</h3>
+        <p class="menu-col-tag">Featured</p>
+        <div class="menu-divider"></div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <span class="menu-item-name">Specialty Lattes</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Matcha</span>
+            <span class="menu-item-badge">Best in Town</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Chai</span>
+            <div class="menu-item-sep"></div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-item-name">Classic Espresso Drinks</span>
+          </div>
+        </div>
+        <p class="menu-time-note">Apple Pay &middot; Contactless</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Quotes ─────────────────────────────────────────────── -->
+<section id="quotes">
+  <div class="quotes-inner">
+
+    <p class="pull-quote">&ldquo;Best matcha in the entire town!&rdquo;</p>
+    <p class="pull-quote-attr">&mdash; Jacksonville, NC</p>
+
+    <div class="quote-divider"></div>
+
+    <p class="motto-quote">Good Eats. Good Coffee. Good People.</p>
+    <p class="motto-sub">Our promise, every day.</p>
+
+  </div>
+</section>
+
+<!-- ── Locations ──────────────────────────────────────────── -->
+<section id="locations">
+  <div style="max-width:1000px;margin:0 auto;text-align:center;padding:0 1rem;">
+    <p class="section-eyebrow">Two Locations</p>
+    <h2 class="section-title">Find Us in Jacksonville</h2>
+  </div>
+
+  <div class="locations-grid">
+
+    <!-- Location 1 -->
+    <div class="location-card">
+      <p class="location-card-eyebrow">Location 1</p>
+      <h3 class="location-card-title">Plain Road</h3>
+      <div class="location-detail-row">
+        <span><strong>Address</strong></span>
+        <span>101 N Plain Rd, Jacksonville, NC 28546</span>
+        <span><a href="tel:9102382637">(910) 238-2637</a></span>
+      </div>
+      <div class="location-detail-row">
+        <span><strong>Hours</strong></span>
+        <span>Every Day &middot; 6:00 AM &ndash; 4:00 PM</span>
+      </div>
+      <div class="location-tags">
+        <span class="location-tag">Apple Pay</span>
+        <span class="location-tag">Contactless</span>
+      </div>
+      <div class="location-map-embed">
+        <iframe
+          src="https://maps.google.com/maps?q=101+N+Plain+Rd+Jacksonville+NC+28546&output=embed"
+          width="100%"
+          height="280"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lil' Bean Café — Plain Road location map">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Location 2 -->
+    <div class="location-card">
+      <p class="location-card-eyebrow">Location 2</p>
+      <h3 class="location-card-title">New Bridge St &mdash; Downtown</h3>
+      <div class="location-detail-row">
+        <span><strong>Address</strong></span>
+        <span>1000 New Bridge St, Jacksonville, NC 28540</span>
+        <span><a href="tel:9102382910">(910) 238-2910</a></span>
+      </div>
+      <div class="location-detail-row">
+        <span><strong>Hours</strong></span>
+        <span>Mon&ndash;Fri &middot; 6:00 AM &ndash; 4:00 PM</span>
+        <span>Sat &amp; Sun &middot; 8:00 AM &ndash; 4:00 PM</span>
+      </div>
+      <div class="location-tags">
+        <span class="location-tag">Pets Welcome</span>
+        <span class="location-tag">Parking Lot</span>
+        <span class="location-tag">Parking Validated</span>
+        <span class="location-tag">Apple Pay</span>
+        <span class="location-tag">Contactless</span>
+      </div>
+      <div class="location-map-embed">
+        <iframe
+          src="https://maps.google.com/maps?q=1000+New+Bridge+St+Jacksonville+NC+28540&output=embed"
+          width="100%"
+          height="280"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lil' Bean Café — New Bridge St downtown location map">
+        </iframe>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── About ──────────────────────────────────────────────── -->
+<section id="about">
+  <div class="about-inner">
+
+    <div class="about-left">
+      <h2 class="about-heading">Born in Jacksonville.<br>Built for Everyone.</h2>
+
+      <p>Lil&rsquo; Bean Caf&eacute; is a Latin family-run business in the heart of Jacksonville, NC. We believe great coffee and good food should bring people together &mdash; whether you&rsquo;re grabbing a quick breakfast burrito before work or settling in for a slow Saturday morning matcha.</p>
+
+      <p>From open mic nights to local art shows, our doors are always open. Come as you are.</p>
+
+      <div class="about-community">
+        <p>We host open mic nights, art exhibitions, and live music &mdash; because this caf&eacute; was always meant to be more than just coffee.</p>
+      </div>
+
+      <div class="rating-badge">
+        &#9733; 4.8 &nbsp;&middot;&nbsp; Jacksonville&rsquo;s Favorite Caf&eacute;
+      </div>
+    </div>
+
+    <div class="about-right">
+      <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=900&q=80" alt="Cozy café interior with warm lighting" loading="lazy">
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────── -->
+<footer>
+  <p>&copy; 2026 Lil&rsquo; Bean Caf&eacute; &nbsp;&middot;&nbsp; Jacksonville, NC &nbsp;&middot;&nbsp; <a href="https://lilbeancafe.com" target="_blank" rel="noopener">lilbeancafe.com</a></p>
+  <p><a href="tel:9102382637">(910) 238-2637</a> &nbsp;&middot;&nbsp; <a href="tel:9102382910">(910) 238-2910</a></p>
+</footer>
+
+<!-- ============================================
+     PREVIEW NOTICE BLOCK
+     Use on: cold outreach demos + Platform tier
+     client sites during build window.
+     Remove within 24hr of final payment.
+     ============================================ -->
+<section class="preview-notice">
+  <div class="preview-notice__inner">
+
+    <div class="preview-notice__ornament" aria-hidden="true">
+      <span>&#9670;</span><span>&#9670;</span><span>&#9670;</span>
+    </div>
+
+    <h2 class="preview-notice__heading">
+      <em>Design Preview</em> &middot; For Review Only
+    </h2>
+
+    <p class="preview-notice__body">
+      This site is a custom design preview prepared exclusively for
+      <strong>Lil&rsquo; Bean Caf&eacute;</strong>. All design elements, layout,
+      code, copy, and creative direction shown here are the sole
+      intellectual property of
+    </p>
+
+    <p class="preview-notice__entity">
+      Altitude Odyssey Media LLC
+    </p>
+
+    <p class="preview-notice__body">
+      Reproduction, redistribution, or use of any portion of this
+      preview without a signed engagement agreement and full payment
+      is strictly prohibited. Preview hosting is temporary and may be
+      removed at any time. Final design transfers to client only upon
+      completion of contracted payment terms.
+    </p>
+
+    <div class="preview-notice__ornament" aria-hidden="true">
+      <span>&#9670;</span><span>&#9670;</span><span>&#9670;</span>
+    </div>
+
+    <p class="preview-notice__copyright">
+      &copy; 2026 Altitude Odyssey Media LLC &middot; All Rights Reserved
+    </p>
+
+  </div>
+</section>
+
+<style>
+  .preview-notice {
+    background: #0e0903;
+    border-top: 1px solid rgba(212,148,90,0.2);
+    padding: 5rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .preview-notice::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/></svg>");
+    pointer-events: none;
+  }
+  .preview-notice::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(212,148,90,0.45) 50%, transparent 100%);
+  }
+  .preview-notice__inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .preview-notice__ornament {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    color: #d4945a;
+    font-size: 0.75rem;
+  }
+  .preview-notice__ornament span { opacity: 0.6; }
+  .preview-notice__ornament span:nth-child(2) {
+    transform: scale(1.5);
+    opacity: 1;
+    color: #e0a870;
+  }
+  .preview-notice__heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #e8e3d8;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+  }
+  .preview-notice__heading em {
+    font-style: italic;
+    color: #d4945a;
+  }
+  .preview-notice__body {
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #8a8680;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto 1.5rem;
+    letter-spacing: 0.01em;
+  }
+  .preview-notice__body strong {
+    font-style: normal;
+    color: #d4945a;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .preview-notice__entity {
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e8e3d8;
+    margin: 1.75rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .preview-notice__copyright {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #4a4a44;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 640px) {
+    .preview-notice { padding: 3.5rem 1.25rem; }
+    .preview-notice__heading { font-size: 1.4rem; }
+    .preview-notice__body { font-size: 0.95rem; line-height: 1.7; }
+    .preview-notice__entity { font-size: 0.9rem; letter-spacing: 0.15em; }
+    .preview-notice__copyright { font-size: 0.6rem; letter-spacing: 0.15em; }
+  }
+</style>
+
+<script>
+  (function() {
+    var nav = document.getElementById('main-nav');
+    var heroHeight = window.innerHeight;
+    function onScroll() {
+      if (window.scrollY > heroHeight * 0.7) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>

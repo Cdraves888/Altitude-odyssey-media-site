@@ -282,22 +282,120 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 .maint-reframe__text { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:clamp(1.5rem,3vw,1.85rem); color:#e8e3d8; line-height:1.5; }
 .maint-reframe__coda { color:#c9973d; }
 
-.maint-compare { max-width:900px; margin:5rem auto; padding:0 1rem; }
-.maint-compare__title { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(1.6rem,3vw,2.2rem); color:#e8e3d8; margin:0.5rem 0 1rem; }
-.maint-compare__title em { color:#c9973d; }
-.maint-compare__sub { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:1.05rem; color:#a89e85; text-align:center; margin-bottom:2rem; }
-.maint-compare__table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
-.maint-compare__table { width:100%; border-collapse:collapse; background:#111; border:1px solid rgba(201,151,61,0.2); border-radius:4px; font-family:'Cormorant Garamond',Georgia,serif; }
-.maint-compare__table thead th { padding:1rem 1.5rem; font-family:'Cinzel',Georgia,serif; font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; }
-.col-diy { background:rgba(239,68,68,0.04); color:#a89e85; border-right:1px solid rgba(201,151,61,0.15); }
-.col-aom { background:rgba(201,151,61,0.06); color:#c9973d; }
-.maint-compare__table tbody tr { border-top:1px dashed rgba(201,151,61,0.1); }
-.maint-compare__table tbody td { padding:0.9rem 1.5rem; font-size:1rem; line-height:1.5; }
-.maint-compare__table tbody tr td:first-child { font-style:italic; color:#7a7260; border-right:1px solid rgba(201,151,61,0.15); }
-.maint-compare__table tbody tr td:last-child { color:#d4c9b0; }
-.totals-row td { padding:1.25rem 1.5rem; border-top:1px solid rgba(201,151,61,0.25) !important; background:rgba(0,0,0,0.3); font-size:clamp(1rem,2vw,1.3rem); }
-.total-diy { font-style:italic; color:#6a6356; border-right:1px solid rgba(201,151,61,0.15); }
-.total-aom { font-style:italic; color:#c9973d; }
+.post-build-paths {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+}
+.post-build-card {
+  background: #131313;
+  border: 1px solid rgba(201,151,61,0.2);
+  border-radius: 4px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.post-build-card--managed {
+  border-color: rgba(201,151,61,0.4);
+}
+.post-build-tag {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #c9973d;
+  margin-bottom: 1rem;
+}
+.post-build-title {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 600;
+  color: #f0e8d4;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+.post-build-sub {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #c9973d;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+.post-build-ornament {
+  color: #c9973d;
+  opacity: 0.6;
+  font-size: 0.6rem;
+  letter-spacing: 0.5em;
+  margin-bottom: 1.5rem;
+}
+.post-build-list {
+  list-style: none;
+  text-align: left;
+  margin: 0 0 2rem;
+  flex: 1;
+}
+.post-build-list li {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1rem;
+  color: #d4c9b0;
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed rgba(201,151,61,0.1);
+  padding-left: 1.25rem;
+  position: relative;
+}
+.post-build-list li::before {
+  content: '\25C6';
+  position: absolute;
+  left: 0;
+  color: #c9973d;
+  font-size: 0.5rem;
+  top: 0.75rem;
+}
+.post-build-list--dim li { color: #7a7260; }
+.post-build-list--dim li::before { color: #5a5040; }
+.post-build-price {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #c9973d;
+  margin-bottom: 0.25rem;
+}
+.post-build-price span { font-size: 1.1rem; color: #a89e85; }
+.post-build-price-note {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #6e6a5e;
+  margin-bottom: 1.75rem;
+}
+.post-build-btn {
+  display: block;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.9rem 1rem;
+  background: #c9973d;
+  color: #0a0806;
+  border: 1px solid #c9973d;
+  border-radius: 2px;
+  transition: background 0.25s, color 0.25s;
+}
+.post-build-btn:hover { background: #e2c47a; border-color: #e2c47a; }
+.post-build-btn--outline {
+  background: transparent;
+  color: #c9973d;
+}
+.post-build-btn--outline:hover { background: rgba(201,151,61,0.1); }
+@media (max-width: 640px) {
+  .post-build-paths { grid-template-columns: 1fr; }
+}
 
 .maint-founder-quote { max-width:760px; margin:5rem auto; padding:3rem 1.5rem; border-top:1px solid rgba(201,151,61,0.15); border-bottom:1px solid rgba(201,151,61,0.15); text-align:center; }
 .maint-founder-ornament { display:flex; justify-content:center; gap:1rem; color:#c9973d; font-size:0.7rem; margin:1.5rem 0; opacity:0.7; }
@@ -361,7 +459,6 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   <ul class="nm">
     <li><a href="#services">Services</a></li>
     <li><a href="#packages">Packages</a></li>
-    <li><a href="#bundles">Bundles</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
@@ -569,36 +666,46 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 
   </div>
 
-  <!-- ELEMENT D: Comparison Table -->
-  <div class="maint-compare">
-    <div class="section-label">The Real Math</div>
-    <h3 class="maint-compare__title">DIY vs. <em>Stewardship.</em></h3>
-    <p class="maint-compare__sub">Most prospects underestimate what running a website actually costs. Here&rsquo;s the honest comparison.</p>
-    <div class="maint-compare__table-wrap">
-      <table class="maint-compare__table">
-        <thead>
-          <tr>
-            <th class="col-diy">Without a Plan</th>
-            <th class="col-aom">AOM Standard ($110/mo)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>$15/mo for hosting (you manage)</td><td>&#9670; Hosting included</td></tr>
-          <tr><td>$15/yr for domain (you remember)</td><td>&#9670; Domain + renewal handled</td></tr>
-          <tr><td>Your time, every month, for updates</td><td>&#9670; Unlimited small updates &middot; 24hr turnaround</td></tr>
-          <tr><td>No SEO upkeep &mdash; rankings drift</td><td>&#9670; Basic SEO maintenance ongoing</td></tr>
-          <tr><td>Hope nothing breaks at 2 a.m.</td><td>&#9670; 24/7 uptime monitoring</td></tr>
-          <tr><td>Security patches when you remember</td><td>&#9670; Watched &mdash; quietly, continuously</td></tr>
-        </tbody>
-        <tfoot>
-          <tr class="totals-row">
-            <td class="total-diy"><em>A second job<br>plus risk</em></td>
-            <td class="total-aom"><em>$110/mo<br>peace of mind</em></td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+  <!-- ELEMENT D: Post-Build Path Cards -->
+  <div class="post-build-paths">
+  <div class="post-build-card post-build-card--managed">
+    <div class="post-build-tag">The Standard Path</div>
+    <h3 class="post-build-title">Managed by AOM</h3>
+    <p class="post-build-sub"><em>Hands-off ownership.<br>We keep your site living.</em></p>
+    <div class="post-build-ornament">&#9670; &#9670; &#9670;</div>
+    <ul class="post-build-list">
+      <li>Hosting on our premium servers</li>
+      <li>Domain registration &amp; annual renewal handled</li>
+      <li>SSL certificate maintained automatically</li>
+      <li>Content updates by our team</li>
+      <li>Security patches &amp; routine backups</li>
+      <li>Uptime monitoring with alerts</li>
+      <li>One monthly bill. One point of contact.</li>
+    </ul>
+    <div class="post-build-price">From $60<span>/mo</span></div>
+    <div class="post-build-price-note">Basic &middot; Standard &middot; Premium plans</div>
+    <a href="#maintenance" class="post-build-btn">View Maintenance Plans</a>
   </div>
+
+  <div class="post-build-card post-build-card--self">
+    <div class="post-build-tag">The Hands-On Path</div>
+    <h3 class="post-build-title">Self-Managed</h3>
+    <p class="post-build-sub"><em>Take the files.<br>Run them yourself.</em></p>
+    <div class="post-build-ornament">&#9671; &#9671; &#9671;</div>
+    <ul class="post-build-list post-build-list--dim">
+      <li>You own and renew your domain (~$15/year)</li>
+      <li>You arrange your own hosting ($5&ndash;20/mo)</li>
+      <li>You manage SSL certificate renewals</li>
+      <li>Content updates billed hourly ($60/hr)</li>
+      <li>You handle backups &amp; security patches</li>
+      <li>Multiple vendors, multiple bills</li>
+      <li>Site files yours to keep, forever</li>
+    </ul>
+    <div class="post-build-price">$150</div>
+    <div class="post-build-price-note">One-time handoff &amp; transfer fee</div>
+    <a href="/intake.html" class="post-build-btn post-build-btn--outline">Discuss This Option</a>
+  </div>
+</div>
 
   <!-- ELEMENT E: Founder Quote -->
   <div class="maint-founder-quote">
@@ -806,144 +913,6 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 
 </section>
 
-<!-- AERIAL PACKAGES -->
-<section class="packages sec" id="aerial">
-  <div class="reveal" style="margin-bottom:52px;">
-    <div class="ey">Aerial Packages</div>
-    <h2 class="sh">Choose your<br><em>aerial approach.</em></h2>
-    <p class="ss">All packages are starting points &mdash; every project is scoped to your exact needs. These give you a baseline to work from.</p>
-  </div>
-  <div class="reveal" style="margin-bottom:16px;">
-    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);"> Aerial & Drone Packages</div>
-    <div class="pkg-grid">
-      <div class="pkg reveal">
-        <div class="pkg-tier">Tier 01</div>
-        <div class="pkg-name">The Flyover</div>
-        <div class="pkg-price">$299</div>
-        <div class="pkg-price-note">Starting price &middot; Location dependent</div>
-        <div class="pkg-includes">What's included</div>
-        <div class="pkg-feature">Up to 1 hour on location</div>
-        <div class="pkg-feature">10&ndash;15 edited aerial photos</div>
-        <div class="pkg-feature">1 short-form video clip (60 sec)</div>
-        <div class="pkg-feature">Color graded, cinematic style</div>
-        <div class="pkg-feature">Delivered within 5 business days</div>
-        <div class="pkg-feature no">No licensed commercial use</div>
-        <div class="pkg-feature no">No raw footage included</div>
-        <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get Started &rarr;</a>
-      </div>
-      <div class="pkg featured reveal">
-        <div class="pkg-badge">Most Popular</div>
-        <div class="pkg-tier">Tier 02</div>
-        <div class="pkg-name">The Cinematic</div>
-        <div class="pkg-price">$599</div>
-        <div class="pkg-price-note">Starting price &middot; 2&ndash;3 hour session</div>
-        <div class="pkg-includes">What's included</div>
-        <div class="pkg-feature">Up to 3 hours on location</div>
-        <div class="pkg-feature">25&ndash;35 edited aerial photos</div>
-        <div class="pkg-feature">1 fully edited video (2&ndash;3 min)</div>
-        <div class="pkg-feature">1 short-form cut (30&ndash;60 sec)</div>
-        <div class="pkg-feature">Color graded, cinematic grade</div>
-        <div class="pkg-feature">Licensed commercial use included</div>
-        <div class="pkg-feature">Delivered within 7 business days</div>
-        <a href="#" class="pkg-cta pkg-cta-gold" onclick="openModal(event)">Get Started &rarr;</a>
-      </div>
-      <div class="pkg reveal">
-        <div class="pkg-tier">Tier 03</div>
-        <div class="pkg-name">The Full Production</div>
-        <div class="pkg-price">$1,200+</div>
-        <div class="pkg-price-note">Custom quote &middot; Full day sessions</div>
-        <div class="pkg-includes">What's included</div>
-        <div class="pkg-feature">Full day on location (6&ndash;8 hrs)</div>
-        <div class="pkg-feature">50+ edited aerial photos</div>
-        <div class="pkg-feature">Full cinematic video (3&ndash;5 min)</div>
-        <div class="pkg-feature">Multiple short-form cuts</div>
-        <div class="pkg-feature">Raw footage delivered</div>
-        <div class="pkg-feature">Full commercial licensing</div>
-        <div class="pkg-feature">Rush delivery available</div>
-        <a href="#" class="pkg-cta pkg-cta-out" onclick="openModal(event)">Get a Quote &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BUNDLES -->
-<section class="bundles sec" id="bundles">
-  <div class="reveal">
-    <div class="ey">Signature Bundles</div>
-    <h2 class="sh">More together.<br><em>Better value.</em></h2>
-    <p class="ss">These bundles combine aerial and digital services for clients who want the full picture. Significant savings over booking separately.</p>
-  </div>
-  <div class="bundle-grid">
-    <div class="bundle reveal">
-      <div class="bundle-tag">Real Estate</div>
-      <div class="bundle-name">The Listing Package</div>
-      <div class="bundle-who">For: Realtors, Developers, Homeowners</div>
-      <div class="bundle-items">
-        <div class="bundle-item">Aerial photo session (25+ photos)</div>
-        <div class="bundle-item">Property walkthrough video (60&ndash;90 sec)</div>
-        <div class="bundle-item">Single-page property website</div>
-        <div class="bundle-item">Social preview card for sharing</div>
-        <div class="bundle-item">Commercial license included</div>
-      </div>
-      <div class="bundle-pricing">
-        <div class="bundle-price">$899</div>
-        <div class="bundle-was">$1,073</div>
-        <div class="bundle-save">Save $174</div>
-      </div>
-    </div>
-    <div class="bundle reveal">
-      <div class="bundle-tag">Automotive</div>
-      <div class="bundle-name">The Car Meet Package</div>
-      <div class="bundle-who">For: Organizers, Clubs, Dealerships</div>
-      <div class="bundle-items">
-        <div class="bundle-item">Event aerial coverage (3 hrs)</div>
-        <div class="bundle-item">50+ edited aerial photos</div>
-        <div class="bundle-item">Cinematic event highlight reel (2 min)</div>
-        <div class="bundle-item">2 short-form social cuts</div>
-        <div class="bundle-item">Full commercial licensing</div>
-      </div>
-      <div class="bundle-pricing">
-        <div class="bundle-price">$749</div>
-        <div class="bundle-was">$899</div>
-        <div class="bundle-save">Save $150</div>
-      </div>
-    </div>
-    <div class="bundle reveal">
-      <div class="bundle-tag">Business Launch</div>
-      <div class="bundle-name">The Brand Debut</div>
-      <div class="bundle-who">For: New Businesses, Restaurants, Retail</div>
-      <div class="bundle-items">
-        <div class="bundle-item">Aerial exterior & property photos</div>
-        <div class="bundle-item">Full branded website (multi-section)</div>
-        <div class="bundle-item">Social preview card</div>
-        <div class="bundle-item">Custom animations & interactions</div>
-        <div class="bundle-item">Deployment + custom domain help</div>
-      </div>
-      <div class="bundle-pricing">
-        <div class="bundle-price">$1,099</div>
-        <div class="bundle-was">$1,398</div>
-        <div class="bundle-save">Save $299</div>
-      </div>
-    </div>
-    <div class="bundle reveal">
-      <div class="bundle-tag">Music & Entertainment</div>
-      <div class="bundle-name">The Artist Package</div>
-      <div class="bundle-who">For: Musicians, Labels, Performers</div>
-      <div class="bundle-items">
-        <div class="bundle-item">Music video aerial sequences (3 hrs)</div>
-        <div class="bundle-item">Cinematic grade color treatment</div>
-        <div class="bundle-item">Artist website with music/video embed</div>
-        <div class="bundle-item">Social preview & press card</div>
-        <div class="bundle-item">Full commercial & streaming rights</div>
-      </div>
-      <div class="bundle-pricing">
-        <div class="bundle-price">$1,299</div>
-        <div class="bundle-was">$1,598</div>
-        <div class="bundle-save">Save $299</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- PROCESS -->
 <section class="process sec" id="process">

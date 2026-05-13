@@ -445,6 +445,42 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   body{cursor:auto;}
   #cur,#cur-r{display:none;}
 }
+.plan-transition {
+  text-align: center;
+  max-width: 600px;
+  margin: 4rem auto 0;
+  padding: 0 1.5rem;
+}
+.plan-transition__rule {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #c9973d, transparent);
+  margin: 1.5rem auto;
+}
+.plan-transition__tag {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: #8a6321;
+  margin-bottom: 0.75rem;
+}
+.plan-transition__heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 400;
+  color: #f0e8d4;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+.plan-transition__sub {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #7a7260;
+  line-height: 1.7;
+}
 </style>
 </head>
 <body>
@@ -664,6 +700,14 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
       <a href="https://buy.stripe.com/cNi14pcuieLQ0bE0nK1Fe04" target="_blank" rel="noopener noreferrer" class="btn-maintenance-cta" data-plan="premium">Get Started</a>
     </div>
 
+  </div>
+
+  <div class="plan-transition">
+    <div class="plan-transition__rule"></div>
+    <p class="plan-transition__tag">Once Your Site Is Live</p>
+    <h3 class="plan-transition__heading">The choice is yours.</h3>
+    <p class="plan-transition__sub">Every site we build comes with 30 days of support. After that, you decide how it's kept.</p>
+    <div class="plan-transition__rule"></div>
   </div>
 
   <!-- ELEMENT D: Post-Build Path Cards -->

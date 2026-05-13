@@ -6,7 +6,7 @@
   <title>Burry Chocolates — Hampstead, NC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #1a1008;
@@ -497,26 +497,84 @@
     .footer-links a:hover { color: var(--gold); }
 
     /* ── AOM PREVIEW NOTICE ── */
-    .aom-notice {
-      background: linear-gradient(135deg, #1e1409, #2d1a0a);
-      border: 1px solid rgba(212, 148, 90, 0.3);
-      border-radius: 4px;
-      padding: 1.2rem 1.8rem;
+    .preview-notice {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(201,151,61,0.25);
+      padding: 5rem 1.5rem;
+      color: #d4d0c8;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-notice__inner {
+      max-width: 640px;
+      margin: 0 auto;
       text-align: center;
-      margin: 0 2rem 2rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+      position: relative;
+      z-index: 1;
     }
-
-    .aom-notice p {
-      font-size: 0.82rem;
-      color: rgba(250, 245, 236, 0.7);
-      line-height: 1.6;
+    .preview-notice__ornament {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+      color: #c9973d;
+      font-size: 0.75rem;
+      opacity: 0.7;
     }
-
-    .aom-notice strong {
-      color: var(--gold);
+    .preview-notice__ornament .big {
+      font-size: 1rem;
+      opacity: 1;
+    }
+    .preview-notice__heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: #e8e3d8;
+      letter-spacing: 0.05em;
+      line-height: 1.4;
+      margin-bottom: 2rem;
+    }
+    .preview-notice__heading em {
+      font-style: italic;
+      color: #c9973d;
+    }
+    .preview-notice__body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #b0aca0;
+      max-width: 540px;
+      margin: 0 auto 1.5rem;
+    }
+    .preview-notice__body strong {
+      font-style: normal;
+      color: #d4af5b;
+      font-weight: 500;
+    }
+    .preview-notice__entity {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: #c9973d;
+      margin: 1.75rem 0;
+      text-transform: uppercase;
+    }
+    .preview-notice__copyright {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: #6e6a5e;
+      text-transform: uppercase;
+      margin-top: 1.5rem;
+    }
+    @media(max-width:640px){
+      .preview-notice { padding: 3.5rem 1.25rem; }
+      .preview-notice__heading { font-size: 1.4rem; }
+      .preview-notice__body { font-size: 0.98rem; }
     }
 
     /* ── CATEGORY PAGE ── */
@@ -1195,12 +1253,38 @@ function renderHomepage() {
       </div>
     </div>
 
-    <!-- AOM NOTICE -->
-    <div style="padding: 2rem 2rem 0; max-width:1200px; margin:0 auto;">
-      <div class="aom-notice">
-        <p>🍫 <strong>Preview Site</strong> — This is a website preview prepared for <strong>Burry Chocolates</strong> by <strong>Altitude Odyssey Media</strong>. This preview demonstrates the site design, navigation, and content. Online ordering is not active. <a href="mailto:hello@altitudeodysseymedia.com" style="color:var(--gold);text-decoration:none;">Contact us</a> with questions.</p>
+    <section class="preview-notice">
+      <div class="preview-notice__inner">
+        <div class="preview-notice__ornament" aria-hidden="true">
+          <span>&#9670;</span><span class="big">&#9670;</span><span>&#9670;</span>
+        </div>
+        <h2 class="preview-notice__heading">
+          <em>Design Preview</em> &middot; For Review Only
+        </h2>
+        <p class="preview-notice__body">
+          This site is a custom design preview prepared exclusively for
+          <strong>Burry Chocolates</strong>. All design elements, layout,
+          code, copy, and creative direction shown here are the sole
+          intellectual property of
+        </p>
+        <p class="preview-notice__entity">
+          Altitude Odyssey Media LLC
+        </p>
+        <p class="preview-notice__body">
+          Reproduction, redistribution, or use of any portion of this
+          preview without a signed engagement agreement and full payment
+          is strictly prohibited. Preview hosting is temporary and may be
+          removed at any time. Final design transfers to client only upon
+          completion of contracted payment terms.
+        </p>
+        <div class="preview-notice__ornament" aria-hidden="true">
+          <span>&#9670;</span><span class="big">&#9670;</span><span>&#9670;</span>
+        </div>
+        <p class="preview-notice__copyright">
+          &copy; 2026 Altitude Odyssey Media LLC &middot; All Rights Reserved
+        </p>
       </div>
-    </div>
+    </section>
   `;
 }
 

@@ -3,28 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>International Stylez | Unisex Salon — Wilmington, NC</title>
-  <meta name="description" content="International Stylez is a unisex salon in Wilmington, NC offering premium cuts, color, natural hair, braids, and styling for men and women. 3710 S College Rd, Unit 127.">
+  <title>International Stylez | Premium Salon — Wilmington, NC</title>
+  <meta name="description" content="International Stylez is a premium full-service salon in Wilmington, NC. Cuts, color, braids, natural hair, fades, silk press, and protective styles.">
   <link rel="canonical" href="https://altitudeodysseymedia.com/international-stylez.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     /* ── Reset & Base ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0f1a1a;
-      --surface:   #1a2a2a;
+      --bg:        #0a0f0f;
       --teal:      #3abfbf;
-      --teal-dim:  rgba(58,191,191,0.12);
-      --sage:      #a8c090;
       --gold:      #c9973d;
       --cream:     #f0ede6;
-      --muted:     #8fa89a;
-      --dim:       #4a6060;
+      --dark-card: #111a1a;
+      --muted:     rgba(240,237,230,0.6);
       --border:    rgba(58,191,191,0.15);
     }
 
@@ -34,8 +31,7 @@
       background: var(--bg);
       color: var(--cream);
       font-family: 'Raleway', sans-serif;
-      font-weight: 400;
-      font-size: 17px;
+      font-size: 16px;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
@@ -44,61 +40,63 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 2rem;
-      height: 66px;
-      background: rgba(15,26,26,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      height: 70px;
+      background: transparent;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    nav.scrolled {
+      background: #0a0f0f;
+      box-shadow: 0 1px 0 rgba(58,191,191,0.1);
     }
 
     .nav-logo {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 600;
-      font-size: 0.82rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
       text-decoration: none;
       color: var(--cream);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      white-space: nowrap;
     }
-    .nav-logo .globe { font-size: 1rem; }
 
     .nav-links {
       display: flex;
-      gap: 2.2rem;
+      gap: 2.5rem;
       list-style: none;
     }
     .nav-links a {
       font-family: 'Raleway', sans-serif;
-      font-weight: 500;
       font-size: 0.72rem;
-      letter-spacing: 0.18em;
+      font-weight: 500;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       text-decoration: none;
-      color: var(--muted);
+      color: rgba(240,237,230,0.75);
       transition: color 0.25s;
     }
     .nav-links a:hover { color: var(--teal); }
 
-    .nav-cta {
+    .nav-book {
       font-family: 'Raleway', sans-serif;
-      font-weight: 600;
       font-size: 0.68rem;
+      font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--bg);
       background: var(--teal);
-      padding: 0.55rem 1.3rem;
-      transition: background 0.25s;
+      padding: 0.55rem 1.4rem;
+      transition: background 0.25s, transform 0.2s;
     }
-    .nav-cta:hover { background: #4dd0d0; }
+    .nav-book:hover {
+      background: #4fd4d4;
+      transform: translateY(-1px);
+    }
 
     /* ── Hero ─────────────────────────────────────────── */
     .hero {
@@ -107,89 +105,52 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 8rem 1.5rem 6rem;
+      padding: 6rem 2rem 4rem;
       position: relative;
       overflow: hidden;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(58,191,191,0.09) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 70% at 20% 80%, rgba(201,151,61,0.06) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 50% at 80% 10%, rgba(168,192,144,0.05) 0%, transparent 50%),
-        var(--bg);
+      background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
-
-    /* Meridian grid lines */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(58,191,191,0.04) 80px),
-        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(58,191,191,0.04) 80px);
-      pointer-events: none;
-    }
-
-    /* Decorative globe */
-    .hero-globe-bg {
-      position: absolute;
-      font-size: 38vw;
-      line-height: 1;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0.055;
-      pointer-events: none;
-      user-select: none;
-      z-index: 0;
+      background: rgba(0,0,0,0.55);
     }
 
     .hero-inner {
       position: relative;
       z-index: 1;
-      max-width: 760px;
+      max-width: 820px;
     }
 
     .hero-eyebrow {
       font-family: 'Raleway', sans-serif;
-      font-weight: 500;
-      font-size: 0.7rem;
-      letter-spacing: 0.36em;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .hero-eyebrow::before,
-    .hero-eyebrow::after {
-      content: '';
-      width: 36px;
-      height: 1px;
-      background: var(--teal);
-      opacity: 0.5;
+      margin-bottom: 1.8rem;
     }
 
     .hero h1 {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 400;
-      color: var(--cream);
-      line-height: 1.08;
-      letter-spacing: 0.01em;
-      margin-bottom: 1.6rem;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: #ffffff;
+      margin-bottom: 1.8rem;
     }
+    .hero h1 span { display: block; }
 
-    .hero-sub {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      font-size: 1.1rem;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-      margin-bottom: 3rem;
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
+    .hero-rule {
+      width: 80px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 2.4rem;
     }
 
     .hero-ctas {
@@ -199,332 +160,322 @@
       flex-wrap: wrap;
     }
 
-    .btn-primary {
+    .btn-teal {
       display: inline-block;
       font-family: 'Raleway', sans-serif;
-      font-weight: 600;
       font-size: 0.72rem;
-      letter-spacing: 0.18em;
+      font-weight: 600;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       text-decoration: none;
-      color: var(--bg);
+      color: #0a0f0f;
       background: var(--teal);
       padding: 1rem 2.2rem;
       transition: background 0.25s, transform 0.2s;
     }
-    .btn-primary:hover {
-      background: #4dd0d0;
-      transform: translateY(-2px);
-    }
+    .btn-teal:hover { background: #4fd4d4; transform: translateY(-2px); }
 
     .btn-outline {
       display: inline-block;
       font-family: 'Raleway', sans-serif;
-      font-weight: 600;
       font-size: 0.72rem;
-      letter-spacing: 0.18em;
+      font-weight: 600;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       text-decoration: none;
-      color: var(--teal);
-      border: 1px solid var(--teal);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.5);
       padding: 1rem 2.2rem;
-      transition: background 0.25s, color 0.25s, transform 0.2s;
+      transition: border-color 0.25s, color 0.25s;
     }
-    .btn-outline:hover {
-      background: var(--teal-dim);
-      transform: translateY(-2px);
+    .btn-outline:hover { border-color: #fff; color: #fff; }
+
+    /* ── Marquee ──────────────────────────────────────── */
+    .marquee-strip {
+      background: var(--teal);
+      overflow: hidden;
+      padding: 0.85rem 0;
+      white-space: nowrap;
     }
-
-    /* ── Section Base ─────────────────────────────────── */
-    section { padding: 6rem 1.5rem; }
-
-    .section-inner { max-width: 1080px; margin: 0 auto; }
-
-    .section-header { text-align: center; margin-bottom: 3.5rem; }
-
-    .section-eyebrow {
+    .marquee-track {
+      display: inline-flex;
+      gap: 0;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-track span {
       font-family: 'Raleway', sans-serif;
-      font-weight: 500;
-      font-size: 0.65rem;
-      letter-spacing: 0.36em;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 0.7rem;
+      color: #0a0f0f;
+      padding: 0 1.5rem;
     }
-
-    .section-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 400;
-      color: var(--cream);
-      line-height: 1.2;
-    }
-
-    .section-rule {
-      width: 48px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--teal), var(--sage));
-      margin: 1.2rem auto 0;
-      opacity: 0.7;
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
 
     /* ── Services ─────────────────────────────────────── */
-    #services { background: var(--surface); }
+    #services {
+      padding: 6rem 2rem;
+    }
 
-    .services-split {
+    .services-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .services-eyebrow {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.6rem;
+    }
+    .services-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    .services-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
+      gap: 2rem;
     }
 
-    .services-column-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: var(--teal);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+    .service-card {
+      background: var(--dark-card);
+      overflow: hidden;
     }
-    .services-column-title .col-icon {
-      font-size: 1.1rem;
+
+    .service-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .service-card-body {
+      padding: 2rem;
+    }
+
+    .service-card-label {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
     }
 
     .service-list {
+      list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.9rem;
+      gap: 0;
     }
-
-    .service-item {
-      background: var(--bg);
-      border: 1px solid rgba(58,191,191,0.1);
-      padding: 1.2rem 1.5rem;
+    .service-list li {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      transition: border-color 0.3s, transform 0.25s;
-      position: relative;
-      overflow: hidden;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(58,191,191,0.1);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: rgba(240,237,230,0.8);
+      letter-spacing: 0.03em;
     }
-    .service-item::after {
+    .service-list li:last-child { border-bottom: none; }
+    .service-list li::after {
       content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, var(--teal), var(--sage));
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .service-item:hover {
-      border-color: rgba(58,191,191,0.3);
-      transform: translateX(4px);
-    }
-    .service-item:hover::after { opacity: 1; }
-
-    .service-dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: var(--teal);
       flex-shrink: 0;
-      opacity: 0.7;
-    }
-
-    .service-name {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 500;
-      font-size: 0.92rem;
-      color: var(--cream);
-      letter-spacing: 0.04em;
     }
 
     /* ── About ────────────────────────────────────────── */
     #about {
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
+      padding: 7rem 2rem;
+      background: var(--dark-card);
     }
 
-    .about-layout {
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5rem;
       align-items: center;
     }
 
-    .about-text h3 {
+    .about-left blockquote {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-size: clamp(2rem, 4vw, 3.2rem);
       font-weight: 400;
+      font-style: italic;
       color: var(--cream);
-      line-height: 1.3;
-      margin-bottom: 1.6rem;
-    }
-
-    .about-text p {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.85;
-    }
-
-    .about-visual {
+      line-height: 1.25;
+      margin-bottom: 2rem;
       position: relative;
-      height: 340px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
     }
-    .about-globe-deco {
-      font-size: 10rem;
-      opacity: 0.12;
-      line-height: 1;
-      display: block;
-    }
-    .about-visual-label {
+    .about-left blockquote::before {
+      content: '\201C';
+      font-size: 8rem;
+      line-height: 0;
       position: absolute;
-      bottom: 1.5rem;
-      left: 0; right: 0;
-      text-align: center;
-      font-family: 'Raleway', sans-serif;
-      font-weight: 500;
-      font-size: 0.62rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--dim);
-    }
-
-    /* ── Hours & Location ─────────────────────────────── */
-    #hours { background: var(--surface); }
-
-    .hours-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-    }
-
-    .hours-block h3 {
+      top: 2.5rem;
+      left: -1.5rem;
+      color: var(--teal);
+      opacity: 0.18;
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.4rem;
+    }
+
+    .about-right p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
       font-weight: 400;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .about-right img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* ── Hours ────────────────────────────────────────── */
+    #hours {
+      padding: 6rem 2rem;
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .hours-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .hours-eyebrow {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.6rem;
+    }
+
+    .hours-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 500;
       color: var(--cream);
-      margin-bottom: 1.6rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hours-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--teal);
+      margin: 0 auto 3rem;
+      opacity: 0.6;
     }
 
     .hours-table {
       width: 100%;
       border-collapse: collapse;
+      margin-bottom: 2.5rem;
     }
-    .hours-table tr + tr td {
-      border-top: 1px solid rgba(58,191,191,0.08);
+    .hours-table tr {
+      border-bottom: 1px solid rgba(58,191,191,0.1);
     }
+    .hours-table tr:last-child { border-bottom: none; }
     .hours-table td {
-      padding: 0.7rem 0;
+      padding: 0.85rem 0.5rem;
       font-family: 'Raleway', sans-serif;
-      font-weight: 400;
-      font-size: 0.93rem;
+      font-size: 0.9rem;
     }
-    .hours-table .day {
-      color: var(--muted);
-      padding-right: 1.5rem;
+    .hours-table td:first-child {
+      text-align: left;
+      color: rgba(240,237,230,0.55);
+      font-weight: 500;
+      letter-spacing: 0.05em;
     }
-    .hours-table .time {
-      color: var(--cream);
+    .hours-table td:last-child {
       text-align: right;
-    }
-    .hours-table .closed { color: var(--dim); }
-
-    .location-block h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.4rem;
-      font-weight: 400;
       color: var(--cream);
-      margin-bottom: 1.6rem;
+      font-weight: 400;
     }
+    .hours-table .closed { color: rgba(240,237,230,0.3); }
 
-    .location-detail {
+    .hours-details {
       display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1.3rem;
-    }
-    .location-icon {
-      color: var(--teal);
-      font-size: 1rem;
-      margin-top: 0.1em;
-      flex-shrink: 0;
-    }
-    .location-text {
+      flex-direction: column;
+      gap: 0.6rem;
       font-family: 'Raleway', sans-serif;
-      font-weight: 400;
-      font-size: 0.93rem;
+      font-size: 0.88rem;
+      color: var(--muted);
     }
-    .location-text strong {
-      display: block;
-      font-weight: 600;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+    .hours-details a {
       color: var(--teal);
-      margin-bottom: 0.2rem;
-    }
-    .location-text a {
-      color: var(--cream);
       text-decoration: none;
     }
-    .location-text a:hover { color: var(--teal); }
+    .hours-details a:hover { text-decoration: underline; }
 
-    .payments-row {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-top: 0.2rem;
-    }
-    .payment-badge {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 500;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      color: var(--bg);
-      background: var(--sage);
-      padding: 0.3rem 0.75rem;
-      border-radius: 2px;
-    }
-
-    /* ── Book ────────────────────────────────────────── */
+    /* ── Book ─────────────────────────────────────────── */
     #book {
-      background: var(--bg);
-      border-top: 1px solid var(--border);
+      padding: 6rem 2rem;
+      background: var(--dark-card);
     }
 
-    .book-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 5rem;
-      align-items: start;
+    .book-inner {
+      max-width: 680px;
+      margin: 0 auto;
     }
 
-    .book-info h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.6rem;
-      font-weight: 400;
-      color: var(--cream);
-      margin-bottom: 1rem;
+    .book-header {
+      text-align: center;
+      margin-bottom: 3rem;
     }
-
-    .book-info p {
+    .book-eyebrow {
       font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 2rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.6rem;
+    }
+    .book-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 500;
+      color: var(--cream);
     }
 
     .book-form {
@@ -547,114 +498,101 @@
 
     .form-group label {
       font-family: 'Raleway', sans-serif;
+      font-size: 0.65rem;
       font-weight: 600;
-      font-size: 0.62rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: rgba(240,237,230,0.55);
     }
 
     .form-group input,
     .form-group select,
     .form-group textarea {
-      background: var(--surface);
-      border: 1px solid rgba(58,191,191,0.18);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(58,191,191,0.2);
       color: var(--cream);
       font-family: 'Raleway', sans-serif;
-      font-weight: 300;
       font-size: 0.95rem;
       padding: 0.85rem 1rem;
       outline: none;
       transition: border-color 0.25s;
       -webkit-appearance: none;
+      border-radius: 0;
     }
     .form-group input::placeholder,
-    .form-group textarea::placeholder { color: var(--dim); }
-
+    .form-group textarea::placeholder {
+      color: rgba(240,237,230,0.25);
+    }
     .form-group select {
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M0 0l6 8 6-8z' fill='%233abfbf' opacity='0.6'/></svg>");
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M0 0l6 8 6-8z' fill='%233abfbf' opacity='0.7'/></svg>");
       background-repeat: no-repeat;
       background-position: right 1rem center;
-      background-color: var(--surface);
+      background-color: rgba(255,255,255,0.04);
       padding-right: 2.5rem;
       cursor: pointer;
     }
-    .form-group select option { background: #1a2a2a; }
-
+    .form-group select option { background: #111a1a; }
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border-color: rgba(58,191,191,0.5);
+      border-color: rgba(58,191,191,0.55);
     }
-
     .form-group textarea { resize: vertical; min-height: 110px; }
 
     .btn-submit {
       font-family: 'Raleway', sans-serif;
-      font-weight: 600;
       font-size: 0.72rem;
-      letter-spacing: 0.18em;
+      font-weight: 700;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--bg);
+      color: #0a0f0f;
       background: var(--teal);
       border: none;
       padding: 1rem 2.4rem;
       cursor: pointer;
-      transition: background 0.25s;
+      transition: background 0.25s, transform 0.2s;
       align-self: flex-start;
     }
-    .btn-submit:hover { background: #4dd0d0; }
-
-    .form-note {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      font-size: 0.82rem;
-      color: var(--dim);
-    }
+    .btn-submit:hover { background: #4fd4d4; transform: translateY(-2px); }
 
     /* ── Footer ───────────────────────────────────────── */
     footer {
-      background: #0a1212;
-      border-top: 1px solid var(--border);
-      padding: 2.4rem 1.5rem;
+      background: #070c0c;
+      border-top: 1px solid rgba(58,191,191,0.1);
+      padding: 2.2rem 1.5rem;
       text-align: center;
     }
     footer p {
       font-family: 'Raleway', sans-serif;
-      font-weight: 400;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      color: rgba(240,237,230,0.35);
     }
     footer a {
       color: var(--teal);
       text-decoration: none;
     }
     footer a:hover { text-decoration: underline; }
+    footer p + p { margin-top: 0.4rem; }
 
     /* ── Responsive ───────────────────────────────────── */
     @media (max-width: 900px) {
-      .about-layout,
-      .book-layout,
-      .hours-layout,
-      .services-split {
+      .services-grid,
+      .about-inner {
         grid-template-columns: 1fr;
+        gap: 2rem;
       }
-      .about-visual { height: 220px; }
+      .about-left blockquote { font-size: 2rem; }
     }
 
     @media (max-width: 640px) {
-      nav { padding: 0 1rem; }
+      nav { padding: 0 1.25rem; }
       .nav-links { display: none; }
-      .nav-logo { font-size: 0.7rem; letter-spacing: 0.14em; }
+      .nav-logo { font-size: 0.88rem; }
 
-      section { padding: 4.5rem 1.25rem; }
+      .hero { background-attachment: scroll; }
 
-      .hero h1 { font-size: clamp(2.4rem, 10vw, 3.5rem); }
-      .hero-globe-bg { font-size: 60vw; }
-      .hero-ctas { flex-direction: column; align-items: center; }
-      .btn-primary, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
+      #services, #about, #hours, #book { padding: 4rem 1.25rem; }
 
       .form-row { grid-template-columns: 1fr; }
       .btn-submit { width: 100%; text-align: center; }
@@ -665,99 +603,95 @@
 <body>
 
 <!-- ── Nav ──────────────────────────────────────────────── -->
-<nav>
-  <a href="#" class="nav-logo">
-    <span class="globe">🌍</span> International Stylez
-  </a>
+<nav id="main-nav">
+  <a href="#" class="nav-logo">International Stylez</a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#hours">Hours</a></li>
     <li><a href="#book">Book</a></li>
-    <li><a href="#book">Contact</a></li>
   </ul>
-  <a href="#book" class="nav-cta">Book Now</a>
+  <a href="#book" class="nav-book">Book Now</a>
 </nav>
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section class="hero">
-  <span class="hero-globe-bg" aria-hidden="true">🌍</span>
   <div class="hero-inner">
-    <p class="hero-eyebrow">Wilmington, NC · Unisex Salon</p>
-    <h1>Style Without Borders.</h1>
-    <p class="hero-sub">Premium cuts, color, and styling for everyone — in Wilmington, NC.</p>
+    <p class="hero-eyebrow">Wilmington, NC &nbsp;&middot;&nbsp; Premium Salon</p>
+    <h1>
+      <span>Style</span>
+      <span>Without</span>
+      <span>Borders.</span>
+    </h1>
+    <div class="hero-rule"></div>
     <div class="hero-ctas">
-      <a href="#book" class="btn-primary">Book Appointment</a>
-      <a href="#services" class="btn-outline">View Services</a>
+      <a href="#book" class="btn-teal">Book Appointment</a>
+      <a href="#services" class="btn-outline">Our Services</a>
     </div>
   </div>
 </section>
 
+<!-- ── Marquee ───────────────────────────────────────────── -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>CUTS</span><span>&middot;</span>
+    <span>COLOR</span><span>&middot;</span>
+    <span>BRAIDS</span><span>&middot;</span>
+    <span>NATURAL HAIR</span><span>&middot;</span>
+    <span>FADES</span><span>&middot;</span>
+    <span>SILK PRESS</span><span>&middot;</span>
+    <span>PROTECTIVE STYLES</span><span>&middot;</span>
+    <span>WILMINGTON NC</span><span>&middot;</span>
+    <!-- duplicate for seamless loop -->
+    <span>CUTS</span><span>&middot;</span>
+    <span>COLOR</span><span>&middot;</span>
+    <span>BRAIDS</span><span>&middot;</span>
+    <span>NATURAL HAIR</span><span>&middot;</span>
+    <span>FADES</span><span>&middot;</span>
+    <span>SILK PRESS</span><span>&middot;</span>
+    <span>PROTECTIVE STYLES</span><span>&middot;</span>
+    <span>WILMINGTON NC</span><span>&middot;</span>
+  </div>
+</div>
+
 <!-- ── Services ─────────────────────────────────────────── -->
 <section id="services">
-  <div class="section-inner">
-    <div class="section-header">
-      <p class="section-eyebrow">What We Offer</p>
-      <h2 class="section-title">Services for Everyone</h2>
-      <div class="section-rule"></div>
+  <div class="services-inner">
+    <div class="services-header">
+      <p class="services-eyebrow">What We Offer</p>
+      <h2 class="services-title">Our Services</h2>
     </div>
 
-    <div class="services-split">
+    <div class="services-grid">
 
       <!-- Men's -->
-      <div>
-        <p class="services-column-title">
-          <span class="col-icon">✂️</span> Men's Services
-        </p>
-        <div class="service-list">
-          <div class="service-item">
-            <div class="service-dot"></div>
-            <span class="service-name">Haircut &amp; Style</span>
-          </div>
-          <div class="service-item">
-            <div class="service-dot"></div>
-            <span class="service-name">Fade &amp; Taper</span>
-          </div>
-          <div class="service-item">
-            <div class="service-dot"></div>
-            <span class="service-name">Beard Trim &amp; Shape</span>
-          </div>
-          <div class="service-item">
-            <div class="service-dot"></div>
-            <span class="service-name">Hot Towel Shave</span>
-          </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&q=80" alt="Barber cutting men's hair" loading="lazy">
+        <div class="service-card-body">
+          <p class="service-card-label">Men's</p>
+          <h3 class="service-card-title">Cuts &amp; Grooming</h3>
+          <ul class="service-list">
+            <li>Haircut &amp; Style</li>
+            <li>Fade &amp; Taper</li>
+            <li>Beard Trim &amp; Shape</li>
+            <li>Hot Towel Shave</li>
+          </ul>
         </div>
       </div>
 
       <!-- Women's -->
-      <div>
-        <p class="services-column-title">
-          <span class="col-icon">💇</span> Women's Services
-        </p>
-        <div class="service-list">
-          <div class="service-item">
-            <div class="service-dot"></div>
-            <span class="service-name">Haircut &amp; Style</span>
-          </div>
-          <div class="service-item">
-            <div class="service-dot"></div>
-            <span class="service-name">Natural Hair Care</span>
-          </div>
-          <div class="service-item">
-            <div class="service-dot"></div>
-            <span class="service-name">Braids &amp; Protective Styles</span>
-          </div>
-          <div class="service-item">
-            <div class="service-dot"></div>
-            <span class="service-name">Color &amp; Highlights</span>
-          </div>
-          <div class="service-item">
-            <div class="service-dot"></div>
-            <span class="service-name">Relaxer Services</span>
-          </div>
-          <div class="service-item">
-            <div class="service-dot"></div>
-            <span class="service-name">Silk Press</span>
-          </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&q=80" alt="Woman getting hair styled" loading="lazy">
+        <div class="service-card-body">
+          <p class="service-card-label">Women's</p>
+          <h3 class="service-card-title">Styling &amp; Care</h3>
+          <ul class="service-list">
+            <li>Haircut &amp; Style</li>
+            <li>Natural Hair Care</li>
+            <li>Braids &amp; Protective Styles</li>
+            <li>Color &amp; Highlights</li>
+            <li>Relaxer Services</li>
+            <li>Silk Press</li>
+          </ul>
         </div>
       </div>
 
@@ -767,183 +701,124 @@
 
 <!-- ── About ─────────────────────────────────────────────── -->
 <section id="about">
-  <div class="section-inner">
-    <div class="about-layout">
+  <div class="about-inner">
 
-      <div class="about-text">
-        <h3>Where Every Culture Is Welcome.</h3>
-        <p>International Stylez brings world-class hair care to Wilmington. Whether you're coming in for a fresh fade or a full transformation, we treat every client with the skill and care your hair deserves.</p>
-      </div>
-
-      <div class="about-visual">
-        <span class="about-globe-deco" aria-hidden="true">🌍</span>
-        <p class="about-visual-label">International Stylez · Wilmington, NC</p>
-      </div>
-
+    <div class="about-left">
+      <blockquote>Every chair tells a story.</blockquote>
     </div>
+
+    <div class="about-right">
+      <p>International Stylez has been crafting looks in Wilmington since day one. We believe great hair transcends culture — every client who sits in our chair gets our full attention, skill, and care.</p>
+      <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=900&q=80" alt="Salon chair closeup" loading="lazy">
+    </div>
+
   </div>
 </section>
 
 <!-- ── Hours & Location ───────────────────────────────────── -->
 <section id="hours">
-  <div class="section-inner">
-    <div class="section-header">
-      <p class="section-eyebrow">Visit Us</p>
-      <h2 class="section-title">Hours &amp; Location</h2>
-      <div class="section-rule"></div>
-    </div>
+  <div class="hours-inner">
+    <p class="hours-eyebrow">Find Us</p>
+    <h2 class="hours-title">Hours &amp; Location</h2>
+    <div class="hours-rule"></div>
 
-    <div class="hours-layout">
+    <table class="hours-table">
+      <tbody>
+        <tr>
+          <td>Mon &ndash; Tue</td>
+          <td>9:00 AM &ndash; 7:00 PM</td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td>9:00 AM &ndash; 6:00 PM</td>
+        </tr>
+        <tr>
+          <td>Thu &ndash; Sat</td>
+          <td>9:00 AM &ndash; 7:00 PM</td>
+        </tr>
+        <tr>
+          <td>Sunday</td>
+          <td class="closed">Closed</td>
+        </tr>
+      </tbody>
+    </table>
 
-      <div class="hours-block">
-        <h3>Hours of Operation</h3>
-        <table class="hours-table">
-          <tr>
-            <td class="day">Monday</td>
-            <td class="time">9:00 AM – 7:00 PM</td>
-          </tr>
-          <tr>
-            <td class="day">Tuesday</td>
-            <td class="time">9:00 AM – 7:00 PM</td>
-          </tr>
-          <tr>
-            <td class="day">Wednesday</td>
-            <td class="time">9:00 AM – 6:00 PM</td>
-          </tr>
-          <tr>
-            <td class="day">Thursday</td>
-            <td class="time">9:00 AM – 7:00 PM</td>
-          </tr>
-          <tr>
-            <td class="day">Friday</td>
-            <td class="time">9:00 AM – 7:00 PM</td>
-          </tr>
-          <tr>
-            <td class="day">Saturday</td>
-            <td class="time">9:00 AM – 7:00 PM</td>
-          </tr>
-          <tr>
-            <td class="day">Sunday</td>
-            <td class="time closed">Closed</td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="location-block">
-        <h3>Find Us</h3>
-
-        <div class="location-detail">
-          <span class="location-icon">📍</span>
-          <div class="location-text">
-            <strong>Address</strong>
-            3710 S College Rd, Unit 127<br>Wilmington, NC 28412
-          </div>
-        </div>
-
-        <div class="location-detail">
-          <span class="location-icon">📞</span>
-          <div class="location-text">
-            <strong>Phone</strong>
-            <a href="tel:+19103997685">(910) 399-7685</a>
-          </div>
-        </div>
-
-        <div class="location-detail">
-          <span class="location-icon">🌐</span>
-          <div class="location-text">
-            <strong>Facebook</strong>
-            <a href="https://facebook.com/INT.STYLEZ" target="_blank" rel="noopener">facebook.com/INT.STYLEZ</a>
-          </div>
-        </div>
-
-        <div class="location-detail">
-          <span class="location-icon">💳</span>
-          <div class="location-text">
-            <strong>Payments Accepted</strong>
-            <div class="payments-row">
-              <span class="payment-badge">Apple Pay</span>
-              <span class="payment-badge">Contactless</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <div class="hours-details">
+      <span>3710 S College Rd &middot; Unit 127 &middot; Wilmington, NC 28412</span>
+      <span><a href="tel:9103997685">(910) 399-7685</a></span>
+      <span>Apple Pay &middot; Contactless</span>
+      <span><a href="https://www.facebook.com/INT.STYLEZ" target="_blank" rel="noopener">facebook.com/INT.STYLEZ</a></span>
     </div>
   </div>
 </section>
 
-<!-- ── Book ──────────────────────────────────────────────── -->
+<!-- ── Booking Form ───────────────────────────────────────── -->
 <section id="book">
-  <div class="section-inner">
-    <div class="section-header">
-      <p class="section-eyebrow">Get In Touch</p>
-      <h2 class="section-title">Book an Appointment</h2>
-      <div class="section-rule"></div>
+  <div class="book-inner">
+    <div class="book-header">
+      <p class="book-eyebrow">Get In Touch</p>
+      <h2 class="book-title">Request an Appointment</h2>
     </div>
 
-    <div class="book-layout">
+    <form class="book-form" action="https://formspree.io/f/xaqayyrr" method="POST">
+      <input type="hidden" name="subject" value="International Stylez — Booking Request">
 
-      <div class="book-info">
-        <h3>Ready to come in?</h3>
-        <p>Fill out the form and we'll reach out to confirm your appointment. We look forward to seeing you.</p>
-        <p style="margin-top: -0.5rem;">Call us directly at <a href="tel:+19103997685" style="color:var(--teal);text-decoration:none;">(910) 399-7685</a>.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="(910) 000-0000">
+        </div>
       </div>
 
-      <form class="book-form" action="https://formspree.io/f/xaqayyrr" method="POST">
-        <input type="hidden" name="_subject" value="International Stylez — Booking Request">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required>
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="(910) 000-0000">
-          </div>
-        </div>
+      <div class="form-group">
+        <label for="service">Service</label>
+        <select id="service" name="service">
+          <option value="" disabled selected>Select a service</option>
+          <optgroup label="Men's">
+            <option value="mens-cut">Haircut &amp; Style</option>
+            <option value="fade">Fade &amp; Taper</option>
+            <option value="beard">Beard Trim &amp; Shape</option>
+            <option value="shave">Hot Towel Shave</option>
+          </optgroup>
+          <optgroup label="Women's">
+            <option value="womens-cut">Haircut &amp; Style</option>
+            <option value="natural">Natural Hair Care</option>
+            <option value="braids">Braids &amp; Protective Styles</option>
+            <option value="color">Color &amp; Highlights</option>
+            <option value="relaxer">Relaxer Services</option>
+            <option value="silk-press">Silk Press</option>
+          </optgroup>
+        </select>
+      </div>
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com">
-        </div>
+      <div class="form-group">
+        <label for="date">Preferred Date</label>
+        <input type="date" id="date" name="preferred_date">
+      </div>
 
-        <div class="form-group">
-          <label for="service">Service</label>
-          <select id="service" name="service" required>
-            <option value="" disabled selected>Select a service</option>
-            <option value="mens-cut">Men's Cut</option>
-            <option value="fade">Fade</option>
-            <option value="beard-trim">Beard Trim</option>
-            <option value="womens-cut">Women's Cut</option>
-            <option value="natural-hair">Natural Hair</option>
-            <option value="braids">Braids</option>
-            <option value="color">Color</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Anything we should know? Style details, preferred time…"></textarea>
+      </div>
 
-        <div class="form-group">
-          <label for="date">Preferred Date</label>
-          <input type="date" id="date" name="preferred_date">
-        </div>
-
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Anything else we should know?"></textarea>
-        </div>
-
-        <p class="form-note">We'll confirm your appointment via phone or email.</p>
-        <button type="submit" class="btn-submit">Send Request &rarr;</button>
-      </form>
-
-    </div>
+      <button type="submit" class="btn-submit">Request Appointment</button>
+    </form>
   </div>
 </section>
 
 <!-- ── Footer ────────────────────────────────────────────── -->
 <footer>
-  <p>&copy; 2026 International Stylez &middot; Wilmington, NC &middot; <a href="https://facebook.com/INT.STYLEZ" target="_blank" rel="noopener">facebook.com/INT.STYLEZ</a></p>
+  <p>&copy; 2026 International Stylez &middot; Wilmington, NC</p>
+  <p><a href="https://www.facebook.com/INT.STYLEZ" target="_blank" rel="noopener">facebook.com/INT.STYLEZ</a> &middot; <a href="tel:9103997685">(910) 399-7685</a></p>
 </footer>
 
 <!-- ============================================
@@ -995,12 +870,19 @@
 
 <style>
   .preview-notice {
-    background: #080f0f;
-    border-top: 1px solid rgba(58,191,191,0.2);
+    background: #0a0a0a;
+    border-top: 1px solid rgba(201, 151, 61, 0.25);
     padding: 5rem 1.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
+  }
+  .preview-notice::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/></svg>");
+    pointer-events: none;
   }
   .preview-notice::after {
     content: '';
@@ -1009,7 +891,7 @@
     left: 10%;
     right: 10%;
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(58,191,191,0.4) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(201, 151, 61, 0.5) 50%, transparent 100%);
   }
   .preview-notice__inner {
     max-width: 640px;
@@ -1024,66 +906,85 @@
     align-items: center;
     gap: 0.75rem;
     margin-bottom: 1.5rem;
-    color: #3abfbf;
+    color: #c9973d;
     font-size: 0.75rem;
   }
-  .preview-notice__ornament span { opacity: 0.5; }
+  .preview-notice__ornament span { opacity: 0.6; }
   .preview-notice__ornament span:nth-child(2) {
     transform: scale(1.5);
-    opacity: 0.9;
-    color: #c9973d;
+    opacity: 1;
+    color: #d4af5b;
   }
   .preview-notice__heading {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 1.75rem;
     font-weight: 400;
-    color: #f0ede6;
-    letter-spacing: 0.02em;
+    color: #e8e3d8;
+    letter-spacing: 0.04em;
     line-height: 1.4;
     margin-bottom: 2rem;
   }
   .preview-notice__heading em {
     font-style: italic;
-    color: #3abfbf;
+    color: #c9973d;
   }
   .preview-notice__body {
     font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    font-size: 0.95rem;
-    color: #8fa89a;
+    font-style: italic;
+    font-size: 1rem;
+    color: #9a968e;
     line-height: 1.8;
     max-width: 520px;
     margin: 0 auto 1.5rem;
+    letter-spacing: 0.01em;
   }
   .preview-notice__body strong {
+    font-style: normal;
+    color: #d4af5b;
     font-weight: 600;
-    color: #3abfbf;
+    letter-spacing: 0.05em;
   }
   .preview-notice__entity {
     font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    font-size: 0.75rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: #f0ede6;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e8e3d8;
     margin: 1.75rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
   }
   .preview-notice__copyright {
     font-family: 'Raleway', sans-serif;
-    font-weight: 400;
-    font-size: 0.62rem;
-    letter-spacing: 0.22em;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #4a6060;
+    color: #5a5650;
     margin-top: 1.5rem;
   }
   @media (max-width: 640px) {
     .preview-notice { padding: 3.5rem 1.25rem; }
     .preview-notice__heading { font-size: 1.4rem; }
-    .preview-notice__body { font-size: 0.9rem; }
-    .preview-notice__entity { font-size: 0.68rem; letter-spacing: 0.2em; }
+    .preview-notice__body { font-size: 0.95rem; line-height: 1.7; }
+    .preview-notice__entity { font-size: 0.9rem; letter-spacing: 0.15em; }
+    .preview-notice__copyright { font-size: 0.6rem; letter-spacing: 0.15em; }
   }
 </style>
+
+<script>
+  (function() {
+    var nav = document.getElementById('main-nav');
+    var heroHeight = window.innerHeight;
+    function onScroll() {
+      if (window.scrollY > heroHeight * 0.7) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
 
 </body>
 </html>

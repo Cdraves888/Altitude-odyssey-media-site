@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burry Chocolates — Hampstead, NC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1a1008;
+      --chocolate: #3d1f0a;
+      --cream: #faf5ec;
+      --gold: #d4945a;
+      --pink: #e8a0b0;
+      --card: #251408;
+      --card-border: #3d2810;
+      --text-muted: #b89a7a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(26, 16, 8, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(212, 148, 90, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 68px;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo span {
+      color: var(--pink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-phone {
+      font-size: 0.85rem;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--gold);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 8px 0;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-track span {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bg);
+      padding: 0 2rem;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      margin-top: 68px;
+      position: relative;
+      height: 92vh;
+      min-height: 560px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.45);
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      padding: 2rem;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(250, 245, 236, 0.8);
+      font-weight: 400;
+      margin-bottom: 2.2rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 0.85rem 2.2rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .hero-cta:hover {
+      background: var(--pink);
+      transform: translateY(-2px);
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-full {
+      padding: 5rem 2rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+    }
+
+    /* ── CATEGORY GRID ── */
+    .categories-section {
+      padding: 5rem 2rem;
+      background: var(--chocolate);
+    }
+
+    .categories-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .category-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--cream);
+      display: block;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      border-color: var(--gold);
+    }
+
+    .category-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s;
+    }
+
+    .category-card:hover .category-card-img {
+      transform: scale(1.04);
+    }
+
+    .category-card-img-wrap {
+      overflow: hidden;
+    }
+
+    .category-card-body {
+      padding: 1.1rem 1.2rem 1.3rem;
+    }
+
+    .category-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: var(--cream);
+    }
+
+    .category-card-meta {
+      font-size: 0.78rem;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── HISTORY ── */
+    .history-section {
+      padding: 6rem 2rem;
+      background: var(--bg);
+    }
+
+    .history-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .history-text p {
+      font-size: 1rem;
+      color: rgba(250, 245, 236, 0.85);
+      margin-bottom: 1.3rem;
+      line-height: 1.85;
+    }
+
+    .history-img {
+      width: 100%;
+      border-radius: 4px;
+      display: block;
+      border: 2px solid var(--card-border);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    /* ── ABOUT ── */
+    .about-section {
+      padding: 6rem 2rem;
+      background: var(--chocolate);
+    }
+
+    .about-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-inner .section-title { text-align: center; }
+    .about-inner .divider { margin: 1.5rem auto; }
+
+    .about-inner p {
+      font-size: 1rem;
+      color: rgba(250, 245, 236, 0.85);
+      margin-bottom: 1.3rem;
+      line-height: 1.85;
+    }
+
+    /* ── LOCATION ── */
+    .location-section {
+      padding: 5rem 2rem;
+      background: var(--bg);
+    }
+
+    .location-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .location-map {
+      width: 100%;
+      height: 380px;
+      border-radius: 4px;
+      border: 2px solid var(--card-border);
+      display: block;
+    }
+
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      font-size: 1.2rem;
+      min-width: 28px;
+      color: var(--gold);
+    }
+
+    .contact-detail {
+      font-size: 0.95rem;
+      color: rgba(250, 245, 236, 0.85);
+      line-height: 1.6;
+    }
+
+    .contact-detail strong {
+      display: block;
+      color: var(--cream);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .contact-detail a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-detail a:hover { color: var(--pink); }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.3rem 1.5rem;
+      font-size: 0.92rem;
+    }
+
+    .hours-day { color: rgba(250,245,236,0.7); }
+    .hours-time { color: var(--gold); font-weight: 600; }
+
+    /* ── SOCIAL LINKS ── */
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      color: var(--cream);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0e0905;
+      border-top: 1px solid rgba(212, 148, 90, 0.15);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── AOM PREVIEW NOTICE ── */
+    .aom-notice {
+      background: linear-gradient(135deg, #1e1409, #2d1a0a);
+      border: 1px solid rgba(212, 148, 90, 0.3);
+      border-radius: 4px;
+      padding: 1.2rem 1.8rem;
+      text-align: center;
+      margin: 0 2rem 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .aom-notice p {
+      font-size: 0.82rem;
+      color: rgba(250, 245, 236, 0.7);
+      line-height: 1.6;
+    }
+
+    .aom-notice strong {
+      color: var(--gold);
+    }
+
+    /* ── CATEGORY PAGE ── */
+    .cat-page {
+      margin-top: 68px;
+      min-height: calc(100vh - 68px);
+    }
+
+    .cat-header {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .cat-header-img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.35);
+    }
+
+    .cat-header-content {
+      position: relative;
+      padding: 2.5rem 3rem;
+      width: 100%;
+    }
+
+    .breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb:hover { color: var(--pink); }
+
+    .cat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.15;
+    }
+
+    .cat-body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 5rem;
+    }
+
+    .cat-description {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-left: 4px solid var(--gold);
+      padding: 1.2rem 1.5rem;
+      border-radius: 2px;
+      font-size: 0.95rem;
+      color: rgba(250, 245, 236, 0.85);
+      margin-bottom: 3rem;
+      line-height: 1.75;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 1.3rem 1.2rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .product-card:hover {
+      border-color: rgba(212, 148, 90, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.35;
+    }
+
+    .product-price {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+    }
+
+    .product-badge {
+      display: inline-block;
+      background: rgba(180, 160, 140, 0.2);
+      border: 1px solid rgba(180, 160, 140, 0.35);
+      color: rgba(250, 245, 236, 0.55);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      align-self: flex-start;
+    }
+
+    .product-limited {
+      display: inline-block;
+      background: rgba(232, 160, 176, 0.15);
+      border: 1px solid rgba(232, 160, 176, 0.3);
+      color: var(--pink);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      align-self: flex-start;
+    }
+
+    .cat-note {
+      margin-top: 3rem;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 1.2rem 1.5rem;
+      font-size: 0.88rem;
+      color: rgba(250, 245, 236, 0.65);
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .cat-note a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .instore-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 4rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .instore-icon {
+      font-size: 3rem;
+    }
+
+    .instore-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--cream);
+    }
+
+    .instore-card p {
+      font-size: 0.95rem;
+      color: rgba(250,245,236,0.7);
+      max-width: 400px;
+    }
+
+    .instore-card a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* ── PRICE BY WEIGHT ── */
+    .price-by-weight {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .weight-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 1.5rem 1.2rem;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+
+    .weight-card:hover { border-color: var(--gold); }
+
+    .weight-size {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+
+    .weight-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .weight-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .history-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .location-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .cat-header-content { padding: 1.5rem; }
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-section { padding: 5rem 1.5rem; background: #251408; text-align: center; }
+    .reviews-inner { max-width: 1000px; margin: 0 auto; }
+    .reviews-tag { font-family: 'Raleway', sans-serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: #d4945a; margin-bottom: 0.75rem; }
+    .reviews-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: #faf5ec; margin-bottom: 0.5rem; }
+    .reviews-title em { color: #d4945a; font-style: italic; }
+    .reviews-sub { font-family: 'Raleway', sans-serif; font-size: 0.85rem; color: #a89070; margin-bottom: 3rem; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
+    @media(max-width:768px){ .reviews-grid { grid-template-columns: 1fr; } }
+    @media(min-width:769px) and (max-width:1024px){ .reviews-grid { grid-template-columns: repeat(2,1fr); } }
+    .review-card { background: #1a1008; border: 1px solid rgba(212,148,90,0.2); border-radius: 8px; padding: 1.5rem; text-align: left; }
+    .review-stars { color: #d4945a; font-size: 1rem; margin-bottom: 0.75rem; letter-spacing: 0.1em; }
+    .review-text { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; color: #f5f0e8; margin-bottom: 1rem; flex: 1; }
+    .review-footer { display: flex; justify-content: space-between; align-items: center; }
+    .review-author { font-family: 'Raleway', sans-serif; font-size: 0.75rem; font-weight: 600; color: #d4945a; letter-spacing: 0.05em; }
+    .review-date { font-family: 'Raleway', sans-serif; font-size: 0.7rem; color: #806050; }
+    .reviews-yelp-btn { display: inline-block; font-family: 'Raleway', sans-serif; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; text-decoration: none; color: #d4945a; border: 1px solid #d4945a; padding: 0.85rem 2rem; border-radius: 2px; transition: background 0.25s, color 0.25s; }
+    .reviews-yelp-btn:hover { background: #d4945a; color: #1a1008; }
+
+    /* ── SCROLL REVEAL ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#/" class="nav-logo">Burry <span>Chocolates</span></a>
+  <ul class="nav-links">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/chocolates-in-the-case">Shop</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#location">Visit Us</a></li>
+  </ul>
+  <span class="nav-phone">(910) 821-1555</span>
+</nav>
+
+<!-- APP ROOT -->
+<div id="app"></div>
+
+<!-- FOOTER (always visible) -->
+<footer id="site-footer">
+  <div class="footer-logo">Burry Chocolates</div>
+  <div class="footer-sub">Handcrafted candies in Hampstead, NC · Est. 2020</div>
+  <div class="footer-links">
+    <a href="tel:9108211555">(910) 821-1555</a>
+    <a href="mailto:burrychocolates@gmail.com">burrychocolates@gmail.com</a>
+    <a href="https://instagram.com/burrychocolates" target="_blank">Instagram</a>
+    <a href="https://facebook.com/profile.php?id=100040376393033" target="_blank">Facebook</a>
+    <span>21572 US-17, Hampstead, NC</span>
+  </div>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const REVIEWS = [
+  {
+    stars: 5,
+    text: "Phenomenal chocolate and excellent customer service! The chocolate is really good — far superior to any store bought. They tasted fresh and the dark chocolate flavor was rich and deep.",
+    author: "Yelp Reviewer",
+    date: "2025"
+  },
+  {
+    stars: 5,
+    text: "So far I've only had the chocolate covered pineapple — to die for! I will definitely be back for more. What a wonderful little shop.",
+    author: "Yelp Reviewer",
+    date: "2025"
+  },
+  {
+    stars: 5,
+    text: "Excellent chocolates from a very friendly business with superb service. A gem in Hampstead. Highly recommend stopping in on your way to Topsail.",
+    author: "Yelp Reviewer",
+    date: "June 2025"
+  },
+  {
+    stars: 5,
+    text: "Delicious chocolate. A lot of choices. Very nice family run business with family recipes from his grandfather. The bourbon cherry cordials are incredible.",
+    author: "Yelp Reviewer",
+    date: "2025"
+  },
+  {
+    stars: 5,
+    text: "We found ourselves in girl-trip heaven — an unexpected find along the highway. Chocolate covered strawberries, pineapple, wafers, nutter butters, mini pretzels, gourmet pretzels, and espresso beans. All amazing.",
+    author: "Yelp Reviewer",
+    date: "2024"
+  },
+  {
+    stars: 5,
+    text: "Superb chocolate! What a wide variety! The staff is so friendly and knowledgeable. The chocolate is wonderful and the ice cream is delicious. We go every time we're in the area.",
+    author: "Yelp Reviewer",
+    date: "2024"
+  }
+];
+
+const CATEGORIES = [
+  {
+    id: 'chocolates-in-the-case',
+    name: 'Chocolates in the Case',
+    img: 'https://d2j6dbq0eux0bg.cloudfront.net/images/45625011/categories/195535064/5566808328.jpg',
+    meta: 'Handcrafted · $30/lb',
+    type: 'case'
+  },
+  {
+    id: 'fresh-chocolate-covered-fruit',
+    name: 'Fresh Chocolate Covered Fruit',
+    img: 'https://d2j6dbq0eux0bg.cloudfront.net/images/45625011/categories/198159040/5660711150.jpg',
+    meta: '$30/lb · Made fresh daily',
+    type: 'fruit'
+  },
+  {
+    id: 'chocolate-covered-products',
+    name: 'Chocolate Covered Products',
+    img: 'https://d2j6dbq0eux0bg.cloudfront.net/images/45625011/categories/75612006/5596761087.jpg',
+    meta: 'From $1 · Packaged treats',
+    type: 'products'
+  },
+  {
+    id: 'fudge',
+    name: 'Fudge',
+    img: 'https://d2j6dbq0eux0bg.cloudfront.net/images/45625011/categories/75616004/3129379696.jpg',
+    meta: '$9/slice · Made in-house',
+    type: 'fudge'
+  },
+  {
+    id: 'candies',
+    name: 'Candies',
+    img: 'https://d2j6dbq0eux0bg.cloudfront.net/images/45625011/3129428119.jpg',
+    meta: '8oz bags · From $4',
+    type: 'candies'
+  },
+  {
+    id: 'premade-assortments',
+    name: 'Premade Assortments',
+    img: 'https://d2j6dbq0eux0bg.cloudfront.net/images/45625011/categories/196482769/5596756846.jpg',
+    meta: 'Curated boxes · From $24',
+    type: 'assortments'
+  },
+  {
+    id: 'ice-cream',
+    name: 'Ice Cream',
+    img: 'https://d2j6dbq0eux0bg.cloudfront.net/images/45625011/categories/200035529/5739694632.jpg',
+    meta: 'See in store',
+    type: 'instore'
+  },
+  {
+    id: 'gifts',
+    name: 'Gifts',
+    img: 'https://d2j6dbq0eux0bg.cloudfront.net/images/45625011/categories/196482770/5596738924.jpg',
+    meta: 'See in store',
+    type: 'instore'
+  },
+  {
+    id: 'foiled-products',
+    name: 'Foiled Products',
+    img: 'https://d2j6dbq0eux0bg.cloudfront.net/images/45625011/categories/196483759/5596761042.jpg',
+    meta: 'See in store',
+    type: 'instore'
+  },
+  {
+    id: 'seasonal',
+    name: 'Seasonal',
+    img: 'https://d2j6dbq0eux0bg.cloudfront.net/images/45625011/categories/196482773/5739822010.jpg',
+    meta: 'See in store',
+    type: 'instore'
+  },
+  {
+    id: 'merch',
+    name: 'Merch Products',
+    img: 'https://d2j6dbq0eux0bg.cloudfront.net/images/45625011/categories/75615003/3129393458.jpg',
+    meta: 'See in store',
+    type: 'instore'
+  }
+];
+
+const PRODUCTS = {
+  'chocolates-in-the-case': [
+    { name: 'Cashew Bark', price: '$30/lb' },
+    { name: 'Marshmallow', price: '$30/lb' },
+    { name: 'Caramel Clouds', price: '$30/lb', limited: true },
+    { name: 'Raspberry Jelly', price: '$30/lb' },
+    { name: 'Caramels', price: '$30/lb' },
+    { name: 'Peanut Butter Cups', price: '$30/lb' },
+    { name: 'Sea Salt Caramels', price: '$30/lb' },
+    { name: 'Peanut Butter Crisp', price: '$30/lb' },
+    { name: 'Peanut Butter Meltaway', price: '$30/lb' },
+    { name: 'French Toast Marshmallow', price: '$30/lb' },
+    { name: 'Almond Butter Crunch (ABC)', price: '$30/lb' },
+    { name: 'Molasses Sponge', price: '$30/lb' },
+    { name: 'Triple Figaro Truffle', price: '$30/lb' },
+    { name: 'Coconut Eggs', price: '$30/lb' },
+    { name: 'Peanut Turtle', price: '$30/lb' },
+    { name: 'Chocolate Butter Cream', price: '$30/lb' },
+    { name: 'Maple Butter Cream', price: '$30/lb' },
+    { name: 'Orange Butter Cream', price: '$30/lb' },
+    { name: 'Sugar Wafer', price: '$30/lb' }
+  ],
+  'chocolate-covered-products': [
+    { name: 'Nutter Butter 4oz', price: '$6.00' },
+    { name: 'non-pariels DARK 8oz', price: '$9.00' },
+    { name: 'non-pariels MILK 8oz', price: '$9.00' },
+    { name: '½ lb Chocolate Raisins DARK', price: '$6.00' },
+    { name: '½ lb Chocolate Raisins MILK', price: '$6.00' },
+    { name: 'Cocoa Dusted Almonds 8oz', price: '$6.00' },
+    { name: '½ lb Malt Balls DARK', price: '$6.00' },
+    { name: '½ lb Malt Balls MILK', price: '$6.00' },
+    { name: 'Break Up DARK 5oz', price: '$6.00' },
+    { name: '½ lb Espresso Beans DARK', price: '$6.00' },
+    { name: '½ lb Espresso Beans MILK', price: '$6.00' },
+    { name: '6oz DK Peanut Butter Grahams', price: '$6.00' },
+    { name: '6oz MK Peanut Butter Grahams', price: '$6.00' },
+    { name: 'Smores DARK 4oz', price: '$6.00' },
+    { name: 'Oreos DARK 4oz', price: '$5.00' },
+    { name: 'Mk Choc Ritz Crackers 6oz', price: '$8.00' },
+    { name: 'Gluten-free Oreos MK 4oz', price: '$6.00' },
+    { name: 'Dark Thin Mints 10oz', price: '$16.00' },
+    { name: 'Milk Thin Mints 10oz', price: '$16.00' },
+    { name: '8oz ABC DARK', price: '$10.00' },
+    { name: '8oz ABC MILK', price: '$10.00' },
+    { name: 'White Pretzels 7oz', price: '$8.00' },
+    { name: 'Hot Chocolate Mix 8oz', price: '$8.00' },
+    { name: 'Gluten Free Pretzels MK 4oz', price: '$6.00' },
+    { name: 'DK ABC Crumble', price: '$1.00' },
+    { name: 'MK ABC Crumble', price: '$1.00' }
+  ],
+  'candies': [
+    { name: 'Coconut Macaroons 8oz', price: '$6.00' },
+    { name: 'Australian Black Licorice 8oz', price: '$5.00' },
+    { name: 'Australian Red Licorice 8oz', price: '$5.00' },
+    { name: 'Neon Worms 8oz', price: '$4.00' },
+    { name: 'Sour Gummi Bears 8oz', price: '$5.00' },
+    { name: 'Caramel Corn 8oz', price: '$7.00' },
+    { name: 'Candy Blox 8oz', price: '$5.00' },
+    { name: 'Licorice Allsorts 8oz', price: '$4.00' },
+    { name: 'Swedish Fish RAINBOW 8oz', price: '$5.00' },
+    { name: 'Swedish Fish RED 8oz', price: '$5.00' },
+    { name: 'Rainbow Laces 8oz', price: '$6.00' },
+    { name: 'Strawberry Laces 8oz', price: '$6.00' },
+    { name: 'Taffy 8oz', price: '$5.00' },
+    { name: '12 Flavor Gummi Bears 8oz', price: '$4.00' },
+    { name: 'Gummi Sharks 8oz', price: '$4.00' },
+    { name: 'Peach Rings 8oz', price: '$4.00' }
+  ],
+  'fudge': [
+    { name: 'Peanut Butter Fudge', price: '$9.00' },
+    { name: 'Dark Chocolate Fudge', price: '$9.00' },
+    { name: 'Milk Chocolate Fudge', price: '$9.00' }
+  ],
+  'premade-assortments': [
+    { name: '15ct Assortment ½ lb', price: '$24.00' },
+    { name: '24ct Assortment 1lb', price: '$34.00' },
+    { name: 'Bourbon Cherry Assortment 18 Ct', price: '$33.00' }
+  ]
+};
+
+const CAT_DESCRIPTIONS = {
+  'chocolates-in-the-case': 'Our individual, handcrafted chocolates are priced at $30 per pound. We have 4 different size boxes for you to choose from, and fill with chocolates as much as your heart desires! From our small ½ lb. box to our extra-large 2 lb. box, we look forward to providing you with our delicious chocolates!',
+  'fresh-chocolate-covered-fruit': 'Fresh chocolate covered fruit is priced at $30 per pound. We have 4 different size boxes for you to choose from!',
+  'fudge': 'Fudge is sold by the slice or can be sold by weight. Made fresh in our kitchen using time-honored recipes.'
+};
+
+const CASE_BOX_SIZES = [
+  { size: '½ lb Box', price: 'from $15', sub: '~8 pieces' },
+  { size: '1 lb Box', price: 'from $30', sub: '~16 pieces' },
+  { size: '1.5 lb Box', price: 'from $45', sub: '~24 pieces' },
+  { size: '2 lb Box', price: 'from $60', sub: '~32 pieces' }
+];
+
+// ─────────────────────────────────────────────
+// TEMPLATES
+// ─────────────────────────────────────────────
+function renderHomepage() {
+  return `
+    <!-- MARQUEE -->
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        ${'<span>ARTISAN CHOCOLATES · FUDGE · CANDIES · FRESH FRUIT · HAMPSTEAD NC · OPEN MON–SAT ·</span>'.repeat(8)}
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <img class="hero-img" src="https://d2j6dbq0eux0bg.cloudfront.net/startersite/images/45625011/1611214691112.jpg" alt="Burry Chocolates storefront">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Hampstead, NC · Est. 2020</div>
+        <h1 class="hero-headline">Handcrafted.<br><em>With Love.</em><br>Since 1961.</h1>
+        <p class="hero-sub">A family tradition of fine chocolates, fudge &amp; candies — brought to the coast of North Carolina.</p>
+        <a href="#/chocolates-in-the-case" class="hero-cta">Explore Our Chocolates</a>
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="categories-section" id="shop">
+      <div class="categories-inner">
+        <div class="section-label fade-in">Shop by Category</div>
+        <h2 class="section-title fade-in">Everything <em>Sweet</em></h2>
+        <div class="divider fade-in"></div>
+        <div class="category-grid">
+          ${CATEGORIES.map(cat => `
+            <a href="#/${cat.id}" class="category-card fade-in">
+              <div class="category-card-img-wrap">
+                <img class="category-card-img" src="${cat.img}" alt="${cat.name}" loading="lazy">
+              </div>
+              <div class="category-card-body">
+                <div class="category-card-name">${cat.name}</div>
+                <div class="category-card-meta">${cat.meta}</div>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="history-section" id="about">
+      <div class="history-inner">
+        <div class="history-text fade-in">
+          <div class="section-label">Our Roots</div>
+          <h2 class="section-title">A Family <em>Legacy</em></h2>
+          <div class="divider"></div>
+          <p>In 1961, United States Army veteran Thomas Allen "Al" Burry and his wife, Anna, decided they were going to make a living crafting delicious homemade candies. Anna and Al (Grandma and Grandpa) opened their business called The Fudge Shoppe in Flemington, NJ. The business steadily grew with the help of their sons, daughters and their husbands and wives.</p>
+          <p>Brandon's favorite memories include many early mornings surrounded by aunts, uncles, brothers, nephews and nieces; my hands in melted chocolate learning to make the delicious sweets. Grandpa would walk around the store; his right hand covered in chocolate teaching me how to handle the melted goodness while Grandma worked nearby diligently packaging the delicate creations.</p>
+          <p>In the kitchen, fudge was mixed in large kettles and poured onto cool marble tables. Orders were taken, customers were greeted, and in the basement, candies made their way along the enrober before heading through the cooling tunnel. At the heart of it all was family, making it all possible.</p>
+        </div>
+        <div class="fade-in">
+          <img class="history-img" src="https://d2j6dbq0eux0bg.cloudfront.net/startersite/images/45625011/1611214701845.jpg" alt="Burry Chocolates interior">
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT US -->
+    <div class="about-section">
+      <div class="about-inner fade-in">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">Brandon &amp; <em>Emily</em></h2>
+        <div class="divider"></div>
+        <p>Brandon and Emily both grew up in Bucks County, PA where they went to the same grade schools together. Brandon spent much of his childhood working through his high school years at the Fudge Shoppe. Emily spent her high school working career working various customer service jobs. After high school, Brandon joined the United States Marine Corps where he was stationed in Jacksonville, North Carolina. Brandon and Emily got married, made their way to the coast, and made North Carolina their home.</p>
+        <p>Inspired by a lifelong connection to chocolate and a deep respect for family tradition, Brandon and Emily dreamed of creating something of their own. Years later, that dream became a reality. Brandon and Emily began Burry Chocolates in Hampstead, NC in 2020.</p>
+        <p>Burry Chocolates proudly celebrates 6 years in business. This milestone is a reflection of the support from the local community, for which they are grateful for.</p>
+        <p>Burry Chocolates is committed to making the best candies to grow great relationships within the community. From the Burry Chocolate family to yours, they hope to see you soon and look forward to seeing you in store!</p>
+      </div>
+    </div>
+
+    <!-- REVIEWS -->
+    <section class="reviews-section">
+      <div class="reviews-inner fade-in">
+        <p class="reviews-tag">WHAT PEOPLE ARE SAYING</p>
+        <h2 class="reviews-title">★★★★★ <em>4.9 on Yelp</em></h2>
+        <p class="reviews-sub">54 reviews · Hampstead, NC</p>
+        <div class="reviews-grid">
+          ${REVIEWS.map(r => `
+            <div class="review-card">
+              <div class="review-stars">${'★'.repeat(r.stars)}</div>
+              <p class="review-text">"${r.text}"</p>
+              <div class="review-footer">
+                <span class="review-author">${r.author}</span>
+                <span class="review-date">${r.date}</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+        <a href="https://www.yelp.com/biz/burry-chocolates-hampstead" target="_blank" rel="noopener noreferrer" class="reviews-yelp-btn">Read All Reviews on Yelp →</a>
+      </div>
+    </section>
+
+    <!-- LOCATION -->
+    <div class="location-section" id="location">
+      <div class="location-inner">
+        <div class="fade-in">
+          <iframe
+            class="location-map"
+            src="https://maps.google.com/maps?q=21572+US-17+Hampstead+NC&output=embed"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Burry Chocolates location map">
+          </iframe>
+        </div>
+        <div class="fade-in">
+          <div class="section-label">Find Us</div>
+          <h2 class="section-title">Visit the <em>Shop</em></h2>
+          <div class="divider"></div>
+          <div class="contact-grid">
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <div class="contact-detail">
+                <strong>Address</strong>
+                21572 US-17, Hampstead, NC<br>
+                <small style="color:var(--text-muted)">Highway 17 · Just north of Eastern Outfitters · Next to Pelican Reef</small>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">🕐</span>
+              <div class="contact-detail">
+                <strong>Hours</strong>
+                <div class="hours-grid">
+                  <span class="hours-day">Mon – Sat</span>
+                  <span class="hours-time">9:00 AM – 7:00 PM</span>
+                  <span class="hours-day">Sunday</span>
+                  <span class="hours-time">Closed</span>
+                </div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📞</span>
+              <div class="contact-detail">
+                <strong>Phone</strong>
+                <a href="tel:9108211555">(910) 821-1555</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">✉️</span>
+              <div class="contact-detail">
+                <strong>Email</strong>
+                <a href="mailto:burrychocolates@gmail.com">burrychocolates@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📱</span>
+              <div class="contact-detail">
+                <strong>Follow Along</strong>
+                <div class="social-links">
+                  <a href="https://instagram.com/burrychocolates" target="_blank" class="social-link">📸 Instagram</a>
+                  <a href="https://facebook.com/profile.php?id=100040376393033" target="_blank" class="social-link">👍 Facebook</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AOM NOTICE -->
+    <div style="padding: 2rem 2rem 0; max-width:1200px; margin:0 auto;">
+      <div class="aom-notice">
+        <p>🍫 <strong>Preview Site</strong> — This is a website preview prepared for <strong>Burry Chocolates</strong> by <strong>Altitude Odyssey Media</strong>. This preview demonstrates the site design, navigation, and content. Online ordering is not active. <a href="mailto:hello@altitudeodysseymedia.com" style="color:var(--gold);text-decoration:none;">Contact us</a> with questions.</p>
+      </div>
+    </div>
+  `;
+}
+
+function renderCategoryPage(catId) {
+  const cat = CATEGORIES.find(c => c.id === catId);
+  if (!cat) return renderHomepage();
+
+  const description = CAT_DESCRIPTIONS[catId];
+  const products = PRODUCTS[catId];
+  const isInstore = cat.type === 'instore';
+  const isCase = cat.type === 'case';
+  const isFruit = cat.type === 'fruit';
+  const isFudge = cat.type === 'fudge';
+
+  let productContent = '';
+
+  if (isInstore) {
+    productContent = `
+      <div class="instore-card">
+        <div class="instore-icon">🏪</div>
+        <h3>Available In Store</h3>
+        <p>Visit us in store to see current ${cat.name.toLowerCase()} offerings! We update our selection regularly.</p>
+        <p>Call <a href="tel:9108211555">(910) 821-1555</a> for availability or stop by anytime Mon–Sat, 9am–7pm.</p>
+      </div>
+    `;
+  } else if (isCase) {
+    productContent = `
+      <div class="section-label" style="margin-bottom:0.75rem;">Choose Your Box Size</div>
+      <div class="price-by-weight" style="margin-bottom:3rem;">
+        ${CASE_BOX_SIZES.map(b => `
+          <div class="weight-card">
+            <div class="weight-size">${b.size}</div>
+            <div class="weight-price">${b.price}</div>
+            <div class="weight-sub">${b.sub}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="section-label" style="margin-bottom:1.2rem;">Available Chocolates</div>
+      <div class="product-grid">
+        ${products.map(p => `
+          <div class="product-card">
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">${p.price}</div>
+            ${p.limited ? '<span class="product-limited">Limited Item</span>' : ''}
+          </div>
+        `).join('')}
+      </div>
+    `;
+  } else if (isFruit) {
+    productContent = `
+      <div class="section-label" style="margin-bottom:0.75rem;">Choose Your Box Size</div>
+      <div class="price-by-weight" style="margin-bottom:3rem;">
+        ${CASE_BOX_SIZES.map(b => `
+          <div class="weight-card">
+            <div class="weight-size">${b.size}</div>
+            <div class="weight-price">${b.price}</div>
+            <div class="weight-sub">${b.sub}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="instore-card" style="padding:2rem;">
+        <div class="instore-icon">🍓</div>
+        <h3>Made Fresh Daily</h3>
+        <p>Fresh chocolate covered fruit is made daily. Call ahead to confirm availability or to place a special order.</p>
+        <p>Call <a href="tel:9108211555">(910) 821-1555</a> to order fresh chocolate-covered fruit.</p>
+      </div>
+    `;
+  } else if (isFudge && products) {
+    productContent = `
+      <div class="product-grid">
+        ${products.map(p => `
+          <div class="product-card">
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">${p.price}</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  } else if (products) {
+    productContent = `
+      <div class="product-grid">
+        ${products.map(p => `
+          <div class="product-card">
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">${p.price}</div>
+            ${p.limited ? '<span class="product-limited">Limited Item</span>' : ''}
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  return `
+    <div class="cat-page">
+      <div class="cat-header">
+        <img class="cat-header-img" src="${cat.img}" alt="${cat.name}">
+        <div class="cat-header-content">
+          <a href="#/" class="breadcrumb">← Back to All Categories</a>
+          <h1 class="cat-title">${cat.name}</h1>
+        </div>
+      </div>
+
+      <div class="cat-body">
+        ${description ? `<div class="cat-description">${description}</div>` : ''}
+        ${productContent}
+        <div class="cat-note">
+          Online ordering is not available — all products are available in store.<br>
+          Call <a href="tel:9108211555">(910) 821-1555</a> to place an order or ask about availability.
+          · 21572 US-17, Hampstead, NC · Mon–Sat 9am–7pm
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ─────────────────────────────────────────────
+// ROUTER
+// ─────────────────────────────────────────────
+function getRoute() {
+  const hash = window.location.hash;
+  if (!hash || hash === '#' || hash === '#/') return '/';
+  return hash.replace('#', '');
+}
+
+function render() {
+  const route = getRoute();
+  const app = document.getElementById('app');
+  window.scrollTo(0, 0);
+
+  if (route === '/') {
+    app.innerHTML = renderHomepage();
+  } else {
+    const catId = route.replace(/^\//, '');
+    app.innerHTML = renderCategoryPage(catId);
+  }
+
+  // Fade-in observer
+  const fadeEls = document.querySelectorAll('.fade-in');
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(el => obs.observe(el));
+  } else {
+    fadeEls.forEach(el => el.classList.add('visible'));
+  }
+}
+
+// Handle hash changes
+window.addEventListener('hashchange', render);
+window.addEventListener('load', render);
+
+// Also run immediately
+render();
+</script>
+</body>
+</html>

@@ -125,6 +125,18 @@
       justify-content: center;
     }
 
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      background: linear-gradient(to bottom, #1a1008 0%, rgba(26,16,8,0) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
     .hero-img {
       position: absolute;
       inset: 0;

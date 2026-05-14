@@ -37,14 +37,20 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(26, 16, 8, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(212, 148, 90, 0.2);
+      background: transparent;
+      border-bottom: 1px solid transparent;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 2rem;
       height: 68px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    nav.scrolled {
+      background: rgba(26, 16, 8, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(212, 148, 90, 0.2);
     }
 
     .nav-logo {
@@ -115,26 +121,13 @@
 
     /* ── HERO ── */
     .hero {
-      margin-top: 68px;
       position: relative;
-      height: 92vh;
+      height: 100vh;
       min-height: 560px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 180px;
-      background: linear-gradient(to bottom, #1a1008 0%, rgba(26,16,8,0) 100%);
-      z-index: 2;
-      pointer-events: none;
     }
 
     .hero-img {
@@ -1433,6 +1426,14 @@ function render() {
     const catId = route.replace(/^\//, '');
     app.innerHTML = renderCategoryPage(catId);
   }
+
+  // Nav scroll state
+  const nav = document.querySelector('nav');
+  function updateNav() {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
 
   // Fade-in observer
   const fadeEls = document.querySelectorAll('.fade-in');

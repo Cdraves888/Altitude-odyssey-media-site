@@ -1094,10 +1094,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+      gap: 20px;
     }
-    #aom-notice.dismissed { transform: translateY(100%); }
-    .aom-left {}
+    .aom-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
     .aom-tag {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 400;
@@ -1113,21 +1116,14 @@
       font-size: 0.85rem;
       color: var(--white);
     }
-    .aom-center {
+    .aom-right-text {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 300;
       font-size: 0.75rem;
-      color: var(--muted);
+      color: rgba(250,250,250,0.5);
+      max-width: 400px;
+      text-align: right;
     }
-    .aom-close {
-      font-size: 1.2rem;
-      color: var(--white);
-      cursor: none;
-      padding: 4px 8px;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-    }
-    .aom-close:hover { opacity: 1; }
 
     /* ─── Fade-Up Animation ─── */
     .fade-up {
@@ -1720,8 +1716,7 @@
       <div class="aom-tag">AOM SHOWCASE EXHIBIT 02</div>
       <div class="aom-name">VERTEX Studio — Fictional Demo</div>
     </div>
-    <div class="aom-center">Built by Altitude Odyssey Media · altitudeodysseymedia.com</div>
-    <button class="aom-close" id="aomClose">×</button>
+    <p class="aom-right-text">This is a premium website mockup built by Altitude Odyssey Media LLC. All content is fictional.</p>
   </div>
 
   <script>
@@ -2143,20 +2138,6 @@
     });
   })();
 
-  /* ────────────────────────────────────────────
-     AOM NOTICE DISMISS
-  ──────────────────────────────────────────── */
-  (function() {
-    const notice = document.getElementById('aom-notice');
-    const close = document.getElementById('aomClose');
-    close.addEventListener('click', () => {
-      notice.classList.add('dismissed');
-      setTimeout(() => {
-        notice.style.display = 'none';
-        document.body.style.paddingBottom = '0';
-      }, 450);
-    });
-  })();
-  </script>
+</script>
 </body>
 </html>

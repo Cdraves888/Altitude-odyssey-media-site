@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Sentry — A Coastal Retreat | Topsail Island, NC</title>
+  <meta name="description" content="A sanctuary perched at the edge of the Atlantic. Twenty-four rooms. Infinite views. Topsail Island, North Carolina." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RESET & BASE ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0c1628;
+      --surface:#131f35;
+      --gold:   #c9a84c;
+      --cream:  #faf5ec;
+      --sage:   #7a9e87;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* hide cursor on non-touch devices — shown via JS class */
+    .no-touch body { cursor: none; }
+
+    section { scroll-margin-top: 80px; }
+
+    img { display: block; max-width: 100%; }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── CUSTOM CURSOR ────────────────────────────────────────────── */
+    #cursor-dot,
+    #cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 99999;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s;
+      opacity: 0;
+    }
+
+    .no-touch #cursor-dot,
+    .no-touch #cursor-ring { opacity: 1; }
+
+    #cursor-dot {
+      width: 8px; height: 8px;
+      background: var(--navy);
+      transition: transform 0.1s ease, opacity 0.2s;
+    }
+
+    #cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--gold);
+      background: transparent;
+      transition: transform 0.15s ease, background 0.2s, opacity 0.2s;
+    }
+
+    .no-touch.cursor-hover #cursor-dot  { transform: translate(-50%, -50%) scale(1.5); }
+    .no-touch.cursor-hover #cursor-ring { transform: translate(-50%, -50%) scale(1.8); background: rgba(201,168,76,0.15); }
+
+    /* ── PRELOADER ────────────────────────────────────────────────── */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      transition: transform 0.7s ease-in-out;
+    }
+
+    #preloader.slide-up {
+      transform: translateY(-100%);
+    }
+
+    #pre-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: var(--cream);
+      font-size: 1.8rem;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards 0.4s;
+    }
+
+    #pre-rule {
+      display: block;
+      height: 1px;
+      background: var(--gold);
+      width: 0;
+      margin: 18px auto 0;
+      animation: expandRule 0.6s ease forwards 0.5s;
+    }
+
+    #pre-sub {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: rgba(250,245,236,0.65);
+      margin-top: 14px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards 1.2s;
+    }
+
+    @keyframes fadeIn  { to { opacity: 1; } }
+    @keyframes expandRule { to { width: 120px; } }
+
+    /* ── NAVIGATION ───────────────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      transition: background 0.4s ease, padding 0.4s ease, backdrop-filter 0.4s ease;
+    }
+
+    #nav.scrolled {
+      background: rgba(12,22,40,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 16px 48px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .nav-monogram {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .nav-pipe {
+      width: 1px;
+      height: 20px;
+      background: rgba(201,168,76,0.4);
+    }
+
+    .nav-name {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--cream);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: rgba(250,245,236,0.85);
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-reserve-btn {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 10px 22px;
+      border-radius: 50px;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .nav-reserve-btn:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--gold);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Mobile overlay menu */
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(100%);
+      transition: transform 0.4s ease;
+    }
+
+    #mobile-menu.open { transform: translateX(0); }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 28px; right: 32px;
+      font-size: 1.8rem;
+      color: var(--gold);
+      cursor: pointer;
+      line-height: 1;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+    }
+
+    .mobile-menu-links {
+      list-style: none;
+      text-align: center;
+    }
+
+    .mobile-menu-links li { margin: 16px 0; }
+
+    .mobile-menu-links a {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--cream);
+      transition: color 0.2s ease;
+    }
+
+    .mobile-menu-links a:hover { color: var(--gold); }
+
+    /* ── HERO ─────────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=90');
+      background-size: cover;
+      background-position: center center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(12,22,40,0.45);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 40px;
+    }
+
+    .hero-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      color: var(--cream);
+      line-height: 1.05;
+      margin-bottom: 0;
+    }
+
+    .hero-rule {
+      width: 80px;
+      height: 1px;
+      background: var(--gold);
+      margin: 28px auto;
+    }
+
+    .hero-sub {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: rgba(250,245,236,0.85);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      margin-top: 36px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 16px 36px;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      transition: filter 0.25s ease, transform 0.25s ease;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-gold {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.9rem;
+      background: transparent;
+      color: var(--gold);
+      padding: 16px 36px;
+      border-radius: 2px;
+      border: 1px solid rgba(201,168,76,0.6);
+      cursor: pointer;
+      transition: background 0.25s ease;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-outline-gold:hover { background: rgba(201,168,76,0.1); }
+
+    .hero-chevron {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: var(--gold);
+      font-size: 1.4rem;
+      line-height: 0.5;
+      letter-spacing: -4px;
+      animation: bob 2s ease-in-out infinite;
+      user-select: none;
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── INTRO STRIP ──────────────────────────────────────────────── */
+    #intro {
+      background: var(--navy);
+      padding: 100px 40px;
+    }
+
+    .intro-inner {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .intro-quote-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .intro-deco-quote {
+      position: absolute;
+      top: -40px;
+      left: -30px;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: 0.4;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .intro-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2rem;
+      color: var(--cream);
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .intro-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 60px;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      border-top: 1px solid var(--gold);
+      padding: 24px 40px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 3rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: rgba(250,245,236,0.7);
+      margin-top: 8px;
+    }
+
+    /* ── SECTION COMMON LABELS ────────────────────────────────────── */
+    .section-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 3.5rem;
+      color: var(--cream);
+      line-height: 1.1;
+    }
+
+    .section-subhead {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      color: rgba(250,245,236,0.7);
+      margin-top: 12px;
+      line-height: 1.7;
+    }
+
+    .gold-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 28px 0;
+    }
+
+    /* ── ROOMS SECTION ────────────────────────────────────────────── */
+    #rooms {
+      background: var(--surface);
+      padding: 120px 60px;
+    }
+
+    .rooms-header { margin-bottom: 60px; }
+
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .room-card {
+      background: var(--navy);
+      border: 1px solid rgba(201,168,76,0.15);
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .room-card:hover {
+      border-color: rgba(201,168,76,0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .room-img-wrap {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+
+    .room-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .room-card:hover .room-img-wrap img { transform: scale(1.04); }
+
+    .room-badge {
+      position: absolute;
+      top: 0; right: 0;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.75rem;
+      padding: 6px 14px;
+      border-radius: 0 0 0 4px;
+    }
+
+    .room-body { padding: 28px; }
+
+    .room-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--cream);
+    }
+
+    .room-price {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--gold);
+      margin-top: 6px;
+    }
+
+    .room-desc {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: rgba(250,245,236,0.7);
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    .room-link {
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      margin-top: 20px;
+      transition: letter-spacing 0.25s ease;
+    }
+
+    .room-link:hover { letter-spacing: 0.05em; }
+
+    .room-link .arrow {
+      display: inline-block;
+      transition: transform 0.25s ease;
+    }
+
+    .room-link:hover .arrow { transform: translateX(4px); }
+
+    /* ── AMENITIES GRID ───────────────────────────────────────────── */
+    #amenities {
+      background: var(--navy);
+      padding: 120px 60px;
+    }
+
+    .amenities-header { margin-bottom: 60px; }
+
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .amenity-card {
+      background: var(--surface);
+      padding: 36px 28px;
+      border: 1px solid rgba(201,168,76,0.1);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .amenity-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(201,168,76,0.4);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    .amenity-icon {
+      width: 32px;
+      height: 32px;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .amenity-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+
+    .amenity-desc {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: rgba(250,245,236,0.65);
+      line-height: 1.7;
+    }
+
+    /* ── RESTAURANT ───────────────────────────────────────────────── */
+    #dining {
+      background: var(--surface);
+    }
+
+    .restaurant-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+    }
+
+    .restaurant-img {
+      width: 100%;
+      height: 100%;
+      min-height: 600px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .restaurant-content {
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .restaurant-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2.8rem;
+      color: var(--cream);
+      margin-top: 16px;
+      line-height: 1.15;
+    }
+
+    .restaurant-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: rgba(250,245,236,0.7);
+      margin-top: 12px;
+    }
+
+    .restaurant-body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: rgba(250,245,236,0.75);
+      line-height: 1.8;
+      margin-top: 20px;
+    }
+
+    .restaurant-hours {
+      margin-top: 0;
+    }
+
+    .hours-line {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.85rem;
+      color: rgba(250,245,236,0.65);
+      line-height: 2.2;
+      letter-spacing: 0.03em;
+    }
+
+    .btn-outline-restaurant {
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 14px 28px;
+      border-radius: 2px;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease;
+      margin-top: 32px;
+      width: fit-content;
+    }
+
+    .btn-outline-restaurant:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    /* ── SPA ──────────────────────────────────────────────────────── */
+    #spa {
+      position: relative;
+      min-height: 600px;
+      background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=900&q=85');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spa-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(12,22,40,0.72);
+    }
+
+    .spa-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      padding: 120px 40px;
+      text-align: center;
+    }
+
+    .spa-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 3rem;
+      color: var(--cream);
+      margin-top: 16px;
+    }
+
+    .spa-sub {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: rgba(250,245,236,0.8);
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    .spa-pills {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      margin-top: 36px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .spa-pill {
+      border: 1px solid rgba(201,168,76,0.5);
+      color: var(--gold);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.85rem;
+      padding: 10px 22px;
+      border-radius: 50px;
+    }
+
+    .spa-btn {
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 16px 36px;
+      border-radius: 2px;
+      margin-top: 40px;
+      transition: filter 0.25s ease, transform 0.25s ease;
+      cursor: pointer;
+    }
+
+    .spa-btn:hover {
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+    }
+
+    /* ── GALLERY ──────────────────────────────────────────────────── */
+    #gallery {
+      background: var(--navy);
+      padding: 120px 60px;
+    }
+
+    .gallery-header { margin-bottom: 60px; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item:nth-child(1) { grid-column: span 2; }
+    .gallery-item:nth-child(5) { grid-column: span 2; }
+
+    .gallery-item:nth-child(1) img,
+    .gallery-item:nth-child(5) img { height: 320px; }
+
+    .gallery-item:nth-child(2) img,
+    .gallery-item:nth-child(3) img,
+    .gallery-item:nth-child(4) img,
+    .gallery-item:nth-child(6) img { height: 240px; }
+
+    .gallery-item img {
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    .gallery-expand {
+      font-size: 2rem;
+      color: #fff;
+      line-height: 1;
+    }
+
+    /* ── RESERVATION ──────────────────────────────────────────────── */
+    #reserve {
+      background: var(--surface);
+      padding: 120px 60px;
+    }
+
+    .reserve-header { margin-bottom: 60px; }
+
+    .reserve-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 36px;
+    }
+
+    .form-label {
+      display: block;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid rgba(201,168,76,0.3);
+      color: var(--cream);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      padding: 12px 0;
+      outline: none;
+      transition: border-color 0.25s ease;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-select {
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .form-select option {
+      background: var(--surface);
+      color: var(--cream);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-bottom-color: var(--gold);
+    }
+
+    .form-input.error,
+    .form-select.error,
+    .form-textarea.error {
+      border-bottom-color: #e05c5c;
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
+    }
+
+    /* webkit calendar icon color */
+    .form-input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.7) sepia(1) saturate(3) hue-rotate(5deg);
+      cursor: pointer;
+    }
+
+    .form-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 18px;
+      letter-spacing: 0.1em;
+      border: none;
+      cursor: pointer;
+      transition: filter 0.25s ease, transform 0.25s ease;
+      border-radius: 2px;
+      margin-top: 8px;
+    }
+
+    .form-submit:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .form-fine-print {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.8rem;
+      color: rgba(250,245,236,0.5);
+      text-align: center;
+      margin-top: 28px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── LOCATION ─────────────────────────────────────────────────── */
+    #location {
+      background: var(--navy);
+      padding: 120px 60px;
+    }
+
+    .location-header { margin-bottom: 60px; }
+
+    .location-split {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .location-map {
+      width: 100%;
+      height: 480px;
+      border: none;
+      border-radius: 2px;
+      filter: grayscale(0.3) contrast(1.1);
+      display: block;
+    }
+
+    .location-info {
+      padding: 0 0 0 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .location-hotel-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.8rem;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+
+    .location-address {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      color: rgba(250,245,236,0.7);
+      line-height: 2;
+    }
+
+    .location-arrival-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .location-arrival-notes {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: rgba(250,245,236,0.65);
+      line-height: 2;
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────────────── */
+    #footer {
+      background: var(--navy);
+      border-top: 1px solid var(--gold);
+      padding: 60px 60px 40px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .footer-brand-monogram {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2.5rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .footer-brand-name {
+      display: block;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      color: var(--cream);
+      margin-top: 8px;
+    }
+
+    .footer-tagline {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.85rem;
+      color: rgba(250,245,236,0.5);
+      margin-top: 8px;
+    }
+
+    .footer-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-nav a {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: rgba(250,245,236,0.6);
+      line-height: 2.5;
+      transition: color 0.2s ease;
+    }
+
+    .footer-nav a:hover { color: var(--gold); }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 16px;
+    }
+
+    .footer-instagram {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: var(--gold);
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-instagram:hover { opacity: 0.75; }
+
+    .footer-book-btn {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 12px 28px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: filter 0.25s ease;
+    }
+
+    .footer-book-btn:hover { filter: brightness(1.1); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(201,168,76,0.15);
+      margin-top: 48px;
+      padding-top: 24px;
+      text-align: center;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.8rem;
+      color: rgba(250,245,236,0.4);
+    }
+
+    /* ── AOM NOTICE BAR ───────────────────────────────────────────── */
+    #aom-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 8888;
+      background: rgba(12,22,40,0.97);
+      border-top: 2px solid var(--gold);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      transition: transform 0.4s ease;
+    }
+
+    #aom-bar.hidden { transform: translateY(100%); }
+
+    .aom-left-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .aom-exhibit-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+    }
+
+    .aom-hotel-name {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: var(--cream);
+    }
+
+    .aom-right-text {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      color: rgba(250,245,236,0.5);
+      max-width: 400px;
+      text-align: right;
+    }
+
+    .aom-close {
+      background: none;
+      border: none;
+      color: rgba(250,245,236,0.4);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: color 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .aom-close:hover { color: var(--gold); }
+
+    /* ── FADE-UP ANIMATION ────────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger delays */
+    .fade-up[data-delay="1"] { transition-delay: 0.1s; }
+    .fade-up[data-delay="2"] { transition-delay: 0.2s; }
+    .fade-up[data-delay="3"] { transition-delay: 0.3s; }
+    .fade-up[data-delay="4"] { transition-delay: 0.4s; }
+    .fade-up[data-delay="5"] { transition-delay: 0.5s; }
+    .fade-up[data-delay="6"] { transition-delay: 0.6s; }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .rooms-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      #nav { padding: 20px 24px; }
+      #nav.scrolled { padding: 14px 24px; }
+      .nav-links, .nav-reserve-btn { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .hero-headline { font-size: clamp(2.8rem, 12vw, 4.5rem); }
+      .hero-buttons { flex-direction: column; align-items: center; }
+
+      .intro-stats { gap: 20px; }
+      .stat-card { padding: 20px 24px; }
+
+      #rooms { padding: 80px 24px; }
+      .rooms-grid { grid-template-columns: 1fr; }
+
+      #amenities { padding: 80px 24px; }
+      .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .restaurant-split { grid-template-columns: 1fr; }
+      .restaurant-img { min-height: 320px; height: 320px; }
+      .restaurant-content { padding: 52px 32px; }
+
+      #gallery { padding: 80px 24px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(5) { grid-column: span 2; }
+
+      #reserve { padding: 80px 24px; }
+      .reserve-grid { grid-template-columns: 1fr; gap: 0; }
+
+      #location { padding: 80px 24px; }
+      .location-split { grid-template-columns: 1fr; }
+      .location-info { padding: 40px 0 0 0; }
+
+      #footer { padding: 48px 24px 32px; }
+      .footer-top { grid-template-columns: 1fr; text-align: center; gap: 36px; }
+      .footer-right { align-items: center; }
+      .footer-nav { align-items: center; }
+
+      #aom-bar { padding: 16px 20px; }
+      .aom-right-text { display: none; }
+
+      section { scroll-margin-top: 70px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-headline { font-size: clamp(3rem, 14vw, 4rem); }
+      .section-heading { font-size: 2.6rem; }
+      .amenities-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(5) { grid-column: span 1; }
+      .intro-stats { flex-direction: column; align-items: center; }
+
+      #rooms { padding: 60px 20px; }
+      #amenities { padding: 60px 20px; }
+      #gallery { padding: 60px 20px; }
+      #reserve { padding: 60px 20px; }
+      #location { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ CUSTOM CURSOR ════════════════════════════════════════════ -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ══ PRELOADER ════════════════════════════════════════════════ -->
+  <div id="preloader">
+    <span id="pre-title">THE SENTRY</span>
+    <span id="pre-rule"></span>
+    <span id="pre-sub">A Coastal Retreat</span>
+  </div>
+
+  <!-- ══ NAVIGATION ═══════════════════════════════════════════════ -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-logo">
+      <span class="nav-monogram">TS</span>
+      <div class="nav-pipe"></div>
+      <span class="nav-name">THE SENTRY</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#rooms">Rooms</a></li>
+      <li><a href="#dining">Dining</a></li>
+      <li><a href="#spa">Spa</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reserve">Reserve</a></li>
+    </ul>
+
+    <a href="#reserve" class="nav-reserve-btn">Reserve Now</a>
+
+    <button class="nav-hamburger" id="hamburger-btn" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">&times;</button>
+    <ul class="mobile-menu-links">
+      <li><a href="#rooms"    class="mobile-nav-link">Rooms</a></li>
+      <li><a href="#dining"   class="mobile-nav-link">Dining</a></li>
+      <li><a href="#spa"      class="mobile-nav-link">Spa</a></li>
+      <li><a href="#gallery"  class="mobile-nav-link">Gallery</a></li>
+      <li><a href="#reserve"  class="mobile-nav-link">Reserve</a></li>
+    </ul>
+  </div>
+
+  <!-- ══ HERO ═════════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-label fade-up">TOPSAIL ISLAND, NORTH CAROLINA &nbsp;·&nbsp; EST. 2019</p>
+      <h1 class="hero-headline fade-up" data-delay="1">
+        Where the<br>horizon<br>never ends.
+      </h1>
+      <div class="hero-rule fade-up" data-delay="2"></div>
+      <p class="hero-sub fade-up" data-delay="2">A sanctuary perched at the edge of the Atlantic. Twenty-four rooms. Infinite views.</p>
+      <div class="hero-buttons fade-up" data-delay="3">
+        <a href="#reserve" class="btn-primary">Reserve a Room</a>
+        <a href="#rooms"   class="btn-outline-gold">Explore the Property ↓</a>
+      </div>
+    </div>
+    <div class="hero-chevron" aria-hidden="true">⌄<br>⌄</div>
+  </section>
+
+  <!-- ══ INTRO STRIP ═══════════════════════════════════════════════ -->
+  <section id="intro">
+    <div class="intro-inner">
+      <div class="intro-quote-wrap fade-up">
+        <span class="intro-deco-quote">&ldquo;</span>
+        <p class="intro-quote">&ldquo;Not every hotel earns the word retreat. The Sentry does.&rdquo;</p>
+      </div>
+
+      <div class="intro-stats">
+        <div class="stat-card fade-up" data-delay="1">
+          <div class="stat-number">24</div>
+          <div class="stat-label">Rooms</div>
+        </div>
+        <div class="stat-card fade-up" data-delay="2">
+          <div class="stat-number">Est.</div>
+          <div class="stat-label">2019</div>
+        </div>
+        <div class="stat-card fade-up" data-delay="3">
+          <div class="stat-number" style="font-size:1.5rem; line-height:1.2;">Topsail Island,</div>
+          <div class="stat-label">North Carolina</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ROOMS ═════════════════════════════════════════════════════ -->
+  <section id="rooms">
+    <div class="rooms-header fade-up">
+      <p class="section-label">ACCOMMODATIONS</p>
+      <h2 class="section-heading">Your Sanctuary.</h2>
+      <p class="section-subhead">Three categories of accommodation, each facing the Atlantic.</p>
+    </div>
+
+    <div class="rooms-grid">
+      <!-- Card A -->
+      <article class="room-card fade-up" data-delay="1">
+        <div class="room-img-wrap">
+          <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=85" alt="Coastal Room interior with ocean view" loading="lazy" />
+        </div>
+        <div class="room-body">
+          <h3 class="room-name">Coastal Room</h3>
+          <p class="room-price">From $289 / night</p>
+          <p class="room-desc">380 sq ft &middot; King bed &middot; Private balcony &middot; Ocean view &middot; Rain shower</p>
+          <a href="#reserve" class="room-link">View Details <span class="arrow">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Card B — Most Popular -->
+      <article class="room-card fade-up" data-delay="2">
+        <span class="room-badge">Most Popular</span>
+        <div class="room-img-wrap">
+          <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&q=85" alt="The Sentry Suite with wraparound terrace" loading="lazy" />
+        </div>
+        <div class="room-body">
+          <h3 class="room-name">The Sentry Suite</h3>
+          <p class="room-price">From $489 / night</p>
+          <p class="room-desc">650 sq ft &middot; King bed + sitting room &middot; Wraparound terrace &middot; Soaking tub &middot; Butler service</p>
+          <a href="#reserve" class="room-link">View Details <span class="arrow">&rarr;</span></a>
+        </div>
+      </article>
+
+      <!-- Card C -->
+      <article class="room-card fade-up" data-delay="3">
+        <div class="room-img-wrap">
+          <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=900&q=85" alt="Lighthouse Penthouse rooftop deck" loading="lazy" />
+        </div>
+        <div class="room-body">
+          <h3 class="room-name">Lighthouse Penthouse</h3>
+          <p class="room-price">From $890 / night</p>
+          <p class="room-desc">1,200 sq ft &middot; Private rooftop deck &middot; Two bedrooms &middot; Full kitchen &middot; Private plunge pool</p>
+          <a href="#reserve" class="room-link">View Details <span class="arrow">&rarr;</span></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ══ AMENITIES ═════════════════════════════════════════════════ -->
+  <section id="amenities">
+    <div class="amenities-header fade-up">
+      <p class="section-label">EXPERIENCES</p>
+      <h2 class="section-heading">Life at The Sentry.</h2>
+    </div>
+
+    <div class="amenities-grid">
+      <!-- 1: Beachfront -->
+      <div class="amenity-card fade-up" data-delay="1">
+        <svg class="amenity-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 22 Q8 16 16 22 Q24 28 30 22"/>
+          <path d="M2 16 Q8 10 16 16 Q24 22 30 16"/>
+          <path d="M2 28 Q8 22 16 28 Q24 34 30 28"/>
+        </svg>
+        <h3 class="amenity-name">Beachfront Access</h3>
+        <p class="amenity-desc">Private access to Topsail's pristine shoreline, steps from your door.</p>
+      </div>
+
+      <!-- 2: Restaurant -->
+      <div class="amenity-card fade-up" data-delay="2">
+        <svg class="amenity-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M10 4v8a4 4 0 0 0 8 0V4"/>
+          <line x1="14" y1="12" x2="14" y2="28"/>
+          <path d="M22 4c0 0 2 4 2 8s-2 4-2 8v8"/>
+        </svg>
+        <h3 class="amenity-name">The Lighthouse Restaurant</h3>
+        <p class="amenity-desc">Chef-driven coastal cuisine. Breakfast through late dinner, seven days a week.</p>
+      </div>
+
+      <!-- 3: Spa -->
+      <div class="amenity-card fade-up" data-delay="3">
+        <svg class="amenity-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="16" cy="12" r="5"/>
+          <path d="M8 28c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+          <path d="M4 10 Q8 6 12 10"/>
+          <path d="M20 10 Q24 6 28 10"/>
+        </svg>
+        <h3 class="amenity-name">Sentry Spa &amp; Wellness</h3>
+        <p class="amenity-desc">Full-service spa with locally-inspired treatments and ocean-view treatment rooms.</p>
+      </div>
+
+      <!-- 4: Pool -->
+      <div class="amenity-card fade-up" data-delay="4">
+        <svg class="amenity-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="12" width="24" height="14" rx="2"/>
+          <path d="M4 20 Q10 16 16 20 Q22 24 28 20"/>
+          <line x1="10" y1="12" x2="10" y2="6"/>
+          <line x1="22" y1="12" x2="22" y2="6"/>
+          <line x1="10" y1="6" x2="22" y2="6"/>
+        </svg>
+        <h3 class="amenity-name">Heated Infinity Pool</h3>
+        <p class="amenity-desc">Temperature-controlled pool perched at the bluff's edge overlooking the Atlantic.</p>
+      </div>
+
+      <!-- 5: Water Sports -->
+      <div class="amenity-card fade-up" data-delay="5">
+        <svg class="amenity-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 22 Q16 10 28 22"/>
+          <path d="M10 22 L16 12 L22 22"/>
+          <path d="M2 26 Q8 22 16 26 Q24 30 30 26"/>
+        </svg>
+        <h3 class="amenity-name">Water Sport Rentals</h3>
+        <p class="amenity-desc">Kayaks, paddleboards, and guided sailing tours available daily at the beach.</p>
+      </div>
+
+      <!-- 6: Yoga -->
+      <div class="amenity-card fade-up" data-delay="6">
+        <svg class="amenity-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="16" cy="5" r="2.5"/>
+          <path d="M16 8 L16 18"/>
+          <path d="M8 14 Q12 12 16 14 Q20 16 24 14"/>
+          <path d="M16 18 L10 28"/>
+          <path d="M16 18 L22 28"/>
+        </svg>
+        <h3 class="amenity-name">Daily Yoga at Dawn</h3>
+        <p class="amenity-desc">Sunrise yoga on the bluff with certified instructors. Complimentary for all guests.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RESTAURANT ════════════════════════════════════════════════ -->
+  <section id="dining">
+    <div class="restaurant-split">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85"
+           alt="The Lighthouse Restaurant — coastal dining by candlelight"
+           class="restaurant-img"
+           loading="lazy" />
+
+      <div class="restaurant-content fade-up">
+        <p class="section-label" style="margin-bottom:0;">CULINARY</p>
+        <h2 class="restaurant-heading">The Lighthouse Restaurant</h2>
+        <p class="restaurant-sub">Local catch. Coastal tables. Every night a celebration.</p>
+        <p class="restaurant-body">Chef Marcus Webb's kitchen celebrates the waters of Topsail Island. Fresh catch daily from our partner fishermen, served with local produce and an award-winning wine list. Open for breakfast, lunch, and dinner — reservations recommended.</p>
+
+        <div class="gold-rule"></div>
+
+        <div class="restaurant-hours">
+          <p class="hours-line">BREAKFAST &nbsp;&nbsp;7:00am &ndash; 10:00am</p>
+          <p class="hours-line">LUNCH &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12:00pm &ndash; 2:30pm</p>
+          <p class="hours-line">DINNER &nbsp;&nbsp;&nbsp;&nbsp;6:00pm &ndash; 10:00pm</p>
+        </div>
+
+        <a href="#reserve" class="btn-outline-restaurant">View Menu &amp; Reserve &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SPA ═══════════════════════════════════════════════════════ -->
+  <section id="spa">
+    <div class="spa-overlay"></div>
+    <div class="spa-content fade-up">
+      <p class="section-label">WELLNESS</p>
+      <h2 class="spa-heading">Sentry Spa &amp; Wellness</h2>
+      <p class="spa-sub">Surrender to stillness. The North Carolina coast as your backdrop.</p>
+
+      <div class="spa-pills">
+        <span class="spa-pill">90-min Deep Tissue</span>
+        <span class="spa-pill">Coastal Salt Scrub</span>
+        <span class="spa-pill">Hot Stone Ritual</span>
+      </div>
+
+      <a href="#reserve" class="spa-btn">Book a Treatment &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ══ GALLERY ═══════════════════════════════════════════════════ -->
+  <section id="gallery">
+    <div class="gallery-header fade-up">
+      <p class="section-label">GALLERY</p>
+      <h2 class="section-heading">The Property.</h2>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item fade-up" data-delay="1">
+        <img src="https://images.unsplash.com/photo-1455587734955-081b22074882?w=700&q=80" alt="Hotel lobby and grand entrance" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-expand">&#8853;</span></div>
+      </div>
+      <div class="gallery-item fade-up" data-delay="2">
+        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=700&q=80" alt="Oceanfront pool terrace" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-expand">&#8853;</span></div>
+      </div>
+      <div class="gallery-item fade-up" data-delay="3">
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=700&q=80" alt="Coastal suite bedroom" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-expand">&#8853;</span></div>
+      </div>
+      <div class="gallery-item fade-up" data-delay="4">
+        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=700&q=80" alt="Spa treatment room" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-expand">&#8853;</span></div>
+      </div>
+      <div class="gallery-item fade-up" data-delay="1">
+        <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=900&q=85" alt="Infinity pool overlooking the Atlantic" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-expand">&#8853;</span></div>
+      </div>
+      <div class="gallery-item fade-up" data-delay="2">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=85" alt="Private beachfront at Topsail Island" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-expand">&#8853;</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RESERVATION FORM ══════════════════════════════════════════ -->
+  <section id="reserve">
+    <div class="reserve-header fade-up">
+      <p class="section-label">RESERVATIONS</p>
+      <h2 class="section-heading">Reserve Your Stay.</h2>
+      <p class="section-subhead">Complete the form below and our concierge team will confirm your reservation within 24 hours.</p>
+    </div>
+
+    <form id="reservation-form"
+          action="https://formspree.io/f/xaqayyrr"
+          method="POST"
+          novalidate>
+
+      <input type="hidden" name="_subject" value="The Sentry — Reservation Request" />
+      <input type="hidden" name="source"   value="aom-exhibit-1-sentry" />
+
+      <div class="reserve-grid">
+        <!-- LEFT COLUMN -->
+        <div>
+          <div class="form-group fade-up" data-delay="1">
+            <label class="form-label" for="checkin">CHECK-IN</label>
+            <input class="form-input" type="date" id="checkin" name="checkin" required />
+          </div>
+          <div class="form-group fade-up" data-delay="2">
+            <label class="form-label" for="checkout">CHECK-OUT</label>
+            <input class="form-input" type="date" id="checkout" name="checkout" required />
+          </div>
+          <div class="form-group fade-up" data-delay="3">
+            <label class="form-label" for="room-type">ROOM TYPE</label>
+            <select class="form-select" id="room-type" name="room_type" required>
+              <option value="" disabled selected>Select Room Type</option>
+              <option value="coastal-room">Coastal Room ($289/night)</option>
+              <option value="sentry-suite">Sentry Suite ($489/night)</option>
+              <option value="lighthouse-penthouse">Lighthouse Penthouse ($890/night)</option>
+            </select>
+          </div>
+          <div class="form-group fade-up" data-delay="4">
+            <label class="form-label" for="guests">NUMBER OF GUESTS</label>
+            <select class="form-select" id="guests" name="guests" required>
+              <option value="" disabled selected>Select Guests</option>
+              <option value="1">1 Guest</option>
+              <option value="2">2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="5">5 Guests</option>
+              <option value="6">6 Guests</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+          <div class="form-group fade-up" data-delay="1">
+            <label class="form-label" for="fullname">FULL NAME</label>
+            <input class="form-input" type="text" id="fullname" name="name" placeholder="Your full name" required />
+          </div>
+          <div class="form-group fade-up" data-delay="2">
+            <label class="form-label" for="email">EMAIL ADDRESS</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group fade-up" data-delay="3">
+            <label class="form-label" for="phone">PHONE NUMBER</label>
+            <input class="form-input" type="tel" id="phone" name="phone" placeholder="(000) 000-0000" />
+          </div>
+          <div class="form-group fade-up" data-delay="4">
+            <label class="form-label" for="requests">SPECIAL REQUESTS</label>
+            <textarea class="form-textarea" id="requests" name="special_requests" rows="4" placeholder="Dietary needs, accessibility, celebrations…"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div style="max-width:1100px; margin:0 auto;">
+        <button type="submit" class="form-submit fade-up">SEND RESERVATION REQUEST</button>
+      </div>
+    </form>
+
+    <p class="form-fine-print fade-up">Rate &amp; availability confirmed upon follow-up. No charge collected today. Cancellations accepted 72 hours prior to arrival.</p>
+  </section>
+
+  <!-- ══ LOCATION ══════════════════════════════════════════════════ -->
+  <section id="location">
+    <div class="location-header fade-up">
+      <p class="section-label">FIND US</p>
+      <h2 class="section-heading">Getting to The Sentry.</h2>
+    </div>
+
+    <div class="location-split">
+      <iframe
+        class="location-map"
+        src="https://maps.google.com/maps?q=Topsail+Island+NC&output=embed"
+        title="Map to The Sentry — Topsail Island, NC"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+
+      <div class="location-info fade-up">
+        <p class="location-hotel-name">The Sentry</p>
+        <div class="location-address">
+          <p>1 Lighthouse Ridge</p>
+          <p>Topsail Island, NC 28445</p>
+          <p style="margin-top:8px;">(910) 555-0190</p>
+          <p>reservations@thesentrycoastal.com</p>
+        </div>
+
+        <div class="gold-rule"></div>
+
+        <p class="location-arrival-label">ARRIVAL NOTES</p>
+        <div class="location-arrival-notes">
+          <p>&middot; 2 hours south of Raleigh</p>
+          <p>&middot; 30 minutes north of Wilmington</p>
+          <p>&middot; 15 minutes from Jacksonville</p>
+        </div>
+
+        <a href="https://maps.google.com/maps?q=Topsail+Island+NC"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="btn-outline-restaurant"
+           style="margin-top:28px;">Get Directions &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div>
+        <span class="footer-brand-monogram">TS</span>
+        <span class="footer-brand-name">THE SENTRY</span>
+        <p class="footer-tagline">Where the horizon never ends.</p>
+      </div>
+
+      <nav aria-label="Footer navigation">
+        <ul class="footer-nav">
+          <li><a href="#rooms">Rooms</a></li>
+          <li><a href="#dining">Dining</a></li>
+          <li><a href="#spa">Spa</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#reserve">Reserve</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-right">
+        <a href="https://instagram.com/thesentrycoastal"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="footer-instagram">@thesentrycoastal</a>
+        <a href="#reserve" class="footer-book-btn">Book Now</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2026 The Sentry Coastal Retreat &nbsp;&middot;&nbsp; Topsail Island, NC &nbsp;&middot;&nbsp; All Rights Reserved
+    </div>
+  </footer>
+
+  <!-- ══ AOM NOTICE BAR ════════════════════════════════════════════ -->
+  <div id="aom-bar" role="complementary" aria-label="AOM Showcase Notice">
+    <div class="aom-left-stack">
+      <span class="aom-exhibit-label">AOM SHOWCASE EXHIBIT</span>
+      <span class="aom-hotel-name">The Sentry — A Coastal Retreat</span>
+    </div>
+    <p class="aom-right-text">This is a premium website mockup built by Altitude Odyssey Media. All content is fictional.</p>
+    <button class="aom-close" id="aom-close-btn" aria-label="Dismiss notice">&times;</button>
+  </div>
+
+  <!-- ══ SCRIPTS ═══════════════════════════════════════════════════ -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── TOUCH DETECTION ──────────────────────────────────────── */
+    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    if (!isTouch) document.documentElement.classList.add('no-touch');
+
+    /* ── PRELOADER ─────────────────────────────────────────────── */
+    document.body.style.overflow = 'hidden';
+    const preloader = document.getElementById('preloader');
+
+    setTimeout(function () {
+      preloader.classList.add('slide-up');
+      document.body.style.overflow = '';
+
+      setTimeout(function () {
+        preloader.style.display = 'none';
+      }, 700);
+    }, 2200);
+
+    /* ── CUSTOM CURSOR ─────────────────────────────────────────── */
+    if (!isTouch) {
+      const dot  = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+
+      let mx = -100, my = -100;  // mouse position
+      let rx = -100, ry = -100;  // ring position (lerped)
+      const LERP = 0.12;
+
+      document.addEventListener('mousemove', function (e) {
+        mx = e.clientX;
+        my = e.clientY;
+        dot.style.left = mx + 'px';
+        dot.style.top  = my + 'px';
+      });
+
+      (function animRing() {
+        rx += (mx - rx) * LERP;
+        ry += (my - ry) * LERP;
+        ring.style.left = rx + 'px';
+        ring.style.top  = ry + 'px';
+        requestAnimationFrame(animRing);
+      })();
+
+      // Hover state on interactive elements
+      const hoverTargets = 'a, button, .room-card, .amenity-card, .gallery-item, input, select, textarea';
+
+      document.addEventListener('mouseover', function (e) {
+        if (e.target.closest(hoverTargets)) {
+          document.documentElement.classList.add('cursor-hover');
+        }
+      });
+
+      document.addEventListener('mouseout', function (e) {
+        if (e.target.closest(hoverTargets)) {
+          document.documentElement.classList.remove('cursor-hover');
+        }
+      });
+    }
+
+    /* ── SCROLL-BASED NAV ──────────────────────────────────────── */
+    const nav = document.getElementById('nav');
+
+    function onScroll() {
+      if (window.scrollY > 80) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ── HERO PARALLAX ─────────────────────────────────────────── */
+    const heroSection = document.getElementById('hero');
+
+    window.addEventListener('scroll', function () {
+      if (window.scrollY < window.innerHeight) {
+        heroSection.style.backgroundPositionY = (window.scrollY * 0.4) + 'px';
+      }
+    }, { passive: true });
+
+    /* ── HAMBURGER / MOBILE MENU ───────────────────────────────── */
+    const hamburgerBtn  = document.getElementById('hamburger-btn');
+    const mobileMenu    = document.getElementById('mobile-menu');
+    const mobileClose   = document.getElementById('mobile-menu-close');
+    const mobileLinks   = document.querySelectorAll('.mobile-nav-link');
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    hamburgerBtn.addEventListener('click', openMobileMenu);
+    mobileClose.addEventListener('click', closeMobileMenu);
+
+    mobileLinks.forEach(function (link) {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    /* ── SMOOTH SCROLL OFFSET FOR FIXED NAV ───────────────────── */
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+
+    /* ── INTERSECTION OBSERVER — FADE UP ──────────────────────── */
+    const fadeEls = document.querySelectorAll('.fade-up');
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      fadeEls.forEach(function (el) {
+        // Hero elements start visible immediately
+        if (el.closest('#hero')) {
+          el.classList.add('visible');
+        } else {
+          observer.observe(el);
+        }
+      });
+    } else {
+      // Fallback — show everything
+      fadeEls.forEach(function (el) { el.classList.add('visible'); });
+    }
+
+    /* ── FORM VALIDATION ───────────────────────────────────────── */
+    const form = document.getElementById('reservation-form');
+
+    form.addEventListener('submit', function (e) {
+      const requiredFields = form.querySelectorAll('[required]');
+      let valid = true;
+
+      requiredFields.forEach(function (field) {
+        field.classList.remove('error');
+
+        const val = field.value.trim();
+        if (!val) {
+          field.classList.add('error');
+          valid = false;
+        }
+      });
+
+      // Email format check
+      const emailField = form.querySelector('#email');
+      if (emailField && emailField.value.trim()) {
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value.trim());
+        if (!emailOk) {
+          emailField.classList.add('error');
+          valid = false;
+        }
+      }
+
+      if (!valid) {
+        e.preventDefault();
+        // Scroll to first error
+        const firstError = form.querySelector('.error');
+        if (firstError) {
+          const top = firstError.getBoundingClientRect().top + window.scrollY - 120;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+          firstError.focus();
+        }
+      }
+    });
+
+    // Remove error class on input
+    form.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(function (field) {
+      field.addEventListener('input', function () { this.classList.remove('error'); });
+      field.addEventListener('change', function () { this.classList.remove('error'); });
+    });
+
+    /* ── AOM BAR DISMISS ───────────────────────────────────────── */
+    const aomBar   = document.getElementById('aom-bar');
+    const aomClose = document.getElementById('aom-close-btn');
+
+    aomClose.addEventListener('click', function () {
+      aomBar.classList.add('hidden');
+    });
+
+  })();
+  </script>
+
+</body>
+</html>

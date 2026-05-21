@@ -1096,7 +1096,6 @@
       justify-content: space-between;
       transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
     }
-    #aom-notice.dismissed { transform: translateY(100%); }
     .aom-left {}
     .aom-tag {
       font-family: 'Space Grotesk', sans-serif;
@@ -1119,16 +1118,6 @@
       font-size: 0.75rem;
       color: var(--muted);
     }
-    .aom-close {
-      font-size: 1.2rem;
-      color: var(--white);
-      cursor: none;
-      padding: 4px 8px;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-    }
-    .aom-close:hover { opacity: 1; }
-
     /* ─── Fade-Up Animation ─── */
     .fade-up {
       opacity: 0;
@@ -1710,7 +1699,7 @@
     </div>
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 Vertex Creative Studio · Wilmington, NC</div>
-      <div class="footer-credit">Built by Altitude Odyssey Media</div>
+      <div class="footer-credit">Built by Altitude Odyssey Media LLC</div>
     </div>
   </footer>
 
@@ -1720,8 +1709,7 @@
       <div class="aom-tag">AOM SHOWCASE EXHIBIT 02</div>
       <div class="aom-name">VERTEX Studio — Fictional Demo</div>
     </div>
-    <div class="aom-center">Built by Altitude Odyssey Media · altitudeodysseymedia.com</div>
-    <button class="aom-close" id="aomClose">×</button>
+    <div class="aom-center">This is a premium website mockup built by Altitude Odyssey Media LLC. All content is fictional.</div>
   </div>
 
   <script>
@@ -2143,20 +2131,6 @@
     });
   })();
 
-  /* ────────────────────────────────────────────
-     AOM NOTICE DISMISS
-  ──────────────────────────────────────────── */
-  (function() {
-    const notice = document.getElementById('aom-notice');
-    const close = document.getElementById('aomClose');
-    close.addEventListener('click', () => {
-      notice.classList.add('dismissed');
-      setTimeout(() => {
-        notice.style.display = 'none';
-        document.body.style.paddingBottom = '0';
-      }, 450);
-    });
-  })();
-  </script>
+</script>
 </body>
 </html>

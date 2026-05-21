@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEIL Private Aviation — Above the Ordinary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Space+Grotesk:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #000000;
+  --deep: #050505;
+  --surface: #0a0a0a;
+  --card: #0f0f0f;
+  --silver: #C8CAD0;
+  --chrome: #E8E9EC;
+  --smoke: rgba(200,205,215,0.12);
+  --mist: rgba(180,190,210,0.06);
+  --white: #F5F5F7;
+  --blue-silver: #8B9DC3;
+  --dim: rgba(245,245,247,0.45);
+  --faint: rgba(245,245,247,0.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #000;
+  color: #F5F5F7;
+  cursor: none;
+  overflow-x: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ─── CANVAS FOG ─────────────────────────────────────────────────── */
+#fog-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ─── GRAIN OVERLAY ──────────────────────────────────────────────── */
+.grain-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+}
+
+/* ─── VIGNETTE ───────────────────────────────────────────────────── */
+.vignette-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(0,0,0,0.55) 100%);
+}
+
+/* ─── CUSTOM CURSOR ──────────────────────────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  width: 3px; height: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  pointer-events: none;
+  transition: none;
+}
+.cursor-ring {
+  position: fixed;
+  width: 48px; height: 48px;
+  border: 1px solid rgba(200,205,215,0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9997;
+  pointer-events: none;
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+.cursor-ring.mag-hover {
+  width: 80px; height: 80px;
+  background: rgba(139,157,195,0.1);
+}
+
+/* ─── PRELOADER ──────────────────────────────────────────────────── */
+#preloader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+#preloader.hide {
+  clip-path: inset(100% 0 0 0);
+}
+.preloader-line {
+  width: 200px; height: 1px;
+  background: var(--silver);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: lineDraw 1.5s ease-in-out 0.2s forwards;
+}
+@keyframes lineDraw {
+  to { transform: scaleX(1); }
+}
+.preloader-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  letter-spacing: 0.8em;
+  color: var(--silver);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease 0.5s forwards;
+}
+.preloader-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  color: rgba(200,205,215,0.5);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease 0.8s forwards;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── NAV ────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 60px;
+  transition: all 0.4s ease;
+}
+nav.scrolled {
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 20px 60px;
+  border-bottom: 1px solid rgba(200,205,215,0.08);
+}
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.4rem;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: rgba(245,245,247,0.5);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--silver);
+  text-decoration: none;
+  border: 1px solid rgba(200,205,215,0.35);
+  padding: 10px 24px;
+  transition: background 0.3s;
+}
+.nav-cta:hover { background: rgba(200,205,215,0.1); }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: none;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 22px; height: 1px;
+  background: var(--silver);
+  transition: all 0.3s;
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+.mobile-menu {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.97);
+  z-index: 99;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2.5rem;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+.mobile-menu a:hover { opacity: 1; }
+
+/* ─── HERO ───────────────────────────────────────────────────────── */
+#hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% -10%, rgba(139,157,195,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 120% 80% at 50% 100%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.95) 100%),
+    url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1600&q=95');
+  background-size: cover, cover, cover;
+  background-position: center, center, center bottom;
+  background-repeat: no-repeat;
+}
+.hero-top-strip {
+  position: absolute;
+  top: 80px;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(200,205,215,0.4);
+  z-index: 10;
+}
+.hero-left {
+  position: absolute;
+  left: 60px;
+  bottom: 30%;
+  z-index: 10;
+}
+.hero-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(8rem, 15vw, 18rem);
+  line-height: 0.85;
+  color: var(--white);
+  display: block;
+}
+.hero-taglines {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero-taglines span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  color: rgba(200,205,215,0.5);
+  display: block;
+}
+.hero-luggage {
+  margin-top: 18px;
+  height: 80px;
+  object-fit: contain;
+  opacity: 0.75;
+  filter: grayscale(1);
+  display: block;
+}
+.hero-right {
+  position: absolute;
+  right: 60px;
+  bottom: 30%;
+  z-index: 10;
+  text-align: right;
+}
+.hero-right .hero-headline { text-align: right; }
+.hero-right-desc {
+  margin-top: 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.8rem;
+  color: rgba(245,245,247,0.55);
+  max-width: 220px;
+  text-align: right;
+  line-height: 1.6;
+  margin-left: auto;
+}
+.hero-scroll-circle {
+  position: absolute;
+  bottom: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 80px; height: 80px;
+  border: 1px solid rgba(200,205,215,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--silver);
+  font-size: 1.1rem;
+  animation: pulse 3s infinite;
+  text-decoration: none;
+}
+@keyframes pulse {
+  0%   { transform: translateX(-50%) scale(1);    border-color: rgba(200,205,215,0.3); }
+  50%  { transform: translateX(-50%) scale(1.05); border-color: rgba(200,205,215,0.6); }
+  100% { transform: translateX(-50%) scale(1);    border-color: rgba(200,205,215,0.3); }
+}
+.hero-bottom-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  border-top: 1px solid rgba(200,205,215,0.12);
+  padding: 20px 60px;
+  display: flex;
+  gap: 60px;
+  z-index: 10;
+}
+.hero-stat {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: rgba(245,245,247,0.45);
+}
+
+/* ─── MARQUEE ────────────────────────────────────────────────────── */
+.marquee-section {
+  border-top: 1px solid rgba(200,205,215,0.08);
+  border-bottom: 1px solid rgba(200,205,215,0.08);
+  background: rgba(255,255,255,0.02);
+  padding: 18px 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marqueeScroll 35s linear infinite;
+}
+.marquee-content {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1rem;
+  color: rgba(200,205,215,0.5);
+  padding-right: 0;
+  flex-shrink: 0;
+}
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+
+/* ─── REVEAL ANIMATION ───────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── FLEET SECTION ──────────────────────────────────────────────── */
+#fleet {
+  padding: 120px 0 0;
+  background: var(--void);
+}
+.fleet-header {
+  padding: 0 60px 80px;
+}
+.section-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 4rem;
+  color: var(--white);
+  line-height: 1;
+}
+.section-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.9rem;
+  color: var(--dim);
+  margin-top: 12px;
+  letter-spacing: 0.02em;
+}
+.fleet-card {
+  display: flex;
+  height: 380px;
+  overflow: hidden;
+}
+.fleet-card.reverse { flex-direction: row-reverse; }
+.fleet-info {
+  flex-basis: 50%;
+  flex-shrink: 0;
+  background: #080808;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.fleet-tag {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  color: rgba(200,205,215,0.3);
+  margin-bottom: 16px;
+}
+.fleet-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--white);
+  line-height: 1.1;
+}
+.fleet-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+}
+.fleet-stat-item {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: var(--silver);
+}
+.fleet-stat-item span {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: rgba(200,205,215,0.4);
+  margin-bottom: 4px;
+}
+.fleet-rule {
+  width: 60px; height: 1px;
+  background: rgba(200,205,215,0.3);
+  margin: 20px 0;
+}
+.fleet-desc {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: var(--dim);
+  line-height: 1.8;
+  max-width: 380px;
+}
+.fleet-link {
+  margin-top: 24px;
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: var(--silver);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(200,205,215,0.3);
+  padding-bottom: 2px;
+  transition: color 0.3s;
+  width: fit-content;
+}
+.fleet-link:hover { color: var(--white); }
+.fleet-photo {
+  flex-basis: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+.fleet-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  transform-origin: center;
+}
+.fleet-photo:hover img { transform: scale(1.04); }
+
+/* ─── SERVICES GRID ──────────────────────────────────────────────── */
+#services {
+  padding: 120px 60px;
+  background: var(--void);
+}
+.services-header { margin-bottom: 60px; }
+.services-grid-container {
+  background: rgba(200,205,215,0.04);
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+}
+.service-tile {
+  background: #0a0a0a;
+  padding: 48px 40px;
+  border-top: 1px solid rgba(200,205,215,0.08);
+  transition: transform 0.4s ease, border-color 0.3s ease;
+  cursor: none;
+}
+.service-tile:hover {
+  transform: translateY(-4px);
+  border-top-color: rgba(200,205,215,0.5);
+}
+.service-icon {
+  width: 40px; height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.service-icon svg {
+  width: 40px; height: 40px;
+  stroke: var(--silver);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.service-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: var(--white);
+  margin-top: 24px;
+  line-height: 1.2;
+}
+.service-desc {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: var(--dim);
+  line-height: 1.7;
+  margin-top: 12px;
+}
+
+/* ─── MAP SECTION ────────────────────────────────────────────────── */
+#destinations {
+  padding: 120px 60px;
+  background: var(--deep);
+}
+.map-header { margin-bottom: 60px; }
+.world-map-container {
+  position: relative;
+  width: 100%;
+  background: transparent;
+}
+.world-map-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.path-line {
+  stroke: rgba(139,157,195,0.4);
+  stroke-width: 0.5;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 1.5s ease;
+}
+.path-line.animate { stroke-dashoffset: 0; }
+.dest-dot {
+  fill: #C8CAD0;
+  animation: dotPulse 2s ease infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; r: 2; }
+  50% { opacity: 0.5; r: 3; }
+}
+
+/* ─── TESTIMONIALS ───────────────────────────────────────────────── */
+#testimonials {
+  background: #050505;
+  padding: 120px 60px;
+  text-align: center;
+}
+.testimonials-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.testimonial-slide {
+  display: none;
+  animation: fadeTestimonial 0.6s ease;
+}
+.testimonial-slide.active { display: block; }
+@keyframes fadeTestimonial {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.testimonial-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2rem;
+  color: var(--white);
+  line-height: 1.5;
+}
+.testimonial-attr {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: rgba(200,205,215,0.5);
+  margin-top: 24px;
+}
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 48px;
+}
+.testimonial-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,205,215,0.4);
+  background: transparent;
+  cursor: none;
+  transition: background 0.3s;
+}
+.testimonial-dot.active {
+  background: rgba(200,205,215,0.8);
+  border-color: rgba(200,205,215,0.8);
+}
+
+/* ─── BOOKING SECTION ────────────────────────────────────────────── */
+#book {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.book-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at center, rgba(12,16,28,1) 0%, rgba(0,0,0,1) 70%),
+    url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=900&q=85');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: normal;
+}
+.book-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=900&q=85') center/cover;
+  opacity: 0.08;
+  z-index: -1;
+}
+.book-content {
+  position: relative;
+  z-index: 10;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 60px;
+  width: 100%;
+}
+.book-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 5rem;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.book-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 1rem;
+  color: var(--dim);
+  margin-bottom: 56px;
+}
+.book-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+.book-form input,
+.book-form select {
+  flex: 1;
+  min-width: 160px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,205,215,0.15);
+  color: var(--white);
+  padding: 14px 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.3s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.book-form input::placeholder { color: rgba(245,245,247,0.3); }
+.book-form input:focus,
+.book-form select:focus { border-color: rgba(200,205,215,0.4); }
+.book-form select option { background: #0a0a0a; }
+.book-form input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+  cursor: none;
+}
+.book-btn {
+  background: transparent;
+  border: 1px solid rgba(200,205,215,0.35);
+  color: var(--silver);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  padding: 14px 32px;
+  cursor: none;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+.book-btn:hover { background: rgba(200,205,215,0.12); }
+.book-concierge {
+  margin-top: 32px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.9rem;
+  color: var(--dim);
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────────────── */
+footer {
+  background: #000;
+  border-top: 1px solid rgba(200,205,215,0.06);
+  padding: 80px 60px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.footer-watermark {
+  position: absolute;
+  bottom: -20px; left: 40px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12rem;
+  color: rgba(255,255,255,0.025);
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+  user-select: none;
+}
+.footer-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 60px;
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: var(--white);
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+.footer-address {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.8rem;
+  color: var(--dim);
+  line-height: 1.8;
+}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-links a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.3s;
+  width: fit-content;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-contact a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-contact a:hover { color: var(--white); }
+.footer-socials {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+.footer-socials a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: rgba(200,205,215,0.4);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-socials a:hover { color: var(--silver); }
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(200,205,215,0.06);
+  margin-top: 60px;
+  padding-top: 24px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.75rem;
+  color: rgba(200,205,215,0.3);
+  letter-spacing: 0.02em;
+}
+
+/* ─── AOM PREVIEW NOTICE ─────────────────────────────────────────── */
+.aom-notice {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(5,5,5,0.97);
+  border-top: 1px solid rgba(200,205,215,0.15);
+  padding: 16px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.aom-notice-left .aom-exhibit {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: rgba(200,205,215,0.5);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.aom-notice-left .aom-client {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: var(--white);
+}
+.aom-notice-right {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 200;
+  font-size: 0.75rem;
+  color: rgba(200,205,215,0.4);
+  max-width: 400px;
+  text-align: right;
+}
+
+/* ─── MOBILE ─────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 24px 24px; }
+  nav.scrolled { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .hamburger { display: flex; }
+
+  #hero { height: 100svh; }
+  .hero-top-strip { font-size: 0.55rem; }
+  .hero-left {
+    left: 24px;
+    bottom: 42%;
+  }
+  .hero-headline { font-size: clamp(5rem, 18vw, 8rem); }
+  .hero-right {
+    right: 24px;
+    bottom: 24%;
+  }
+  .hero-right .hero-headline { font-size: clamp(5rem, 18vw, 8rem); }
+  .hero-right-desc { font-size: 0.7rem; max-width: 160px; }
+  .hero-bottom-bar { padding: 16px 24px; gap: 20px; flex-wrap: wrap; }
+  .hero-luggage { display: none; }
+  .hero-scroll-circle { display: none; }
+
+  #fleet { padding: 80px 0 0; }
+  .fleet-header { padding: 0 24px 48px; }
+  .fleet-card { flex-direction: column !important; height: auto; }
+  .fleet-info { padding: 40px 24px; flex-basis: auto; }
+  .fleet-photo { height: 260px; flex-basis: auto; }
+
+  #services { padding: 80px 24px; }
+  .services-grid { grid-template-columns: 1fr; }
+
+  #destinations { padding: 80px 24px; }
+
+  #testimonials { padding: 80px 24px; }
+  .testimonial-quote { font-size: 1.5rem; }
+
+  .book-content { padding: 80px 24px; }
+  .book-heading { font-size: 3.5rem; }
+  .book-form { flex-direction: column; }
+  .book-form input,
+  .book-form select { min-width: unset; width: 100%; }
+
+  footer { padding: 60px 24px 40px; }
+  .footer-watermark { font-size: 7rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  .aom-notice { padding: 12px 20px; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .aom-notice-right { text-align: left; max-width: 100%; }
+
+  .section-heading { font-size: 2.8rem; }
+  .book-heading { font-size: 3rem; }
+}
+
+/* ─── COUNTRY MAP PATHS ──────────────────────────────────────────── */
+.country-path {
+  fill: #0d0d12;
+  stroke: rgba(200,205,215,0.06);
+  stroke-width: 0.5;
+}
+</style>
+</head>
+<body>
+
+<!-- FOG CANVAS -->
+<canvas id="fog-canvas"></canvas>
+
+<!-- GRAIN OVERLAY -->
+<div class="grain-overlay"></div>
+
+<!-- VIGNETTE -->
+<div class="vignette-overlay"></div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="preloader-line"></div>
+  <div class="preloader-brand">VEIL</div>
+  <div class="preloader-sub">PRIVATE AVIATION</div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-brand">VEIL</a>
+  <ul class="nav-links">
+    <li><a href="#fleet">Airplanes</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#fleet">Fleet</a></li>
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#book">Book</a></li>
+  </ul>
+  <a href="#book" class="nav-cta mag">Book a Flight ↗</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#fleet" onclick="closeMobile()">Airplanes</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#fleet" onclick="closeMobile()">Fleet</a>
+  <a href="#destinations" onclick="closeMobile()">Destinations</a>
+  <a href="#book" onclick="closeMobile()">Book</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-top-strip">AIRPLANES | SERVICES | BLOG</div>
+
+  <div class="hero-left">
+    <span class="hero-headline">Private</span>
+    <div class="hero-taglines">
+      <span>CONCIERGE</span>
+      <span>SERVICE</span>
+    </div>
+    <img
+      src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=900&q=85"
+      alt="Luggage"
+      class="hero-luggage"
+    >
+  </div>
+
+  <div class="hero-right">
+    <span class="hero-headline">Flight</span>
+    <p class="hero-right-desc">WE PROVIDE A TAILORED APPROACH TO MAKE YOUR FLIGHT A SEAMLESS AND LUXURIOUS EXPERIENCE.</p>
+  </div>
+
+  <a href="#fleet" class="hero-scroll-circle">↓</a>
+
+  <div class="hero-bottom-bar">
+    <span class="hero-stat">47 DESTINATIONS</span>
+    <span class="hero-stat">24/7 CONCIERGE</span>
+    <span class="hero-stat">ZERO WAIT TIME</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-content">PRIVATE CHARTER &nbsp;·&nbsp; GLOBAL REACH &nbsp;·&nbsp; CONCIERGE SERVICE &nbsp;·&nbsp; GULFSTREAM G700 &nbsp;·&nbsp; BOMBARDIER GLOBAL 7500 &nbsp;·&nbsp; 24/7 AVAILABILITY &nbsp;·&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span class="marquee-content">PRIVATE CHARTER &nbsp;·&nbsp; GLOBAL REACH &nbsp;·&nbsp; CONCIERGE SERVICE &nbsp;·&nbsp; GULFSTREAM G700 &nbsp;·&nbsp; BOMBARDIER GLOBAL 7500 &nbsp;·&nbsp; 24/7 AVAILABILITY &nbsp;·&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span class="marquee-content">PRIVATE CHARTER &nbsp;·&nbsp; GLOBAL REACH &nbsp;·&nbsp; CONCIERGE SERVICE &nbsp;·&nbsp; GULFSTREAM G700 &nbsp;·&nbsp; BOMBARDIER GLOBAL 7500 &nbsp;·&nbsp; 24/7 AVAILABILITY &nbsp;·&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</span>
+  </div>
+</div>
+
+<!-- FLEET SECTION -->
+<section id="fleet">
+  <div class="fleet-header reveal">
+    <h2 class="section-heading">The Fleet.</h2>
+    <p class="section-sub">Four aircraft. Every mission.</p>
+  </div>
+
+  <!-- Card 1 -->
+  <div class="fleet-card reveal">
+    <div class="fleet-info">
+      <div class="fleet-tag">01</div>
+      <div class="fleet-name">Gulfstream G700</div>
+      <div class="fleet-stats">
+        <div class="fleet-stat-item"><span>RANGE</span>7,500 nm</div>
+        <div class="fleet-stat-item"><span>SEATS</span>19 passengers</div>
+      </div>
+      <div class="fleet-rule"></div>
+      <p class="fleet-desc">Our flagship. Intercontinental range with the widest cabin in class.</p>
+      <a href="#book" class="fleet-link mag">Request This Aircraft ↗</a>
+    </div>
+    <div class="fleet-photo" data-tilt>
+      <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1200&q=90" alt="Gulfstream G700" loading="lazy">
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="fleet-card reverse reveal">
+    <div class="fleet-info">
+      <div class="fleet-tag">02</div>
+      <div class="fleet-name">Bombardier Global 7500</div>
+      <div class="fleet-stats">
+        <div class="fleet-stat-item"><span>RANGE</span>7,700 nm</div>
+        <div class="fleet-stat-item"><span>SEATS</span>17 passengers</div>
+      </div>
+      <div class="fleet-rule"></div>
+      <p class="fleet-desc">Four living spaces. Dedicated crew suite. Unmatched on ultra-long range.</p>
+      <a href="#book" class="fleet-link mag">Request This Aircraft ↗</a>
+    </div>
+    <div class="fleet-photo" data-tilt>
+      <img src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=1200&q=90" alt="Bombardier Global 7500" loading="lazy">
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="fleet-card reveal">
+    <div class="fleet-info">
+      <div class="fleet-tag">03</div>
+      <div class="fleet-name">Embraer Praetor 600</div>
+      <div class="fleet-stats">
+        <div class="fleet-stat-item"><span>RANGE</span>4,018 nm</div>
+        <div class="fleet-stat-item"><span>SEATS</span>12 passengers</div>
+      </div>
+      <div class="fleet-rule"></div>
+      <p class="fleet-desc">Mid-size excellence. Optimal for transatlantic and coast-to-coast routes.</p>
+      <a href="#book" class="fleet-link mag">Request This Aircraft ↗</a>
+    </div>
+    <div class="fleet-photo" data-tilt>
+      <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=90" alt="Embraer Praetor 600" loading="lazy">
+    </div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="fleet-card reverse reveal">
+    <div class="fleet-info">
+      <div class="fleet-tag">04</div>
+      <div class="fleet-name">Citation Longitude</div>
+      <div class="fleet-stats">
+        <div class="fleet-stat-item"><span>RANGE</span>3,500 nm</div>
+        <div class="fleet-stat-item"><span>SEATS</span>10 passengers</div>
+      </div>
+      <div class="fleet-rule"></div>
+      <p class="fleet-desc">Super mid-size versatility. Perfect for regional and domestic missions.</p>
+      <a href="#book" class="fleet-link mag">Request This Aircraft ↗</a>
+    </div>
+    <div class="fleet-photo" data-tilt>
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=90" alt="Citation Longitude" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES GRID -->
+<section id="services">
+  <div class="services-header reveal">
+    <h2 class="section-heading">Designed Around You.</h2>
+  </div>
+  <div class="services-grid-container reveal">
+    <div class="services-grid">
+
+      <!-- Tile 1: Concierge -->
+      <div class="service-tile">
+        <div class="service-icon">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="12" r="5"/>
+            <path d="M8 34c0-6.627 5.373-12 12-12s12 5.373 12 12"/>
+            <path d="M28 8l3 3-3 3"/>
+          </svg>
+        </div>
+        <div class="service-title">Concierge Service</div>
+        <p class="service-desc">From gate to suite. Your dedicated concierge handles every detail before, during, and after flight.</p>
+      </div>
+
+      <!-- Tile 2: Catering -->
+      <div class="service-tile">
+        <div class="service-icon">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 14 Q20 8 32 14"/>
+            <path d="M10 14 L10 30 Q10 32 12 32 L28 32 Q30 32 30 30 L30 14"/>
+            <line x1="20" y1="8" x2="20" y2="32"/>
+            <path d="M15 20 Q20 24 25 20"/>
+          </svg>
+        </div>
+        <div class="service-title">In-Flight Catering</div>
+        <p class="service-desc">Michelin-starred menus curated to your preferences. Local specialties from your destination.</p>
+      </div>
+
+      <!-- Tile 3: Transport -->
+      <div class="service-tile">
+        <div class="service-icon">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="16" width="32" height="14" rx="3"/>
+            <path d="M8 16 L12 8 L28 8 L32 16"/>
+            <circle cx="11" cy="32" r="3"/>
+            <circle cx="29" cy="32" r="3"/>
+            <line x1="14" y1="32" x2="26" y2="32"/>
+          </svg>
+        </div>
+        <div class="service-title">Ground Transport</div>
+        <p class="service-desc">Rolls-Royce, Mercedes, or your preferred vehicle. Waiting on the tarmac.</p>
+      </div>
+
+      <!-- Tile 4: Clearances -->
+      <div class="service-tile">
+        <div class="service-icon">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="14"/>
+            <path d="M20 6 Q26 13 26 20 Q26 27 20 34"/>
+            <path d="M20 6 Q14 13 14 20 Q14 27 20 34"/>
+            <line x1="6" y1="20" x2="34" y2="20"/>
+            <path d="M9 13 Q20 16 31 13"/>
+            <path d="M9 27 Q20 24 31 27"/>
+          </svg>
+        </div>
+        <div class="service-title">Global Clearances</div>
+        <p class="service-desc">Pre-cleared customs, diplomatic handling, and priority slots at 2,400+ airports worldwide.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WORLD DESTINATIONS MAP -->
+<section id="destinations">
+  <div class="map-header reveal">
+    <h2 class="section-heading">47 Destinations. One Standard.</h2>
+  </div>
+  <div class="world-map-container reveal" id="mapContainer">
+    <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" id="worldMap">
+      <defs>
+        <radialGradient id="mapGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(139,157,195,0.05)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <rect width="1000" height="500" fill="#080810"/>
+      <rect width="1000" height="500" fill="url(#mapGlow)"/>
+
+      <!-- Simplified continent outlines -->
+      <!-- North America -->
+      <path class="country-path" d="M 90 80 L 130 70 L 200 75 L 240 90 L 260 110 L 250 140 L 230 160 L 240 180 L 260 200 L 270 230 L 250 250 L 230 260 L 200 265 L 180 255 L 170 240 L 150 230 L 140 210 L 120 200 L 100 180 L 85 160 L 80 130 L 85 100 Z"/>
+      <!-- Central America / Caribbean -->
+      <path class="country-path" d="M 200 265 L 220 275 L 230 290 L 220 300 L 210 295 L 195 280 Z"/>
+      <!-- South America -->
+      <path class="country-path" d="M 230 295 L 270 285 L 310 295 L 340 320 L 350 360 L 340 400 L 310 430 L 280 440 L 260 430 L 240 400 L 225 370 L 220 340 L 225 315 Z"/>
+      <!-- Europe -->
+      <path class="country-path" d="M 380 80 L 430 75 L 460 85 L 470 100 L 460 120 L 440 130 L 420 135 L 400 130 L 385 120 L 375 105 Z"/>
+      <!-- Scandinavia -->
+      <path class="country-path" d="M 420 55 L 445 50 L 455 65 L 450 80 L 435 78 L 420 75 Z"/>
+      <!-- Africa -->
+      <path class="country-path" d="M 390 145 L 450 140 L 490 155 L 510 185 L 510 230 L 500 280 L 480 320 L 460 355 L 440 370 L 415 360 L 395 330 L 380 290 L 375 250 L 375 210 L 380 180 L 385 160 Z"/>
+      <!-- Middle East -->
+      <path class="country-path" d="M 510 130 L 560 125 L 590 140 L 600 165 L 580 180 L 550 185 L 520 175 L 505 158 Z"/>
+      <!-- Central/South Asia -->
+      <path class="country-path" d="M 590 120 L 680 115 L 720 130 L 730 160 L 710 185 L 680 195 L 650 190 L 615 180 L 595 160 L 588 140 Z"/>
+      <!-- India -->
+      <path class="country-path" d="M 640 190 L 680 185 L 695 210 L 690 250 L 670 275 L 650 280 L 630 260 L 625 230 L 630 205 Z"/>
+      <!-- Southeast Asia -->
+      <path class="country-path" d="M 720 155 L 780 145 L 810 165 L 810 200 L 790 220 L 760 225 L 740 210 L 725 185 Z"/>
+      <!-- East Asia / China / Japan -->
+      <path class="country-path" d="M 730 95 L 820 90 L 860 105 L 865 140 L 840 160 L 800 165 L 765 155 L 740 140 L 728 120 Z"/>
+      <!-- Japan -->
+      <path class="country-path" d="M 865 105 L 890 100 L 900 115 L 895 135 L 875 140 L 862 130 Z"/>
+      <!-- Russia -->
+      <path class="country-path" d="M 470 55 L 600 45 L 750 50 L 850 60 L 860 85 L 800 90 L 720 85 L 640 75 L 560 80 L 500 80 L 470 72 Z"/>
+      <!-- Australia -->
+      <path class="country-path" d="M 780 310 L 850 300 L 900 315 L 920 350 L 910 390 L 880 415 L 840 420 L 800 405 L 775 375 L 770 345 Z"/>
+      <!-- UK / Ireland -->
+      <path class="country-path" d="M 370 90 L 385 85 L 390 98 L 383 110 L 372 108 Z"/>
+      <!-- Greenland -->
+      <path class="country-path" d="M 280 30 L 330 25 L 350 35 L 345 60 L 320 68 L 290 62 L 275 48 Z"/>
+
+      <!-- FLIGHT PATHS -->
+      <!-- NYC to London -->
+      <path class="path-line" id="path1" d="M 230 180 Q 290 140 400 175"/>
+      <!-- LA to Tokyo -->
+      <path class="path-line" id="path2" d="M 120 195 Q 80 140 700 175"/>
+      <!-- Miami to Dubai -->
+      <path class="path-line" id="path3" d="M 250 220 Q 460 120 640 210"/>
+      <!-- London to Singapore -->
+      <path class="path-line" id="path4" d="M 400 175 Q 500 130 760 240"/>
+      <!-- NYC to São Paulo -->
+      <path class="path-line" id="path5" d="M 230 180 Q 240 280 310 310"/>
+      <!-- Paris to Dubai -->
+      <path class="path-line" id="path6" d="M 420 168 Q 500 130 640 210"/>
+      <!-- Tokyo to Sydney -->
+      <path class="path-line" id="path7" d="M 700 175 Q 730 260 760 320"/>
+      <!-- LA to Miami -->
+      <path class="path-line" id="path8" d="M 120 195 Q 200 220 250 220"/>
+      <!-- Dubai to Mumbai -->
+      <path class="path-line" id="path9" d="M 640 210 Q 660 230 690 235"/>
+      <!-- London to NYC -->
+      <path class="path-line" id="path10" d="M 400 175 Q 330 155 230 180"/>
+      <!-- Singapore to Sydney -->
+      <path class="path-line" id="path11" d="M 760 240 Q 770 270 760 320"/>
+      <!-- Paris to NYC -->
+      <path class="path-line" id="path12" d="M 420 168 Q 340 150 230 180"/>
+
+      <!-- DESTINATION DOTS -->
+      <circle class="dest-dot" cx="230" cy="180" r="2"/> <!-- NYC -->
+      <circle class="dest-dot" cx="120" cy="195" r="2"/> <!-- LA -->
+      <circle class="dest-dot" cx="250" cy="220" r="2"/> <!-- Miami -->
+      <circle class="dest-dot" cx="400" cy="175" r="2"/> <!-- London -->
+      <circle class="dest-dot" cx="420" cy="168" r="2"/> <!-- Paris -->
+      <circle class="dest-dot" cx="440" cy="170" r="2"/> <!-- Frankfurt -->
+      <circle class="dest-dot" cx="640" cy="210" r="2"/> <!-- Dubai -->
+      <circle class="dest-dot" cx="690" cy="235" r="2"/> <!-- Mumbai -->
+      <circle class="dest-dot" cx="700" cy="175" r="2"/> <!-- Tokyo -->
+      <circle class="dest-dot" cx="760" cy="240" r="2"/> <!-- Singapore -->
+      <circle class="dest-dot" cx="760" cy="320" r="2"/> <!-- Sydney -->
+      <circle class="dest-dot" cx="310" cy="310" r="2"/> <!-- São Paulo -->
+      <circle class="dest-dot" cx="600" cy="120" r="2"/> <!-- Moscow -->
+      <circle class="dest-dot" cx="480" cy="155" r="2"/> <!-- Cairo -->
+      <circle class="dest-dot" cx="650" cy="270" r="2"/> <!-- Delhi -->
+    </svg>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-inner reveal">
+    <div class="testimonial-slide active" id="t1">
+      <p class="testimonial-quote">"In fifteen years of charter flying, I have never experienced service at this level. VEIL treats every flight as though it is your first and most important."</p>
+      <div class="testimonial-attr">— Jonathan Harwick, CEO</div>
+    </div>
+    <div class="testimonial-slide" id="t2">
+      <p class="testimonial-quote">"The attention to detail is extraordinary. From pre-flight preparation to landing, every element was curated perfectly."</p>
+      <div class="testimonial-attr">— Sophia Laurent, Creative Director</div>
+    </div>
+    <div class="testimonial-slide" id="t3">
+      <p class="testimonial-quote">"VEIL is not a charter service. It is a statement. Nothing else compares."</p>
+      <div class="testimonial-attr">— Marcus Okafor, Managing Partner</div>
+    </div>
+    <div class="testimonial-dots">
+      <div class="testimonial-dot active" onclick="goToTestimonial(0)"></div>
+      <div class="testimonial-dot" onclick="goToTestimonial(1)"></div>
+      <div class="testimonial-dot" onclick="goToTestimonial(2)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING SECTION -->
+<section id="book">
+  <div class="book-bg"></div>
+  <div class="book-content">
+    <h2 class="book-heading reveal">Book Your Flight.</h2>
+    <p class="book-sub reveal">Our team responds within minutes.</p>
+    <form class="book-form reveal" action="https://formspree.io/f/xaqayyrr" method="POST">
+      <input type="hidden" name="_subject" value="VEIL — Charter Booking Request">
+      <input type="hidden" name="source" value="aom-exhibit-3-veil">
+      <input type="text" name="from" placeholder="Departure City" autocomplete="off">
+      <input type="text" name="to" placeholder="Destination" autocomplete="off">
+      <input type="date" name="date">
+      <select name="passengers">
+        <option value="" disabled selected>Passengers</option>
+        <option>1</option><option>2</option><option>3</option><option>4</option>
+        <option>5</option><option>6</option><option>7</option><option>8</option>
+        <option>9</option><option>10</option><option>11</option><option>12</option>
+        <option>13</option><option>14</option><option>15</option><option>16</option>
+        <option>17</option><option>18</option><option>19</option><option>20</option>
+      </select>
+      <button type="submit" class="book-btn mag">Search Charter →</button>
+    </form>
+    <p class="book-concierge reveal">Or speak to our concierge: <a href="tel:+18888354500" style="color:inherit;text-decoration:none;">+1 (888) 835-4500</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-watermark">VEIL</div>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">VEIL</div>
+      <div class="footer-address">
+        Above the Ordinary.<br>
+        Global Private Charter.<br>
+        Concierge Service. Zero Compromise.<br><br>
+        fly@veilaviation.com<br>
+        +1 (888) 835-4500
+      </div>
+    </div>
+    <div>
+      <div class="footer-links">
+        <a href="#fleet">Airplanes</a>
+        <a href="#services">Services</a>
+        <a href="#fleet">Fleet</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#book">Book</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-contact">
+        <a href="mailto:fly@veilaviation.com">fly@veilaviation.com</a>
+        <a href="tel:+18888354500">+1 (888) 835-4500</a>
+      </div>
+      <div class="footer-socials">
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Veil Aviation &nbsp;·&nbsp; Wilmington, NC &nbsp;·&nbsp; Built by Altitude Odyssey Media LLC
+  </div>
+</footer>
+
+<!-- AOM PREVIEW NOTICE -->
+<div class="aom-notice">
+  <div class="aom-notice-left">
+    <span class="aom-exhibit">AOM Showcase Exhibit 03</span>
+    <span class="aom-client">VEIL Aviation — Fictional Demo</span>
+  </div>
+  <div class="aom-notice-right">
+    This is a premium website mockup built by Altitude Odyssey Media LLC. All content is fictional.
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   VEIL PRIVATE AVIATION — JavaScript
+═══════════════════════════════════════════════════════════════════ */
+
+/* ─── PRELOADER ──────────────────────────────────────────────────── */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const pl = document.getElementById('preloader');
+    pl.classList.add('hide');
+    setTimeout(() => { pl.style.display = 'none'; }, 900);
+  }, 2800);
+});
+
+/* ─── CUSTOM CURSOR ──────────────────────────────────────────────── */
+const dot  = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0;
+let rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX;
+  my = e.clientY;
+  dot.style.left = mx + 'px';
+  dot.style.top  = my + 'px';
+});
+
+(function lerpCursor() {
+  rx += (mx - rx) * 0.1;
+  ry += (my - ry) * 0.1;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(lerpCursor);
+})();
+
+// Mag hover state
+document.querySelectorAll('.mag').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('mag-hover'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('mag-hover'));
+});
+
+/* ─── MAGNETIC ELEMENTS ──────────────────────────────────────────── */
+document.querySelectorAll('.mag').forEach(el => {
+  el.addEventListener('mousemove', e => {
+    const rect = el.getBoundingClientRect();
+    const cx   = rect.left + rect.width / 2;
+    const cy   = rect.top  + rect.height / 2;
+    const dx   = e.clientX - cx;
+    const dy   = e.clientY - cy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const maxR = 100;
+    if (dist < maxR) {
+      const pull = (1 - dist / maxR) * 15;
+      el.style.transform = `translate(${(dx / dist) * pull}px, ${(dy / dist) * pull}px)`;
+    }
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = 'translate(0,0)';
+  });
+});
+
+/* ─── NAV SCROLL ─────────────────────────────────────────────────── */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+/* ─── HERO PARALLAX ──────────────────────────────────────────────── */
+const hero = document.getElementById('hero');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  hero.style.backgroundPosition = `center, center, center ${y * 0.3}px`;
+}, { passive: true });
+
+/* ─── HAMBURGER / MOBILE MENU ────────────────────────────────────── */
+const ham     = document.getElementById('hamburger');
+const mobMenu = document.getElementById('mobileMenu');
+
+ham.addEventListener('click', () => {
+  ham.classList.toggle('active');
+  mobMenu.classList.toggle('open');
+});
+
+function closeMobile() {
+  ham.classList.remove('active');
+  mobMenu.classList.remove('open');
+}
+
+/* ─── INTERSECTION OBSERVER — REVEAL ────────────────────────────── */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      el.classList.add('visible');
+      // Stagger children
+      const children = el.querySelectorAll(':scope > *');
+      children.forEach((child, i) => {
+        child.style.transitionDelay = (i * 0.1) + 's';
+      });
+      revealObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+/* ─── FLEET CARD TILT ────────────────────────────────────────────── */
+document.querySelectorAll('[data-tilt]').forEach(panel => {
+  panel.addEventListener('mousemove', e => {
+    const rect = panel.getBoundingClientRect();
+    const x    = (e.clientX - rect.left) / rect.width  - 0.5;
+    const y    = (e.clientY - rect.top)  / rect.height - 0.5;
+    panel.querySelector('img').style.transform =
+      `scale(1.04) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
+  });
+  panel.addEventListener('mouseleave', () => {
+    panel.querySelector('img').style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
+  });
+});
+
+/* ─── SVG MAP PATH ANIMATION ─────────────────────────────────────── */
+function initMapPaths() {
+  const paths = document.querySelectorAll('.path-line');
+  paths.forEach(path => {
+    const length = path.getTotalLength ? path.getTotalLength() : 1000;
+    path.style.strokeDasharray  = length;
+    path.style.strokeDashoffset = length;
+  });
+}
+initMapPaths();
+
+const mapObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const paths = document.querySelectorAll('.path-line');
+      paths.forEach((path, i) => {
+        setTimeout(() => {
+          path.style.transition = 'stroke-dashoffset 1.5s ease';
+          path.style.strokeDashoffset = '0';
+        }, i * 100);
+      });
+      mapObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+
+const mapContainer = document.getElementById('mapContainer');
+if (mapContainer) mapObserver.observe(mapContainer);
+
+/* ─── TESTIMONIALS CYCLING ───────────────────────────────────────── */
+const slides = document.querySelectorAll('.testimonial-slide');
+const tdots  = document.querySelectorAll('.testimonial-dot');
+let currentTestimonial = 0;
+
+function goToTestimonial(idx) {
+  slides[currentTestimonial].classList.remove('active');
+  tdots[currentTestimonial].classList.remove('active');
+  currentTestimonial = idx;
+  slides[currentTestimonial].classList.add('active');
+  tdots[currentTestimonial].classList.add('active');
+}
+
+setInterval(() => {
+  goToTestimonial((currentTestimonial + 1) % slides.length);
+}, 5000);
+
+/* ─── FOG CANVAS RAF LOOP ────────────────────────────────────────── */
+(function initFog() {
+  const canvas = document.getElementById('fog-canvas');
+  const ctx    = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const particles = [];
+  for (let i = 0; i < 50; i++) {
+    particles.push({
+      x:   Math.random() * window.innerWidth,
+      y:   Math.random() * window.innerHeight,
+      w:   300 + Math.random() * 300,
+      h:   100 + Math.random() * 100,
+      vx:  0.05 + Math.random() * 0.10,
+      vy: -0.02 + Math.random() * 0.04,
+      op:  0.015 + Math.random() * 0.025,
+    });
+  }
+
+  function drawFog() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.filter = 'blur(60px)';
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.ellipse(p.x, p.y, p.w / 2, p.h / 2, 0, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180,190,220,${p.op})`;
+      ctx.fill();
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x - p.w / 2 > canvas.width)  p.x = -p.w / 2;
+      if (p.x + p.w / 2 < 0)              p.x = canvas.width + p.w / 2;
+      if (p.y - p.h / 2 > canvas.height)  p.y = -p.h / 2;
+      if (p.y + p.h / 2 < 0)              p.y = canvas.height + p.h / 2;
+    });
+    ctx.filter = 'none';
+    requestAnimationFrame(drawFog);
+  }
+  drawFog();
+})();
+
+/* ─── SMOOTH ANCHOR SCROLL ───────────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>

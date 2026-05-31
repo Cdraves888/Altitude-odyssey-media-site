@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sea Blue Coffee & Ice Cream | Surf City, NC · Topsail Island</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sea-blue: #1a9fd4;
+      --yellow: #f5b800;
+      --light-blue: #e8f7fd;
+      --dark: #1a2535;
+      --text: #2d3748;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: transparent;
+      transition: background 0.35s ease, box-shadow 0.35s ease;
+      padding: 0 40px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #nav.scrolled {
+      background: var(--white);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.09);
+    }
+
+    .nav-logo img {
+      height: 54px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--dark);
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    #nav:not(.scrolled) .nav-links a {
+      color: var(--white);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+
+    .nav-links a:hover { color: var(--sea-blue); }
+    #nav:not(.scrolled) .nav-links a:hover { color: var(--yellow); }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-phone {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--dark);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    #nav:not(.scrolled) .nav-phone {
+      color: var(--white);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+
+    .btn-order {
+      background: var(--sea-blue);
+      color: var(--white) !important;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-order:hover {
+      background: #0f85b4;
+      transform: translateY(-1px);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2.5px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    #nav:not(.scrolled) .hamburger span { background: var(--white); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: var(--white);
+      padding: 20px 30px 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      z-index: 999;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--dark);
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--light-blue);
+    }
+
+    .mobile-menu a:last-child { border: none; }
+
+    /* ─── HERO ────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://static.wixstatic.com/media/eb5f5b_f1909fb251f14596b8ac7fb6580b4c00~mv2.jpg/v1/fill/w_1400,q_90/eb5f5b_f1909fb251f14596b8ac7fb6580b4c00~mv2.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 20px;
+      max-width: 780px;
+    }
+
+    .award-badge {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--dark);
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 8px 20px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 18px rgba(245,184,0,0.4);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .hero-headline-1 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      color: var(--sea-blue);
+      line-height: 1.1;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.12);
+    }
+
+    .hero-headline-2 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      color: var(--dark);
+      line-height: 1.15;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 600;
+      color: var(--dark);
+      text-shadow: 0 1px 8px rgba(255,255,255,0.7);
+      margin-bottom: 36px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--sea-blue);
+      color: var(--white);
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(26,159,212,0.35);
+    }
+
+    .btn-primary:hover {
+      background: #0f85b4;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(26,159,212,0.45);
+    }
+
+    .btn-outline-yellow {
+      border: 2.5px solid var(--yellow);
+      color: var(--dark);
+      padding: 14px 34px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      background: rgba(245,184,0,0.12);
+    }
+
+    .btn-outline-yellow:hover {
+      background: var(--yellow);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.7;
+    }
+
+    .scroll-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--dark);
+      border-radius: 50%;
+      animation: scrollBounce 1.4s ease-in-out infinite;
+    }
+
+    .scroll-dot:nth-child(2) { animation-delay: 0.15s; }
+    .scroll-dot:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes scrollBounce {
+      0%, 100% { opacity: 0.3; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(4px); }
+    }
+
+    /* ─── MARQUEE ─────────────────────────── */
+    .marquee-wrap {
+      background: var(--sea-blue);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-track span {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 28px;
+    }
+
+    .marquee-track span.sep {
+      color: var(--yellow);
+      font-size: 1rem;
+      padding: 0 8px;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION BASE ────────────────────── */
+    section {
+      padding: 96px 40px;
+    }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sea-blue);
+      margin-bottom: 12px;
+    }
+
+    .section-heading {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      color: var(--dark);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      font-size: 1.1rem;
+      color: #5a6a7e;
+      line-height: 1.75;
+      max-width: 640px;
+    }
+
+    /* ─── FADE-UP ANIMATION ───────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-up.delay-1 { transition-delay: 0.12s; }
+    .fade-up.delay-2 { transition-delay: 0.24s; }
+    .fade-up.delay-3 { transition-delay: 0.36s; }
+
+    /* ─── ABOUT ───────────────────────────── */
+    #about {
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .about-img {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.13);
+      aspect-ratio: 4/3;
+    }
+
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .about-img:hover img { transform: scale(1.04); }
+
+    .about-text {
+      padding: 8px 0;
+    }
+
+    .no-secret {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--sea-blue);
+      margin: 28px 0 24px;
+      line-height: 1.2;
+    }
+
+    .about-copy {
+      font-size: 1.05rem;
+      line-height: 1.82;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .award-pills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .award-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--light-blue);
+      border: 1.5px solid rgba(26,159,212,0.25);
+      color: var(--dark);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 9px 18px;
+      border-radius: 50px;
+    }
+
+    .award-pill .trophy { font-size: 1rem; }
+
+    /* ─── BEVERAGES ───────────────────────── */
+    #beverages {
+      background: var(--light-blue);
+    }
+
+    .bev-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .bev-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .bev-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .bev-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.13);
+    }
+
+    .bev-card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bev-card-body {
+      padding: 28px 28px 32px;
+    }
+
+    .bev-card-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .bev-card-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.35rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .bev-card-desc {
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: #5a6a7e;
+    }
+
+    .bev-card-tag {
+      display: inline-block;
+      background: var(--light-blue);
+      color: var(--sea-blue);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-top: 18px;
+    }
+
+    /* ─── ICE CREAM ───────────────────────── */
+    #ice-cream {
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .ic-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://static.wixstatic.com/media/eb5f5b_de6919e4a5914c10bea90b8383e30da6~mv2.jpg/v1/fill/w_900,q_90/eb5f5b_de6919e4a5914c10bea90b8383e30da6~mv2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .ic-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,37,53,0.78) 0%, rgba(26,159,212,0.62) 100%);
+    }
+
+    .ic-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 120px 40px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .ic-kicker {
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 20px;
+    }
+
+    .ic-headline {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .ic-sub {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .ic-award {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245,184,0,0.18);
+      border: 1.5px solid var(--yellow);
+      color: var(--yellow);
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 10px 22px;
+      border-radius: 50px;
+      margin: 20px 0 32px;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-yellow-solid {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--dark);
+      padding: 16px 38px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(245,184,0,0.35);
+    }
+
+    .btn-yellow-solid:hover {
+      background: #e5aa00;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(245,184,0,0.45);
+    }
+
+    /* ─── GIFT SHOP ───────────────────────── */
+    #gift-shop {
+      background: var(--white);
+    }
+
+    .gift-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .gift-text {
+      padding-top: 16px;
+    }
+
+    .gift-copy {
+      font-size: 1.05rem;
+      line-height: 1.82;
+      color: var(--text);
+      margin-bottom: 36px;
+    }
+
+    .gift-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .gift-img {
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .gift-img:first-child {
+      grid-column: 1 / -1;
+      aspect-ratio: 2/1;
+    }
+
+    .gift-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .gift-img:hover img { transform: scale(1.06); }
+
+    /* ─── FIND US ─────────────────────────── */
+    #find-us {
+      background: var(--light-blue);
+    }
+
+    .find-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .find-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .find-map {
+      grid-column: 1 / 3;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      height: 380px;
+    }
+
+    .find-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .find-info {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .find-block h4 {
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sea-blue);
+      margin-bottom: 10px;
+    }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .hours-table td {
+      padding: 5px 0;
+      font-size: 0.93rem;
+      color: var(--text);
+    }
+
+    .hours-table td:last-child {
+      text-align: right;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .hours-table tr:not(:last-child) td {
+      border-bottom: 1px solid rgba(26,159,212,0.15);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-item:hover { color: var(--sea-blue); }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--sea-blue);
+      color: var(--white);
+      padding: 9px 18px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .social-btn:hover {
+      background: #0f85b4;
+      transform: translateY(-1px);
+    }
+
+    /* ─── FOOTER ──────────────────────────── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.85);
+      padding: 64px 40px 36px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-brand img {
+      height: 58px;
+      width: auto;
+      margin-bottom: 18px;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    .footer-tagline {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.15rem;
+      color: var(--yellow);
+      margin-bottom: 10px;
+    }
+
+    .footer-desc {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      opacity: 0.7;
+      max-width: 320px;
+    }
+
+    .footer-col h5 {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sea-blue);
+      margin-bottom: 16px;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      font-size: 0.9rem;
+      line-height: 1.85;
+      opacity: 0.75;
+      text-decoration: none;
+      color: rgba(255,255,255,0.75);
+      display: block;
+      transition: opacity 0.2s;
+    }
+
+    .footer-col a:hover { opacity: 1; }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .footer-social-icon {
+      width: 38px;
+      height: 38px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .footer-social-icon:hover {
+      background: var(--sea-blue);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.83rem;
+      opacity: 0.55;
+    }
+
+    /* ─── AOM NOTICE ──────────────────────── */
+    .aom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2000;
+      background: var(--white);
+      border-top: 2px solid var(--sea-blue);
+      padding: 10px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    }
+
+    .aom-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .aom-badge {
+      background: var(--sea-blue);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .aom-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--dark);
+    }
+
+    .aom-right {
+      font-size: 0.8rem;
+      color: #78909c;
+      text-align: right;
+      max-width: 380px;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────── */
+    @media (max-width: 960px) {
+      section { padding: 72px 24px; }
+      #nav { padding: 0 24px; }
+
+      .nav-links, .nav-phone { display: none; }
+      .hamburger { display: flex; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .bev-cards { grid-template-columns: 1fr; }
+      .gift-inner { grid-template-columns: 1fr; gap: 40px; }
+      .find-grid { grid-template-columns: 1fr; }
+      .find-map { grid-column: 1; height: 280px; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+
+      .aom-bar { flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 20px; }
+      .aom-right { max-width: 100%; text-align: left; }
+    }
+
+    @media (max-width: 640px) {
+      .hero-btns { flex-direction: column; align-items: center; }
+      .footer-bottom { flex-direction: column; }
+    }
+
+    /* Extra padding so footer isn't hidden by AOM bar */
+    body { padding-bottom: 56px; }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────── -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <a href="#hero" class="nav-logo">
+    <img src="https://static.wixstatic.com/media/eb5f5b_e895313a8e0f413b94e3996aea0bf5eb~mv2.png/v1/fill/w_300,q_90/seablue-new-SM.png" alt="Sea Blue Coffee & Ice Cream" />
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#about">This Is Us</a></li>
+    <li><a href="#beverages">Beverages</a></li>
+    <li><a href="#ice-cream">Ice Cream</a></li>
+    <li><a href="#gift-shop">Gifts</a></li>
+    <li><a href="#find-us">Find Us</a></li>
+  </ul>
+
+  <div class="nav-cta">
+    <a href="tel:9105410595" class="nav-phone">(910) 541-0595</a>
+    <a href="tel:9105410595" class="btn-order">Order Now</a>
+  </div>
+
+  <button class="hamburger" aria-label="Open menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">This Is Us</a>
+  <a href="#beverages" onclick="toggleMenu()">Beverages</a>
+  <a href="#ice-cream" onclick="toggleMenu()">Award Winning Ice Cream</a>
+  <a href="#gift-shop" onclick="toggleMenu()">Gifts</a>
+  <a href="#find-us" onclick="toggleMenu()">Find Us</a>
+  <a href="tel:9105410595" style="color:var(--sea-blue)" onclick="toggleMenu()">(910) 541-0595</a>
+</div>
+
+<!-- ─── HERO ─────────────────────────────────────── -->
+<section id="hero" role="banner">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="award-badge">🏆 Topsail's #1 Ice Cream 2025</div>
+    <div class="hero-headline-1">Award Winning</div>
+    <div class="hero-headline-2">Ice Cream &amp; Coffee</div>
+    <p class="hero-sub">Family-owned shop in the heart of Surf City on Topsail Island 🌊</p>
+    <div class="hero-btns">
+      <a href="#beverages" class="btn-primary">View Our Menu</a>
+      <a href="#find-us" class="btn-outline-yellow">Find Us</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <div class="scroll-dot"></div>
+    <div class="scroll-dot"></div>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ───────────────────────────────────── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Award Winning Ice Cream</span><span class="sep">·</span>
+    <span>Locally Roasted Coffee</span><span class="sep">·</span>
+    <span>Surf City NC</span><span class="sep">·</span>
+    <span>Topsail Island</span><span class="sep">·</span>
+    <span>Family Owned</span><span class="sep">·</span>
+    <span>Open Daily 7AM–9PM</span><span class="sep">·</span>
+    <span>Award Winning Ice Cream</span><span class="sep">·</span>
+    <span>Locally Roasted Coffee</span><span class="sep">·</span>
+    <span>Surf City NC</span><span class="sep">·</span>
+    <span>Topsail Island</span><span class="sep">·</span>
+    <span>Family Owned</span><span class="sep">·</span>
+    <span>Open Daily 7AM–9PM</span><span class="sep">·</span>
+  </div>
+</div>
+
+<!-- ─── ABOUT ─────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img fade-up">
+        <img
+          src="https://static.wixstatic.com/media/eb5f5b_deb373d3132d4aaab6ebaf46fdaabde3~mv2.jpg/v1/fill/w_900,q_90/eb5f5b_deb373d3132d4aaab6ebaf46fdaabde3~mv2.jpg"
+          alt="Inside Sea Blue Coffee & Ice Cream shop"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="about-text fade-up delay-1">
+        <p class="section-label">This Is Us</p>
+        <h2 class="section-heading">This Is Us.</h2>
+        <div class="no-secret">"No Secret Ingredients."</div>
+        <p class="about-copy">
+          We are a Family Owned &amp; Operated Coffee and Ice Cream Shop located on Topsail Island.
+          Our Shop, which offers a laid-back, beach vibe, has become one of the most popular spots
+          for Coffee and Smoothies on the Island. We Proudly Serve Super Premium Award-Winning
+          Ice Cream Crafted in Madison, Wisconsin.
+        </p>
+        <p class="about-copy">
+          Located in the heart of Surf City, we're just a short stroll from beach access 18 and 19.
+          Come see us — locally roasted coffee, premium ice cream, unique gifts, and a whole lot of island love. 🏖️
+        </p>
+        <div class="award-pills">
+          <div class="award-pill"><span class="trophy">🏆</span> Topsail's Top Choice 2025</div>
+          <div class="award-pill">🥇 1st Place — Ice Cream</div>
+          <div class="award-pill">🥈 2nd Place — Coffee Shop</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BEVERAGES ─────────────────────────────────── -->
+<section id="beverages">
+  <div class="container">
+    <div class="bev-header fade-up">
+      <p class="section-label">What We Brew</p>
+      <h2 class="section-heading">Hot &amp; Cold Beverages</h2>
+      <p class="section-sub" style="margin:0 auto;">
+        From our locally roasted drip coffee to hand-crafted frappes and smooth nitro cold brew — every sip is a beach day in a cup.
+      </p>
+    </div>
+
+    <div class="bev-cards">
+      <div class="bev-card fade-up delay-1">
+        <img
+          class="bev-card-img"
+          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=85"
+          alt="Fresh Brewed Coffee"
+          loading="lazy"
+        />
+        <div class="bev-card-body">
+          <span class="bev-card-icon">☕</span>
+          <div class="bev-card-title">Fresh Brewed Coffee</div>
+          <p class="bev-card-desc">Locally roasted coffee for a luxurious taste and delightful aroma. Lattes, cappuccinos, and drip — your morning ritual, island-style.</p>
+          <span class="bev-card-tag">Hot &amp; Cold</span>
+        </div>
+      </div>
+
+      <div class="bev-card fade-up delay-2">
+        <img
+          class="bev-card-img"
+          src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=900&q=85"
+          alt="Frozen Frappes"
+          loading="lazy"
+        />
+        <div class="bev-card-body">
+          <span class="bev-card-icon">🥤</span>
+          <div class="bev-card-title">Frozen Frappes</div>
+          <p class="bev-card-desc">Blended to perfection, the perfect Topsail Island treat. Rich, creamy, and refreshing — the ultimate cool-down after a day on the beach.</p>
+          <span class="bev-card-tag">Frozen</span>
+        </div>
+      </div>
+
+      <div class="bev-card fade-up delay-3">
+        <img
+          class="bev-card-img"
+          src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=900&q=85"
+          alt="Nitro Cold Brew"
+          loading="lazy"
+        />
+        <div class="bev-card-body">
+          <span class="bev-card-icon">⚡</span>
+          <div class="bev-card-title">Nitro Cold Brew</div>
+          <p class="bev-card-desc">Smooth, creamy, and refreshing. Cold brew on tap — nitrogen-infused for that velvety cascade and naturally sweet finish. No sugar needed.</p>
+          <span class="bev-card-tag">Cold Brew On Tap</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ICE CREAM ─────────────────────────────────── -->
+<section id="ice-cream">
+  <div class="ic-bg"></div>
+  <div class="ic-overlay"></div>
+  <div class="ic-content fade-up">
+    <p class="ic-kicker">🍦 Super Premium · National Award-Winning</p>
+    <h2 class="ic-headline">Award Winning<br>Ice Cream</h2>
+    <p class="ic-sub">Crafted in Madison, Wisconsin — served with pride in Surf City, NC.</p>
+    <p class="ic-sub">Every scoop is a nationally recognized flavor. Every visit is a memory.</p>
+    <div class="ic-award">🏆 Voted Topsail's Top Choice 2025 · 1st Place Ice Cream</div>
+    <a href="#find-us" class="btn-yellow-solid">See All Flavors →</a>
+  </div>
+</section>
+
+<!-- ─── GIFT SHOP ──────────────────────────────────── -->
+<section id="gift-shop">
+  <div class="container">
+    <div class="gift-inner">
+      <div class="gift-text fade-up">
+        <p class="section-label">Shop With Us</p>
+        <h2 class="section-heading">Visit Our Gift Shop</h2>
+        <p class="gift-copy">
+          Unique jewelry, thoughtful gifts, and beautiful locally crafted art. Whether you're looking for the perfect souvenir or a meaningful keepsake, our curated collection captures the spirit of Topsail Island.
+        </p>
+        <p class="gift-copy">
+          Perfect for your Topsail Island memories — something special to take home or give to someone you love. 🎁
+        </p>
+        <a href="#find-us" class="btn-primary" style="display:inline-block;margin-top:8px;">Come Visit Us</a>
+      </div>
+
+      <div class="gift-grid fade-up delay-1">
+        <div class="gift-img">
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=85"
+            alt="Topsail Island beach"
+            loading="lazy"
+          />
+        </div>
+        <div class="gift-img">
+          <img
+            src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=900&q=85"
+            alt="Ice cream"
+            loading="lazy"
+          />
+        </div>
+        <div class="gift-img">
+          <img
+            src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=900&q=85"
+            alt="Coffee shop"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FIND US ────────────────────────────────────── -->
+<section id="find-us">
+  <div class="container">
+    <div class="find-header fade-up">
+      <p class="section-label">Come See Us</p>
+      <h2 class="section-heading">Drop Down by The Sea Blue</h2>
+      <p class="section-sub" style="margin:0 auto;">
+        We're in the heart of Surf City — just a short stroll from beach access 18 and 19. Open every day, 7am to 9pm.
+      </p>
+    </div>
+
+    <div class="find-grid">
+      <div class="find-map fade-up">
+        <iframe
+          src="https://maps.google.com/maps?q=116C+S+Shore+Dr+Surf+City+NC+28445&output=embed"
+          title="Sea Blue Coffee & Ice Cream location map"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <div class="find-info fade-up delay-1">
+        <div class="find-block">
+          <h4>Hours</h4>
+          <table class="hours-table">
+            <tbody>
+              <tr><td>Monday</td><td>7:00 AM – 9:00 PM</td></tr>
+              <tr><td>Tuesday</td><td>7:00 AM – 9:00 PM</td></tr>
+              <tr><td>Wednesday</td><td>7:00 AM – 9:00 PM</td></tr>
+              <tr><td>Thursday</td><td>7:00 AM – 9:00 PM</td></tr>
+              <tr><td>Friday</td><td>7:00 AM – 9:00 PM</td></tr>
+              <tr><td>Saturday</td><td>7:00 AM – 9:00 PM</td></tr>
+              <tr><td>Sunday</td><td>7:00 AM – 9:00 PM</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="find-block">
+          <h4>Contact</h4>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <a href="tel:9105410595" class="contact-item">
+              <div class="contact-icon">📞</div>
+              <span>(910) 541-0595</span>
+            </a>
+            <a href="mailto:SeaBlueSurfCity@gmail.com" class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <span>SeaBlueSurfCity@gmail.com</span>
+            </a>
+            <div class="contact-item" style="cursor:default;">
+              <div class="contact-icon">📍</div>
+              <span>116C S. Shore Drive<br>Surf City, NC 28445</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="find-block">
+          <h4>Follow Along</h4>
+          <div class="social-row">
+            <a href="https://instagram.com" class="social-btn" target="_blank" rel="noopener">
+              📸 Instagram
+            </a>
+            <a href="https://facebook.com" class="social-btn" target="_blank" rel="noopener">
+              👍 Facebook
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand fade-up">
+        <img
+          src="https://static.wixstatic.com/media/eb5f5b_e895313a8e0f413b94e3996aea0bf5eb~mv2.png/v1/fill/w_300,q_90/seablue-new-SM.png"
+          alt="Sea Blue Coffee & Ice Cream"
+        />
+        <div class="footer-tagline">Award Winning Ice Cream &amp; Coffee</div>
+        <p class="footer-desc">
+          Family-owned coffee and ice cream shop on Topsail Island. Laid-back beach vibes, premium ice cream, locally roasted coffee, and island gifts.
+        </p>
+        <div class="footer-social" style="margin-top:20px;">
+          <a href="https://instagram.com" class="footer-social-icon" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+          <a href="https://facebook.com" class="footer-social-icon" target="_blank" rel="noopener" aria-label="Facebook">👍</a>
+          <a href="mailto:SeaBlueSurfCity@gmail.com" class="footer-social-icon" aria-label="Email">✉️</a>
+        </div>
+      </div>
+
+      <div class="footer-col fade-up delay-1">
+        <h5>Explore</h5>
+        <a href="#about">This Is Us</a>
+        <a href="#beverages">Beverages</a>
+        <a href="#ice-cream">Award Winning Ice Cream</a>
+        <a href="#gift-shop">Gift Shop</a>
+        <a href="#find-us">Find Us</a>
+      </div>
+
+      <div class="footer-col fade-up delay-2">
+        <h5>Visit</h5>
+        <p>116C S. Shore Drive<br>Surf City, NC 28445</p>
+        <br>
+        <h5 style="margin-bottom:10px;">Hours</h5>
+        <p>Open Every Day<br>7:00 AM – 9:00 PM</p>
+        <br>
+        <a href="tel:9105410595">(910) 541-0595</a>
+        <a href="mailto:SeaBlueSurfCity@gmail.com">SeaBlueSurfCity@gmail.com</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Sea Blue Coffee &amp; Ice Cream · 116C S. Shore Drive, Surf City, NC 28445</span>
+      <span>Voted Topsail's Top Choice 2025 · 1st Place Ice Cream · 2nd Place Coffee Shop</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── AOM PREVIEW NOTICE ─────────────────────────── -->
+<div class="aom-bar" role="complementary" aria-label="AOM Showcase Notice">
+  <div class="aom-left">
+    <span class="aom-badge">AOM Showcase</span>
+    <span class="aom-title">Sea Blue Coffee &amp; Ice Cream — Client Preview</span>
+  </div>
+  <div class="aom-right">
+    This is a custom design preview built by Altitude Odyssey Media LLC. All content belongs to Sea Blue.
+  </div>
+</div>
+
+<!-- ─── SCRIPTS ───────────────────────────────────── -->
+<script>
+  // Scroll nav behavior
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  // Mobile menu toggle
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+
+  // Close mobile menu on outside click
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.querySelector('.hamburger');
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
+  // IntersectionObserver fade-up
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

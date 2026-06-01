@@ -180,6 +180,7 @@
     .hero-overlay {
       position: absolute;
       inset: 0;
+      z-index: 1;
       background: rgba(255,255,255,0.15);
     }
 
@@ -210,21 +211,23 @@
       50% { transform: translateY(-6px); }
     }
 
-    .hero-headline-1 {
-      font-family: 'Pacifico', cursive;
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      color: var(--sea-blue);
-      line-height: 1.1;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.12);
+    .hero-headline {
+      line-height: 1.05;
+      margin-bottom: 16px;
     }
-
-    .hero-headline-2 {
+    .hero-headline .line1 {
+      display: block;
       font-family: 'Pacifico', cursive;
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      color: var(--dark);
-      line-height: 1.15;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      color: #1a9fd4;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+    .hero-headline .line2 {
+      display: block;
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      color: #ffffff;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
     }
 
     .hero-sub {
@@ -954,6 +957,10 @@
       .aom-right { max-width: 100%; text-align: left; }
     }
 
+    @media (max-width: 768px) {
+      footer > div:first-child > div { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 640px) {
       .hero-btns { flex-direction: column; align-items: center; }
       .footer-bottom { flex-direction: column; }
@@ -1005,8 +1012,10 @@
 
   <div class="hero-content">
     <div class="award-badge">🏆 Topsail's #1 Ice Cream 2025</div>
-    <div class="hero-headline-1">Award Winning</div>
-    <div class="hero-headline-2">Ice Cream &amp; Coffee</div>
+    <div class="hero-headline">
+      <span class="line1">Award Winning</span>
+      <span class="line2">Ice Cream &amp; Coffee</span>
+    </div>
     <p class="hero-sub">Family-owned shop in the heart of Surf City on Topsail Island 🌊</p>
     <div class="hero-btns">
       <a href="#beverages" class="btn-primary">View Our Menu</a>
@@ -1264,50 +1273,48 @@
 </section>
 
 <!-- ─── FOOTER ────────────────────────────────────── -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand fade-up">
-        <img
-          src="https://static.wixstatic.com/media/eb5f5b_e895313a8e0f413b94e3996aea0bf5eb~mv2.png/v1/fill/w_300,q_90/seablue-new-SM.png"
-          alt="Sea Blue Coffee & Ice Cream"
-        />
-        <div class="footer-tagline">Award Winning Ice Cream &amp; Coffee</div>
-        <p class="footer-desc">
-          Family-owned coffee and ice cream shop on Topsail Island. Laid-back beach vibes, premium ice cream, locally roasted coffee, and island gifts.
-        </p>
-        <div class="footer-social" style="margin-top:20px;">
-          <a href="https://instagram.com" class="footer-social-icon" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
-          <a href="https://facebook.com" class="footer-social-icon" target="_blank" rel="noopener" aria-label="Facebook">👍</a>
-          <a href="mailto:SeaBlueSurfCity@gmail.com" class="footer-social-icon" aria-label="Email">✉️</a>
-        </div>
-      </div>
+<footer style="background:#1a9fd4;color:white;padding:60px 60px 32px;">
+  <!-- Top: 3 columns -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;max-width:1200px;margin:0 auto 40px;align-items:start;">
 
-      <div class="footer-col fade-up delay-1">
-        <h5>Explore</h5>
-        <a href="#about">This Is Us</a>
-        <a href="#beverages">Beverages</a>
-        <a href="#ice-cream">Award Winning Ice Cream</a>
-        <a href="#gift-shop">Gift Shop</a>
-        <a href="#find-us">Find Us</a>
-      </div>
-
-      <div class="footer-col fade-up delay-2">
-        <h5>Visit</h5>
-        <p>116C S. Shore Drive<br>Surf City, NC 28445</p>
-        <br>
-        <h5 style="margin-bottom:10px;">Hours</h5>
-        <p>Open Every Day<br>7:00 AM – 9:00 PM</p>
-        <br>
-        <a href="tel:9105410595">(910) 541-0595</a>
-        <a href="mailto:SeaBlueSurfCity@gmail.com">SeaBlueSurfCity@gmail.com</a>
+    <!-- Col 1: Brand -->
+    <div>
+      <img src="https://static.wixstatic.com/media/eb5f5b_e895313a8e0f413b94e3996aea0bf5eb~mv2.png" alt="Sea Blue Logo" style="height:70px;margin-bottom:12px;display:block;">
+      <div style="font-family:'Pacifico',cursive;font-size:1.2rem;margin-bottom:4px;">Sea Blue Coffee &amp; Ice Cream</div>
+      <div style="font-family:'Nunito',sans-serif;font-size:0.85rem;opacity:0.85;">Surf City's favorite coffee &amp; ice cream shop 🌊</div>
+      <div style="margin-top:16px;display:flex;gap:12px;">
+        <a href="https://www.facebook.com/seablueco" target="_blank" rel="noopener noreferrer" style="background:rgba(255,255,255,0.2);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:white;font-size:0.9rem;">f</a>
+        <a href="https://www.instagram.com/seablueco/" target="_blank" rel="noopener noreferrer" style="background:rgba(255,255,255,0.2);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:white;font-size:0.9rem;">ig</a>
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <span>© 2026 Sea Blue Coffee &amp; Ice Cream · 116C S. Shore Drive, Surf City, NC 28445</span>
-      <span>Voted Topsail's Top Choice 2025 · 1st Place Ice Cream · 2nd Place Coffee Shop</span>
+    <!-- Col 2: Quick Links -->
+    <div>
+      <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;opacity:0.7;">Quick Links</div>
+      <nav style="display:flex;flex-direction:column;gap:10px;">
+        <a href="#this-is-us" style="color:white;text-decoration:none;font-family:'Nunito',sans-serif;font-size:0.9rem;opacity:0.9;">This Is Us</a>
+        <a href="#menu" style="color:white;text-decoration:none;font-family:'Nunito',sans-serif;font-size:0.9rem;opacity:0.9;">Our Menu</a>
+        <a href="#ice-cream" style="color:white;text-decoration:none;font-family:'Nunito',sans-serif;font-size:0.9rem;opacity:0.9;">Award Winning Ice Cream</a>
+        <a href="#gifts" style="color:white;text-decoration:none;font-family:'Nunito',sans-serif;font-size:0.9rem;opacity:0.9;">Gifts &amp; Souvenirs</a>
+        <a href="#find-us" style="color:white;text-decoration:none;font-family:'Nunito',sans-serif;font-size:0.9rem;opacity:0.9;">Find Us</a>
+      </nav>
     </div>
+
+    <!-- Col 3: Contact & Hours -->
+    <div>
+      <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;opacity:0.7;">Contact &amp; Hours</div>
+      <div style="font-family:'Nunito',sans-serif;font-size:0.9rem;line-height:2;opacity:0.9;">
+        <div>📍 116C S. Shore Drive, Surf City, NC 28445</div>
+        <div>📞 <a href="tel:9105410595" style="color:white;text-decoration:none;">(910) 541-0595</a></div>
+        <div>✉️ <a href="mailto:SeaBlueSurfCity@gmail.com" style="color:white;text-decoration:none;">SeaBlueSurfCity@gmail.com</a></div>
+        <div style="margin-top:8px;font-weight:700;">Hours: Open Daily 7am – 9pm 🌊</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom: copyright -->
+  <div style="border-top:1px solid rgba(255,255,255,0.2);padding-top:24px;max-width:1200px;margin:0 auto;text-align:center;font-family:'Nunito',sans-serif;font-size:0.8rem;opacity:0.7;">
+    © 2026 Sea Blue Coffee &amp; Ice Cream · 116C S. Shore Drive, Surf City, NC 28445 · (910) 541-0595
   </div>
 </footer>
 

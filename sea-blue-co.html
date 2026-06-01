@@ -961,15 +961,50 @@
 
     /* Extra padding so footer isn't hidden by AOM bar */
     body { padding-bottom: 56px; }
+
+    /* ─── FULL MENU GRID ─────────────────────── */
+    .menu-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; max-width:1100px; margin:2rem auto 0; }
+    @media(max-width:768px){ .menu-grid { grid-template-columns:1fr; } }
+    .menu-card { background:#f0f9ff; border:2px solid #bee3f8; border-radius:12px; padding:1.75rem; }
+    .menu-cat { font-family:'Pacifico',cursive; font-size:1.2rem; color:#1a9fd4; margin-bottom:1rem; }
+    .menu-list { list-style:none; padding:0; }
+    .menu-list li { font-family:'Nunito',sans-serif; font-size:0.9rem; color:#2d3748; padding:5px 0; border-bottom:1px solid rgba(26,159,212,0.1); line-height:1.4; }
+    .menu-list li:last-child { border-bottom:none; }
+    .menu-list li strong { color:#1a6fa8; }
+    .menu-list li span { color:#718096; font-style:italic; }
+    .menu-extras { font-family:'Nunito',sans-serif; font-size:0.82rem; color:#718096; font-style:italic; margin-top:0.75rem; padding-top:0.75rem; border-top:1px dashed #bee3f8; }
   </style>
 </head>
 <body>
 
 <!-- ─── NAV ─────────────────────────────────────── -->
 <nav id="nav" role="navigation" aria-label="Main navigation">
-  <a href="#hero" class="nav-logo">
-    <img src="https://static.wixstatic.com/media/eb5f5b_e895313a8e0f413b94e3996aea0bf5eb~mv2.png/v1/fill/w_300,q_90/seablue-new-SM.png" alt="Sea Blue Coffee & Ice Cream" />
-  </a>
+  <div class="nav-logo" style="display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="window.scrollTo(0,0)">
+    <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer blue ring -->
+      <circle cx="26" cy="26" r="25" fill="#1a6fa8" stroke="#0d4f7a" stroke-width="1.5"/>
+      <!-- Inner teal/ocean bg -->
+      <circle cx="26" cy="26" r="22" fill="#2196c4"/>
+      <!-- Sandy bottom -->
+      <ellipse cx="26" cy="42" rx="22" ry="9" fill="#d4a843"/>
+      <!-- White wave crest -->
+      <path d="M4 22 Q10 14 18 20 Q22 23 26 19 Q30 15 36 20 Q42 25 48 20 L48 26 Q42 22 36 26 Q30 30 26 26 Q22 22 18 26 Q12 30 4 26 Z" fill="white" opacity="0.9"/>
+      <!-- Blue wave body -->
+      <path d="M4 24 Q10 18 18 22 Q22 24 26 21 Q30 18 36 22 Q42 26 48 22 L48 42 Q40 44 26 44 Q12 44 4 42 Z" fill="#1565a0"/>
+      <!-- Yellow banner -->
+      <rect x="4" y="30" width="44" height="10" rx="2" fill="#f5b800"/>
+      <!-- "SEA BLUE" text -->
+      <text x="26" y="28" text-anchor="middle" font-family="Arial Black, sans-serif" font-weight="900" font-size="9" fill="white" letter-spacing="0.5">SEA BLUE</text>
+      <!-- "COFFEE & ICE CREAM" on banner -->
+      <text x="26" y="37.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="5.5" fill="#0d4f7a" letter-spacing="0.2">COFFEE &amp; ICE CREAM</text>
+      <!-- "SURF CITY, NC" at bottom -->
+      <text x="26" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-weight="600" font-size="4.5" fill="#0d4f7a" letter-spacing="0.5">SURF CITY, NC</text>
+    </svg>
+    <div>
+      <div style="font-family:'Pacifico',cursive;font-size:1.15rem;color:#1a9fd4;line-height:1.1;">Sea Blue</div>
+      <div style="font-family:'Nunito',sans-serif;font-size:0.6rem;color:#2d3748;letter-spacing:0.08em;text-transform:uppercase;">Coffee &amp; Ice Cream · Surf City, NC</div>
+    </div>
+  </div>
 
   <ul class="nav-links">
     <li><a href="#about">This Is Us</a></li>
@@ -1086,51 +1121,60 @@
       </p>
     </div>
 
-    <div class="bev-cards">
-      <div class="bev-card fade-up delay-1">
-        <img
-          class="bev-card-img"
-          src="https://static.wixstatic.com/media/eb5f5b_deb373d3132d4aaab6ebaf46fdaabde3~mv2.jpg"
-          alt="Fresh Brewed Coffee"
-          loading="lazy"
-        />
-        <div class="bev-card-body">
-          <span class="bev-card-icon">☕</span>
-          <div class="bev-card-title">Fresh Brewed Coffee</div>
-          <p class="bev-card-desc">Locally roasted coffee for a luxurious taste and delightful aroma. Lattes, cappuccinos, and drip — your morning ritual, island-style.</p>
-          <span class="bev-card-tag">Hot &amp; Cold</span>
-        </div>
+    <div class="menu-grid">
+
+      <!-- HOT COFFEE & ESPRESSO -->
+      <div class="menu-card fade-up delay-1">
+        <h3 class="menu-cat">☕ Hot Coffee &amp; Espresso</h3>
+        <ul class="menu-list">
+          <li><strong>House Brew</strong></li>
+          <li><strong>Espresso</strong></li>
+          <li><strong>Red Eye</strong> <span>— Regular coffee with a shot of espresso</span></li>
+          <li><strong>Americano</strong> <span>— Hot water with shots of espresso</span></li>
+          <li><strong>Cappuccino</strong> <span>— Espresso blended with steamed and foamed milk</span></li>
+          <li><strong>Café Latte</strong> <span>— Espresso blended with steamed milk</span></li>
+          <li><strong>Macchiato</strong> <span>— Espresso, caramel, vanilla with steamed milk</span></li>
+          <li><strong>Flavored Latte</strong> <span>— Espresso &amp; one flavor blended with steamed milk</span></li>
+        </ul>
+        <p class="menu-extras">+ Extras: Almond or Oat Milk · Whey Protein · Whipped Cream · Honey · Extra Shot</p>
       </div>
 
-      <div class="bev-card fade-up delay-2">
-        <img
-          class="bev-card-img"
-          src="https://static.wixstatic.com/media/eb5f5b_de6919e4a5914c10bea90b8383e30da6~mv2.jpg"
-          alt="Frozen Frappes"
-          loading="lazy"
-        />
-        <div class="bev-card-body">
-          <span class="bev-card-icon">🥤</span>
-          <div class="bev-card-title">Frozen Frappes</div>
-          <p class="bev-card-desc">Blended to perfection, the perfect Topsail Island treat. Rich, creamy, and refreshing — the ultimate cool-down after a day on the beach.</p>
-          <span class="bev-card-tag">Frozen</span>
-        </div>
+      <!-- NON-COFFEE HOT DRINKS -->
+      <div class="menu-card fade-up delay-2">
+        <h3 class="menu-cat">🍵 Non-Coffee Hot Drinks</h3>
+        <ul class="menu-list">
+          <li><strong>Hot TAZO Teas</strong></li>
+          <li><strong>Hot Chocolate</strong></li>
+          <li><strong>Chai Latte</strong> <span>— Lightly sweetened authentic chai blended with steamed milk</span></li>
+          <li><strong>Dirty Chai Latte</strong> <span>— Chai latte with a shot of espresso</span></li>
+          <li><strong>Matcha Latte</strong> <span>— Lightly sweetened green tea powder blended with steamed milk</span></li>
+        </ul>
       </div>
 
-      <div class="bev-card fade-up delay-3">
-        <img
-          class="bev-card-img"
-          src="https://static.wixstatic.com/media/eb5f5b_f1909fb251f14596b8ac7fb6580b4c00~mv2.jpg"
-          alt="Nitro Cold Brew"
-          loading="lazy"
-        />
-        <div class="bev-card-body">
-          <span class="bev-card-icon">⚡</span>
-          <div class="bev-card-title">Nitro Cold Brew</div>
-          <p class="bev-card-desc">Smooth, creamy, and refreshing. Cold brew on tap — nitrogen-infused for that velvety cascade and naturally sweet finish. No sugar needed.</p>
-          <span class="bev-card-tag">Cold Brew On Tap</span>
-        </div>
+      <!-- ICED DRINKS -->
+      <div class="menu-card fade-up delay-1">
+        <h3 class="menu-cat">🧊 Iced Drinks</h3>
+        <ul class="menu-list">
+          <li><strong>Iced Tea</strong> <span>— Sweet or unsweetened</span></li>
+          <li><strong>Lotus Plant Based Energy Refresher</strong> <span>— Crafted w/ variety of flavors over ice</span></li>
+          <li><strong>Nitro Cold Brew</strong> <span>— Cold brew infused with nitrogen</span></li>
+          <li><strong>Cold Brew</strong> <span>— Slow brewed 18 hours, served over ice</span></li>
+          <li><strong>Iced Americano · Iced Café Latte · Iced Flavored Latte · Iced Macchiato</strong></li>
+          <li><strong>Iced Chai Latte · Iced Dirty Chai Latte · Iced Matcha Latte</strong></li>
+        </ul>
       </div>
+
+      <!-- FROZEN DRINKS -->
+      <div class="menu-card fade-up delay-2">
+        <h3 class="menu-cat">🥤 Frozen Drinks</h3>
+        <ul class="menu-list">
+          <li><strong>Frappes</strong> <span>— Blended ice, milk, flavor &amp; whipped cream</span></li>
+          <li style="padding-left:1rem;"><span>Caramel · Mocha · Coffee · Toffee Coffee · Vanilla · Cookies &amp; Cream · Salted Caramel · Matcha</span></li>
+          <li style="margin-top:8px;"><strong>Smoothies</strong> <span>— Fruit puree &amp; ice</span></li>
+          <li style="padding-left:1rem;"><span>Strawberry Banana · Strawberry · Mango · Blueberry Pomegranate · Piña Colada · Lemonade · Peach</span></li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1268,10 +1312,17 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand fade-up">
-        <img
-          src="https://static.wixstatic.com/media/eb5f5b_e895313a8e0f413b94e3996aea0bf5eb~mv2.png/v1/fill/w_300,q_90/seablue-new-SM.png"
-          alt="Sea Blue Coffee & Ice Cream"
-        />
+        <svg width="58" height="58" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:14px;display:block;">
+          <circle cx="26" cy="26" r="25" fill="#1a6fa8" stroke="#0d4f7a" stroke-width="1.5"/>
+          <circle cx="26" cy="26" r="22" fill="#2196c4"/>
+          <ellipse cx="26" cy="42" rx="22" ry="9" fill="#d4a843"/>
+          <path d="M4 22 Q10 14 18 20 Q22 23 26 19 Q30 15 36 20 Q42 25 48 20 L48 26 Q42 22 36 26 Q30 30 26 26 Q22 22 18 26 Q12 30 4 26 Z" fill="white" opacity="0.9"/>
+          <path d="M4 24 Q10 18 18 22 Q22 24 26 21 Q30 18 36 22 Q42 26 48 22 L48 42 Q40 44 26 44 Q12 44 4 42 Z" fill="#1565a0"/>
+          <rect x="4" y="30" width="44" height="10" rx="2" fill="#f5b800"/>
+          <text x="26" y="28" text-anchor="middle" font-family="Arial Black, sans-serif" font-weight="900" font-size="9" fill="white" letter-spacing="0.5">SEA BLUE</text>
+          <text x="26" y="37.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="5.5" fill="#0d4f7a" letter-spacing="0.2">COFFEE &amp; ICE CREAM</text>
+          <text x="26" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-weight="600" font-size="4.5" fill="#0d4f7a" letter-spacing="0.5">SURF CITY, NC</text>
+        </svg>
         <div class="footer-tagline">Award Winning Ice Cream &amp; Coffee</div>
         <p class="footer-desc">
           Family-owned coffee and ice cream shop on Topsail Island. Laid-back beach vibes, premium ice cream, locally roasted coffee, and island gifts.

@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hot Diggity Dogz — Surf City, NC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --mustard: #F5B700;
+      --red: #C0392B;
+      --red-dark: #9B2D20;
+      --teal: #1A9E8F;
+      --dark: #0f0f0f;
+      --dark2: #1a1a1a;
+      --white: #FFFFFF;
+      --offwhite: #FFF8EC;
+      --gray: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* =================== NAV =================== */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.35s ease, padding 0.35s ease, box-shadow 0.35s ease;
+    }
+    #nav.scrolled {
+      background: #0f0f0f;
+      padding: 12px 32px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    }
+
+    .nav-logo {
+      font-family: 'Bangers', cursive;
+      font-size: 1.75rem;
+      letter-spacing: 0.06em;
+      color: var(--mustard);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .nav-logo span { color: var(--white); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--mustard); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #0f0f0f;
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Bangers', cursive;
+      font-size: 2.8rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--mustard); }
+    .mobile-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-size: 2rem;
+      color: var(--white);
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    /* =================== HERO =================== */
+    #hero {
+      height: 100vh;
+      min-height: 600px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://s3-media0.fl.yelpcdn.com/bphoto/EPgSOK290BYcaZQ5_-I0AA/o.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+    .hero-bg.loaded { transform: scale(1); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(10,10,10,0.72) 0%, rgba(192,57,43,0.45) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      padding: 0 24px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--mustard);
+      color: var(--dark);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      color: var(--white);
+      letter-spacing: 0.04em;
+      line-height: 1.0;
+      margin-bottom: 20px;
+      text-shadow: 2px 4px 24px rgba(0,0,0,0.5);
+    }
+    .hero-title em {
+      color: var(--mustard);
+      font-style: normal;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: rgba(255,255,255,0.88);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--mustard);
+      color: var(--dark);
+      font-family: 'Bangers', cursive;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      padding: 14px 40px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover {
+      background: #ffc929;
+      transform: translateY(-2px);
+    }
+
+    .hero-stars {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 32px;
+    }
+    .hero-stars .stars { color: var(--mustard); font-size: 1.1rem; }
+    .hero-stars .label { color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; }
+
+    /* =================== MARQUEE =================== */
+    .marquee-wrap {
+      background: var(--mustard);
+      overflow: hidden;
+      padding: 12px 0;
+      border-top: 4px solid var(--red);
+      border-bottom: 4px solid var(--red);
+    }
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      font-family: 'Bangers', cursive;
+      font-size: 1.2rem;
+      letter-spacing: 0.12em;
+      color: var(--dark);
+      padding: 0 32px;
+      flex-shrink: 0;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* =================== SECTIONS =================== */
+    section { padding: 96px 24px; }
+
+    .container { max-width: 1140px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.05em;
+      line-height: 1.05;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+
+    .section-title .accent { color: var(--red); }
+
+    /* =================== ABOUT =================== */
+    #about { background: var(--offwhite); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+    .about-img-badge {
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      width: 130px;
+      height: 130px;
+      background: var(--mustard);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: 'Bangers', cursive;
+      line-height: 1.1;
+      border: 5px solid var(--white);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .about-img-badge .big { font-size: 2.4rem; color: var(--red); letter-spacing: 0.02em; }
+    .about-img-badge .small { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--dark); }
+
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #444;
+      margin-bottom: 18px;
+    }
+    .about-text strong { color: var(--dark); }
+
+    .about-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .pill {
+      background: var(--dark);
+      color: var(--mustard);
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 100px;
+    }
+
+    /* =================== MENU =================== */
+    #menu { background: var(--dark); }
+    #menu .section-title { color: var(--white); }
+    #menu .section-label { color: var(--mustard); }
+
+    .menu-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+    .tab-btn {
+      font-family: 'Bangers', cursive;
+      font-size: 1.05rem;
+      letter-spacing: 0.1em;
+      padding: 10px 24px;
+      border: 2px solid #333;
+      background: transparent;
+      color: #888;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { border-color: var(--mustard); color: var(--mustard); }
+    .tab-btn.active { background: var(--mustard); border-color: var(--mustard); color: var(--dark); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .menu-item {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .menu-item:hover { border-color: var(--mustard); transform: translateY(-2px); }
+
+    .menu-item-info { flex: 1; }
+    .menu-item-name {
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .menu-item-desc {
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.55;
+    }
+    .menu-item-price {
+      font-family: 'Bangers', cursive;
+      font-size: 1.4rem;
+      color: var(--mustard);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .menu-note {
+      margin-top: 32px;
+      text-align: center;
+      color: #555;
+      font-size: 0.85rem;
+    }
+    .menu-note a { color: var(--mustard); text-decoration: none; }
+
+    /* =================== REVIEWS =================== */
+    #reviews { background: var(--white); }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 16px;
+    }
+
+    .review-card {
+      background: var(--offwhite);
+      border-radius: 8px;
+      padding: 32px;
+      border-left: 4px solid var(--mustard);
+      position: relative;
+    }
+
+    .review-quote {
+      font-size: 3.5rem;
+      color: var(--mustard);
+      font-family: Georgia, serif;
+      line-height: 0.5;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .review-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .review-stars { color: var(--mustard); font-size: 1rem; margin-bottom: 10px; }
+
+    .review-author {
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: var(--dark);
+      letter-spacing: 0.06em;
+    }
+    .review-source {
+      font-size: 0.72rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .reviews-cta {
+      text-align: center;
+      margin-top: 48px;
+    }
+    .yelp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #d32323;
+      color: var(--white);
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 14px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .yelp-btn:hover { background: #b01e1e; transform: translateY(-2px); }
+
+    /* =================== FIND US =================== */
+    #find-us { background: var(--offwhite); }
+
+    .findus-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .map-frame {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+      border: 4px solid var(--mustard);
+    }
+    .map-frame iframe {
+      width: 100%;
+      height: 380px;
+      display: block;
+      border: none;
+    }
+
+    .info-block { margin-bottom: 36px; }
+    .info-block h3 {
+      font-family: 'Bangers', cursive;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid #e8e0d0; }
+    .hours-table td { padding: 8px 0; font-size: 0.9rem; }
+    .hours-table td:last-child { text-align: right; color: var(--dark); font-weight: 700; }
+    .hours-table td:first-child { color: #666; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--mustard);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-text { font-size: 0.95rem; color: #444; font-weight: 600; }
+    .contact-text a { color: var(--red); text-decoration: none; }
+    .contact-text a:hover { text-decoration: underline; }
+
+    /* =================== FOOTER =================== */
+    #footer {
+      background: #0a0a0a;
+      padding: 56px 24px 40px;
+      color: #888;
+    }
+    .footer-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-logo {
+      font-family: 'Bangers', cursive;
+      font-size: 2rem;
+      letter-spacing: 0.06em;
+      color: var(--mustard);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .footer-desc { font-size: 0.85rem; line-height: 1.7; color: #666; }
+
+    .footer-col h4 {
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul a {
+      color: #777;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--mustard); }
+    .footer-col p { font-size: 0.88rem; line-height: 1.8; color: #666; }
+
+    .footer-bottom {
+      border-top: 1px solid #1f1f1f;
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy { font-size: 0.75rem; color: #444; }
+
+    /* =================== ANIMATIONS =================== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+    .fade-up.delay-4 { transition-delay: 0.4s; }
+
+    /* =================== RESPONSIVE =================== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-img-badge { width: 100px; height: 100px; bottom: -16px; right: -12px; }
+      .about-img-badge .big { font-size: 1.8rem; }
+
+      .findus-grid { grid-template-columns: 1fr; gap: 40px; }
+      .map-frame { order: -1; }
+
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+
+      section { padding: 64px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .menu-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- =================== NAV =================== -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Hot Diggity Dogz <span>🌭</span></a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#find-us">Find Us</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+  <a href="#menu" class="mob-link">Menu</a>
+  <a href="#reviews" class="mob-link">Reviews</a>
+  <a href="#find-us" class="mob-link">Find Us</a>
+</div>
+
+<!-- =================== HERO =================== -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">📍 103 S Shore Dr · Surf City, NC</div>
+    <h1 class="hero-title">Surf City's<br /><em>Favorite</em><br />Hot Dog Stand</h1>
+    <p class="hero-sub">Handcrafted dogs. Cold drinks. Good vibes.</p>
+    <a href="#menu" class="hero-cta">See Our Menu ↓</a>
+    <div class="hero-stars">
+      <span class="stars">★★★★</span>
+      <span class="label">Rated 3.9 on Yelp · 111+ Reviews</span>
+    </div>
+  </div>
+</section>
+
+<!-- =================== MARQUEE =================== -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">🌭 Hot Diggity Dogz</span>
+    <span class="marquee-item">· Surf City, NC ·</span>
+    <span class="marquee-item">All-Beef Dogs</span>
+    <span class="marquee-item">· 13 Toppings ·</span>
+    <span class="marquee-item">🌊 Beach Town Flavor</span>
+    <span class="marquee-item">· Carolina Dogs ·</span>
+    <span class="marquee-item">Milkshakes &amp; Shaved Ice</span>
+    <span class="marquee-item">· BBQ &amp; More ·</span>
+    <span class="marquee-item">🌭 Hot Diggity Dogz</span>
+    <span class="marquee-item">· Surf City, NC ·</span>
+    <span class="marquee-item">All-Beef Dogs</span>
+    <span class="marquee-item">· 13 Toppings ·</span>
+    <span class="marquee-item">🌊 Beach Town Flavor</span>
+    <span class="marquee-item">· Carolina Dogs ·</span>
+    <span class="marquee-item">Milkshakes &amp; Shaved Ice</span>
+    <span class="marquee-item">· BBQ &amp; More ·</span>
+  </div>
+</div>
+
+<!-- =================== ABOUT =================== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-up">
+        <img
+          class="about-img-main"
+          src="https://s3-media0.fl.yelpcdn.com/bphoto/g0EyNhi1GD_HSS18U3UW0A/o.jpg"
+          crossorigin="anonymous"
+          alt="Hot Diggity Dogz stand in Surf City"
+          onerror="this.src='https://images.unsplash.com/photo-1570458436416-b8fcccfe883f?w=800&q=80'"
+        />
+        <div class="about-img-badge">
+          <span class="big">🌭</span>
+          <span class="small">Best Dogs<br/>In Surf City</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title fade-up">More Than <span class="accent">Just a Dog Stand.</span></h2>
+        <div class="fade-up delay-1">
+          <p>Tucked right across the street from the beach on S Shore Drive, <strong>Hot Diggity Dogz</strong> has been serving up Surf City's most craveable hot dogs since day one. We're a colorful little stand with a big personality — and an even bigger menu.</p>
+          <p>Every dog starts with a <strong>fresh, all-beef frank</strong> and gets built to perfection with your choice of <strong>13 different toppings</strong>. Whether you're going classic with yellow mustard and relish, loading up a Carolina Dog with chili sauce and slaw, or piling on everything you've got — we make it right.</p>
+          <p>But dogs are just the beginning. We've got <strong>BBQ, milkshakes, soft serve ice cream, mac-n-cheese, shaved ice</strong>, and even a veggie dog option. Owner <strong>Carroll</strong> and the crew are here all summer to make sure you leave happy. Come hungry.</p>
+        </div>
+        <div class="about-pills fade-up delay-2">
+          <span class="pill">All-Beef Dogs</span>
+          <span class="pill">13 Toppings</span>
+          <span class="pill">Outdoor Seating</span>
+          <span class="pill">Kid-Friendly</span>
+          <span class="pill">Veggie Options</span>
+          <span class="pill">Health Score: 99.5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== MENU =================== -->
+<section id="menu">
+  <div class="container">
+    <span class="section-label fade-up">What We're Serving</span>
+    <h2 class="section-title fade-up delay-1">The Full <span style="color:var(--mustard)">Lineup</span></h2>
+    <p class="fade-up delay-2" style="color:#888;margin-bottom:48px;max-width:560px;">All-beef dogs. Real toppings. No shortcuts. Pick your dog, pile it on, and get back to the beach.</p>
+
+    <div class="menu-tabs fade-up delay-3">
+      <button class="tab-btn active" data-tab="dogs">Classic Dogs</button>
+      <button class="tab-btn" data-tab="specialty">Specialty Dogs</button>
+      <button class="tab-btn" data-tab="bbq">BBQ</button>
+      <button class="tab-btn" data-tab="sides">Sides</button>
+      <button class="tab-btn" data-tab="treats">Treats &amp; Drinks</button>
+    </div>
+
+    <!-- Classic Dogs -->
+    <div class="tab-panel active" id="tab-dogs">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The All-American</div>
+            <div class="menu-item-desc">Classic all-beef frank with yellow mustard, ketchup, relish, and diced onion. You can't go wrong.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Carolina Dog</div>
+            <div class="menu-item-desc">Chili sauce, creamy coleslaw, and mustard. A true Southern classic — and a Surf City fan favorite.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Beach Dog</div>
+            <div class="menu-item-desc">Chili, slaw, diced onions, and mustard piled sky-high. Immense. Messy. Worth every bite.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Plain Jane</div>
+            <div class="menu-item-desc">Just a great all-beef frank on a steamed bun. Pure. Simple. Delicious.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Veggie Dog</div>
+            <div class="menu-item-desc">Lightlife Smart Dog with your choice of toppings. Everyone eats at Hot Diggity Dogz.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Build Your Own</div>
+            <div class="menu-item-desc">Start with any frank and choose from 13 toppings. Your dog, your rules.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Specialty Dogs -->
+    <div class="tab-panel" id="tab-specialty">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Surf City Dog</div>
+            <div class="menu-item-desc">Jalapeños, pepper jack cheese, sriracha mayo, and crispy fried onions. For those who like it hot.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The BBQ Dog</div>
+            <div class="menu-item-desc">All-beef frank topped with our house pulled pork, smoky BBQ sauce, and crispy onion strings.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Slaw Dog Deluxe</div>
+            <div class="menu-item-desc">Double the slaw, double the chili, extra mustard. The messiest dog on the menu. Bring napkins.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Cheesy Dog</div>
+            <div class="menu-item-desc">Smothered in warm cheddar cheese sauce with crispy bacon bits and pickled jalapeño slices.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Tidal Wave</div>
+            <div class="menu-item-desc">Chili, cheddar sauce, shredded onion, diced tomato, and a swirl of yellow mustard. Pure chaos. Highly recommended.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Islander</div>
+            <div class="menu-item-desc">Pineapple relish, teriyaki glaze, shredded coconut, and sriracha mayo. A little tropical, a little unhinged.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- BBQ -->
+    <div class="tab-panel" id="tab-bbq">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Pulled Pork BBQ Sandwich</div>
+            <div class="menu-item-desc">Slow-smoked pulled pork piled on a toasted bun with coleslaw and house BBQ sauce. A Surf City sleeper hit.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">BBQ Plate</div>
+            <div class="menu-item-desc">Generous portion of pulled pork with your choice of two sides. Perfect for when one sandwich isn't enough.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">BBQ Dog Combo</div>
+            <div class="menu-item-desc">Our BBQ specialty dog plus a side of fries and a canned drink. A full beach lunch in one shot.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Sides -->
+    <div class="tab-panel" id="tab-sides">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Chili Cheese Fries</div>
+            <div class="menu-item-desc">Crispy fries smothered in house chili and cheddar cheese sauce. A side that steals the show.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Regular Fries</div>
+            <div class="menu-item-desc">Golden, crispy, salted. Classic beach fries. Simple and satisfying.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Mac-n-Cheese</div>
+            <div class="menu-item-desc">Creamy, cheesy, comforting. A crowd-pleaser for the little ones (and adults who know what's up).</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Chicken Tenders</div>
+            <div class="menu-item-desc">Crispy golden tenders served with your choice of dipping sauce. Great for the non-dog folks in the group.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Treats & Drinks -->
+    <div class="tab-panel" id="tab-treats">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Turtle Shake</div>
+            <div class="menu-item-desc">Our most legendary milkshake — a different take on the classic chocolate shake. Caramel, pecan, chocolate. You need this.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Milkshakes</div>
+            <div class="menu-item-desc">Chocolate, Vanilla, or Strawberry — thick, creamy, and made fresh. The perfect beach cool-down.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Soft Serve Ice Cream</div>
+            <div class="menu-item-desc">Cone or cup. Classic vanilla soft serve the way summer is supposed to taste.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Shaved Ice</div>
+            <div class="menu-item-desc">Tons of flavors. Perfectly shaved. Essential after a day on the beach in the Carolina heat.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Canned Drinks</div>
+            <div class="menu-item-desc">Coke, Diet Coke, Sprite, and more. Cold and ready.</div>
+          </div>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Water</div>
+            <div class="menu-item-desc">Stay hydrated out there.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <p class="menu-note fade-up">Full menu available at <a href="http://www.hotdiggitydognc.com/our-menu.html" target="_blank" rel="noopener">hotdiggitydognc.com</a> · Prices and availability may vary by season.</p>
+  </div>
+</section>
+
+<!-- =================== PHOTO STRIP =================== -->
+<div style="display:grid;grid-template-columns:repeat(4,1fr);height:260px;overflow:hidden;">
+  <img src="https://s3-media0.fl.yelpcdn.com/bphoto/cbx0nj_rVngsJzuov_EpdA/o.jpg" crossorigin="anonymous" alt="Hot Diggity Dogz food" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.src='https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=400&q=80'" />
+  <img src="https://s3-media0.fl.yelpcdn.com/bphoto/eeo-q2YJzrpMOJa23PSDig/o.jpg" crossorigin="anonymous" alt="Hot Diggity Dogz dogs" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.src='https://images.unsplash.com/photo-1534482421-64566f976cfa?w=400&q=80'" />
+  <img src="https://s3-media0.fl.yelpcdn.com/bphoto/RWQBMBqkeWm9jQGysygxSw/o.jpg" crossorigin="anonymous" alt="Hot Diggity Dogz stand" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.src='https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80'" />
+  <img src="https://s3-media0.fl.yelpcdn.com/bphoto/C7TX3tSW0f0M53-Oc1lqeQ/o.jpg" crossorigin="anonymous" alt="Hot Diggity Dogz shaved ice" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.src='https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80'" />
+</div>
+
+<!-- =================== REVIEWS =================== -->
+<section id="reviews">
+  <div class="container">
+    <span class="section-label fade-up">From Our Customers</span>
+    <h2 class="section-title fade-up delay-1">What People Are <span class="accent">Saying</span></h2>
+
+    <div class="reviews-grid" style="margin-top:48px;">
+      <div class="review-card fade-up">
+        <div class="review-quote">"</div>
+        <p class="review-text">This place has super unique hot dogs. I loved the wide variety of dog flavors, ice cream flavors and the service was immaculate. Outdoor seating was accessible and clean as well. When we visit Surf City again, this will be the first place we eat.</p>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-author">Alex T.</div>
+        <div class="review-source">via Yelp</div>
+      </div>
+      <div class="review-card fade-up delay-1">
+        <div class="review-quote">"</div>
+        <p class="review-text">Fantastic! Highly recommend the original turtle shake... it's a different take on the classic chocolate shake. The fellas manning the counter were super friendly and helped recommend some ice cream treats. We even met the owner Carroll and he was just the kindest soul you'll meet.</p>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-author">Jamie R.</div>
+        <div class="review-source">via Yelp</div>
+      </div>
+      <div class="review-card fade-up delay-2">
+        <div class="review-quote">"</div>
+        <p class="review-text">A quick little stop with lots of hot dog options. The service was fast and friendly and the food tasted great. It's a beach stop so not much of a restaurant vibe, but definitely a beach vibe.</p>
+        <div class="review-stars">★★★★</div>
+        <div class="review-author">Morgan K.</div>
+        <div class="review-source">via Yelp</div>
+      </div>
+      <div class="review-card fade-up delay-3">
+        <div class="review-quote">"</div>
+        <p class="review-text">Hot Diggity! I found an awesomely tasty pulled pork BBQ sandwich on the island!! This cool little dog stand offers much more than dogs — they even have something for the vegetarians out there. A great stop for lunch. Cheers!</p>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-author">Sam W.</div>
+        <div class="review-source">via Yelp</div>
+      </div>
+    </div>
+
+    <div class="reviews-cta fade-up">
+      <a href="https://www.yelp.com/biz/hot-diggity-dogz-surf-city" target="_blank" rel="noopener" class="yelp-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+        Read All 111+ Reviews on Yelp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FIND US =================== -->
+<section id="find-us">
+  <div class="container">
+    <div class="findus-grid">
+      <div>
+        <span class="section-label fade-up">Location &amp; Hours</span>
+        <h2 class="section-title fade-up delay-1">Come <span class="accent">Find Us</span></h2>
+
+        <div class="info-block fade-up delay-2">
+          <h3>Hours</h3>
+          <table class="hours-table">
+            <tr><td>Monday</td><td>11:00 AM – 6:00 PM</td></tr>
+            <tr><td>Tuesday</td><td>11:00 AM – 8:00 PM</td></tr>
+            <tr><td>Wednesday</td><td>11:00 AM – 8:00 PM</td></tr>
+            <tr><td>Thursday</td><td>11:00 AM – 8:00 PM</td></tr>
+            <tr><td>Friday</td><td>11:00 AM – 8:00 PM</td></tr>
+            <tr><td>Saturday</td><td>11:00 AM – 8:00 PM</td></tr>
+            <tr><td>Sunday</td><td>11:00 AM – 6:00 PM</td></tr>
+          </table>
+          <p style="font-size:0.8rem;color:#888;margin-top:10px;">Hours may vary seasonally. Call ahead off-season.</p>
+        </div>
+
+        <div class="info-block fade-up delay-3">
+          <h3>Contact &amp; Location</h3>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-text">103 S Shore Dr, Surf City, NC 28445<br /><span style="color:#888;font-size:0.8rem;">Across the street from the beach</span></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-text"><a href="tel:+12529435383">(252) 943-5383</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🌐</div>
+            <div class="contact-text"><a href="http://www.hotdiggitydognc.com" target="_blank" rel="noopener">hotdiggitydognc.com</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up delay-2">
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3295.0882853!2d-77.5490!3d34.4340!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89a8f50b1b1b1b1b%3A0x1b1b1b1b1b1b1b1b!2sHot%20Diggity%20Dogz%2C%20103%20S%20Shore%20Dr%2C%20Surf%20City%2C%20NC%2028445!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Hot Diggity Dogz Location Map"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <span class="footer-logo">Hot Diggity Dogz 🌭</span>
+        <p class="footer-desc">Surf City's favorite hot dog stand. All-beef dogs, 13 toppings, BBQ, milkshakes, shaved ice, and good vibes — right across from the beach.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#find-us">Find Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <p>
+          103 S Shore Dr<br />
+          Surf City, NC 28445<br /><br />
+          <a href="tel:+12529435383" style="color:#777;text-decoration:none;">(252) 943-5383</a><br /><br />
+          Mon &amp; Sun: 11am – 6pm<br />
+          Tue – Sat: 11am – 8pm
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Hot Diggity Dogz · Surf City, NC</div>
+      <div class="footer-copy" style="color:#333;">
+        <a href="https://www.yelp.com/biz/hot-diggity-dogz-surf-city" target="_blank" rel="noopener" style="color:#555;text-decoration:none;margin-right:16px;">Yelp</a>
+        <a href="http://www.hotdiggitydognc.com" target="_blank" rel="noopener" style="color:#555;text-decoration:none;">Website</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- =================== AOM LEGAL PREVIEW NOTICE =================== -->
+<div id="aom-preview-notice" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#0a0a0a;border-top:1px solid #333;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'Nunito',sans-serif;">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <span style="color:#c9a84c;font-size:1rem;letter-spacing:0.15em;">◆</span>
+    <span style="color:#888;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;">Design Preview · For Review Only</span>
+    <span style="color:#c9a84c;font-size:1rem;letter-spacing:0.15em;">◆</span>
+  </div>
+  <div style="color:#555;font-size:0.65rem;text-align:center;letter-spacing:0.08em;">
+    Prepared by <span style="color:#c9a84c;">Altitude Odyssey Media LLC</span> · Confidential · Not for distribution · All content subject to revision
+  </div>
+  <div style="color:#444;font-size:0.6rem;letter-spacing:0.06em;">© 2026 Altitude Odyssey Media LLC</div>
+</div>
+<div style="height:52px;"></div>
+
+<!-- =================== SCRIPTS =================== -->
+<script>
+  // Hero background with fallback
+  const heroBg = document.getElementById('heroBg');
+  const heroImg = new Image();
+  heroImg.crossOrigin = 'anonymous';
+  heroImg.onload = () => {
+    heroBg.style.backgroundImage = `url('${heroImg.src}')`;
+    setTimeout(() => heroBg.classList.add('loaded'), 100);
+  };
+  heroImg.onerror = () => {
+    heroBg.style.backgroundImage = "url('https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=1400&q=80')";
+    setTimeout(() => heroBg.classList.add('loaded'), 100);
+  };
+  heroImg.src = 'https://s3-media0.fl.yelpcdn.com/bphoto/EPgSOK290BYcaZQ5_-I0AA/o.jpg';
+
+  // Nav scroll behavior
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // Menu tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // IntersectionObserver fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Marquee duplication check (already doubled in HTML)
+</script>
+</body>
+</html>

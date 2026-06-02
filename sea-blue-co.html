@@ -461,76 +461,147 @@
 
     .award-pill .trophy { font-size: 1rem; }
 
-    /* ─── BEVERAGES ───────────────────────── */
+    /* ─── BEVERAGES / MENU ───────────────── */
     #beverages {
       background: var(--light-blue);
     }
 
     .bev-header {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 48px;
     }
 
-    .bev-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
+    /* Tab navigation */
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 44px;
     }
 
-    .bev-card {
+    .menu-tab-btn {
       background: var(--white);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid transparent;
+      border-radius: 50px;
+      padding: 10px 24px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
     }
 
-    .bev-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 48px rgba(0,0,0,0.13);
+    .menu-tab-btn:hover {
+      border-color: var(--sea-blue);
+      color: var(--sea-blue);
     }
 
-    .bev-card-img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
+    .menu-tab-btn.active {
+      background: var(--sea-blue);
+      color: var(--white);
+      border-color: var(--sea-blue);
+      box-shadow: 0 4px 18px rgba(26,159,212,0.3);
     }
 
-    .bev-card-body {
-      padding: 28px 28px 32px;
+    /* Tab panels */
+    .menu-panel { display: none; }
+    .menu-panel.active { display: block; }
+
+    /* Menu grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
     }
 
-    .bev-card-icon {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      display: block;
+    .menu-item {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 20px 22px;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .bev-card-title {
-      font-family: 'Pacifico', cursive;
-      font-size: 1.35rem;
+    .menu-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .menu-item-name {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
       color: var(--dark);
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
-    .bev-card-desc {
-      font-size: 0.97rem;
-      line-height: 1.7;
-      color: #5a6a7e;
+    .menu-item-desc {
+      font-size: 0.87rem;
+      line-height: 1.6;
+      color: #6b7a8d;
     }
 
-    .bev-card-tag {
+    .menu-item-tag {
       display: inline-block;
       background: var(--light-blue);
       color: var(--sea-blue);
       font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 5px 14px;
+      padding: 3px 10px;
       border-radius: 50px;
-      margin-top: 18px;
+      margin-top: 10px;
+    }
+
+    .menu-item-tag.tag-yellow {
+      background: #fff8e1;
+      color: #c47f00;
+    }
+
+    .menu-item-tag.tag-green {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    /* Sub-category headings inside a panel */
+    .menu-sub-heading {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.15rem;
+      color: var(--sea-blue);
+      margin: 32px 0 16px;
+    }
+
+    .menu-sub-heading:first-child { margin-top: 0; }
+
+    /* Extras note */
+    .menu-extras-box {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.06);
+      margin-top: 20px;
+    }
+
+    .menu-extras-box .menu-item-name { margin-bottom: 10px; }
+
+    .menu-extras-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .menu-extras-list li {
+      background: var(--light-blue);
+      color: var(--sea-blue);
+      font-size: 0.83rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 50px;
     }
 
     /* ─── ICE CREAM ───────────────────────── */
@@ -974,38 +1045,9 @@
 
 <!-- ─── NAV ─────────────────────────────────────── -->
 <nav id="nav" role="navigation" aria-label="Main navigation">
-  <a href="#" class="nav-logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-  <svg width="58" height="50" viewBox="0 0 200 172" xmlns="http://www.w3.org/2000/svg">
-    <!-- Outer oval border -->
-    <ellipse cx="100" cy="86" rx="98" ry="84" fill="#1a5c50"/>
-    <!-- Inner oval teal background -->
-    <ellipse cx="100" cy="86" rx="92" ry="78" fill="#1e7a6e"/>
-    <!-- Ocean/sky background top half -->
-    <ellipse cx="100" cy="86" rx="88" ry="74" fill="#1a6fc8"/>
-    <!-- Sandy bottom clipping ellipse -->
-    <ellipse cx="100" cy="130" rx="88" ry="34" fill="#c9a060"/>
-    <!-- Dark water base -->
-    <rect x="12" y="90" width="176" height="50" fill="#0e3a7a"/>
-    <!-- Yellow banner band -->
-    <rect x="12" y="88" width="176" height="42" fill="#f5c518"/>
-    <!-- Wave shape — large crashing wave over banner -->
-    <path d="M12,72 C30,20 60,10 80,40 C90,58 95,65 100,55 C108,40 118,18 140,25 C162,32 175,60 188,55 L188,95 L12,95 Z" fill="#1a4a8c"/>
-    <!-- Wave foam/crest highlight -->
-    <path d="M50,48 C65,28 80,35 88,50 C93,60 97,65 100,55 C105,42 115,22 135,28" stroke="white" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.9"/>
-    <path d="M50,48 C65,28 80,35 88,50 C93,60 97,65 100,55 C105,42 115,22 135,28 C148,32 160,48 175,44" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/>
-    <!-- White foam splatter at wave top -->
-    <ellipse cx="88" cy="50" rx="12" ry="7" fill="white" opacity="0.85" transform="rotate(-15,88,50)"/>
-    <ellipse cx="108" cy="42" rx="8" ry="5" fill="white" opacity="0.8" transform="rotate(10,108,42)"/>
-    <!-- "Sea Blue" text on yellow banner -->
-    <text x="100" y="112" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="900" font-size="32" fill="#1a3a8c" stroke="white" stroke-width="3" paint-order="stroke">Sea Blue</text>
-    <!-- "COFFEE &amp; ICE CREAM" text -->
-    <text x="100" y="126" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="11" fill="white" letter-spacing="1">COFFEE &amp; ICE CREAM</text>
-    <!-- "SURF CITY, NC" on sandy bottom -->
-    <text x="100" y="153" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="11" fill="#5a3010" letter-spacing="2">SURF CITY, NC</text>
-    <!-- Outer oval stroke on top for polish -->
-    <ellipse cx="100" cy="86" rx="98" ry="84" fill="none" stroke="#c9a060" stroke-width="2"/>
-  </svg>
-</a>
+  <a href="#hero" class="nav-logo">
+    <img src="https://static.wixstatic.com/media/eb5f5b_e895313a8e0f413b94e3996aea0bf5eb~mv2.png/v1/fill/w_300,q_90/seablue-new-SM.png" alt="Sea Blue Coffee & Ice Cream" />
+  </a>
 
   <ul class="nav-links">
     <li><a href="#about">This Is Us</a></li>
@@ -1113,63 +1155,264 @@
   </div>
 </section>
 
-<!-- ─── BEVERAGES ─────────────────────────────────── -->
+<!-- ─── BEVERAGES / FULL MENU ─────────────────────── -->
 <section id="beverages">
   <div class="container">
     <div class="bev-header fade-up">
       <p class="section-label">What We Brew</p>
-      <h2 class="section-heading">Hot &amp; Cold Beverages</h2>
+      <h2 class="section-heading">Our Full Menu</h2>
       <p class="section-sub" style="margin:0 auto;">
-        From our locally roasted drip coffee to hand-crafted frappes and smooth nitro cold brew — every sip is a beach day in a cup.
+        From locally roasted espresso to creamy frappes, fruit smoothies, and nitro cold brew — every sip is a beach day in a cup.
       </p>
     </div>
 
-    <div class="bev-cards">
-      <div class="bev-card fade-up delay-1">
-        <img
-          class="bev-card-img"
-          src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=600&q=80"
-          alt="Fresh Brewed Coffee"
-          loading="lazy"
-        />
-        <div class="bev-card-body">
-          <span class="bev-card-icon">☕</span>
-          <div class="bev-card-title">Fresh Brewed Coffee</div>
-          <p class="bev-card-desc">Locally roasted coffee for a luxurious taste and delightful aroma. Lattes, cappuccinos, and drip — your morning ritual, island-style.</p>
-          <span class="bev-card-tag">Hot &amp; Cold</span>
+    <!-- Tab buttons -->
+    <div class="menu-tabs fade-up">
+      <button class="menu-tab-btn active" onclick="showMenuTab('hot-coffee', this)">☕ Hot Coffee &amp; Espresso</button>
+      <button class="menu-tab-btn" onclick="showMenuTab('hot-noncoffee', this)">🍵 Non-Coffee Hot Drinks</button>
+      <button class="menu-tab-btn" onclick="showMenuTab('frozen', this)">🥤 Frozen Drinks</button>
+      <button class="menu-tab-btn" onclick="showMenuTab('iced', this)">🧊 Iced Drinks</button>
+    </div>
+
+    <!-- ── HOT COFFEE & ESPRESSO ── -->
+    <div class="menu-panel active" id="panel-hot-coffee">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-name">House Brew</div>
+          <div class="menu-item-desc">Our classic drip coffee — locally roasted for a rich, smooth cup every time.</div>
+          <span class="menu-item-tag">Drip Coffee</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Espresso</div>
+          <div class="menu-item-desc">A pure shot of bold, concentrated espresso.</div>
+          <span class="menu-item-tag">Espresso</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Red Eye</div>
+          <div class="menu-item-desc">Regular coffee with a shot of espresso — the extra kick you need for a big beach day.</div>
+          <span class="menu-item-tag">Coffee + Espresso</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Americano</div>
+          <div class="menu-item-desc">Hot water with shots of espresso for a clean, bold flavor.</div>
+          <span class="menu-item-tag">Espresso</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Cappuccino</div>
+          <div class="menu-item-desc">Espresso blended with steamed and foamed milk — classic Italian coffeehouse style.</div>
+          <span class="menu-item-tag">Espresso</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Café Latte</div>
+          <div class="menu-item-desc">Espresso blended with silky steamed milk for a smooth, mellow sip.</div>
+          <span class="menu-item-tag">Espresso</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Macchiato</div>
+          <div class="menu-item-desc">Espresso, Caramel, and Vanilla with steamed milk.</div>
+          <span class="menu-item-tag">Espresso</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Flavored Latte</div>
+          <div class="menu-item-desc">Espresso &amp; one flavor of your choice blended with steamed milk.</div>
+          <span class="menu-item-tag">Espresso + Flavor</span>
         </div>
       </div>
-
-      <div class="bev-card fade-up delay-2">
-        <img
-          class="bev-card-img"
-          src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=600&q=80"
-          alt="Frozen Frappes"
-          loading="lazy"
-        />
-        <div class="bev-card-body">
-          <span class="bev-card-icon">🥤</span>
-          <div class="bev-card-title">Frozen Frappes</div>
-          <p class="bev-card-desc">Blended to perfection, the perfect Topsail Island treat. Rich, creamy, and refreshing — the ultimate cool-down after a day on the beach.</p>
-          <span class="bev-card-tag">Frozen</span>
-        </div>
+      <div class="menu-extras-box">
+        <div class="menu-item-name">Add-Ons &amp; Extras</div>
+        <ul class="menu-extras-list">
+          <li>Shot of Espresso</li>
+          <li>Whipped Cream</li>
+          <li>Shots of Flavor</li>
+          <li>Honey</li>
+          <li>Almond Milk</li>
+          <li>Oat Milk</li>
+          <li>Whey Protein</li>
+          <li>Cold Foam</li>
+        </ul>
       </div>
+    </div>
 
-      <div class="bev-card fade-up delay-3">
-        <img
-          class="bev-card-img"
-          src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&q=80"
-          alt="Nitro Cold Brew"
-          loading="lazy"
-        />
-        <div class="bev-card-body">
-          <span class="bev-card-icon">⚡</span>
-          <div class="bev-card-title">Nitro Cold Brew</div>
-          <p class="bev-card-desc">Smooth, creamy, and refreshing. Cold brew on tap — nitrogen-infused for that velvety cascade and naturally sweet finish. No sugar needed.</p>
-          <span class="bev-card-tag">Cold Brew On Tap</span>
+    <!-- ── NON-COFFEE HOT DRINKS ── -->
+    <div class="menu-panel" id="panel-hot-noncoffee">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-name">Hot TAZO Teas</div>
+          <div class="menu-item-desc">Premium TAZO teas brewed hot — a warm, calming island sip.</div>
+          <span class="menu-item-tag">Tea</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Hot Chocolate</div>
+          <div class="menu-item-desc">Rich, creamy hot chocolate — the classic comfort drink.</div>
+          <span class="menu-item-tag">Non-Coffee</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Chai Latte</div>
+          <div class="menu-item-desc">Lightly sweetened authentic chai blended with steamed milk.</div>
+          <span class="menu-item-tag">Chai</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Dirty Chai Latte</div>
+          <div class="menu-item-desc">Same as our Chai Latte but with a shot of espresso for an extra kick.</div>
+          <span class="menu-item-tag">Chai + Espresso</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Matcha Latte</div>
+          <div class="menu-item-desc">Lightly sweetened green tea powder blended with steamed milk — earthy, smooth, and energizing.</div>
+          <span class="menu-item-tag tag-green">Matcha</span>
         </div>
       </div>
     </div>
+
+    <!-- ── FROZEN DRINKS ── -->
+    <div class="menu-panel" id="panel-frozen">
+      <h3 class="menu-sub-heading">Frappes</h3>
+      <p class="menu-item-desc" style="margin-bottom:20px;">Delicious blend of ice, milk &amp; your choice of flavor. Topped with whipped cream.</p>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-name">Caramel Frappe</div>
+          <div class="menu-item-desc">Rich caramel blended with coffee, milk, and ice. Topped with whipped cream.</div>
+          <span class="menu-item-tag">Frappe</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Mocha Frappe</div>
+          <div class="menu-item-desc">Chocolatey mocha flavor blended with espresso and ice for a decadent frozen treat.</div>
+          <span class="menu-item-tag">Frappe</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Coffee Frappe</div>
+          <div class="menu-item-desc">Classic coffee frappe — bold, creamy, and perfectly blended.</div>
+          <span class="menu-item-tag">Frappe</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Toffee Coffee Frappe</div>
+          <div class="menu-item-desc">Buttery toffee meets bold coffee in this irresistible frozen blend.</div>
+          <span class="menu-item-tag">Frappe</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Vanilla Frappe</div>
+          <div class="menu-item-desc">Creamy vanilla blended with milk and ice — no coffee needed.</div>
+          <span class="menu-item-tag tag-yellow">Non-Coffee</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Cookies &amp; Cream Frappe</div>
+          <div class="menu-item-desc">Crushed cookies blended smooth with cream and ice.</div>
+          <span class="menu-item-tag tag-yellow">Non-Coffee</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Salted Caramel Frappe</div>
+          <div class="menu-item-desc">Sweet caramel with a touch of sea salt — tropical meets coffeehouse.</div>
+          <span class="menu-item-tag tag-yellow">Non-Coffee</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Matcha Frappe</div>
+          <div class="menu-item-desc">Earthy green tea blended icy smooth — a refreshing non-coffee frozen option.</div>
+          <span class="menu-item-tag tag-green">Matcha</span>
+        </div>
+      </div>
+
+      <h3 class="menu-sub-heading">Smoothies</h3>
+      <p class="menu-item-desc" style="margin-bottom:20px;">Fruit purée blended with ice — refreshing, real-fruit sips.</p>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-name">Strawberry Banana</div>
+          <div class="menu-item-desc">Classic combo of ripe strawberries and sweet banana, blended with ice.</div>
+          <span class="menu-item-tag tag-yellow">Smoothie</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Strawberry</div>
+          <div class="menu-item-desc">Pure strawberry purée blended icy smooth.</div>
+          <span class="menu-item-tag tag-yellow">Smoothie</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Mango</div>
+          <div class="menu-item-desc">Tropical mango purée blended with ice — sunshine in a cup.</div>
+          <span class="menu-item-tag tag-yellow">Smoothie</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Blueberry Pomegranate</div>
+          <div class="menu-item-desc">Bold, antioxidant-rich blend of blueberry and pomegranate purée.</div>
+          <span class="menu-item-tag tag-yellow">Smoothie</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Piña Colada</div>
+          <div class="menu-item-desc">Pineapple and coconut blended smooth — a taste of the tropics.</div>
+          <span class="menu-item-tag tag-yellow">Smoothie</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Lemonade</div>
+          <div class="menu-item-desc">Tangy, bright lemonade blended with ice for the perfect beach cooldown.</div>
+          <span class="menu-item-tag tag-yellow">Smoothie</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Peach</div>
+          <div class="menu-item-desc">Sweet, juicy peach purée blended icy fresh.</div>
+          <span class="menu-item-tag tag-yellow">Smoothie</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ICED DRINKS ── -->
+    <div class="menu-panel" id="panel-iced">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-name">Iced Tea</div>
+          <div class="menu-item-desc">Sweet or unsweetened — the quintessential Southern sip over ice.</div>
+          <span class="menu-item-tag">Tea</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Lotus Energy Refresher</div>
+          <div class="menu-item-desc">Plant-based energy crafted with a variety of flavors over ice. Ask us about the Lotus Menu!</div>
+          <span class="menu-item-tag tag-green">Plant-Based Energy</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Nitro Cold Brew</div>
+          <div class="menu-item-desc">Cold brew infused with nitrogen — velvety, smooth, and naturally sweet. No sugar needed.</div>
+          <span class="menu-item-tag">Cold Brew On Tap</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Cold Brew</div>
+          <div class="menu-item-desc">Coffee slow brewed for 18 hours for peak flavor, served over ice.</div>
+          <span class="menu-item-tag">Cold Brew</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Iced Americano</div>
+          <div class="menu-item-desc">Espresso shots over ice — clean, bold, and refreshing.</div>
+          <span class="menu-item-tag">Espresso</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Iced Café Latte</div>
+          <div class="menu-item-desc">Espresso and milk served over ice — smooth and satisfying.</div>
+          <span class="menu-item-tag">Espresso</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Iced Flavored Latte</div>
+          <div class="menu-item-desc">Espresso and your choice of flavor with milk served over ice.</div>
+          <span class="menu-item-tag">Espresso + Flavor</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Iced Macchiato</div>
+          <div class="menu-item-desc">Espresso, Caramel, and Vanilla with milk served over ice.</div>
+          <span class="menu-item-tag">Espresso</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Iced Chai Latte</div>
+          <div class="menu-item-desc">Lightly sweetened authentic chai and milk served over ice.</div>
+          <span class="menu-item-tag">Chai</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Iced Dirty Chai Latte</div>
+          <div class="menu-item-desc">Same as Chai Latte but with a shot of espresso — for the chai lover who wants a kick.</div>
+          <span class="menu-item-tag">Chai + Espresso</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-name">Iced Matcha Latte</div>
+          <div class="menu-item-desc">Lightly sweetened green tea powder and milk served over ice — earthy and refreshing.</div>
+          <span class="menu-item-tag tag-green">Matcha</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1369,6 +1612,14 @@
       nav.classList.remove('scrolled');
     }
   }, { passive: true });
+
+  // Menu tab switching
+  function showMenuTab(tabId, btn) {
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.menu-tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + tabId).classList.add('active');
+    btn.classList.add('active');
+  }
 
   // Mobile menu toggle
   function toggleMenu() {

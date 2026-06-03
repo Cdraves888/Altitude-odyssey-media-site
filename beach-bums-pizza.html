@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beach Bums Pizzeria, Bar &amp; Grill — North Topsail Beach, NC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --coral: #E05A3A;
+      --coral-dark: #B8441F;
+      --ocean: #2A7DA0;
+      --navy: #0A2342;
+      --navy2: #0e2a50;
+      --sand: #F5E6C8;
+      --white: #FFFFFF;
+      --offwhite: #FEF8F2;
+      --gray: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAV ===== */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.35s, padding 0.35s, box-shadow 0.35s;
+    }
+    #nav.scrolled {
+      background: var(--navy);
+      padding: 12px 32px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    }
+    .nav-logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5rem;
+      color: var(--sand);
+      text-decoration: none;
+      line-height: 1;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--sand); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px; height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.2rem;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--sand); }
+    .mobile-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-size: 2rem;
+      color: var(--white);
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      height: 100vh;
+      min-height: 600px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.06);
+      transition: transform 8s ease;
+    }
+    .hero-bg.loaded { transform: scale(1); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(155deg, rgba(10,35,66,0.82) 0%, rgba(224,90,58,0.38) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      padding: 0 24px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--coral);
+      color: var(--white);
+      font-weight: 900;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    .hero-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(3rem, 7.5vw, 6.5rem);
+      color: var(--white);
+      line-height: 1.18;
+      margin-bottom: 20px;
+      text-shadow: 2px 4px 28px rgba(0,0,0,0.5);
+    }
+    .hero-title em { color: var(--sand); font-style: normal; }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: rgba(255,255,255,0.88);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 40px;
+    }
+    .hero-cta-wrap {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--coral);
+      color: var(--white);
+      font-weight: 900;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover { background: var(--coral-dark); transform: translateY(-2px); }
+    .hero-cta.outline {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+    .hero-cta.outline:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+    .hero-stars {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .hero-stars .stars { color: var(--sand); font-size: 1.1rem; }
+    .hero-stars .label { color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; }
+
+    /* ===== MARQUEE ===== */
+    .marquee-wrap {
+      background: var(--coral);
+      overflow: hidden;
+      padding: 11px 0;
+      border-top: 4px solid var(--coral-dark);
+      border-bottom: 4px solid var(--coral-dark);
+    }
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 34s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      font-weight: 900;
+      font-size: 0.92rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+      padding: 0 24px;
+      flex-shrink: 0;
+    }
+    .marquee-dot { color: var(--sand); opacity: 0.7; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ===== SHARED SECTION STYLES ===== */
+    section { padding: 96px 24px; }
+    .container { max-width: 1140px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--coral);
+      display: block;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      line-height: 1.18;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+    .section-title .accent { color: var(--coral); }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--offwhite); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .about-img-wrap { position: relative; }
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+    .about-img-badge {
+      position: absolute;
+      bottom: -24px; right: -24px;
+      width: 128px; height: 128px;
+      background: var(--coral);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1.25;
+      border: 5px solid var(--white);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+    .about-img-badge .big { font-family: 'Pacifico', cursive; font-size: 1rem; color: var(--white); }
+    .about-img-badge .small { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.06em; color: rgba(255,255,255,0.85); text-transform: uppercase; margin-top: 3px; }
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.78;
+      color: #444;
+      margin-bottom: 18px;
+    }
+    .about-text strong { color: var(--navy); }
+    .about-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .pill {
+      background: var(--navy);
+      color: var(--sand);
+      font-weight: 800;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 100px;
+    }
+
+    /* ===== MENU ===== */
+    #menu { background: var(--navy); }
+    #menu .section-title { color: var(--white); }
+    #menu .section-label { color: var(--sand); }
+    .menu-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+    .tab-btn {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border: 2px solid #1a3a60;
+      background: transparent;
+      color: #5a80a8;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { border-color: var(--sand); color: var(--sand); }
+    .tab-btn.active { background: var(--coral); border-color: var(--coral); color: var(--white); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
+    }
+    .menu-item {
+      background: var(--navy2);
+      border: 1px solid #1a3a60;
+      border-radius: 8px;
+      padding: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .menu-item:hover { border-color: var(--coral); transform: translateY(-2px); }
+    .menu-item-info { flex: 1; }
+    .menu-item-name { font-weight: 800; font-size: 1rem; color: var(--white); margin-bottom: 6px; }
+    .menu-item-desc { font-size: 0.85rem; color: #6888a8; line-height: 1.55; }
+    .menu-note {
+      margin-top: 32px;
+      text-align: center;
+      color: #3a5a7a;
+      font-size: 0.85rem;
+    }
+    .menu-note a { color: var(--sand); text-decoration: none; }
+    .menu-note a:hover { text-decoration: underline; }
+
+    /* ===== EVENTS ===== */
+    #events { background: var(--white); }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 26px;
+      margin-top: 48px;
+    }
+    .event-card {
+      background: var(--offwhite);
+      border-radius: 8px;
+      padding: 36px 26px;
+      text-align: center;
+      border-top: 4px solid var(--coral);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(10,35,66,0.1);
+    }
+    .event-icon { font-size: 2.4rem; margin-bottom: 14px; display: block; }
+    .event-day {
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .event-name {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.3rem;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .event-desc { font-size: 0.88rem; color: #666; line-height: 1.6; }
+
+    /* ===== PHOTO STRIP ===== */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      height: 280px;
+      overflow: hidden;
+    }
+    .photo-strip img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .photo-strip img:hover { transform: scale(1.06); }
+
+    /* ===== REVIEWS ===== */
+    #reviews { background: var(--offwhite); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 26px;
+      margin-top: 48px;
+    }
+    .review-card {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 30px;
+      border-left: 4px solid var(--coral);
+      box-shadow: 0 4px 20px rgba(10,35,66,0.06);
+    }
+    .review-quote {
+      font-size: 3.5rem;
+      color: var(--coral);
+      font-family: Georgia, serif;
+      line-height: 0.5;
+      margin-bottom: 16px;
+      opacity: 0.35;
+    }
+    .review-text {
+      font-size: 0.95rem;
+      line-height: 1.72;
+      color: #444;
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+    .review-stars { color: #f4a522; font-size: 1rem; margin-bottom: 8px; }
+    .review-author { font-weight: 800; font-size: 0.85rem; color: var(--navy); letter-spacing: 0.06em; }
+    .review-source { font-size: 0.7rem; color: var(--gray); letter-spacing: 0.12em; text-transform: uppercase; }
+    .reviews-cta {
+      text-align: center;
+      margin-top: 48px;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .yelp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #d32323;
+      color: var(--white);
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 14px 30px;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .yelp-btn:hover { background: #b01e1e; transform: translateY(-2px); }
+    .dd-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ff3008;
+      color: var(--white);
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 14px 30px;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .dd-btn:hover { background: #d42807; transform: translateY(-2px); }
+
+    /* ===== FIND US ===== */
+    #find-us { background: var(--white); }
+    .findus-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .map-frame {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(10,35,66,0.14);
+      border: 4px solid var(--coral);
+    }
+    .map-frame iframe {
+      width: 100%; height: 380px;
+      display: block; border: none;
+    }
+    .info-block { margin-bottom: 34px; }
+    .info-block h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.35rem;
+      color: var(--coral);
+      margin-bottom: 14px;
+    }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid #ede8de; }
+    .hours-table td { padding: 8px 0; font-size: 0.9rem; }
+    .hours-table td:last-child { text-align: right; color: var(--navy); font-weight: 700; }
+    .hours-table td:first-child { color: #666; }
+    .hours-note { font-size: 0.77rem; color: #aaa; margin-top: 8px; }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 13px;
+    }
+    .contact-icon {
+      width: 36px; height: 36px;
+      background: var(--coral);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .contact-text { font-size: 0.93rem; color: #444; font-weight: 600; line-height: 1.5; }
+    .contact-text a { color: var(--ocean); text-decoration: none; }
+    .contact-text a:hover { text-decoration: underline; }
+
+    /* ===== FOOTER ===== */
+    #footer {
+      background: var(--navy);
+      padding: 56px 24px 0;
+      color: #5a7a9a;
+    }
+    .footer-inner { max-width: 1140px; margin: 0 auto; }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.75rem;
+      color: var(--sand);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .footer-desc { font-size: 0.85rem; line-height: 1.72; color: #3a5a7a; }
+    .footer-col h4 {
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #2a4a6a;
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul a {
+      color: #4a6a8a;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--sand); }
+    .footer-col p { font-size: 0.88rem; line-height: 1.85; color: #3a5a7a; }
+    .footer-bottom {
+      border-top: 1px solid #0e2a50;
+      padding: 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy { font-size: 0.75rem; color: #1e3a5a; }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+    .fade-up.delay-4 { transition-delay: 0.4s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-img-badge { width: 100px; height: 100px; bottom: -16px; right: -12px; }
+      .about-img-badge .big { font-size: 0.85rem; }
+      .findus-grid { grid-template-columns: 1fr; gap: 40px; }
+      .map-frame { order: -1; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .photo-strip { grid-template-columns: repeat(2,1fr); height: 300px; }
+      section { padding: 64px 20px; }
+    }
+    @media (max-width: 480px) {
+      .menu-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .events-grid { grid-template-columns: 1fr; }
+    }
+
+    footer { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Beach Bums</a>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#find-us">Find Us</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+  <a href="#about" class="mob-link">Our Story</a>
+  <a href="#menu" class="mob-link">Menu</a>
+  <a href="#events" class="mob-link">Events</a>
+  <a href="#reviews" class="mob-link">Reviews</a>
+  <a href="#find-us" class="mob-link">Find Us</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">📍 4021 Island Dr · North Topsail Beach, NC</div>
+    <h1 class="hero-title">Eat.<br /><em>Drink.</em><br />Be Merry.</h1>
+    <p class="hero-sub">Locally owned pizza, bar &amp; grill — right across from the ocean.</p>
+    <div class="hero-cta-wrap">
+      <a href="#menu" class="hero-cta">See Our Menu</a>
+      <a href="https://www.doordash.com/store/beach-bums-pizzeria-bar-and-grill-n-topsail-beach-36386467/" target="_blank" rel="noopener" class="hero-cta outline">Order on DoorDash</a>
+    </div>
+    <div class="hero-stars">
+      <span class="stars">★★★★</span>
+      <span class="label">4.3 · 1,000+ Reviews · North Topsail Beach</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">🍕 Hand-Tossed Pizza</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> North Topsail Beach, NC <span class="marquee-dot">·</span></span>
+    <span class="marquee-item">🌊 Oceanside Vibes</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Full Bar &amp; Craft Cocktails <span class="marquee-dot">·</span></span>
+    <span class="marquee-item">🎶 Live Music Every Weekend</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Locally Owned <span class="marquee-dot">·</span></span>
+    <span class="marquee-item">🥞 Breakfast Thu–Sun</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Eat. Drink. Be Merry. <span class="marquee-dot">·</span></span>
+    <span class="marquee-item">🍕 Hand-Tossed Pizza</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> North Topsail Beach, NC <span class="marquee-dot">·</span></span>
+    <span class="marquee-item">🌊 Oceanside Vibes</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Full Bar &amp; Craft Cocktails <span class="marquee-dot">·</span></span>
+    <span class="marquee-item">🎶 Live Music Every Weekend</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Locally Owned <span class="marquee-dot">·</span></span>
+    <span class="marquee-item">🥞 Breakfast Thu–Sun</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Eat. Drink. Be Merry. <span class="marquee-dot">·</span></span>
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-up">
+        <img
+          class="about-img-main"
+          src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/cb/f2/4f/the-beach-bar.jpg"
+          crossorigin="anonymous"
+          alt="Beach Bums bar interior"
+          onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80'"
+        />
+        <div class="about-img-badge">
+          <span class="big">Only at</span>
+          <span class="small">Beach Bums</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title fade-up">More Than <span class="accent">Just a Pizza Joint.</span></h2>
+        <div class="fade-up delay-1">
+          <p>Nestled right across from the Atlantic on Island Drive, <strong>Beach Bums Pizzeria, Bar &amp; Grill</strong> is a locally owned, laid-back spot built for the way the beach makes you feel — relaxed, hungry, and ready for a good time.</p>
+          <p>Our kitchen fires up <strong>hand-tossed 16" pizzas</strong> loaded with bold toppings — from the iconic <strong>Topsail Special</strong> to the indulgent <strong>Hog Heaven</strong>. Beyond pizza, we've got <strong>burgers, steak nachos, wings, fresh salads</strong>, and a full <strong>breakfast menu</strong> every Thursday through Sunday.</p>
+          <p>When the sun goes down, the party picks up. The bar pours <strong>carefully crafted cocktails</strong> and cold beers while <strong>live music, Music Bingo, Karaoke</strong>, and Trivia Night keep the patio alive. Come as you are. Stay as long as you want.</p>
+        </div>
+        <div class="about-pills fade-up delay-2">
+          <span class="pill">Locally Owned</span>
+          <span class="pill">Hand-Tossed Pizza</span>
+          <span class="pill">Full Bar</span>
+          <span class="pill">Patio Seating</span>
+          <span class="pill">Breakfast Thu–Sun</span>
+          <span class="pill">Family Friendly</span>
+          <span class="pill">Live Music</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MENU ===== -->
+<section id="menu">
+  <div class="container">
+    <span class="section-label fade-up">What We're Serving</span>
+    <h2 class="section-title fade-up delay-1">The Full <span style="color:var(--sand)">Menu</span></h2>
+    <p class="fade-up delay-2" style="color:#4a6a8a;margin-bottom:48px;max-width:540px;">Hand-tossed pizzas, stacked burgers, cold cocktails, and everything in between. No shortcuts — just good food, right across from the ocean.</p>
+
+    <div class="menu-tabs fade-up delay-3">
+      <button class="tab-btn active" data-tab="pizza">🍕 Pizza</button>
+      <button class="tab-btn" data-tab="starters">Starters</button>
+      <button class="tab-btn" data-tab="mains">Burgers &amp; More</button>
+      <button class="tab-btn" data-tab="breakfast">Breakfast</button>
+      <button class="tab-btn" data-tab="bar">Desserts &amp; Bar</button>
+    </div>
+
+    <!-- PIZZA -->
+    <div class="tab-panel active" id="tab-pizza">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">The Topsail Special</div>
+            <div class="menu-item-desc">Our signature house pizza — a fan favorite loaded with the flavors of the island. The one everyone comes back for.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Hog Heaven</div>
+            <div class="menu-item-desc">A pork lover's dream piled high on a hand-tossed 16" crust. Rich, savory, and absolutely worth the mess.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Buffalo Chicken Pizza</div>
+            <div class="menu-item-desc">Zesty buffalo sauce, tender chicken, mozzarella, and a cool ranch drizzle. Heat meets the beach.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Chicken Ranch</div>
+            <div class="menu-item-desc">Creamy ranch base, seasoned grilled chicken, and melted mozzarella. Simple and seriously satisfying.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Hawaiian with Jalapeños</div>
+            <div class="menu-item-desc">Ham and pineapple with a spicy kick. Sweet, savory, and a little unhinged — in the best way.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Classic Pepperoni</div>
+            <div class="menu-item-desc">House red sauce, generous pepperoni, and plenty of mozzarella on a perfectly crisped hand-tossed crust.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Build Your Own</div>
+            <div class="menu-item-desc">Start with our hand-tossed 16" dough and pick your sauce, cheese, and toppings. Your pizza, your rules.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STARTERS -->
+    <div class="tab-panel" id="tab-starters">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Steak Nachos</div>
+            <div class="menu-item-desc">Loaded tortilla chips with seasoned steak, melted cheese, jalapeños, sour cream, and salsa. Built for sharing.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Gouda Bites</div>
+            <div class="menu-item-desc">Crispy-fried gouda with a gooey melty center. Reviewers call them "just spectacular." We agree.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Mac &amp; Cheese Bites</div>
+            <div class="menu-item-desc">Creamy mac packed into crispy golden bites. A crowd-pleaser for all ages, no exceptions.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Southwest Egg Rolls</div>
+            <div class="menu-item-desc">Crispy egg rolls stuffed with chicken, corn, black beans, peppers, and cheddar — with chipotle dipping sauce.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Wings</div>
+            <div class="menu-item-desc">Jumbo wings in your choice of sauce — Buffalo, BBQ, Garlic Parmesan, or Old Bay. Crispy. Saucy. Addictive.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Fresh Salads</div>
+            <div class="menu-item-desc">Made-to-order salads with crisp greens, fresh toppings, and your choice of dressing. The lighter option that still hits.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BURGERS & MORE -->
+    <div class="tab-panel" id="tab-mains">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Buffalo Burger</div>
+            <div class="menu-item-desc">Bold and spicy with buffalo sauce, crispy lettuce, tomato, and blue cheese. Guests say it's "the best they've had in years."</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Kracken Burger</div>
+            <div class="menu-item-desc">Our biggest, boldest burger — stacked sky-high and loaded with your choice of toppings. Not for the faint of appetite.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Philly Cheesesteak</div>
+            <div class="menu-item-desc">Thinly sliced ribeye, grilled peppers and onions, and melted provolone on a toasted hoagie roll. Done right.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Chicken Quesadilla</div>
+            <div class="menu-item-desc">Grilled chicken, melted cheese, and fresh toppings in a crispy tortilla. Served with sour cream and salsa.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Stromboli</div>
+            <div class="menu-item-desc">Hand-rolled and oven-baked stromboli stuffed with your choice of meats, cheese, and veggies. Served with marinara.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Cheese Bread</div>
+            <div class="menu-item-desc">Golden, garlicky, and loaded with melted cheese. The perfect companion to any pizza or a snack all on its own.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BREAKFAST -->
+    <div class="tab-panel" id="tab-breakfast">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Breakfast Plates</div>
+            <div class="menu-item-desc">Two eggs any style with your choice of meat, toast or biscuit, and hash browns. A full beach morning in one plate.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Breakfast Sandwiches</div>
+            <div class="menu-item-desc">Eggs, your choice of meat, and melted cheese on a toasted roll or biscuit. The perfect fuel for a beach day ahead.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Pancakes &amp; Waffles</div>
+            <div class="menu-item-desc">Fluffy, golden, made to order. Top them with syrup, fresh fruit, or whipped cream — your call.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Omelets</div>
+            <div class="menu-item-desc">Loaded omelets with your choice of fillings — veggies, meats, cheese. Made fresh every morning.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Kids Breakfast</div>
+            <div class="menu-item-desc">Smaller portions for smaller appetites. Eggs, pancakes, or French toast to get the little ones ready for the beach.</div>
+          </div>
+        </div>
+      </div>
+      <p class="menu-note" style="color:#4a6a8a;margin-top:32px;">Breakfast served <strong style="color:var(--sand)">Thursday – Sunday · 8:00–11:00 AM</strong></p>
+    </div>
+
+    <!-- DESSERTS & BAR -->
+    <div class="tab-panel" id="tab-bar">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Key Lime Pie</div>
+            <div class="menu-item-desc">Tart, creamy, and impossibly refreshing — a slice of pure coastal bliss. Made fresh the way it should be.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Peanut Butter Pie</div>
+            <div class="menu-item-desc">Rich, velvety peanut butter filling in a chocolate crumb crust. Dangerously good. You've been warned.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Craft Cocktails</div>
+            <div class="menu-item-desc">Carefully crafted drinks made with quality spirits — seasonal specials, classics done right, and frozen beach drinks that hit differently.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Beer &amp; Wine</div>
+            <div class="menu-item-desc">Ice-cold domestics, crafts, and imports. Plus a curated wine selection for those who prefer a glass over a pint.</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <div class="menu-item-name">Non-Alcoholic</div>
+            <div class="menu-item-desc">Soft drinks, lemonade, iced tea, juices, and more. Everyone's welcome at the Beach Bums bar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="menu-note fade-up">Full menu &amp; prices at <a href="https://www.beachbumstopsail.com/food-menus.html" target="_blank" rel="noopener">beachbumstopsail.com</a> · Menu subject to seasonal change</p>
+  </div>
+</section>
+
+<!-- ===== EVENTS ===== -->
+<section id="events">
+  <div class="container">
+    <span class="section-label fade-up">Every Week</span>
+    <h2 class="section-title fade-up delay-1">Party on <span class="accent">the Patio</span></h2>
+    <p class="fade-up delay-2" style="color:#666;max-width:540px;">Beach Bums isn't just dinner — it's a destination. Weekly events, live entertainment, and the kind of good company you only find at the beach.</p>
+
+    <div class="events-grid">
+      <div class="event-card fade-up">
+        <span class="event-icon">🎵</span>
+        <span class="event-day">Tuesdays</span>
+        <div class="event-name">Music Bingo</div>
+        <p class="event-desc">Test your music knowledge with our fan-favorite Music Bingo nights. Drink specials, prizes, and way too much fun.</p>
+      </div>
+      <div class="event-card fade-up delay-1">
+        <span class="event-icon">🧠</span>
+        <span class="event-day">Weekly</span>
+        <div class="event-name">Trivia Night</div>
+        <p class="event-desc">Put your team to the test. Categories change every week — new categories, same great time.</p>
+      </div>
+      <div class="event-card fade-up delay-2">
+        <span class="event-icon">🎤</span>
+        <span class="event-day">Fridays</span>
+        <div class="event-name">Karaoke Night</div>
+        <p class="event-desc">The mic is yours every Friday night. Whether you can sing or absolutely cannot — everyone's welcome to take the stage.</p>
+      </div>
+      <div class="event-card fade-up delay-3">
+        <span class="event-icon">🎸</span>
+        <span class="event-day">Saturdays &amp; Sundays</span>
+        <div class="event-name">Live Music</div>
+        <p class="event-desc">Local artists bring the sound every weekend on the patio. Cold drinks, ocean air, live music — it doesn't get better.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PHOTO STRIP ===== -->
+<div class="photo-strip">
+  <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/cf/d7/78/beach-bum-s-pizza-bar.jpg" crossorigin="anonymous" alt="Beach Bums exterior" onerror="this.src='https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80'" />
+  <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/5c/e4/32/chicken-quesadilla.jpg" crossorigin="anonymous" alt="Chicken quesadilla" onerror="this.src='https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80'" />
+  <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/5c/e3/fb/stromboli.jpg" crossorigin="anonymous" alt="Stromboli" onerror="this.src='https://images.unsplash.com/photo-1548369937-47519962c11a?w=400&q=80'" />
+  <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/cb/f2/4f/the-beach-bar.jpg" crossorigin="anonymous" alt="Beach Bums bar" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80'" />
+</div>
+
+<!-- ===== REVIEWS ===== -->
+<section id="reviews">
+  <div class="container">
+    <span class="section-label fade-up">From Our Guests</span>
+    <h2 class="section-title fade-up delay-1">What People Are <span class="accent">Saying</span></h2>
+
+    <div class="reviews-grid">
+      <div class="review-card fade-up">
+        <div class="review-quote">"</div>
+        <p class="review-text">The Gouda bites were just spectacular — crispy outside, perfectly melty inside. We had the Buffalo Burger too and it was honestly the best either of us had in years. Great atmosphere, kind staff.</p>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-author">Jordan M.</div>
+        <div class="review-source">via Tripadvisor</div>
+      </div>
+      <div class="review-card fade-up delay-1">
+        <div class="review-quote">"</div>
+        <p class="review-text">Fresh, well-prepared food and a super relaxed beach atmosphere. The Topsail Special was incredible — crisp crust, great toppings. Service was attentive and kind. Already planning our return trip.</p>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-author">Casey R.</div>
+        <div class="review-source">via Yelp</div>
+      </div>
+      <div class="review-card fade-up delay-2">
+        <div class="review-quote">"</div>
+        <p class="review-text">Music Bingo on Tuesday was SO fun. Great cocktails, excellent fries, and a staff that genuinely seemed happy to be there. The outdoor patio is exactly what a beach bar should be. 10/10.</p>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-author">Taylor K.</div>
+        <div class="review-source">via Google</div>
+      </div>
+      <div class="review-card fade-up delay-3">
+        <div class="review-quote">"</div>
+        <p class="review-text">Stumbled in after a long beach day and stayed for three hours. Steak nachos were massive and delicious. The bar makes a great cocktail. Clean, fun, and exactly what a beach bar should be.</p>
+        <div class="review-stars">★★★★</div>
+        <div class="review-author">Sam W.</div>
+        <div class="review-source">via Tripadvisor</div>
+      </div>
+    </div>
+
+    <div class="reviews-cta fade-up">
+      <a href="https://www.yelp.com/biz/beach-bums-pizza-bar-and-grill-north-topsail-beach" target="_blank" rel="noopener" class="yelp-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.16 12.73l-3.4-.8a.87.87 0 0 0-.81.27.88.88 0 0 0-.19.84l1.18 3.27a.62.62 0 0 0 .85.37 5.85 5.85 0 0 0 2.93-3.11.63.63 0 0 0-.56-.84zM5.23 12.98a.87.87 0 0 0-.78-.32l-3.42.42a.63.63 0 0 0-.51.88 5.84 5.84 0 0 0 2.65 3.3.62.62 0 0 0 .87-.29l1.38-3.17a.88.88 0 0 0-.19-.82zm1.53 4.58a.88.88 0 0 0-.82-.11L2.8 18.73a.62.62 0 0 0-.21.97 5.92 5.92 0 0 0 3.72 1.8.62.62 0 0 0 .68-.72l-.6-3.4a.87.87 0 0 0-.63-.82zm5.56.03a.87.87 0 0 0-.6.83l-.25 3.44a.62.62 0 0 0 .65.66 5.9 5.9 0 0 0 3.8-1.64.62.62 0 0 0-.16-.99l-2.98-1.6a.87.87 0 0 0-.46-.7zm1.9-13.37C12.13 1.6 8 2.84 6.28 6.1a5.85 5.85 0 0 0-.6 4.5.63.63 0 0 0 .96.37L13.5 6.4a.87.87 0 0 0 .31-1.18z"/></svg>
+        Read All Reviews on Yelp
+      </a>
+      <a href="https://www.doordash.com/store/beach-bums-pizzeria-bar-and-grill-n-topsail-beach-36386467/" target="_blank" rel="noopener" class="dd-btn">
+        🛵 Order on DoorDash
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FIND US ===== -->
+<section id="find-us">
+  <div class="container">
+    <div class="findus-grid">
+      <div>
+        <span class="section-label fade-up">Location &amp; Hours</span>
+        <h2 class="section-title fade-up delay-1">Come <span class="accent">Find Us</span></h2>
+
+        <div class="info-block fade-up delay-2">
+          <h3>Hours</h3>
+          <table class="hours-table">
+            <tr><td>Monday</td><td>11:00 AM – 9:00 PM</td></tr>
+            <tr><td>Tuesday</td><td>11:00 AM – 9:00 PM</td></tr>
+            <tr><td>Wednesday</td><td>11:00 AM – 9:00 PM</td></tr>
+            <tr><td>Thursday</td><td>8:00 AM – 9:00 PM</td></tr>
+            <tr><td>Friday</td><td>8:00 AM – 10:00 PM</td></tr>
+            <tr><td>Saturday</td><td>8:00 AM – 10:00 PM</td></tr>
+            <tr><td>Sunday</td><td>8:00 AM – 9:00 PM</td></tr>
+          </table>
+          <p class="hours-note">Breakfast served Thu–Sun 8–11am · Hours may vary seasonally</p>
+        </div>
+
+        <div class="info-block fade-up delay-3">
+          <h3>Contact &amp; Find Us</h3>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-text">4021 Island Dr, North Topsail Beach, NC 28460<br /><span style="color:#aaa;font-size:0.8rem;">Right across from the Atlantic Ocean</span></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-text"><a href="tel:+19103281044">(910) 328-1044</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🌐</div>
+            <div class="contact-text"><a href="https://www.beachbumstopsail.com" target="_blank" rel="noopener">beachbumstopsail.com</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📘</div>
+            <div class="contact-text"><a href="https://www.facebook.com/beachbumsntb" target="_blank" rel="noopener">facebook.com/beachbumsntb</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📸</div>
+            <div class="contact-text"><a href="https://www.instagram.com/beachbumsntb" target="_blank" rel="noopener">@beachbumsntb</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up delay-2">
+        <div class="map-frame">
+          <iframe
+            src="https://maps.google.com/maps?q=Beach+Bums+Pizzeria+4021+Island+Dr+North+Topsail+Beach+NC&t=&z=16&ie=UTF8&iwloc=B&output=embed"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Beach Bums Pizzeria Location Map"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <span class="footer-logo">Beach Bums 🏖️</span>
+        <p class="footer-desc">Locally owned pizza, bar &amp; grill on North Topsail Beach, NC. Hand-tossed pizzas, craft cocktails, live music, and good vibes — right across from the ocean.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#about">Our Story</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#find-us">Find Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <p>
+          4021 Island Dr<br />
+          North Topsail Beach, NC 28460<br /><br />
+          <a href="tel:+19103281044" style="color:#4a6a8a;text-decoration:none;">(910) 328-1044</a><br /><br />
+          Mon–Wed: 11am – 9pm<br />
+          Thu: 8am – 9pm<br />
+          Fri–Sat: 8am – 10pm<br />
+          Sun: 8am – 9pm
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Beach Bums Pizzeria, Bar &amp; Grill · North Topsail Beach, NC</div>
+      <div class="footer-copy">
+        <a href="https://www.yelp.com/biz/beach-bums-pizza-bar-and-grill-north-topsail-beach" target="_blank" rel="noopener" style="color:#2a4a6a;text-decoration:none;margin-right:16px;">Yelp</a>
+        <a href="https://www.facebook.com/beachbumsntb" target="_blank" rel="noopener" style="color:#2a4a6a;text-decoration:none;margin-right:16px;">Facebook</a>
+        <a href="https://www.beachbumstopsail.com" target="_blank" rel="noopener" style="color:#2a4a6a;text-decoration:none;">Website</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== AOM LEGAL FOOTER ===== -->
+<section id="aom-legal-footer" style="display:block !important;position:static !important;width:100%;background:#0a0a0a;padding:72px 40px 56px;text-align:center;box-sizing:border-box;border-top:1px solid rgba(255,255,255,0.08);margin-top:0;">
+  <div style="margin-bottom:36px;"><span style="color:#F5E6C8;font-size:1rem;letter-spacing:0.5em;">&#9670; &#9670; &#9670;</span></div>
+  <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:700;margin:0 0 32px;line-height:1.2;color:white;">
+    <em style="color:#F5E6C8;font-style:italic;">Design Preview</em>
+    <span style="color:rgba(255,255,255,0.9);font-style:normal;"> &middot; For Review Only</span>
+  </h2>
+  <p style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(0.95rem,2vw,1.1rem);color:rgba(255,255,255,0.65);max-width:600px;margin:0 auto 28px;line-height:1.9;">
+    This site is a custom design preview prepared exclusively for <strong style="color:#F5E6C8;font-style:italic;">Beach Bums Pizzeria, Bar &amp; Grill</strong>. All design elements, layout, code, copy, and creative direction are the sole intellectual property of
+  </p>
+  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1rem,3vw,1.4rem);font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#F5E6C8;margin:0 0 28px;">Altitude Odyssey Media LLC</div>
+  <p style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(0.8rem,1.8vw,0.95rem);color:rgba(255,255,255,0.4);max-width:580px;margin:0 auto 40px;line-height:1.9;">
+    Reproduction, redistribution, or use of any portion of this preview without a signed engagement agreement and full payment is strictly prohibited. Preview hosting is temporary and may be removed at any time. Final design transfers to client only upon completion of contracted payment terms.
+  </p>
+  <div style="margin-bottom:32px;"><span style="color:#F5E6C8;font-size:1rem;letter-spacing:0.5em;">&#9670; &#9670; &#9670;</span></div>
+  <p style="font-family:'Playfair Display',Georgia,serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin:0;">&copy; 2026 Altitude Odyssey Media LLC &middot; All Rights Reserved</p>
+</section>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+  // Hero background — Tripadvisor photo with Unsplash fallback
+  const heroBg = document.getElementById('heroBg');
+  const heroImg = new Image();
+  heroImg.crossOrigin = 'anonymous';
+  heroImg.onload = () => {
+    heroBg.style.backgroundImage = `url('${heroImg.src}')`;
+    setTimeout(() => heroBg.classList.add('loaded'), 100);
+  };
+  heroImg.onerror = () => {
+    heroBg.style.backgroundImage = "url('https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1400&q=80')";
+    setTimeout(() => heroBg.classList.add('loaded'), 100);
+  };
+  heroImg.src = 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/cf/d7/78/beach-bum-s-pizza-bar.jpg';
+
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // Menu tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

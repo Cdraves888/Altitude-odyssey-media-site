@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Undertow — Surf City, NC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050810;
+      --cyan: #00d4ff;
+      --ocean: #0a1628;
+      --coral: #ff4d6d;
+      --text: rgba(255,255,255,0.75);
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, padding 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgba(5,8,16,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 14px 48px;
+      border-bottom: 1px solid rgba(0,212,255,0.1);
+    }
+
+    .nav-logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.2em;
+      color: var(--cyan);
+      text-decoration: none;
+      text-shadow: 0 0 20px rgba(0,212,255,0.6);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+
+    .btn-reserve-nav {
+      background: var(--coral);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-reserve-nav:hover {
+      background: #ff2d52;
+      box-shadow: 0 0 20px rgba(255,77,109,0.5);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(5,8,16,0.97);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--cyan); }
+    .mobile-menu .btn-reserve-nav { font-size: 1rem; padding: 14px 32px; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1571266028243-d220c6f7e9c4?w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      animation: heroZoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.06); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(5,8,16,0.30) 0%,
+        rgba(5,8,16,0.45) 40%,
+        rgba(5,8,16,0.85) 100%
+      );
+    }
+
+    /* CSS-only animated gradient shimmer across hero */
+    .hero-shimmer {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        transparent 0%,
+        rgba(0,212,255,0.03) 30%,
+        transparent 60%,
+        rgba(255,77,109,0.03) 80%,
+        transparent 100%
+      );
+      background-size: 200% 200%;
+      animation: shimmer 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 20px;
+    }
+
+    .hero-location {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      text-shadow: 0 0 20px rgba(0,212,255,0.8);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.8rem, 8vw, 7rem);
+      line-height: 1;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 16px 0;
+      text-shadow: 0 0 60px rgba(0,212,255,0.2);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.9s ease 0.6s forwards;
+    }
+
+    .hero-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.9s forwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 1.1s forwards;
+    }
+
+    .btn-primary {
+      background: var(--coral);
+      color: #fff;
+      padding: 16px 36px;
+      border-radius: 3px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover {
+      background: #ff2d52;
+      box-shadow: 0 8px 30px rgba(255,77,109,0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      padding: 15px 36px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 3px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 8px 30px rgba(0,212,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .scroll-arrow {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      animation: pulse-arrow 2s ease-in-out infinite;
+    }
+    .scroll-arrow svg {
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: rgba(0,212,255,0.7);
+      stroke-width: 2;
+    }
+    @keyframes pulse-arrow {
+      0%, 100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 1; transform: translateX(-50%) translateY(8px); }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-strip {
+      background: var(--ocean);
+      border-top: 1px solid rgba(0,212,255,0.2);
+      border-bottom: 1px solid rgba(0,212,255,0.2);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-block;
+      animation: marqueeScroll 28s linear infinite;
+    }
+    .marquee-track span {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 100px 48px; }
+
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .section-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text);
+      max-width: 540px;
+    }
+
+    /* fade-in on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── EXPERIENCE ── */
+    #experience {
+      background: var(--bg);
+      text-align: center;
+    }
+    #experience .section-body {
+      margin: 0 auto 64px;
+      text-align: left;
+      max-width: 480px;
+    }
+
+    .experience-header { margin-bottom: 64px; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .exp-card {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(0,212,255,0.1);
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .exp-card:hover {
+      border-color: rgba(0,212,255,0.5);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(0,212,255,0.1);
+    }
+
+    .exp-card-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .exp-card:hover .exp-card-img { transform: scale(1.05); }
+
+    .exp-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,8,16,0.92) 0%, rgba(5,8,16,0.2) 60%);
+    }
+
+    .exp-card-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px;
+      text-align: left;
+    }
+
+    .exp-card-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .exp-card-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.5;
+    }
+
+    .exp-card-line {
+      width: 32px;
+      height: 2px;
+      background: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    /* ── EVENTS ── */
+    #events {
+      background: var(--ocean);
+      text-align: center;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 56px auto 0;
+    }
+
+    .event-card {
+      background: rgba(5,8,16,0.8);
+      border: 1px solid rgba(0,212,255,0.15);
+      border-radius: 6px;
+      padding: 40px 32px;
+      text-align: left;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .event-card:hover {
+      border-color: rgba(0,212,255,0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,212,255,0.08);
+    }
+
+    .event-day {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    .event-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .event-genre {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 24px;
+    }
+
+    .event-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 2px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .badge-weekly { background: rgba(0,212,255,0.15); color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); }
+    .badge-monthly { background: rgba(255,77,109,0.15); color: var(--coral); border: 1px solid rgba(255,77,109,0.3); }
+
+    .event-card.special {
+      border-color: rgba(255,77,109,0.2);
+      background: linear-gradient(135deg, rgba(255,77,109,0.05), rgba(5,8,16,0.9));
+    }
+    .event-card.special:hover {
+      border-color: rgba(255,77,109,0.5);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,77,109,0.08);
+    }
+    .event-card.special .event-day { color: var(--coral); }
+
+    /* ── GALLERY ── */
+    #gallery {
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 220px);
+      gap: 12px;
+      max-width: 1100px;
+      margin: 56px auto 0;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .gallery-item:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px rgba(0,212,255,0.3);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    /* ── BOTTLE SERVICE ── */
+    #bottle-service {
+      background: var(--ocean);
+      text-align: center;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 56px auto 48px;
+    }
+
+    .pkg-card {
+      background: rgba(5,8,16,0.7);
+      border: 1px solid rgba(0,212,255,0.15);
+      border-radius: 6px;
+      padding: 40px 32px;
+      text-align: left;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .pkg-card:hover {
+      border-color: rgba(0,212,255,0.4);
+      transform: translateY(-4px);
+    }
+    .pkg-card.featured {
+      border-color: rgba(0,212,255,0.4);
+      background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(5,8,16,0.9));
+    }
+
+    .pkg-tier {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .pkg-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .pkg-features {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+    .pkg-features li {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.65);
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pkg-features li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      flex-shrink: 0;
+    }
+
+    .btn-pkg {
+      display: block;
+      text-align: center;
+      padding: 12px 20px;
+      border: 1px solid rgba(0,212,255,0.4);
+      border-radius: 3px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-pkg:hover { background: var(--cyan); color: #000; }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--bg);
+      padding: 0;
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 580px;
+    }
+
+    .about-img {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-content {
+      padding: 80px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-stat {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .stat-num {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: var(--cyan);
+      text-shadow: 0 0 20px rgba(0,212,255,0.4);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── FIND US ── */
+    #find-us {
+      background: var(--ocean);
+    }
+
+    .find-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .map-wrap {
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(0,212,255,0.2);
+      height: 380px;
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: invert(92%) hue-rotate(180deg) saturate(0.6);
+    }
+
+    .find-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .info-item label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .info-item p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+
+    .info-item a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .info-item a:hover { color: var(--cyan); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #020408;
+      padding: 64px 48px 40px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      text-shadow: 0 0 20px rgba(0,212,255,0.4);
+      display: block;
+      margin-bottom: 28px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-links a:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(0,212,255,0.08);
+    }
+
+    .footer-disclaimer {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.12em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      nav.scrolled { padding: 12px 24px; }
+      section { padding: 72px 24px; }
+
+      .nav-links { display: none; }
+      .btn-reserve-nav.desktop { display: none; }
+      .hamburger { display: flex; }
+
+      .cards-grid,
+      .events-grid,
+      .packages-grid { grid-template-columns: 1fr; }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 200px);
+      }
+
+      .about-inner { grid-template-columns: 1fr; }
+      .about-img { min-height: 320px; }
+      .about-content { padding: 48px 24px; }
+
+      .find-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 560px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: unset;
+      }
+      .gallery-item { height: 220px; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .about-stat { flex-direction: column; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="#" class="nav-logo">THE UNDERTOW</a>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#bottle-service">Bottle Service</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#find-us">Reserve</a></li>
+      <li><a href="#find-us" class="btn-reserve-nav">Reserve Tonight</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#experience" onclick="closeMobile()">Experience</a>
+    <a href="#bottle-service" onclick="closeMobile()">Bottle Service</a>
+    <a href="#events" onclick="closeMobile()">Events</a>
+    <a href="#find-us" onclick="closeMobile()">Reserve</a>
+    <a href="#find-us" class="btn-reserve-nav" onclick="closeMobile()">Reserve Tonight</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-shimmer"></div>
+    <div class="hero-content">
+      <p class="hero-location">Surf City, NC</p>
+      <h1 class="hero-title">Where the Night<br>Pulls You In</h1>
+      <p class="hero-sub">North Carolina's premier oceanfront nightclub experience</p>
+      <div class="hero-ctas">
+        <a href="#find-us" class="btn-primary">Reserve a Table</a>
+        <a href="#events" class="btn-outline">View Events</a>
+      </div>
+    </div>
+    <div class="scroll-arrow">
+      <svg viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span>✦ THE UNDERTOW &nbsp;·&nbsp; SURF CITY, NC &nbsp;·&nbsp; EVERY FRIDAY &amp; SATURDAY &nbsp;·&nbsp; BOTTLE SERVICE AVAILABLE &nbsp;·&nbsp; VIP TABLES &nbsp;·&nbsp; LIVE DJS &nbsp;·&nbsp; 21+ &nbsp;·&nbsp; OCEANFRONT &nbsp;·&nbsp; &nbsp;&nbsp;</span>
+      <span>✦ THE UNDERTOW &nbsp;·&nbsp; SURF CITY, NC &nbsp;·&nbsp; EVERY FRIDAY &amp; SATURDAY &nbsp;·&nbsp; BOTTLE SERVICE AVAILABLE &nbsp;·&nbsp; VIP TABLES &nbsp;·&nbsp; LIVE DJS &nbsp;·&nbsp; 21+ &nbsp;·&nbsp; OCEANFRONT &nbsp;·&nbsp; &nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="experience-header reveal">
+      <p class="section-label">The Experience</p>
+      <h2 class="section-title">Feel Every Beat</h2>
+      <p class="section-body" style="margin:0 auto; text-align:center;">An oceanfront sanctuary for the night. World-class sound, elevated service, and an energy unlike anywhere on the Carolina coast.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="exp-card reveal reveal-delay-1">
+        <img class="exp-card-img" src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80" alt="DJ performing at The Undertow" loading="lazy" />
+        <div class="exp-card-overlay"></div>
+        <div class="exp-card-content">
+          <div class="exp-card-line"></div>
+          <div class="exp-card-title">The Dance Floor</div>
+          <div class="exp-card-desc">4,000 sq ft of pure energy</div>
+        </div>
+      </div>
+      <div class="exp-card reveal reveal-delay-2">
+        <img class="exp-card-img" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80" alt="Craft cocktails at The Undertow" loading="lazy" />
+        <div class="exp-card-overlay"></div>
+        <div class="exp-card-content">
+          <div class="exp-card-line"></div>
+          <div class="exp-card-title">The Bar</div>
+          <div class="exp-card-desc">Premium spirits, craft cocktails, cold imports</div>
+        </div>
+      </div>
+      <div class="exp-card reveal reveal-delay-3">
+        <img class="exp-card-img" src="https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=800&q=80" alt="VIP bottle service" loading="lazy" />
+        <div class="exp-card-overlay"></div>
+        <div class="exp-card-content">
+          <div class="exp-card-line"></div>
+          <div class="exp-card-title">VIP Bottle Service</div>
+          <div class="exp-card-desc">Reserved seating. Personal service.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events">
+    <div class="reveal">
+      <p class="section-label">Weekly Events</p>
+      <h2 class="section-title">The Lineup</h2>
+    </div>
+    <div class="events-grid">
+      <div class="event-card reveal reveal-delay-1">
+        <div class="event-day">Every Friday</div>
+        <div class="event-name">FREQUENCY</div>
+        <div class="event-genre">Electronic &amp; House</div>
+        <span class="event-badge badge-weekly">Weekly</span>
+      </div>
+      <div class="event-card reveal reveal-delay-2">
+        <div class="event-day">Every Saturday</div>
+        <div class="event-name">OFFSHORE</div>
+        <div class="event-genre">Hip-Hop &amp; Top 40</div>
+        <span class="event-badge badge-weekly">Weekly</span>
+      </div>
+      <div class="event-card special reveal reveal-delay-3">
+        <div class="event-day">Monthly Special</div>
+        <div class="event-name">TIDAL WAVE</div>
+        <div class="event-genre">Featured Artists &amp; Full Production</div>
+        <span class="event-badge badge-monthly">Monthly</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="reveal">
+      <p class="section-label">Inside The Undertow</p>
+      <h2 class="section-title">The Scene</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal reveal-delay-1">
+        <img src="https://images.unsplash.com/photo-1571266028243-d220c6f7e9c4?w=800&q=80" alt="Nightclub laser lights crowd" loading="lazy" />
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" alt="Bar interior neon" loading="lazy" />
+      </div>
+      <div class="gallery-item reveal reveal-delay-3">
+        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80" alt="DJ performing" loading="lazy" />
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80" alt="Crowd dancing" loading="lazy" />
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80" alt="Craft cocktails" loading="lazy" />
+      </div>
+      <div class="gallery-item reveal reveal-delay-3">
+        <img src="https://images.unsplash.com/photo-1574391884720-bbc3740c59d1?w=800&q=80" alt="Nightclub energy crowd" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTLE SERVICE -->
+  <section id="bottle-service">
+    <div class="reveal" style="text-align:center;">
+      <p class="section-label">VIP Experience</p>
+      <h2 class="section-title">Bottle Service</h2>
+      <p class="section-body" style="margin:0 auto; text-align:center;">Elevate your night. Our VIP packages are designed for those who expect more — from the table to the ceremony.</p>
+    </div>
+    <div class="packages-grid">
+      <div class="pkg-card reveal reveal-delay-1">
+        <div class="pkg-tier">Tier 01</div>
+        <div class="pkg-name">The Shore Package</div>
+        <ul class="pkg-features">
+          <li>Priority entry</li>
+          <li>Reserved seating</li>
+          <li>1 premium bottle</li>
+          <li>Mixers &amp; garnishes</li>
+          <li>Dedicated server</li>
+        </ul>
+        <a href="#find-us" class="btn-pkg">Inquire</a>
+      </div>
+      <div class="pkg-card featured reveal reveal-delay-2">
+        <div class="pkg-tier">Tier 02 · Most Popular</div>
+        <div class="pkg-name">The Riptide Package</div>
+        <ul class="pkg-features">
+          <li>VIP priority entry</li>
+          <li>Premium reserved section</li>
+          <li>2 premium bottles</li>
+          <li>Full mixers setup</li>
+          <li>Dedicated personal server</li>
+          <li>Welcome shot for the group</li>
+        </ul>
+        <a href="#find-us" class="btn-pkg">Inquire</a>
+      </div>
+      <div class="pkg-card reveal reveal-delay-3">
+        <div class="pkg-tier">Tier 03</div>
+        <div class="pkg-name">The Current Package</div>
+        <ul class="pkg-features">
+          <li>Premier VIP floor section</li>
+          <li>3 top-shelf bottles</li>
+          <li>Full bottle ceremony</li>
+          <li>Private server all night</li>
+          <li>Custom table setup</li>
+          <li>Direct concierge line</li>
+        </ul>
+        <a href="#find-us" class="btn-pkg">Inquire</a>
+      </div>
+    </div>
+    <div style="text-align:center;" class="reveal">
+      <a href="#find-us" class="btn-primary">Reserve Your Experience</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-inner">
+      <img
+        class="about-img"
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80"
+        alt="The Undertow interior"
+        loading="lazy"
+      />
+      <div class="about-content">
+        <div class="reveal">
+          <p class="section-label">About Us</p>
+          <h2 class="section-title">Born from the Ocean.<br>Built for the Night.</h2>
+          <p class="section-body">
+            Opened in 2024, The Undertow is Surf City's first true nightclub experience — an oceanfront venue where the energy of the coast collides with the pulse of the night. Housed in a striking 4,000 sq ft space steps from the Atlantic, we've brought a world-class sound system, immersive lighting production, and a full VIP bottle service program to the Carolina coast.
+          </p>
+          <p class="section-body" style="margin-top:16px;">
+            We don't just open our doors — we create nights worth remembering.
+          </p>
+          <div class="about-stat">
+            <div>
+              <span class="stat-num">4,000</span>
+              <span class="stat-label">Sq Ft Venue</span>
+            </div>
+            <div>
+              <span class="stat-num">2024</span>
+              <span class="stat-label">Est. Surf City</span>
+            </div>
+            <div>
+              <span class="stat-num">21+</span>
+              <span class="stat-label">Always</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIND US -->
+  <section id="find-us">
+    <div class="find-inner">
+      <div class="reveal">
+        <div class="map-wrap">
+          <iframe
+            src="https://maps.google.com/maps?q=Surf+City+NC&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+            title="The Undertow location map"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+      <div class="find-info reveal reveal-delay-1">
+        <div>
+          <p class="section-label">Find Us</p>
+          <h2 class="section-title">Come In</h2>
+        </div>
+        <div class="info-item">
+          <label>Address</label>
+          <p>1 Undertow Blvd<br>Surf City, NC 28445</p>
+        </div>
+        <div class="info-item">
+          <label>Hours</label>
+          <p>Friday – Saturday<br>10:00 PM – 2:00 AM</p>
+        </div>
+        <div class="info-item">
+          <label>Reservations</label>
+          <p><a href="mailto:reservations@theundertow.com">reservations@theundertow.com</a></p>
+        </div>
+        <div class="info-item">
+          <label>Phone</label>
+          <p><a href="tel:+19105550190">(910) 555-0190</a></p>
+        </div>
+        <a href="mailto:reservations@theundertow.com" class="btn-primary" style="display:inline-block; margin-top:8px;">Make a Reservation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">THE UNDERTOW</span>
+    <div class="social-links">
+      <!-- Instagram -->
+      <a href="#" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      </a>
+      <!-- TikTok -->
+      <a href="#" aria-label="TikTok">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.22 8.22 0 0 0 4.82 1.55V7.16a4.85 4.85 0 0 1-1.05-.47z"/>
+        </svg>
+      </a>
+      <!-- Facebook -->
+      <a href="#" aria-label="Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+    </div>
+    <p class="footer-disclaimer">21+ &nbsp;·&nbsp; Dress Code Enforced &nbsp;·&nbsp; Management Reserves the Right to Refuse Entry</p>
+    <p class="footer-copy">&copy; 2026 The Undertow &nbsp;·&nbsp; Surf City, NC &nbsp;·&nbsp; All Rights Reserved</p>
+  </footer>
+
+  <!-- LEGAL FOOTER -->
+  <section id="aom-legal-footer" style="display:block !important;position:static !important;bottom:auto !important;top:auto !important;left:auto !important;right:auto !important;z-index:auto !important;width:100%;background:#0a0a0a;padding:72px 40px 56px;text-align:center;box-sizing:border-box;border-top:1px solid rgba(255,255,255,0.1);margin-top:0;">
+    <div style="margin-bottom:36px;"><span style="color:#00d4ff;font-size:1rem;letter-spacing:0.5em;">&#9670; &#9670; &#9670;</span></div>
+    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:700;margin:0 0 32px;line-height:1.2;color:white;"><em style="color:#00d4ff;font-style:italic;">Design Preview</em><span style="color:rgba(255,255,255,0.9);"> &middot; For Review Only</span></h2>
+    <p style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(0.95rem,2vw,1.1rem);color:rgba(255,255,255,0.65);max-width:600px;margin:0 auto 28px;line-height:1.9;">This site is a custom design preview prepared exclusively for <strong style="color:#00d4ff;">The Undertow</strong>. All design elements, layout, code, copy, and creative direction shown here are the sole intellectual property of</p>
+    <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1rem,3vw,1.4rem);font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#00d4ff;margin:0 0 28px;">Altitude Odyssey Media LLC</div>
+    <p style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(0.8rem,1.8vw,0.95rem);color:rgba(255,255,255,0.4);max-width:580px;margin:0 auto 40px;line-height:1.9;">Reproduction, redistribution, or use of any portion of this preview without a signed engagement agreement and full payment is strictly prohibited. Preview hosting is temporary and may be removed at any time. Final design transfers to client only upon completion of contracted payment terms.</p>
+    <div style="margin-bottom:32px;"><span style="color:#00d4ff;font-size:1rem;letter-spacing:0.5em;">&#9670; &#9670; &#9670;</span></div>
+    <p style="font-family:'Playfair Display',Georgia,serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin:0;">&copy; 2026 Altitude Odyssey Media LLC &middot; All Rights Reserved</p>
+  </section>
+
+  <script>
+    // ── NAV SCROLL
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── HAMBURGER
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── SCROLL REVEAL
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

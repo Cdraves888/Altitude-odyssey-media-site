@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dale's Pub — Holly Ridge, NC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --near-black: #0d0d0d;
+      --amber: #c87941;
+      --gold: #e8a84c;
+      --cream: #f5f0e8;
+      --dark-surface: #141414;
+      --section-dark: #111111;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--near-black);
+      color: var(--cream);
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 22px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.35s ease, padding 0.35s ease, box-shadow 0.35s ease;
+    }
+    nav.scrolled {
+      background: rgba(13,13,13,0.97);
+      padding: 14px 48px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.6);
+    }
+    .nav-logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.85);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--cream);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(13,13,13,0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      nav.scrolled { padding: 12px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: -60px;
+      background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 24px;
+    }
+    .hero-content h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    }
+    .hero-content h1 span { color: var(--gold); }
+    .hero-content p {
+      font-family: 'Lato', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: rgba(245,240,232,0.85);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      margin-bottom: 40px;
+    }
+    .btn-amber {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--near-black);
+      background: var(--amber);
+      padding: 16px 44px;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    }
+    .btn-amber:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--near-black);
+      border-top: 1px solid rgba(200,121,65,0.3);
+      border-bottom: 1px solid rgba(200,121,65,0.3);
+      overflow: hidden;
+      padding: 14px 0;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 30s linear infinite;
+    }
+    .marquee-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--amber);
+      white-space: nowrap;
+      padding: 0 60px;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS BASE ── */
+    section {
+      padding: 100px 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+      section { padding: 72px 0; }
+    }
+
+    .section-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .section-title span { color: var(--amber); }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--amber);
+      margin-bottom: 32px;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--dark-surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+    .about-text p {
+      font-size: 1.05rem;
+      color: rgba(245,240,232,0.8);
+      line-height: 1.85;
+      margin-bottom: 20px;
+    }
+    .est-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--amber);
+      padding: 18px 32px;
+      margin-bottom: 36px;
+    }
+    .est-badge .est-year {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .est-badge .est-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.5);
+    }
+    .about-photo {
+      position: relative;
+    }
+    .about-photo img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+    .about-photo::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: -16px;
+      right: 16px;
+      bottom: 16px;
+      border: 2px solid var(--amber);
+      z-index: 0;
+    }
+    .about-photo img { position: relative; z-index: 1; }
+
+    /* ── DRINKS ── */
+    #drinks { background: var(--section-dark); }
+    .menu-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+      margin-top: 56px;
+    }
+    .menu-card {
+      background: #1a1a1a;
+      border: 1px solid rgba(200,121,65,0.2);
+      padding: 36px 28px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .menu-card:hover {
+      border-color: var(--amber);
+      transform: translateY(-4px);
+    }
+    .menu-card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .menu-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(200,121,65,0.25);
+    }
+    .menu-card ul {
+      list-style: none;
+    }
+    .menu-card ul li {
+      font-size: 0.95rem;
+      color: rgba(245,240,232,0.75);
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .menu-card ul li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: var(--amber);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── EVENTS ── */
+    #events { background: var(--dark-surface); }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .event-card {
+      background: var(--near-black);
+      border-top: 3px solid var(--amber);
+      padding: 32px 24px;
+      text-align: center;
+      transition: transform 0.25s;
+    }
+    .event-card:hover { transform: translateY(-4px); }
+    .event-card .event-icon {
+      font-size: 2.4rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .event-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .event-card .event-day {
+      font-size: 0.82rem;
+      color: var(--amber);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .event-card p {
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.55);
+    }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--section-dark); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 280px);
+      gap: 12px;
+      margin-top: 56px;
+    }
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 220px);
+      }
+    }
+    @media (max-width: 500px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+      }
+      .gallery-grid .gallery-item { height: 220px; }
+    }
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+    .gallery-item:hover img { transform: scale(1.07); }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ── REVIEWS ── */
+    #reviews { background: var(--dark-surface); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 56px;
+    }
+    .review-card {
+      background: var(--near-black);
+      padding: 36px 32px;
+      border-left: 3px solid var(--amber);
+    }
+    .stars {
+      color: var(--gold);
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+    .review-card blockquote {
+      font-style: italic;
+      font-size: 0.98rem;
+      color: rgba(245,240,232,0.75);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .reviewer {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+    .reviewer span {
+      color: rgba(245,240,232,0.35);
+      font-size: 0.72rem;
+    }
+
+    /* ── FIND US ── */
+    #find-us { background: var(--section-dark); }
+    .find-us-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 56px;
+    }
+    @media (max-width: 900px) {
+      .find-us-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    .map-embed {
+      width: 100%;
+      height: 380px;
+      border: none;
+      display: block;
+      filter: grayscale(0.3);
+    }
+    .find-us-info h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+      margin-top: 32px;
+    }
+    .find-us-info h3:first-child { margin-top: 0; }
+    .find-us-info p, .find-us-info a {
+      font-size: 1rem;
+      color: rgba(245,240,232,0.75);
+      text-decoration: none;
+    }
+    .find-us-info a:hover { color: var(--gold); }
+    .find-us-info .btn-amber {
+      display: inline-block;
+      margin-top: 28px;
+      color: var(--near-black);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080808;
+      padding: 60px 0 36px;
+      border-top: 1px solid rgba(200,121,65,0.2);
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 768px) {
+      .footer-inner { grid-template-columns: 1fr; text-align: center; gap: 32px; }
+    }
+    .footer-logo-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.4);
+      letter-spacing: 0.08em;
+    }
+    .footer-col h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 16px;
+    }
+    .footer-col p, .footer-col a {
+      font-size: 0.9rem;
+      color: rgba(245,240,232,0.5);
+      line-height: 1.8;
+      text-decoration: none;
+      display: block;
+    }
+    .footer-col a:hover { color: var(--gold); }
+    .social-icons {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    @media (max-width: 768px) {
+      .social-icons { justify-content: center; }
+    }
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(200,121,65,0.4);
+      color: rgba(245,240,232,0.6);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-icon:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+      background: rgba(200,121,65,0.08);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 28px;
+      text-align: center;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: rgba(245,240,232,0.2);
+      text-transform: uppercase;
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .fade-in-delay-4 { transition-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="#hero" class="nav-logo">Dale's Pub</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#drinks">Drinks</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#find-us">Find Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#drinks" class="mobile-link">Drinks</a>
+    <a href="#events" class="mobile-link">Events</a>
+    <a href="#gallery" class="mobile-link">Gallery</a>
+    <a href="#find-us" class="mobile-link">Find Us</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Holly Ridge's <span>Favorite</span> Watering Hole</h1>
+      <p>Cold drinks. Good people. Since 2000.</p>
+      <a href="#about" class="btn-amber">Come On In</a>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-text">🍺 Dale's Pub · Est. 2000 · Holly Ridge, NC · Cold Drinks · Live Music · Good Times · Patio · Nightclub · Cold Beers · Great People · Onslow County's Bar ·</span>
+      <span class="marquee-text">🍺 Dale's Pub · Est. 2000 · Holly Ridge, NC · Cold Drinks · Live Music · Good Times · Patio · Nightclub · Cold Beers · Great People · Onslow County's Bar ·</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <div class="est-badge">
+            <span class="est-year">2000</span>
+            <span class="est-label">Established</span>
+          </div>
+          <div class="section-label">About Us</div>
+          <h2 class="section-title">The Heart of<br /><span>Holly Ridge</span></h2>
+          <div class="divider"></div>
+          <p>Dale's Pub has been a cornerstone of Holly Ridge and Onslow County since the turn of the millennium. More than just a bar — we're a neighborhood institution. A place where locals gather after a long day, friends catch up over cold beers, and strangers become regulars.</p>
+          <p>Tucked along East Ocean Highway, we've built a reputation for cold drinks, honest service, and a no-frills, come-as-you-are atmosphere that keeps people coming back. Our nightclub setup means the party doesn't stop when the sun goes down — with a patio, pool tables, and a dance floor ready to go.</p>
+          <p>Over two decades in, we're still here. Still pouring cold ones. Still playing great music. Still the same spot Holly Ridge has always counted on for a good time.</p>
+        </div>
+        <div class="about-photo fade-in fade-in-delay-2">
+          <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80" alt="Interior of Dale's Pub" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRINKS / MENU -->
+  <section id="drinks">
+    <div class="container">
+      <div class="fade-in">
+        <div class="section-label">What We're Pouring</div>
+        <h2 class="section-title">Drinks &amp; <span>Bar Bites</span></h2>
+        <div class="divider"></div>
+        <p style="color:rgba(245,240,232,0.6); max-width:560px;">Cold, simple, and exactly what you need. We keep it classic at Dale's — great beer, solid cocktails, and snacks to keep you going.</p>
+      </div>
+      <div class="menu-categories">
+        <div class="menu-card fade-in fade-in-delay-1">
+          <span class="menu-card-icon">🍺</span>
+          <h3>Draft Beers</h3>
+          <ul>
+            <li>Bud Light</li>
+            <li>Coors Light</li>
+            <li>Miller Lite</li>
+            <li>Yuengling</li>
+            <li>Rotating Craft Taps</li>
+          </ul>
+        </div>
+        <div class="menu-card fade-in fade-in-delay-2">
+          <span class="menu-card-icon">🥃</span>
+          <h3>Cocktails</h3>
+          <ul>
+            <li>Rum &amp; Coke</li>
+            <li>Jack &amp; Coke</li>
+            <li>Gin &amp; Tonic</li>
+            <li>Margarita</li>
+            <li>Long Island Iced Tea</li>
+          </ul>
+        </div>
+        <div class="menu-card fade-in fade-in-delay-3">
+          <span class="menu-card-icon">🔥</span>
+          <h3>Shots</h3>
+          <ul>
+            <li>Fireball</li>
+            <li>Jameson</li>
+            <li>Tequila</li>
+            <li>Crown Royal</li>
+            <li>Ask Your Bartender</li>
+          </ul>
+        </div>
+        <div class="menu-card fade-in fade-in-delay-4">
+          <span class="menu-card-icon">🍗</span>
+          <h3>Bar Bites</h3>
+          <ul>
+            <li>Wings</li>
+            <li>Nachos</li>
+            <li>Mozzarella Sticks</li>
+            <li>Fries</li>
+            <li>Onion Rings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events">
+    <div class="container">
+      <div class="fade-in">
+        <div class="section-label">Always Something Going On</div>
+        <h2 class="section-title">Events &amp; <span>Nights Out</span></h2>
+        <div class="divider"></div>
+        <p style="color:rgba(245,240,232,0.6); max-width:560px;">From live bands to karaoke nights, there's always a reason to stop by Dale's. Check out what's happening this week.</p>
+      </div>
+      <div class="events-grid">
+        <div class="event-card fade-in fade-in-delay-1">
+          <span class="event-icon">🎸</span>
+          <h3>Live Music</h3>
+          <div class="event-day">Fri &amp; Sat</div>
+          <p>Local bands and regional acts taking the stage all night long.</p>
+        </div>
+        <div class="event-card fade-in fade-in-delay-2">
+          <span class="event-icon">🎧</span>
+          <h3>DJ Nights</h3>
+          <div class="event-day">Thursdays</div>
+          <p>Start your weekend early with beats from our rotating DJ lineup.</p>
+        </div>
+        <div class="event-card fade-in fade-in-delay-2">
+          <span class="event-icon">🍻</span>
+          <h3>Happy Hour</h3>
+          <div class="event-day">Mon – Fri · 4–7 PM</div>
+          <p>Discounted drinks and great vibes. Best way to end a work week.</p>
+        </div>
+        <div class="event-card fade-in fade-in-delay-3">
+          <span class="event-icon">🎤</span>
+          <h3>Karaoke Night</h3>
+          <div class="event-day">Wednesdays</div>
+          <p>Grab the mic and show Holly Ridge what you've got. No judgment here.</p>
+        </div>
+        <div class="event-card fade-in fade-in-delay-4">
+          <span class="event-icon">🎱</span>
+          <h3>Pool Tournaments</h3>
+          <div class="event-day">Sundays</div>
+          <p>Friendly competition on the tables. Prizes for top players.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="container">
+      <div class="fade-in">
+        <div class="section-label">Life at Dale's</div>
+        <h2 class="section-title">The <span>Scene</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item fade-in fade-in-delay-1">
+          <img src="https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=800&q=80" alt="Bar scene" loading="lazy" />
+        </div>
+        <div class="gallery-item fade-in fade-in-delay-2">
+          <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80" alt="Pub interior" loading="lazy" />
+        </div>
+        <div class="gallery-item fade-in fade-in-delay-3">
+          <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800&q=80" alt="Drinks at the bar" loading="lazy" />
+        </div>
+        <div class="gallery-item fade-in fade-in-delay-1">
+          <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&q=80" alt="Bar atmosphere" loading="lazy" />
+        </div>
+        <div class="gallery-item fade-in fade-in-delay-2">
+          <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&q=80" alt="Night out" loading="lazy" />
+        </div>
+        <div class="gallery-item fade-in fade-in-delay-3">
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80" alt="Bar vibes" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="container">
+      <div class="fade-in">
+        <div class="section-label">What People Are Saying</div>
+        <h2 class="section-title">Local <span>Love</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card fade-in fade-in-delay-1">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Been coming to Dale's since it first opened. This place is the real deal — no pretense, just cold beer, good music, and people who actually know your name. The live music on weekends is always a blast. My go-to spot in Onslow County."</blockquote>
+          <div class="reviewer">Mike T. <span>— Holly Ridge, NC</span></div>
+        </div>
+        <div class="review-card fade-in fade-in-delay-2">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Dale's is exactly what a neighborhood bar should be. Friendly staff, ice-cold drinks, and a great patio. Happy hour is unbeatable Monday through Friday. If you're anywhere near Holly Ridge, this is the spot you need to know about."</blockquote>
+          <div class="reviewer">Sarah L. <span>— Jacksonville, NC</span></div>
+        </div>
+        <div class="review-card fade-in fade-in-delay-3">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Karaoke Wednesdays are legendary. The whole crowd gets into it and the bartenders keep the energy going all night. This place has such a great vibe — it's been the heart of Holly Ridge for as long as I can remember. Can't recommend it enough."</blockquote>
+          <div class="reviewer">James R. <span>— Surf City, NC</span></div>
+        </div>
+        <div class="review-card fade-in fade-in-delay-4">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Our whole crew loves this place. Pool tournaments on Sundays bring the whole town out. The atmosphere is always great, the drinks are always cold, and you can tell the staff genuinely cares about the regulars. Dale's is a true local gem."</blockquote>
+          <div class="reviewer">Tanya B. <span>— Sneads Ferry, NC</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIND US -->
+  <section id="find-us">
+    <div class="container">
+      <div class="fade-in">
+        <div class="section-label">Come See Us</div>
+        <h2 class="section-title">Find <span>Dale's Pub</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="find-us-grid">
+        <div class="fade-in fade-in-delay-1">
+          <iframe
+            class="map-embed"
+            src="https://maps.google.com/maps?q=775+E+Ocean+Hwy+Holly+Ridge+NC+28445&output=embed"
+            allowfullscreen
+            loading="lazy"
+            title="Dale's Pub Location"
+          ></iframe>
+        </div>
+        <div class="find-us-info fade-in fade-in-delay-2">
+          <h3>Address</h3>
+          <p>775 E Ocean Hwy<br />Holly Ridge, NC 28445</p>
+
+          <h3>Phone</h3>
+          <a href="tel:+19103294213">(910) 329-4213</a>
+
+          <h3>Hours</h3>
+          <p>Monday – Friday: 4:00 PM – 2:00 AM<br />
+          Saturday: 2:00 PM – 2:00 AM<br />
+          Sunday: 4:00 PM – Midnight</p>
+
+          <a href="tel:+19103294213" class="btn-amber">Call Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo-text">Dale's Pub</div>
+          <div class="footer-tagline">Holly Ridge's Favorite Watering Hole<br />Est. 2000</div>
+        </div>
+        <div class="footer-col">
+          <h4>Location</h4>
+          <p>775 E Ocean Hwy</p>
+          <p>Holly Ridge, NC 28445</p>
+          <a href="tel:+19103294213" style="margin-top:8px;">(910) 329-4213</a>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Along</h4>
+          <p style="margin-bottom:12px;">Stay connected for events &amp; specials.</p>
+          <div class="social-icons">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Dale's Pub &middot; 775 E Ocean Hwy, Holly Ridge, NC 28445 &middot; All Rights Reserved
+      </div>
+    </div>
+  </footer>
+
+  <!-- LEGAL NOTICE — LAST ELEMENT BEFORE </body> -->
+  <section id="aom-legal-footer" style="display:block !important;position:static !important;bottom:auto !important;top:auto !important;left:auto !important;right:auto !important;z-index:auto !important;width:100%;background:#0a0a0a;padding:72px 40px 56px;text-align:center;box-sizing:border-box;border-top:1px solid rgba(255,255,255,0.1);margin-top:0;">
+    <div style="margin-bottom:36px;"><span style="color:#c87941;font-size:1rem;letter-spacing:0.5em;">&#9670; &#9670; &#9670;</span></div>
+    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:700;margin:0 0 32px;line-height:1.2;color:white;"><em style="color:#c87941;font-style:italic;">Design Preview</em><span style="color:rgba(255,255,255,0.9);"> &middot; For Review Only</span></h2>
+    <p style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(0.95rem,2vw,1.1rem);color:rgba(255,255,255,0.65);max-width:600px;margin:0 auto 28px;line-height:1.9;">This site is a custom design preview prepared exclusively for <strong style="color:#c87941;">Dale's Pub</strong>. All design elements, layout, code, copy, and creative direction shown here are the sole intellectual property of</p>
+    <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1rem,3vw,1.4rem);font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#c87941;margin:0 0 28px;">Altitude Odyssey Media LLC</div>
+    <p style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(0.8rem,1.8vw,0.95rem);color:rgba(255,255,255,0.4);max-width:580px;margin:0 auto 40px;line-height:1.9;">Reproduction, redistribution, or use of any portion of this preview without a signed engagement agreement and full payment is strictly prohibited. Preview hosting is temporary and may be removed at any time. Final design transfers to client only upon completion of contracted payment terms.</p>
+    <div style="margin-bottom:32px;"><span style="color:#c87941;font-size:1rem;letter-spacing:0.5em;">&#9670; &#9670; &#9670;</span></div>
+    <p style="font-family:'Playfair Display',Georgia,serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin:0;">&copy; 2026 Altitude Odyssey Media LLC &middot; All Rights Reserved</p>
+  </section>
+
+  <script>
+    // ── NAV SCROLL ──
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── HAMBURGER ──
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ── PARALLAX HERO ──
+    const heroBg = document.getElementById('hero-bg');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      if (scrolled < window.innerHeight) {
+        heroBg.style.transform = `translateY(${scrolled * 0.35}px)`;
+      }
+    }, { passive: true });
+
+    // ── FADE IN (IntersectionObserver) ──
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

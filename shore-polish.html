@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shore Polish · Boutique Nail Studio · Surf City, NC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Poppins:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf8f5;
+      --rose: #c9697a;
+      --mauve: #8b5e6b;
+      --gold: #d4a853;
+      --dark: #2d2828;
+      --light: rgba(255,255,255,0.9);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
+    }
+    nav.scrolled {
+      background: var(--cream);
+      box-shadow: 0 2px 20px rgba(45,40,40,0.08);
+      padding: 14px 48px;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--rose);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    nav.scrolled .nav-links a { color: var(--dark); }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-cta {
+      background: var(--rose);
+      color: #fff !important;
+      padding: 10px 22px;
+      border-radius: 2px;
+      letter-spacing: 0.1em !important;
+    }
+    .nav-cta:hover { background: var(--mauve); color: #fff !important; }
+    nav.scrolled .nav-cta { color: #fff !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      transition: background 0.3s, transform 0.3s, opacity 0.3s;
+    }
+    nav.scrolled .hamburger span { background: var(--dark); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--cream);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--dark);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+    }
+    .mobile-menu a:hover { color: var(--rose); }
+    .mobile-menu .nav-cta {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 14px 36px;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      height: 100vh;
+      min-height: 600px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+      transition: transform 8s ease-out;
+    }
+    .hero-bg.loaded { transform: scale(1); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(201,105,122,0.38) 0%, rgba(45,40,40,0.62) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 800px;
+    }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.22em;
+      margin-bottom: 20px;
+    }
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      margin-bottom: 22px;
+    }
+    .hero-desc {
+      font-size: clamp(0.88rem, 2vw, 1rem);
+      color: rgba(255,255,255,0.78);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      margin-bottom: 42px;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-filled {
+      background: var(--rose);
+      color: #fff;
+      padding: 14px 36px;
+      border: 2px solid var(--rose);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .btn-filled:hover { background: var(--mauve); border-color: var(--mauve); }
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      padding: 14px 36px;
+      border: 2px solid rgba(255,255,255,0.65);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--cream);
+      border-top: 1px solid rgba(201,105,122,0.18);
+      border-bottom: 1px solid rgba(201,105,122,0.18);
+      overflow: hidden;
+      padding: 18px 0;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 28s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-track span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      color: var(--rose);
+      text-transform: uppercase;
+      padding-right: 60px;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 96px 48px; }
+    .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+    .section-subtitle {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: #7a6e6e;
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--cream); }
+    .services-header { text-align: center; margin-bottom: 64px; }
+    .services-header .section-subtitle { margin: 0 auto; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .service-card {
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 28px rgba(45,40,40,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-top: 3px solid var(--rose);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 48px rgba(201,105,122,0.18);
+    }
+    .service-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s;
+    }
+    .service-card:hover .service-img { transform: scale(1.04); }
+    .service-img-wrap { overflow: hidden; }
+    .service-body { padding: 28px 28px 32px; }
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .service-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: #7a6e6e;
+      line-height: 1.75;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: #f3eeea;
+      padding: 0;
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 580px;
+    }
+    .about-img-side {
+      position: relative;
+      overflow: hidden;
+    }
+    .about-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      min-height: 480px;
+    }
+    .about-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,105,122,0.28) 0%, rgba(139,94,107,0.22) 100%);
+    }
+    .about-copy {
+      padding: 72px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .about-copy p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: #5e5252;
+      line-height: 1.9;
+      margin-bottom: 18px;
+    }
+    .about-copy p:last-child { margin-bottom: 0; }
+    .about-sig {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--rose);
+      margin-top: 28px;
+    }
+
+    /* ── MENU ── */
+    #menu { background: var(--cream); }
+    .menu-header { text-align: center; margin-bottom: 56px; }
+    .menu-header .section-subtitle { margin: 0 auto; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 4px 32px rgba(45,40,40,0.07);
+      overflow: hidden;
+    }
+    .menu-group {
+      padding: 40px 44px;
+      border-right: 1px solid rgba(201,105,122,0.1);
+      border-bottom: 1px solid rgba(201,105,122,0.1);
+    }
+    .menu-group:nth-child(even) { border-right: none; }
+    .menu-group:nth-child(3), .menu-group:nth-child(4) { border-bottom: none; }
+    .menu-group-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--rose);
+      letter-spacing: 0.12em;
+      margin-bottom: 22px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(201,105,122,0.2);
+    }
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+    }
+    .menu-item:last-child { margin-bottom: 0; }
+    .menu-item-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+    .menu-item-desc {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: #9a8e8e;
+    }
+    .menu-note {
+      text-align: center;
+      margin-top: 36px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.98rem;
+      color: var(--mauve);
+    }
+
+    /* ── GALLERY ── */
+    #gallery { background: #f3eeea; }
+    .gallery-header { text-align: center; margin-bottom: 52px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 3px;
+      aspect-ratio: 1;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s, box-shadow 0.4s;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.06);
+    }
+    .gallery-item:hover {
+      box-shadow: 0 0 0 3px var(--rose), 0 12px 36px rgba(201,105,122,0.22);
+    }
+
+    /* ── REVIEWS ── */
+    #reviews { background: var(--cream); }
+    .reviews-header { text-align: center; margin-bottom: 56px; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .review-card {
+      background: #fff;
+      border-radius: 4px;
+      padding: 36px 32px;
+      box-shadow: 0 4px 28px rgba(45,40,40,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 40px rgba(201,105,122,0.14);
+    }
+    .review-stars { color: var(--gold); font-size: 1rem; letter-spacing: 3px; }
+    .review-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.12rem;
+      font-weight: 400;
+      color: var(--dark);
+      line-height: 1.7;
+    }
+    .review-author {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rose);
+    }
+
+    /* ── BOOK NOW ── */
+    #book {
+      background: linear-gradient(135deg, var(--rose) 0%, var(--mauve) 100%);
+      text-align: center;
+    }
+    #book .section-label { color: rgba(255,255,255,0.6); }
+    #book .section-title { color: #fff; margin-bottom: 14px; }
+    #book .section-subtitle { color: rgba(255,255,255,0.72); margin: 0 auto 48px; max-width: 440px; }
+    .book-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+    .btn-white {
+      background: #fff;
+      color: var(--rose);
+      padding: 14px 36px;
+      border: 2px solid #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-white:hover { background: transparent; color: #fff; }
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      padding: 14px 36px;
+      border: 2px solid rgba(255,255,255,0.65);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+    .book-contact {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .book-contact a {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .book-contact a:hover { color: #fff; }
+    .book-contact-icon { font-size: 1.1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--cream);
+      border-top: 1px solid rgba(201,105,122,0.15);
+      padding: 56px 48px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .footer-brand .nav-logo { font-size: 1.4rem; display: inline-block; margin-bottom: 14px; }
+    .footer-brand p {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: #9a8e8e;
+      line-height: 1.75;
+    }
+    .footer-social {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .footer-social a {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,105,122,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rose);
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+    }
+    .footer-social a:hover { background: var(--rose); border-color: var(--rose); color: #fff; }
+    .footer-col-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--dark);
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+    .footer-hours {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-hours span {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: #7a6e6e;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .footer-hours span b {
+      font-weight: 500;
+      color: var(--dark);
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: #7a6e6e;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--rose); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 36px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(45,40,40,0.08);
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: #b0a4a4;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      nav.scrolled { padding: 12px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 72px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-inner { grid-template-columns: 1fr; }
+      .about-img { min-height: 320px; }
+      .about-copy { padding: 48px 28px; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .menu-group { border-right: none; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      footer { padding: 48px 24px; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#book" class="nav-cta" onclick="closeMobile()">Book Appointment</a>
+</div>
+
+<!-- ── NAV ── -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">SHORE POLISH</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#book" class="nav-cta">Book Appointment</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-sub fade-in">Boutique Nail Studio · Surf City, NC</p>
+    <h1 class="hero-h1 fade-in fade-in-delay-1">Where Every<br>Detail Shines</h1>
+    <p class="hero-desc fade-in fade-in-delay-2">Luxury nails tailored to you, right here on the coast.</p>
+    <div class="hero-btns fade-in fade-in-delay-3">
+      <a href="#book" class="btn-filled">Book Your Appointment</a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>✦ SHORE POLISH · SURF CITY, NC · GEL MANICURES · PEDICURES · NAIL ART · DIP POWDER · ACRYLICS · COASTAL LUXURY ✦&nbsp;&nbsp;</span>
+    <span>✦ SHORE POLISH · SURF CITY, NC · GEL MANICURES · PEDICURES · NAIL ART · DIP POWDER · ACRYLICS · COASTAL LUXURY ✦&nbsp;&nbsp;</span>
+    <span>✦ SHORE POLISH · SURF CITY, NC · GEL MANICURES · PEDICURES · NAIL ART · DIP POWDER · ACRYLICS · COASTAL LUXURY ✦&nbsp;&nbsp;</span>
+  </div>
+</div>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="services-header fade-in">
+    <p class="section-label">What We Offer</p>
+    <h2 class="section-title">Treatments &amp; Services</h2>
+    <p class="section-subtitle">Thoughtfully designed services for every occasion — from a quick polish refresh to a full nail transformation.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-in fade-in-delay-1">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1604902396830-aca29e19b067?w=800&q=80" alt="Gel Manicure" class="service-img" loading="lazy" />
+      </div>
+      <div class="service-body">
+        <h3 class="service-name">Classic &amp; Gel Manicures</h3>
+        <p class="service-desc">Shape, buff, and polish to perfection. Classic polish or long-lasting gel — choose your finish and let us take care of the rest.</p>
+      </div>
+    </div>
+    <div class="service-card fade-in fade-in-delay-2">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=800&q=80" alt="Spa Pedicure" class="service-img" loading="lazy" />
+      </div>
+      <div class="service-body">
+        <h3 class="service-name">Pedicures &amp; Spa Treatments</h3>
+        <p class="service-desc">Soak, exfoliate, and treat your feet to a full coastal spa experience. Because your toes deserve the same attention as your fingertips.</p>
+      </div>
+    </div>
+    <div class="service-card fade-in fade-in-delay-3">
+      <div class="service-img-wrap">
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&q=80" alt="Nail Art" class="service-img" loading="lazy" />
+      </div>
+      <div class="service-body">
+        <h3 class="service-name">Nail Art &amp; Extensions</h3>
+        <p class="service-desc">From subtle to statement — custom designs, acrylics, dip powder, and more. Your nails as a canvas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-img-side">
+      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=900&q=80" alt="Shore Polish studio interior" class="about-img" loading="lazy" />
+      <div class="about-img-overlay"></div>
+    </div>
+    <div class="about-copy">
+      <p class="section-label fade-in">Our Story</p>
+      <h2 class="section-title fade-in">A Studio Built<br>on Care &amp; Craft</h2>
+      <p class="fade-in">Shore Polish was born from a simple belief: everyone deserves to feel genuinely taken care of. Founded by a Surf City local who grew up loving the laid-back coast as much as the art of a perfect set, this studio was designed to feel like coming home.</p>
+      <p class="fade-in fade-in-delay-1">We're a small, intimate studio — just two nail techs who care deeply about their work and their clients. That means fresh tools every single appointment, zero rushing, and a genuinely relaxed experience from the moment you walk in.</p>
+      <p class="fade-in fade-in-delay-2">We're appointment-only, so your time here is truly your own. No crowded waiting rooms, no noise — just you, your nails, and the quiet calm of the coast.</p>
+      <p class="about-sig fade-in fade-in-delay-3">— Shore Polish, Surf City, NC</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── MENU ── -->
+<section id="menu">
+  <div class="menu-header fade-in">
+    <p class="section-label">Full Menu</p>
+    <h2 class="section-title">Services &amp; Pricing</h2>
+    <p class="section-subtitle">We offer a full range of nail care services. Pricing varies by complexity and nail tech — reach out for a personalized quote.</p>
+  </div>
+  <div class="menu-grid fade-in">
+    <div class="menu-group">
+      <h3 class="menu-group-title">Manicures</h3>
+      <div class="menu-item">
+        <span class="menu-item-name">Classic Manicure</span>
+        <span class="menu-item-desc">Shape, cuticle care & regular polish</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">Gel Manicure</span>
+        <span class="menu-item-desc">Long-lasting gel color, cured under UV</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">French Manicure</span>
+        <span class="menu-item-desc">Classic French tip in regular or gel</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">Gel Removal</span>
+        <span class="menu-item-desc">Safe, nourishing soak-off removal</span>
+      </div>
+    </div>
+    <div class="menu-group">
+      <h3 class="menu-group-title">Pedicures</h3>
+      <div class="menu-item">
+        <span class="menu-item-name">Classic Pedicure</span>
+        <span class="menu-item-desc">Soak, shape, cuticle & polish</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">Spa Pedicure</span>
+        <span class="menu-item-desc">Exfoliation, mask & extended massage</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">Gel Pedicure</span>
+        <span class="menu-item-desc">Spa treatment with gel polish finish</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">Callus Treatment</span>
+        <span class="menu-item-desc">Deep callus softening add-on</span>
+      </div>
+    </div>
+    <div class="menu-group">
+      <h3 class="menu-group-title">Enhancements</h3>
+      <div class="menu-item">
+        <span class="menu-item-name">Full Set Acrylic</span>
+        <span class="menu-item-desc">Custom length & shape, full application</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">Fill-In</span>
+        <span class="menu-item-desc">Acrylic maintenance & regrowth fill</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">Dip Powder</span>
+        <span class="menu-item-desc">Durable, no-UV dip color system</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">Nail Repair</span>
+        <span class="menu-item-desc">Single nail fix or restoration</span>
+      </div>
+    </div>
+    <div class="menu-group">
+      <h3 class="menu-group-title">Nail Art</h3>
+      <div class="menu-item">
+        <span class="menu-item-name">Simple Art (per nail)</span>
+        <span class="menu-item-desc">Minimalist designs, linework, solids</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">Detailed Art (per nail)</span>
+        <span class="menu-item-desc">Intricate hand-painted designs</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">Nail Gems</span>
+        <span class="menu-item-desc">Rhinestones & crystal embellishments</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-item-name">Chrome Powder</span>
+        <span class="menu-item-desc">Mirror & holographic chrome finish</span>
+      </div>
+    </div>
+  </div>
+  <p class="menu-note fade-in">Pricing varies — contact us for a quote or book a consultation.</p>
+</section>
+
+<!-- ── GALLERY ── -->
+<section id="gallery">
+  <div class="gallery-header fade-in">
+    <p class="section-label">Our Work</p>
+    <h2 class="section-title">The Shore Polish Look</h2>
+    <p class="section-subtitle" style="margin:0 auto;">A peek at what we love creating — every set is one of a kind.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item fade-in fade-in-delay-1">
+      <img src="https://images.unsplash.com/photo-1604902396830-aca29e19b067?w=600&q=80" alt="Nail art gallery" loading="lazy" />
+    </div>
+    <div class="gallery-item fade-in fade-in-delay-2">
+      <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80" alt="Nail art gallery" loading="lazy" />
+    </div>
+    <div class="gallery-item fade-in fade-in-delay-3">
+      <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=600&q=80" alt="Pedicure gallery" loading="lazy" />
+    </div>
+    <div class="gallery-item fade-in fade-in-delay-1">
+      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80" alt="Studio gallery" loading="lazy" />
+    </div>
+    <div class="gallery-item fade-in fade-in-delay-2">
+      <img src="https://images.unsplash.com/photo-1604902396830-aca29e19b067?w=600&q=80" alt="Manicure gallery" loading="lazy" />
+    </div>
+    <div class="gallery-item fade-in fade-in-delay-3">
+      <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80" alt="Nail art gallery" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section id="reviews">
+  <div class="reviews-header fade-in">
+    <p class="section-label">Client Love</p>
+    <h2 class="section-title">What People Are Saying</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card fade-in fade-in-delay-1">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Absolutely obsessed with my nails. The attention to detail is unreal. I won't go anywhere else."</p>
+      <span class="review-author">— Kayla M.</span>
+    </div>
+    <div class="review-card fade-in fade-in-delay-2">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Such a chill, clean vibe. Felt totally pampered for an hour. The gel set lasted almost 4 weeks!"</p>
+      <span class="review-author">— Brittany T.</span>
+    </div>
+    <div class="review-card fade-in fade-in-delay-3">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Best pedicure I've had on the island. So relaxing, and my toes looked perfect for the whole beach trip."</p>
+      <span class="review-author">— Jessica R.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOK NOW ── -->
+<section id="book">
+  <p class="section-label fade-in">Appointments</p>
+  <h2 class="section-title fade-in">Ready to Shine?</h2>
+  <p class="section-subtitle fade-in">Appointments fill fast — book yours today and treat yourself to the Shore Polish experience.</p>
+  <div class="book-btns fade-in fade-in-delay-1">
+    <a href="#" class="btn-white">Book Online</a>
+    <a href="tel:9105550241" class="btn-outline-white">Call or Text Us</a>
+  </div>
+  <div class="book-contact fade-in fade-in-delay-2">
+    <a href="tel:9105550241"><span class="book-contact-icon">📞</span> (910) 555-0241</a>
+    <a href="https://instagram.com/shorepolish" target="_blank" rel="noopener"><span class="book-contact-icon">📸</span> @shorepolish</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">SHORE POLISH</a>
+      <p>Surf City, NC · By Appointment Only<br>Where Every Detail Shines</p>
+      <div class="footer-social">
+        <a href="https://instagram.com/shorepolish" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h4 class="footer-col-title">Hours</h4>
+      <div class="footer-hours">
+        <span><b>Tue – Sat</b> 9am – 6pm</span>
+        <span><b>Sunday</b> 10am – 4pm</span>
+        <span><b>Monday</b> Closed</span>
+      </div>
+    </div>
+    <div>
+      <h4 class="footer-col-title">Quick Links</h4>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About Us</a>
+        <a href="#menu">Full Menu</a>
+        <a href="#book">Book Appointment</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Shore Polish · Surf City, NC · All Rights Reserved
+  </div>
+</footer>
+
+<!-- ── LEGAL FOOTER ── -->
+<section id="aom-legal-footer" style="display:block !important;position:static !important;bottom:auto !important;top:auto !important;left:auto !important;right:auto !important;z-index:auto !important;width:100%;background:#0a0a0a;padding:72px 40px 56px;text-align:center;box-sizing:border-box;border-top:1px solid rgba(255,255,255,0.1);margin-top:0;">
+  <div style="margin-bottom:36px;"><span style="color:#c9697a;font-size:1rem;letter-spacing:0.5em;">&#9670; &#9670; &#9670;</span></div>
+  <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:700;margin:0 0 32px;line-height:1.2;color:white;"><em style="color:#c9697a;font-style:italic;">Design Preview</em><span style="color:rgba(255,255,255,0.9);"> &middot; For Review Only</span></h2>
+  <p style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(0.95rem,2vw,1.1rem);color:rgba(255,255,255,0.65);max-width:600px;margin:0 auto 28px;line-height:1.9;">This site is a custom design preview prepared exclusively for <strong style="color:#c9697a;">Shore Polish</strong>. All design elements, layout, code, copy, and creative direction shown here are the sole intellectual property of</p>
+  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1rem,3vw,1.4rem);font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#c9697a;margin:0 0 28px;">Altitude Odyssey Media LLC</div>
+  <p style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(0.8rem,1.8vw,0.95rem);color:rgba(255,255,255,0.4);max-width:580px;margin:0 auto 40px;line-height:1.9;">Reproduction, redistribution, or use of any portion of this preview without a signed engagement agreement and full payment is strictly prohibited. Preview hosting is temporary and may be removed at any time. Final design transfers to client only upon completion of contracted payment terms.</p>
+  <div style="margin-bottom:32px;"><span style="color:#c9697a;font-size:1rem;letter-spacing:0.5em;">&#9670; &#9670; &#9670;</span></div>
+  <p style="font-family:'Playfair Display',Georgia,serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin:0;">&copy; 2026 Altitude Odyssey Media LLC &middot; All Rights Reserved</p>
+</section>
+
+<script>
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── HERO BG LOAD ──
+  const heroBg = document.getElementById('heroBg');
+  setTimeout(() => heroBg.classList.add('loaded'), 100);
+
+  // ── HAMBURGER ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── FADE IN ON SCROLL ──
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  fadeEls.forEach(el => observer.observe(el));
+
+  // ── HERO ELEMENTS VISIBLE ON LOAD ──
+  document.querySelectorAll('#hero .fade-in').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), 300 + i * 160);
+  });
+</script>
+</body>
+</html>

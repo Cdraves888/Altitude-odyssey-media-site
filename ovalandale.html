@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oval & Ale | Pinsa-Style Roman Pizza & Craft Beer — Hampstead, NC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Playfair+Display:ital,wght@0,700;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:      #2d4a2d;
+      --green-light:#3a5f3a;
+      --cream:      #f5f0e8;
+      --gold:       #c9a84c;
+      --gold-light: #dfc278;
+      --charcoal:   #1a1a1a;
+      --white:      #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+    }
+    nav.scrolled {
+      background: var(--charcoal);
+      padding: 16px 48px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.35);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--charcoal);
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1800&q=85');
+      background-size: cover;
+      background-position: center 40%;
+      opacity: 0.55;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26,26,26,0.3) 0%,
+        rgba(26,26,26,0.15) 40%,
+        rgba(26,26,26,0.65) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 900px;
+    }
+    .hero-eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-style: italic;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 44px;
+      line-height: 1.6;
+    }
+    .hero-cta {
+      display: inline-flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      background: var(--gold);
+      color: var(--charcoal);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* ─── MARQUEE ─────────────────────────────────────────── */
+    .marquee-wrap {
+      background: var(--green);
+      overflow: hidden;
+      padding: 18px 0;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      white-space: nowrap;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-track span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      letter-spacing: 0.12em;
+      color: var(--cream);
+      padding-right: 60px;
+    }
+    .marquee-track span strong {
+      color: var(--gold);
+      font-style: normal;
+      font-weight: 700;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION SHELL ───────────────────────────────────── */
+    section { padding: 100px 48px; }
+    .section-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 28px;
+    }
+    .section-heading em { font-style: italic; color: var(--green); }
+    .section-body {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #444;
+      max-width: 560px;
+    }
+    .gold-rule {
+      width: 64px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    /* ─── ABOUT ───────────────────────────────────────────── */
+    #about {
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .about-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+    }
+    .about-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 48px;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--green);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    /* ─── MENU HIGHLIGHTS ─────────────────────────────────── */
+    #menu {
+      background: var(--cream);
+      padding: 100px 48px;
+    }
+    .menu-intro {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 72px;
+    }
+    .menu-intro .section-heading { color: var(--charcoal); }
+    .menu-intro .gold-rule { margin: 0 auto 28px; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .menu-card {
+      background: var(--white);
+      padding: 48px 32px;
+      text-align: center;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .menu-card:hover { background: var(--charcoal); }
+    .menu-card:hover::before { transform: scaleX(1); }
+    .menu-card:hover .menu-card-title { color: var(--white); }
+    .menu-card:hover .menu-card-desc { color: rgba(255,255,255,0.65); }
+    .menu-card:hover .menu-icon { color: var(--gold); }
+    .menu-icon {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: var(--green);
+      transition: color 0.3s;
+    }
+    .menu-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+      transition: color 0.3s;
+    }
+    .menu-card-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #666;
+      transition: color 0.3s;
+    }
+    .menu-items-list {
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 16px;
+    }
+
+    /* ─── EVENTS ──────────────────────────────────────────── */
+    #events {
+      background: var(--green);
+      color: var(--white);
+      padding: 100px 48px;
+    }
+    #events .section-heading { color: var(--white); }
+    #events .section-heading em { color: var(--gold-light); }
+    #events .section-body { color: rgba(255,255,255,0.75); max-width: 100%; }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1200px;
+      margin: 64px auto 0;
+    }
+    .event-card {
+      border: 1px solid rgba(201,168,76,0.35);
+      padding: 40px 32px;
+      position: relative;
+    }
+    .event-day {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .event-dayname {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+    }
+    .event-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .event-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+    }
+    .events-note {
+      text-align: center;
+      margin-top: 48px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ─── GALLERY ─────────────────────────────────────────── */
+    #gallery {
+      padding: 0;
+      background: var(--charcoal);
+    }
+    .gallery-header {
+      padding: 80px 48px 60px;
+      text-align: center;
+    }
+    .gallery-header .section-heading { color: var(--white); }
+    .gallery-header .section-heading em { color: var(--gold-light); }
+    .gallery-header .gold-rule { margin: 0 auto 28px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 340px);
+      gap: 4px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item:first-child {
+      grid-column: span 2;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,26,26,0.55) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+    /* ─── REVIEWS ─────────────────────────────────────────── */
+    #reviews {
+      background: var(--cream);
+      padding: 100px 48px;
+    }
+    .reviews-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 72px;
+    }
+    .reviews-header .gold-rule { margin: 0 auto 28px; }
+    .stars {
+      color: var(--gold);
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+    .rating-badges {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+    .badge {
+      text-align: center;
+    }
+    .badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 600;
+      color: var(--green);
+      line-height: 1;
+    }
+    .badge-source {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      margin-top: 6px;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .review-card {
+      background: var(--white);
+      padding: 40px 32px;
+      border-bottom: 3px solid var(--gold);
+    }
+    .review-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.75;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+    }
+    .review-author {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #999;
+    }
+    .review-platform {
+      font-size: 0.68rem;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    /* ─── FIND US ─────────────────────────────────────────── */
+    #findus {
+      background: var(--charcoal);
+      padding: 100px 48px;
+    }
+    .findus-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    #findus .section-heading { color: var(--white); }
+    #findus .section-heading em { color: var(--gold-light); }
+    .info-blocks { display: flex; flex-direction: column; gap: 36px; margin-top: 8px; }
+    .info-block-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .info-block-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.85);
+    }
+    .info-block-val a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .info-block-val a:hover { color: var(--gold); }
+    .hours-table { width: 100%; }
+    .hours-table td {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      padding: 5px 0;
+    }
+    .hours-table td:first-child { color: rgba(255,255,255,0.5); width: 120px; }
+    .hours-table td.closed { color: rgba(255,255,255,0.35); font-style: italic; }
+    .map-wrap {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border: 2px solid rgba(201,168,76,0.25);
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      filter: grayscale(40%);
+    }
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .social-link {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-link:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: #0f0f0f;
+      padding: 56px 48px 40px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 32px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      list-style: none;
+      margin-bottom: 32px;
+    }
+    .footer-links a {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-divider {
+      width: 48px;
+      height: 1px;
+      background: rgba(201,168,76,0.4);
+      margin: 0 auto 28px;
+    }
+    .footer-address {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .footer-copy {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      #about { grid-template-columns: 1fr; gap: 48px; max-width: 700px; }
+      .about-img { aspect-ratio: 16/9; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .events-grid { grid-template-columns: 1fr 1fr; }
+      .findus-inner { grid-template-columns: 1fr; gap: 56px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .events-grid { grid-template-columns: 1fr; }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 240px);
+      }
+      .gallery-item:first-child { grid-column: span 2; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .rating-badges { gap: 24px; }
+      .about-stats { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ════════════════════════════════════════════════ -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">Oval <span>&</span> Ale</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#findus">Find Us</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Hampstead, North Carolina</p>
+    <h1 class="hero-title">Pinsa, Pints &<br><em>Good Company</em></h1>
+    <p class="hero-sub">Roman-style oval pizza, 12 rotating craft beers,<br>live music — and the kind of place you keep coming back to.</p>
+    <div class="hero-cta">
+      <a href="#menu" class="btn-primary">Explore the Menu</a>
+      <a href="#findus" class="btn-outline">Hours &amp; Location</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ════════════════════════════════════════════ -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>✦ <strong>Pinsa-Style Roman Pizza</strong> · Craft Beer · Live Music · Wine Bar · Dog-Friendly · Outdoor Seating · Hampstead, NC · </span>
+    <span>✦ <strong>Pinsa-Style Roman Pizza</strong> · Craft Beer · Live Music · Wine Bar · Dog-Friendly · Outdoor Seating · Hampstead, NC · </span>
+    <span>✦ <strong>Pinsa-Style Roman Pizza</strong> · Craft Beer · Live Music · Wine Bar · Dog-Friendly · Outdoor Seating · Hampstead, NC · </span>
+    <span>✦ <strong>Pinsa-Style Roman Pizza</strong> · Craft Beer · Live Music · Wine Bar · Dog-Friendly · Outdoor Seating · Hampstead, NC · </span>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ══════════════════════════════════════════════ -->
+<section id="about" style="padding:100px 80px;">
+  <div>
+    <img
+      class="about-img"
+      src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80"
+      alt="Oval & Ale restaurant interior"
+      loading="lazy"
+    />
+  </div>
+  <div>
+    <p class="section-label">Our Story</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-heading">Where Ancient<br>Craft Meets<br><em>Coastal Living</em></h2>
+    <p class="section-body">
+      Oval &amp; Ale brings the tradition of Roman Pinsa to the heart of Hampstead, NC. Our dough — a centuries-old Italian recipe — produces a light, crispy oval crust unlike anything you'll find at an ordinary pizza place. Topped with the freshest ingredients and paired with a rotating selection of 12 craft beers, local wines, and seasonal cocktails, every visit is its own experience.
+    </p>
+    <p class="section-body" style="margin-top:20px;">
+      We believe great food is just the beginning. With live music most weekends, a welcoming dog-friendly patio, and a crew that genuinely loves what they do, Oval &amp; Ale has become a gathering place for the whole community — families, friends, neighbors, and anyone passing through the coast looking for something real.
+    </p>
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="stat-num">4.7<span style="font-size:1.5rem">★</span></div>
+        <div class="stat-label">Google Rating</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">325+</div>
+        <div class="stat-label">Reviews</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Craft Beers on Tap</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MENU ════════════════════════════════════════════════ -->
+<section id="menu">
+  <div class="menu-intro">
+    <p class="section-label">What We Offer</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-heading">The <em>Full Experience</em></h2>
+    <p class="section-body" style="margin:0 auto;text-align:center;">
+      From the world's oldest pizza dough to the freshest coastal sides — here's what makes an Oval &amp; Ale night unforgettable.
+    </p>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-icon">🫓</div>
+      <div class="menu-card-title">Pinsa Romana</div>
+      <div class="menu-card-desc">Our oval Roman-style pies feature a uniquely light, airy, crispy crust made from a centuries-old dough blend. Build your own or try a signature.</div>
+      <div class="menu-items-list">Prosciutto &amp; Arugula · Margherita · Veggie · Custom Build</div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-icon">🍺</div>
+      <div class="menu-card-title">Craft Beer</div>
+      <div class="menu-card-desc">12 rotating taps featuring local and regional craft breweries alongside curated bottled selections. Something new every visit.</div>
+      <div class="menu-items-list">12 Rotating Taps · Local Brews · Seasonal Selections</div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-icon">🍷</div>
+      <div class="menu-card-title">Wine &amp; Cocktails</div>
+      <div class="menu-card-desc">Hand-picked wines from around the world plus seasonal craft cocktails designed to complement your meal perfectly.</div>
+      <div class="menu-items-list">Italian Reds · Coastal Whites · Seasonal Craft Cocktails</div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-icon">🥗</div>
+      <div class="menu-card-title">Starters &amp; Salads</div>
+      <div class="menu-card-desc">Fresh-made bruschetta, bavarian brezeln, crisp Greek salads, and seasonal starters that set the tone for the whole evening.</div>
+      <div class="menu-items-list">Bruschetta · Greek Salad · Brezeln · Seasonal Starters</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EVENTS ═════════════════════════════════════════════ -->
+<section id="events">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p class="section-label" style="color:var(--gold-light);">Always Something On</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-heading">Live Music &amp;<br><em>Weekly Events</em></h2>
+    <p class="section-body">
+      Oval &amp; Ale is more than a restaurant — it's where Hampstead comes alive. Check back often; our event lineup rotates with local talent, seasonal specials, and community favorites.
+    </p>
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-day">Fri</div>
+        <div class="event-dayname">Every Friday</div>
+        <div class="event-title">Live Music Nights</div>
+        <div class="event-desc">Local and regional artists take the stage every Friday evening. Great beer, great pizza, great sound — the perfect coastal Friday.</div>
+      </div>
+      <div class="event-card">
+        <div class="event-day">Sat</div>
+        <div class="event-dayname">Select Saturdays</div>
+        <div class="event-title">Tap Takeovers</div>
+        <div class="event-desc">Local breweries take over our taps with exclusive pours, meet-the-brewer sessions, and limited-release beers you won't find anywhere else.</div>
+      </div>
+      <div class="event-card">
+        <div class="event-day">Tue–<br>Thu</div>
+        <div class="event-dayname">Weeknight Specials</div>
+        <div class="event-title">Happy Hour &amp; Specials</div>
+        <div class="event-desc">Start the evening right with rotating weeknight specials. Ask your server what's on tonight — it changes with the season.</div>
+      </div>
+    </div>
+    <p class="events-note">Follow us on Facebook &amp; Instagram @ovalandale for updated event listings.</p>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ════════════════════════════════════════════ -->
+<section id="gallery">
+  <div class="gallery-header">
+    <p class="section-label" style="color:var(--gold);">A Look Inside</p>
+    <div class="gold-rule" style="margin:0 auto 28px;"></div>
+    <h2 class="section-heading" style="color:var(--white);">The Oval &amp; Ale<br><em style="color:var(--gold-light);">Atmosphere</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=1200&q=80" alt="Artisan Pinsa pizza" loading="lazy" />
+      <div class="gallery-item-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=800&q=80" alt="Craft beer selection" loading="lazy" />
+      <div class="gallery-item-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Restaurant atmosphere" loading="lazy" />
+      <div class="gallery-item-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80" alt="Wine selection" loading="lazy" />
+      <div class="gallery-item-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80" alt="Outdoor patio dining" loading="lazy" />
+      <div class="gallery-item-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?w=800&q=80" alt="Fresh pizza ingredients" loading="lazy" />
+      <div class="gallery-item-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REVIEWS ════════════════════════════════════════════ -->
+<section id="reviews">
+  <div class="reviews-header">
+    <p class="section-label">What Guests Say</p>
+    <div class="gold-rule"></div>
+    <h2 class="section-heading">Loved by<br><em>Hampstead</em></h2>
+  </div>
+  <div class="rating-badges">
+    <div class="badge">
+      <div class="stars">★★★★★</div>
+      <div class="badge-num">4.7</div>
+      <div class="badge-source">Google · 325 Reviews</div>
+    </div>
+    <div class="badge" style="padding:0 40px;border-left:1px solid #ddd;border-right:1px solid #ddd;">
+      <div class="stars">★★★★★</div>
+      <div class="badge-num">4.9</div>
+      <div class="badge-source">Facebook · 46 Reviews</div>
+    </div>
+    <div class="badge">
+      <div class="stars">★★★★★</div>
+      <div class="badge-num">4.8</div>
+      <div class="badge-source">Overall · 450+ Votes</div>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars" style="font-size:0.9rem;margin-bottom:20px;">★★★★★</div>
+      <div class="review-quote">"The perfect blend of great food, atmosphere, rotating beverage options, and constantly live music. This place hits every note — we drive from Wilmington just for this."</div>
+      <div class="review-author">Sarah M.</div>
+      <div class="review-platform">Google Review</div>
+    </div>
+    <div class="review-card">
+      <div class="stars" style="font-size:0.9rem;margin-bottom:20px;">★★★★★</div>
+      <div class="review-quote">"Never had Roman Pinsa before coming here. The crust is unlike anything — light, crispy, and not heavy at all. The prosciutto and arugula is absolutely stunning."</div>
+      <div class="review-author">James T.</div>
+      <div class="review-platform">Google Review</div>
+    </div>
+    <div class="review-card">
+      <div class="stars" style="font-size:0.9rem;margin-bottom:20px;">★★★★★</div>
+      <div class="review-quote">"Attentive staff, fast service, dog-friendly patio, and 12 rotating taps. This is our neighborhood spot. The rotating beers always keep us coming back to see what's new."</div>
+      <div class="review-author">Melissa R.</div>
+      <div class="review-platform">Facebook Review</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FIND US ═════════════════════════════════════════════ -->
+<section id="findus">
+  <div class="findus-inner">
+    <div>
+      <p class="section-label">Come Visit</p>
+      <div class="gold-rule"></div>
+      <h2 class="section-heading">Find Us in<br><em>Hampstead</em></h2>
+      <div class="info-blocks">
+        <div>
+          <div class="info-block-label">Address</div>
+          <div class="info-block-val">
+            47 S Hampstead Village Dr<br>
+            Hampstead, NC 28443
+          </div>
+        </div>
+        <div>
+          <div class="info-block-label">Phone</div>
+          <div class="info-block-val">
+            <a href="tel:+19108211000">(910) 821-1000</a>
+          </div>
+        </div>
+        <div>
+          <div class="info-block-label">Hours</div>
+          <table class="hours-table">
+            <tr><td>Monday</td><td class="closed">Closed</td></tr>
+            <tr><td>Tue – Thu</td><td>4:00 PM – 9:00 PM</td></tr>
+            <tr><td>Friday</td><td>12:00 PM – 10:00 PM</td></tr>
+            <tr><td>Saturday</td><td>12:00 PM – 10:00 PM</td></tr>
+            <tr><td>Sunday</td><td>12:00 PM – 8:00 PM</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="info-block-label">Follow Along</div>
+          <div class="social-links">
+            <a href="https://www.facebook.com/ovalandale/" class="social-link" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/ovalandale/" class="social-link" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://order.toasttab.com/online/ovalandale" class="social-link" target="_blank" rel="noopener">Order Online</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.3!2d-77.7135!3d34.3615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89a9f3a5a5a5a5a5%3A0x1!2s47+S+Hampstead+Village+Dr%2C+Hampstead%2C+NC+28443!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Oval &amp; Ale location map"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-logo">Oval <span>&</span> Ale</div>
+  <p class="footer-tagline">Roman Pinsa · Craft Beer · Hampstead, NC</p>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#findus">Find Us</a></li>
+    <li><a href="https://order.toasttab.com/online/ovalandale" target="_blank" rel="noopener">Order Online</a></li>
+  </ul>
+  <div class="footer-divider"></div>
+  <div class="footer-address">
+    47 S Hampstead Village Dr, Hampstead, NC 28443<br>
+    (910) 821-1000 · <a href="https://www.facebook.com/ovalandale/" style="color:rgba(255,255,255,0.3);text-decoration:none;" target="_blank">facebook.com/ovalandale</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Oval &amp; Ale · Hampstead, NC · All Rights Reserved</p>
+</footer>
+
+<!-- ═══ AOM LEGAL ═══════════════════════════════════════════ -->
+<section id="aom-legal-footer" style="display:block !important;position:static !important;bottom:auto !important;top:auto !important;left:auto !important;right:auto !important;z-index:auto !important;width:100%;background:#0a0a0a;padding:72px 40px 56px;text-align:center;box-sizing:border-box;border-top:1px solid rgba(255,255,255,0.1);margin-top:0;">
+  <div style="margin-bottom:36px;"><span style="color:#c9a84c;font-size:1rem;letter-spacing:0.5em;">&#9670; &#9670; &#9670;</span></div>
+  <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:700;margin:0 0 32px;line-height:1.2;color:white;"><em style="color:#c9a84c;font-style:italic;">Design Preview</em><span style="color:rgba(255,255,255,0.9);"> &middot; For Review Only</span></h2>
+  <p style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(0.95rem,2vw,1.1rem);color:rgba(255,255,255,0.65);max-width:600px;margin:0 auto 28px;line-height:1.9;">This site is a custom design preview prepared exclusively for <strong style="color:#c9a84c;">Ovalandale</strong>. All design elements, layout, code, copy, and creative direction shown here are the sole intellectual property of</p>
+  <div style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1rem,3vw,1.4rem);font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#c9a84c;margin:0 0 28px;">Altitude Odyssey Media LLC</div>
+  <p style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(0.8rem,1.8vw,0.95rem);color:rgba(255,255,255,0.4);max-width:580px;margin:0 auto 40px;line-height:1.9;">Reproduction, redistribution, or use of any portion of this preview without a signed engagement agreement and full payment is strictly prohibited. Preview hosting is temporary and may be removed at any time. Final design transfers to client only upon completion of contracted payment terms.</p>
+  <div style="margin-bottom:32px;"><span style="color:#c9a84c;font-size:1rem;letter-spacing:0.5em;">&#9670; &#9670; &#9670;</span></div>
+  <p style="font-family:'Playfair Display',Georgia,serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin:0;">&copy; 2026 Altitude Odyssey Media LLC &middot; All Rights Reserved</p>
+</section>
+
+<script>
+  // Sticky nav
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.menu-card, .event-card, .review-card, .gallery-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(32px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

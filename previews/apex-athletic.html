@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX ATHLETIC CLUB | Where Limits Are Broken | Wilmington NC</title>
+<meta property="og:title" content="APEX ATHLETIC CLUB — Where Limits Are Broken">
+<meta property="og:description" content="Premium gym in Wilmington, NC. 4200+ members, 85 machines, 32 classes. Join today.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a0a;
+    --crimson: #e63946;
+    --orange: #ff6b35;
+    --white: #ffffff;
+    --gray: #1a1a1a;
+    --gray2: #2a2a2a;
+    --gray3: #888;
+    --bebas: 'Bebas Neue', sans-serif;
+    --inter: 'Inter', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--white); font-family: var(--inter); overflow-x: hidden; }
+  ::selection { background: var(--crimson); color: #fff; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 72px;
+    background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(230,57,70,0.2);
+    transition: all .3s;
+  }
+  nav.scrolled { height: 60px; background: rgba(10,10,10,0.98); }
+  .nav-logo { font-family: var(--bebas); font-size: 2rem; letter-spacing: 4px; color: var(--white); }
+  .nav-logo span { color: var(--crimson); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: .85rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.75); transition: color .2s; }
+  .nav-links a:hover { color: var(--crimson); }
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+  .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 9px 22px; border-radius: 4px; font-family: var(--inter); font-size: .8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+  .btn-ghost:hover { border-color: var(--white); }
+  .btn-crimson { background: var(--crimson); border: none; color: #fff; padding: 9px 22px; border-radius: 4px; font-family: var(--inter); font-size: .8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+  .btn-crimson:hover { background: #c8303d; transform: translateY(-1px); }
+  #nav-user-avatar { display: none; align-items: center; gap: 10px; cursor: pointer; }
+  #nav-user-avatar .avatar-circle { width: 36px; height: 36px; border-radius: 50%; background: var(--crimson); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative; height: 100vh; min-height: 700px;
+    display: flex; align-items: center;
+    background: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1800&q=80') center/cover no-repeat;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.5) 60%, rgba(230,57,70,0.15) 100%);
+  }
+  .hero-content { position: relative; z-index: 2; padding: 0 80px; max-width: 900px; }
+  .hero-eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--crimson); margin-bottom: 16px; }
+  .hero-title { font-family: var(--bebas); font-size: clamp(4rem, 10vw, 9rem); line-height: .95; letter-spacing: 2px; margin-bottom: 24px; }
+  .hero-title .line2 { color: var(--crimson); display: block; }
+  .hero-sub { font-size: 1.1rem; font-weight: 300; color: rgba(255,255,255,0.75); margin-bottom: 40px; max-width: 480px; line-height: 1.6; }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-hero-primary { background: var(--crimson); color: #fff; padding: 16px 40px; border-radius: 4px; font-weight: 700; font-size: .95rem; letter-spacing: 1.5px; text-transform: uppercase; border: none; cursor: pointer; transition: all .25s; }
+  .btn-hero-primary:hover { background: #c8303d; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(230,57,70,0.4); }
+  .btn-hero-secondary { background: transparent; color: #fff; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: .95rem; letter-spacing: 1.5px; text-transform: uppercase; border: 2px solid rgba(255,255,255,0.4); cursor: pointer; transition: all .25s; }
+  .btn-hero-secondary:hover { border-color: #fff; }
+  .hero-stats {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+    display: flex; justify-content: center; gap: 0;
+    background: rgba(10,10,10,0.9); border-top: 1px solid rgba(230,57,70,0.3);
+  }
+  .stat-item { flex: 1; max-width: 220px; text-align: center; padding: 28px 20px; border-right: 1px solid rgba(255,255,255,0.07); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: var(--bebas); font-size: 3rem; color: var(--crimson); line-height: 1; }
+  .stat-label { font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+  /* ── SECTION WRAPPER ── */
+  section { padding: 100px 80px; }
+  .section-eyebrow { font-size: .72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--crimson); margin-bottom: 12px; }
+  .section-title { font-family: var(--bebas); font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 2px; margin-bottom: 16px; }
+  .section-sub { font-size: 1rem; color: rgba(255,255,255,0.6); max-width: 560px; line-height: 1.7; margin-bottom: 60px; }
+  .divider { width: 60px; height: 3px; background: var(--crimson); margin-bottom: 24px; }
+
+  /* ── MEMBERSHIPS ── */
+  #memberships { background: var(--gray); }
+  .plans-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+  .plan-card {
+    background: var(--bg); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+    padding: 40px 32px; position: relative; transition: transform .3s, box-shadow .3s;
+  }
+  .plan-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .plan-card.popular { border-color: var(--crimson); }
+  .popular-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--crimson); color: #fff; font-size: .65rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; padding: 5px 18px; border-radius: 20px;
+  }
+  .plan-name { font-family: var(--bebas); font-size: 2rem; letter-spacing: 2px; margin-bottom: 8px; }
+  .plan-price { font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+  .plan-price span { font-size: 1rem; font-weight: 400; color: var(--gray3); }
+  .plan-tagline { font-size: .8rem; color: var(--gray3); margin-bottom: 32px; letter-spacing: .5px; }
+  .plan-features { list-style: none; margin-bottom: 36px; }
+  .plan-features li { padding: 9px 0; font-size: .88rem; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 10px; }
+  .plan-features li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--crimson); flex-shrink: 0; }
+  .plan-features li.off { color: rgba(255,255,255,0.25); }
+  .plan-features li.off::before { background: rgba(255,255,255,0.15); }
+  .btn-plan { width: 100%; padding: 14px; border-radius: 4px; font-weight: 700; font-size: .85rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+  .btn-plan-outline { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; }
+  .btn-plan-outline:hover { border-color: var(--crimson); color: var(--crimson); }
+  .btn-plan-filled { background: var(--crimson); border: none; color: #fff; }
+  .btn-plan-filled:hover { background: #c8303d; }
+
+  /* ── CALORIE COUNTER ── */
+  #calorie-calc { background: var(--bg); }
+  .calc-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; max-width: 1100px; margin: 0 auto; }
+  .calc-form { background: var(--gray); border-radius: 8px; padding: 40px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: .72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray3); }
+  .form-group input, .form-group select {
+    background: var(--bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;
+    color: #fff; padding: 11px 14px; font-size: .9rem; font-family: var(--inter);
+    transition: border-color .2s;
+  }
+  .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--crimson); }
+  .form-group select option { background: var(--bg); }
+  .form-group.full { grid-column: 1/-1; }
+  .btn-calc { background: var(--crimson); border: none; color: #fff; width: 100%; padding: 14px; border-radius: 4px; font-weight: 700; font-size: .9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background .2s; }
+  .btn-calc:hover { background: #c8303d; }
+  .calc-results { }
+  .gauge-wrapper { position: relative; width: 220px; height: 220px; margin: 0 auto 32px; }
+  .gauge-wrapper svg { width: 100%; height: 100%; }
+  .gauge-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .gauge-num { font-family: var(--bebas); font-size: 2.8rem; color: var(--crimson); line-height: 1; }
+  .gauge-label { font-size: .7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray3); }
+  .macro-bars { display: flex; flex-direction: column; gap: 16px; }
+  .macro-row { }
+  .macro-header { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: .82rem; }
+  .macro-name { font-weight: 600; }
+  .macro-val { color: var(--gray3); }
+  .macro-bar-bg { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+  .macro-bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease; width: 0%; }
+  .result-label { font-size: .7rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray3); margin-bottom: 6px; }
+  .result-row { display: flex; justify-content: space-between; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .result-key { font-size: .85rem; color: rgba(255,255,255,0.7); }
+  .result-val { font-size: .85rem; font-weight: 700; }
+  .results-box { background: var(--gray); border-radius: 8px; padding: 32px; }
+
+  /* ── GYM FLOOR MAP ── */
+  #floor-map { background: var(--gray); }
+  .map-layout { display: grid; grid-template-columns: 1fr 320px; gap: 40px; max-width: 1100px; margin: 0 auto; align-items: start; }
+  .map-svg-wrap { background: #111; border-radius: 8px; padding: 24px; border: 1px solid rgba(255,255,255,0.07); }
+  .map-svg-wrap svg { width: 100%; height: auto; }
+  .zone-rect { cursor: pointer; transition: opacity .2s; }
+  .zone-rect:hover { opacity: .85; }
+  .zone-detail-panel { background: var(--bg); border-radius: 8px; padding: 32px; border: 1px solid rgba(230,57,70,0.2); min-height: 300px; }
+  .zone-icon-big { font-size: 3rem; margin-bottom: 16px; }
+  .zone-title { font-family: var(--bebas); font-size: 1.8rem; letter-spacing: 2px; margin-bottom: 8px; }
+  .zone-desc { font-size: .88rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 20px; }
+  .zone-equip { list-style: none; }
+  .zone-equip li { font-size: .82rem; color: rgba(255,255,255,0.7); padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 8px; }
+  .zone-equip li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+  .map-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: .72rem; color: rgba(255,255,255,0.6); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ── CLASSES ── */
+  #classes { background: var(--bg); }
+  .schedule-scroll { overflow-x: auto; }
+  .schedule-grid { display: grid; grid-template-columns: 90px repeat(7, 1fr); gap: 2px; min-width: 800px; }
+  .sched-header { background: var(--gray2); text-align: center; padding: 12px 8px; font-size: .72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray3); border-radius: 4px 4px 0 0; }
+  .sched-header.today { background: var(--crimson); color: #fff; }
+  .sched-time { background: transparent; padding: 10px 8px; font-size: .72rem; color: var(--gray3); text-align: right; display: flex; align-items: center; justify-content: flex-end; }
+  .sched-cell { background: var(--gray); min-height: 60px; border-radius: 4px; }
+  .class-pill {
+    background: var(--gray2); border-radius: 4px; margin: 2px; padding: 6px 8px;
+    cursor: pointer; transition: background .2s; border-left: 3px solid var(--crimson);
+  }
+  .class-pill:hover { background: rgba(230,57,70,0.15); }
+  .class-pill.orange { border-left-color: var(--orange); }
+  .class-pill.blue { border-left-color: #4facde; }
+  .class-pill.green { border-left-color: #52e07c; }
+  .class-pill .cp-name { font-size: .75rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .class-pill .cp-time { font-size: .65rem; color: var(--gray3); }
+  .class-pill .cp-trainer { font-size: .65rem; color: rgba(255,255,255,0.4); }
+
+  /* ── TRAINERS ── */
+  #trainers { background: var(--gray); }
+  .trainers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1100px; margin: 0 auto; }
+  .trainer-card { background: var(--bg); border-radius: 8px; overflow: hidden; transition: transform .3s; }
+  .trainer-card:hover { transform: translateY(-4px); }
+  .trainer-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; display: block; }
+  .trainer-info { padding: 20px 24px; }
+  .trainer-name { font-family: var(--bebas); font-size: 1.5rem; letter-spacing: 1.5px; margin-bottom: 4px; }
+  .trainer-specialty { font-size: .72rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--crimson); margin-bottom: 10px; }
+  .trainer-certs { font-size: .78rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* ── AMENITIES ── */
+  #amenities { background: var(--bg); }
+  .amenities-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+  .amenity-item { background: var(--gray); border-radius: 8px; padding: 28px 24px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: border-color .2s, transform .2s; }
+  .amenity-item:hover { border-color: rgba(230,57,70,0.4); transform: translateY(-3px); }
+  .amenity-icon { font-size: 2.2rem; margin-bottom: 12px; }
+  .amenity-name { font-size: .85rem; font-weight: 600; margin-bottom: 6px; }
+  .amenity-desc { font-size: .75rem; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--gray); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1100px; margin: 0 auto; }
+  .contact-form input, .contact-form textarea, .contact-form select {
+    width: 100%; background: var(--bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;
+    color: #fff; padding: 13px 16px; font-family: var(--inter); font-size: .9rem;
+    transition: border-color .2s; margin-bottom: 14px;
+  }
+  .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { outline: none; border-color: var(--crimson); }
+  .contact-form textarea { min-height: 120px; resize: vertical; }
+  .contact-form select option { background: var(--bg); }
+  .btn-submit { background: var(--crimson); border: none; color: #fff; padding: 14px 36px; border-radius: 4px; font-weight: 700; font-size: .9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background .2s; }
+  .btn-submit:hover { background: #c8303d; }
+  .contact-info-block { margin-bottom: 32px; }
+  .contact-info-block h3 { font-family: var(--bebas); font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 16px; }
+  .info-row { display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start; }
+  .info-icon { font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+  .info-text { font-size: .88rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+  .hours-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  .hours-table td { padding: 8px 0; font-size: .85rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .hours-table td:last-child { text-align: right; color: rgba(255,255,255,0.55); }
+  .map-embed { border-radius: 8px; overflow: hidden; margin-top: 24px; border: 1px solid rgba(255,255,255,0.08); }
+  .map-embed iframe { width: 100%; height: 240px; display: block; border: none; }
+
+  /* ── FOOTER ── */
+  footer { background: #050505; border-top: 1px solid rgba(255,255,255,0.07); padding: 70px 80px 32px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 60px; }
+  .footer-brand p { font-size: .85rem; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 280px; margin-top: 12px; }
+  .footer-col h4 { font-size: .72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray3); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a { font-size: .85rem; color: rgba(255,255,255,0.5); transition: color .2s; }
+  .footer-col a:hover { color: var(--crimson); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.07); }
+  .footer-copy { font-size: .78rem; color: rgba(255,255,255,0.3); }
+  .social-icons { display: flex; gap: 14px; }
+  .social-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--gray2); display: flex; align-items: center; justify-content: center; font-size: .9rem; color: rgba(255,255,255,0.5); transition: all .2s; cursor: pointer; }
+  .social-icon:hover { background: var(--crimson); color: #fff; }
+
+  /* ── AUTH MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--gray); border-radius: 10px; width: 100%; max-width: 440px;
+    border: 1px solid rgba(255,255,255,0.1); overflow: hidden; position: relative;
+  }
+  .modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: rgba(255,255,255,0.5); font-size: 1.4rem; cursor: pointer; transition: color .2s; line-height: 1; }
+  .modal-close:hover { color: #fff; }
+  .modal-tabs { display: flex; }
+  .modal-tab { flex: 1; padding: 18px; text-align: center; font-weight: 700; font-size: .82rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; background: var(--bg); color: rgba(255,255,255,0.4); transition: all .2s; border-bottom: 2px solid transparent; }
+  .modal-tab.active { background: var(--gray); color: #fff; border-bottom-color: var(--crimson); }
+  .modal-body { padding: 36px; }
+  .modal-title { font-family: var(--bebas); font-size: 2rem; letter-spacing: 2px; margin-bottom: 8px; }
+  .modal-sub { font-size: .82rem; color: var(--gray3); margin-bottom: 28px; }
+  .auth-input {
+    width: 100%; background: var(--bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;
+    color: #fff; padding: 13px 16px; font-family: var(--inter); font-size: .9rem;
+    margin-bottom: 14px; transition: border-color .2s;
+  }
+  .auth-input:focus { outline: none; border-color: var(--crimson); }
+  .btn-auth { width: 100%; background: var(--crimson); border: none; color: #fff; padding: 14px; border-radius: 4px; font-weight: 700; font-size: .9rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; margin-top: 6px; transition: background .2s; }
+  .btn-auth:hover { background: #c8303d; }
+  .auth-err { font-size: .8rem; color: var(--crimson); margin-bottom: 12px; display: none; }
+  .auth-succ { font-size: .8rem; color: #52e07c; margin-bottom: 12px; display: none; }
+  .modal-divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
+  .modal-divider hr { flex: 1; border-color: rgba(255,255,255,0.08); }
+  .modal-divider span { font-size: .72rem; color: var(--gray3); white-space: nowrap; }
+
+  /* ── CLASS MODAL ── */
+  .class-modal-box { max-width: 500px; }
+  .class-modal-header { background: var(--crimson); padding: 28px 36px; }
+  .class-modal-header h2 { font-family: var(--bebas); font-size: 2.2rem; letter-spacing: 2px; }
+  .class-modal-header p { font-size: .85rem; opacity: .8; }
+  .class-modal-body { padding: 36px; }
+  .class-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .cdetail { background: var(--bg); border-radius: 6px; padding: 16px; text-align: center; }
+  .cdetail-val { font-family: var(--bebas); font-size: 1.6rem; color: var(--crimson); }
+  .cdetail-label { font-size: .68rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray3); margin-top: 2px; }
+
+  /* ── LEGAL NOTICE ── */
+  .aom-notice {
+    background: #0e0000; border-top: 2px solid var(--crimson); padding: 28px 80px;
+    font-size: .72rem; color: rgba(255,255,255,0.35); line-height: 1.7;
+  }
+  .aom-notice strong { color: var(--crimson); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 900px) {
+    section { padding: 70px 24px; }
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero-content { padding: 0 24px; }
+    .hero-stats { flex-wrap: wrap; }
+    .stat-item { flex: 0 0 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .plans-grid, .trainers-grid { grid-template-columns: 1fr; }
+    .calc-wrapper, .contact-grid, .map-layout { grid-template-columns: 1fr; }
+    .amenities-grid { grid-template-columns: repeat(2,1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    footer { padding: 50px 24px 28px; }
+    .aom-notice { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+════════════════════════════════════════════ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">APE<span>X</span></a>
+  <ul class="nav-links">
+    <li><a href="#memberships">Membership</a></li>
+    <li><a href="#calorie-calc">Nutrition</a></li>
+    <li><a href="#floor-map">Gym Floor</a></li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#trainers">Trainers</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <div id="nav-user-avatar" onclick="openUserMenu()">
+      <div class="avatar-circle" id="avatar-initials">?</div>
+      <span id="avatar-name" style="font-size:.82rem;font-weight:600"></span>
+    </div>
+    <button class="btn-ghost" id="nav-signin-btn" onclick="openModal('signin')">Sign In</button>
+    <button class="btn-crimson" id="nav-join-btn" onclick="openModal('register')">Join Now</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Wilmington, NC · Premier Fitness</p>
+    <h1 class="hero-title">
+      WHERE<br>
+      <span class="line2">LIMITS ARE</span><br>
+      BROKEN
+    </h1>
+    <p class="hero-sub">Apex Athletic Club is Wilmington's most advanced training facility. Elite equipment. Expert coaching. Unmatched community.</p>
+    <div class="hero-ctas">
+      <button class="btn-hero-primary" onclick="openModal('register')">Start Your Journey</button>
+      <button class="btn-hero-secondary" onclick="document.getElementById('floor-map').scrollIntoView({behavior:'smooth'})">Explore the Gym</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num" data-target="4200" id="stat-members">0</div>
+      <div class="stat-label">Active Members</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="85" id="stat-machines">0</div>
+      <div class="stat-label">Machines</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="32" id="stat-classes">0</div>
+      <div class="stat-label">Weekly Classes</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="18" id="stat-trainers">0</div>
+      <div class="stat-label">Elite Trainers</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MEMBERSHIPS
+════════════════════════════════════════════ -->
+<section id="memberships">
+  <div style="text-align:center;margin-bottom:60px">
+    <p class="section-eyebrow">Membership Plans</p>
+    <h2 class="section-title">CHOOSE YOUR<br><span style="color:var(--crimson)">BATTLEFIELD</span></h2>
+    <div class="divider" style="margin:0 auto 16px"></div>
+    <p class="section-sub" style="margin:0 auto">No hidden fees. No long-term lock-ins. Cancel anytime.</p>
+  </div>
+  <div class="plans-grid">
+    <!-- Foundry -->
+    <div class="plan-card reveal">
+      <div class="plan-name">Foundry</div>
+      <div class="plan-price">$29<span>/mo</span></div>
+      <p class="plan-tagline">Everything you need to get started.</p>
+      <ul class="plan-features">
+        <li>Full gym floor access</li>
+        <li>Locker room &amp; showers</li>
+        <li>2 guest passes/month</li>
+        <li>Member app access</li>
+        <li class="off">Group fitness classes</li>
+        <li class="off">Recovery zone</li>
+        <li class="off">Personal training discount</li>
+        <li class="off">Priority booking</li>
+      </ul>
+      <button class="btn-plan btn-plan-outline" onclick="openModal('register')">Get Started</button>
+    </div>
+    <!-- Forge (popular) -->
+    <div class="plan-card popular reveal" style="transition-delay:.1s">
+      <div class="popular-badge">Most Popular</div>
+      <div class="plan-name" style="color:var(--crimson)">Forge</div>
+      <div class="plan-price" style="color:var(--crimson)">$59<span>/mo</span></div>
+      <p class="plan-tagline">The complete athlete experience.</p>
+      <ul class="plan-features">
+        <li>Full gym floor access</li>
+        <li>Locker room &amp; showers</li>
+        <li>5 guest passes/month</li>
+        <li>Member app access</li>
+        <li>Unlimited group classes</li>
+        <li>Recovery zone access</li>
+        <li>10% PT discount</li>
+        <li class="off">Priority booking</li>
+      </ul>
+      <button class="btn-plan btn-plan-filled" onclick="openModal('register')">Join Forge</button>
+    </div>
+    <!-- Apex Elite -->
+    <div class="plan-card reveal" style="transition-delay:.2s">
+      <div class="plan-name">Apex Elite</div>
+      <div class="plan-price">$99<span>/mo</span></div>
+      <p class="plan-tagline">For those who settle for nothing less.</p>
+      <ul class="plan-features">
+        <li>Full gym floor access</li>
+        <li>Locker room &amp; showers</li>
+        <li>Unlimited guest passes</li>
+        <li>Member app access</li>
+        <li>Unlimited group classes</li>
+        <li>Recovery zone access</li>
+        <li>20% PT discount</li>
+        <li>Priority class booking</li>
+      </ul>
+      <button class="btn-plan btn-plan-outline" onclick="openModal('register')">Go Elite</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CALORIE COUNTER
+════════════════════════════════════════════ -->
+<section id="calorie-calc">
+  <p class="section-eyebrow">Nutrition Tools</p>
+  <h2 class="section-title">CALORIE &amp;<br><span style="color:var(--crimson)">MACRO PLANNER</span></h2>
+  <div class="divider"></div>
+  <p class="section-sub">Calculate your TDEE using Mifflin-St Jeor and get a personalized macro breakdown for your goals.</p>
+  <div class="calc-wrapper">
+    <div class="calc-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Age</label>
+          <input type="number" id="c-age" placeholder="e.g. 28" min="15" max="90">
+        </div>
+        <div class="form-group">
+          <label>Biological Sex</label>
+          <select id="c-sex">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Weight (lbs)</label>
+          <input type="number" id="c-weight" placeholder="e.g. 185">
+        </div>
+        <div class="form-group">
+          <label>Height (in)</label>
+          <input type="number" id="c-height" placeholder="e.g. 70">
+        </div>
+        <div class="form-group full">
+          <label>Activity Level</label>
+          <select id="c-activity">
+            <option value="1.2">Sedentary (desk job, little exercise)</option>
+            <option value="1.375">Lightly Active (1–3 days/week)</option>
+            <option value="1.55" selected>Moderately Active (3–5 days/week)</option>
+            <option value="1.725">Very Active (6–7 days/week)</option>
+            <option value="1.9">Athlete (2x/day training)</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Goal</label>
+          <select id="c-goal">
+            <option value="cut">Fat Loss (Cut)</option>
+            <option value="maintain" selected>Maintain Weight</option>
+            <option value="bulk">Muscle Gain (Bulk)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-calc" onclick="calcCalories()">Calculate My Macros</button>
+    </div>
+    <div class="calc-results" id="calc-results-panel" style="opacity:0;transition:opacity .5s">
+      <div class="results-box">
+        <div class="gauge-wrapper">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="12"/>
+            <circle id="gauge-ring" cx="100" cy="100" r="85" fill="none" stroke="var(--crimson)" stroke-width="12"
+              stroke-dasharray="534" stroke-dashoffset="534" stroke-linecap="round"
+              transform="rotate(-90 100 100)" style="transition:stroke-dashoffset 1.2s ease"/>
+          </svg>
+          <div class="gauge-center">
+            <div class="gauge-num" id="gauge-num">0</div>
+            <div class="gauge-label">cal / day</div>
+          </div>
+        </div>
+        <div style="margin-bottom:20px">
+          <div class="result-row"><span class="result-key">BMR</span><span class="result-val" id="r-bmr">—</span></div>
+          <div class="result-row"><span class="result-key">TDEE</span><span class="result-val" id="r-tdee">—</span></div>
+          <div class="result-row" style="border:none"><span class="result-key">Target Calories</span><span class="result-val" id="r-target" style="color:var(--crimson)">—</span></div>
+        </div>
+        <div class="macro-bars">
+          <div class="macro-row">
+            <div class="macro-header"><span class="macro-name">Protein</span><span class="macro-val" id="m-protein">—</span></div>
+            <div class="macro-bar-bg"><div class="macro-bar-fill" id="mb-protein" style="background:var(--crimson)"></div></div>
+          </div>
+          <div class="macro-row">
+            <div class="macro-header"><span class="macro-name">Carbohydrates</span><span class="macro-val" id="m-carbs">—</span></div>
+            <div class="macro-bar-bg"><div class="macro-bar-fill" id="mb-carbs" style="background:var(--orange)"></div></div>
+          </div>
+          <div class="macro-row">
+            <div class="macro-header"><span class="macro-name">Fats</span><span class="macro-val" id="m-fats">—</span></div>
+            <div class="macro-bar-bg"><div class="macro-bar-fill" id="mb-fats" style="background:#4facde"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     GYM FLOOR MAP
+════════════════════════════════════════════ -->
+<section id="floor-map">
+  <p class="section-eyebrow">Facility Layout</p>
+  <h2 class="section-title">EXPLORE THE<br><span style="color:var(--crimson)">GYM FLOOR</span></h2>
+  <div class="divider"></div>
+  <p class="section-sub">Click any zone to discover equipment, capacity, and what to expect in each area.</p>
+  <div class="map-layout">
+    <div>
+      <div class="map-svg-wrap">
+        <svg viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg" id="floor-svg">
+          <!-- Outer walls -->
+          <rect x="10" y="10" width="680" height="460" rx="6" fill="#111" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+          <!-- Zones -->
+          <!-- Cardio -->
+          <rect class="zone-rect" x="20" y="20" width="220" height="140" rx="4" fill="#e6394622" stroke="#e63946" stroke-width="1.5"
+            onclick="showZone('cardio')" data-zone="cardio"/>
+          <text x="130" y="80" text-anchor="middle" fill="#e63946" font-family="'Bebas Neue',sans-serif" font-size="16" pointer-events="none">CARDIO</text>
+          <text x="130" y="100" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-size="10" pointer-events="none">24 machines</text>
+          <!-- Free Weights -->
+          <rect class="zone-rect" x="250" y="20" width="200" height="140" rx="4" fill="#ff6b3522" stroke="#ff6b35" stroke-width="1.5"
+            onclick="showZone('freeweights')" data-zone="freeweights"/>
+          <text x="350" y="80" text-anchor="middle" fill="#ff6b35" font-family="'Bebas Neue',sans-serif" font-size="16" pointer-events="none">FREE WEIGHTS</text>
+          <text x="350" y="100" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-size="10" pointer-events="none">DBs, Barbells, Racks</text>
+          <!-- Resistance Machines -->
+          <rect class="zone-rect" x="460" y="20" width="230" height="140" rx="4" fill="#4facde22" stroke="#4facde" stroke-width="1.5"
+            onclick="showZone('resistance')" data-zone="resistance"/>
+          <text x="575" y="80" text-anchor="middle" fill="#4facde" font-family="'Bebas Neue',sans-serif" font-size="16" pointer-events="none">RESISTANCE</text>
+          <text x="575" y="100" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-size="10" pointer-events="none">35 cable machines</text>
+          <!-- Functional -->
+          <rect class="zone-rect" x="20" y="170" width="220" height="130" rx="4" fill="#52e07c22" stroke="#52e07c" stroke-width="1.5"
+            onclick="showZone('functional')" data-zone="functional"/>
+          <text x="130" y="230" text-anchor="middle" fill="#52e07c" font-family="'Bebas Neue',sans-serif" font-size="16" pointer-events="none">FUNCTIONAL</text>
+          <text x="130" y="250" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-size="10" pointer-events="none">CrossFit-style training</text>
+          <!-- Studio A -->
+          <rect class="zone-rect" x="250" y="170" width="130" height="130" rx="4" fill="#b87fff22" stroke="#b87fff" stroke-width="1.5"
+            onclick="showZone('studioa')" data-zone="studioa"/>
+          <text x="315" y="230" text-anchor="middle" fill="#b87fff" font-family="'Bebas Neue',sans-serif" font-size="16" pointer-events="none">STUDIO A</text>
+          <text x="315" y="248" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-size="10" pointer-events="none">Yoga / Pilates</text>
+          <!-- Studio B -->
+          <rect class="zone-rect" x="390" y="170" width="130" height="130" rx="4" fill="#ffe44422" stroke="#ffe444" stroke-width="1.5"
+            onclick="showZone('studiob')" data-zone="studiob"/>
+          <text x="455" y="230" text-anchor="middle" fill="#ffe444" font-family="'Bebas Neue',sans-serif" font-size="16" pointer-events="none">STUDIO B</text>
+          <text x="455" y="248" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-size="10" pointer-events="none">HIIT / Cycling</text>
+          <!-- Recovery -->
+          <rect class="zone-rect" x="530" y="170" width="160" height="130" rx="4" fill="#ff9f4322" stroke="#ff9f43" stroke-width="1.5"
+            onclick="showZone('recovery')" data-zone="recovery"/>
+          <text x="610" y="228" text-anchor="middle" fill="#ff9f43" font-family="'Bebas Neue',sans-serif" font-size="15" pointer-events="none">RECOVERY</text>
+          <text x="610" y="248" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-size="10" pointer-events="none">Sauna · Ice Bath</text>
+          <!-- Lockers -->
+          <rect class="zone-rect" x="20" y="310" width="300" height="150" rx="4" fill="#888faa22" stroke="#888faa" stroke-width="1.5"
+            onclick="showZone('lockers')" data-zone="lockers"/>
+          <text x="170" y="385" text-anchor="middle" fill="#888faa" font-family="'Bebas Neue',sans-serif" font-size="16" pointer-events="none">LOCKER ROOMS</text>
+          <text x="170" y="405" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-size="10" pointer-events="none">Male · Female · Unisex</text>
+          <!-- Reception -->
+          <rect class="zone-rect" x="330" y="310" width="360" height="150" rx="4" fill="#ff6b3511" stroke="#ff6b35" stroke-width="1" stroke-dasharray="6,3"
+            onclick="showZone('reception')" data-zone="reception"/>
+          <text x="510" y="385" text-anchor="middle" fill="#ff6b35" font-family="'Bebas Neue',sans-serif" font-size="16" pointer-events="none">RECEPTION &amp; PRO SHOP</text>
+          <text x="510" y="405" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" font-size="10" pointer-events="none">Check-in · Retail · Café</text>
+          <!-- entry arrow -->
+          <path d="M510 455 L510 465 L490 465 L510 476 L530 465 L510 465" fill="#ff6b35" opacity=".5"/>
+          <text x="510" y="452" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8" font-family="Inter,sans-serif">MAIN ENTRANCE</text>
+        </svg>
+      </div>
+      <div class="map-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#e63946"></div>Cardio</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ff6b35"></div>Free Weights</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#4facde"></div>Resistance</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#52e07c"></div>Functional</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#b87fff"></div>Studio A</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ffe444"></div>Studio B</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ff9f43"></div>Recovery</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#888faa"></div>Lockers</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ff6b35;opacity:.5"></div>Reception</div>
+      </div>
+    </div>
+    <div>
+      <div class="zone-detail-panel" id="zone-panel">
+        <div style="text-align:center;color:rgba(255,255,255,0.25);padding:40px 0">
+          <div style="font-size:3rem;margin-bottom:12px">🗺️</div>
+          <div style="font-size:.85rem">Click a zone on the map<br>to see details</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CLASSES
+════════════════════════════════════════════ -->
+<section id="classes">
+  <p class="section-eyebrow">Group Fitness</p>
+  <h2 class="section-title">WEEKLY CLASS<br><span style="color:var(--crimson)">SCHEDULE</span></h2>
+  <div class="divider"></div>
+  <p class="section-sub">32 classes per week. All fitness levels welcome. Forge &amp; Elite members get unlimited access.</p>
+  <div class="schedule-scroll">
+    <div class="schedule-grid" id="schedule-grid">
+      <!-- Headers -->
+      <div class="sched-header" style="background:transparent"></div>
+      <div class="sched-header">Mon</div>
+      <div class="sched-header today">Tue</div>
+      <div class="sched-header">Wed</div>
+      <div class="sched-header">Thu</div>
+      <div class="sched-header">Fri</div>
+      <div class="sched-header">Sat</div>
+      <div class="sched-header">Sun</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TRAINERS
+════════════════════════════════════════════ -->
+<section id="trainers">
+  <div style="text-align:center;margin-bottom:60px">
+    <p class="section-eyebrow">Expert Coaching</p>
+    <h2 class="section-title">MEET YOUR<br><span style="color:var(--crimson)">TRAINERS</span></h2>
+    <div class="divider" style="margin:0 auto 16px"></div>
+    <p class="section-sub" style="margin:0 auto">NSCA, NASM, and ACE-certified coaches. Real results, personalized programming.</p>
+  </div>
+  <div class="trainers-grid">
+    <div class="trainer-card reveal">
+      <img class="trainer-img" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="Marcus Cole" loading="lazy">
+      <div class="trainer-info">
+        <div class="trainer-name">Marcus Cole</div>
+        <div class="trainer-specialty">Strength &amp; Power</div>
+        <div class="trainer-certs">NSCA-CSCS · Former D1 Athlete · 12 yrs experience</div>
+      </div>
+    </div>
+    <div class="trainer-card reveal" style="transition-delay:.1s">
+      <img class="trainer-img" src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=600&q=80" alt="Jordan Reyes" loading="lazy">
+      <div class="trainer-info">
+        <div class="trainer-name">Jordan Reyes</div>
+        <div class="trainer-specialty">HIIT &amp; Metabolic</div>
+        <div class="trainer-certs">NASM-CPT · CrossFit L2 · Precision Nutrition</div>
+      </div>
+    </div>
+    <div class="trainer-card reveal" style="transition-delay:.2s">
+      <img class="trainer-img" src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="Simone Park" loading="lazy">
+      <div class="trainer-info">
+        <div class="trainer-name">Simone Park</div>
+        <div class="trainer-specialty">Yoga &amp; Mobility</div>
+        <div class="trainer-certs">RYT-500 · FMS Certified · Pilates NCPT</div>
+      </div>
+    </div>
+    <div class="trainer-card reveal">
+      <img class="trainer-img" src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=600&q=80" alt="Derek Mason" loading="lazy">
+      <div class="trainer-info">
+        <div class="trainer-name">Derek Mason</div>
+        <div class="trainer-specialty">Bodybuilding</div>
+        <div class="trainer-certs">ACE-CPT · NPC Competitor · Sports Nutrition</div>
+      </div>
+    </div>
+    <div class="trainer-card reveal" style="transition-delay:.1s">
+      <img class="trainer-img" src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?w=600&q=80" alt="Aaliyah Brooks" loading="lazy">
+      <div class="trainer-info">
+        <div class="trainer-name">Aaliyah Brooks</div>
+        <div class="trainer-specialty">Cardio &amp; Endurance</div>
+        <div class="trainer-certs">ISSA-CPT · USA Triathlon Coach · 8 yrs experience</div>
+      </div>
+    </div>
+    <div class="trainer-card reveal" style="transition-delay:.2s">
+      <img class="trainer-img" src="https://images.unsplash.com/photo-1611672585731-fa10603fb9e0?w=600&q=80" alt="Ethan Cruz" loading="lazy">
+      <div class="trainer-info">
+        <div class="trainer-name">Ethan Cruz</div>
+        <div class="trainer-specialty">Functional &amp; Sport</div>
+        <div class="trainer-certs">NASM-PES · FRC Mobility Specialist · MMA Background</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     AMENITIES
+════════════════════════════════════════════ -->
+<section id="amenities">
+  <div style="text-align:center;margin-bottom:60px">
+    <p class="section-eyebrow">Club Features</p>
+    <h2 class="section-title">WORLD-CLASS<br><span style="color:var(--crimson)">AMENITIES</span></h2>
+    <div class="divider" style="margin:0 auto"></div>
+  </div>
+  <div class="amenities-grid">
+    <div class="amenity-item reveal">
+      <div class="amenity-icon">🏋️</div>
+      <div class="amenity-name">85+ Machines</div>
+      <div class="amenity-desc">Latest Life Fitness &amp; Technogym equipment refreshed annually</div>
+    </div>
+    <div class="amenity-item reveal" style="transition-delay:.05s">
+      <div class="amenity-icon">🔥</div>
+      <div class="amenity-name">Infrared Sauna</div>
+      <div class="amenity-desc">Full-spectrum infrared panels. Private 4-person cabins.</div>
+    </div>
+    <div class="amenity-item reveal" style="transition-delay:.1s">
+      <div class="amenity-icon">🧊</div>
+      <div class="amenity-name">Cold Plunge</div>
+      <div class="amenity-desc">40°F ice bath for recovery, inflammation reduction, and mental edge</div>
+    </div>
+    <div class="amenity-item reveal" style="transition-delay:.15s">
+      <div class="amenity-icon">🚿</div>
+      <div class="amenity-name">Luxury Lockers</div>
+      <div class="amenity-desc">Spacious changing rooms with towel service and premium toiletries</div>
+    </div>
+    <div class="amenity-item reveal" style="transition-delay:.2s">
+      <div class="amenity-icon">☕</div>
+      <div class="amenity-name">Fuel Bar</div>
+      <div class="amenity-desc">Smoothies, cold brew, pre-workout, and healthy snacks on-site</div>
+    </div>
+    <div class="amenity-item reveal" style="transition-delay:.25s">
+      <div class="amenity-icon">📱</div>
+      <div class="amenity-name">Member App</div>
+      <div class="amenity-desc">Book classes, track workouts, and chat with trainers from your phone</div>
+    </div>
+    <div class="amenity-item reveal" style="transition-delay:.3s">
+      <div class="amenity-icon">🅿️</div>
+      <div class="amenity-name">Free Parking</div>
+      <div class="amenity-desc">Dedicated 200-space lot with EV charging stations</div>
+    </div>
+    <div class="amenity-item reveal" style="transition-delay:.35s">
+      <div class="amenity-icon">🏪</div>
+      <div class="amenity-name">Pro Shop</div>
+      <div class="amenity-desc">Apex-branded gear, supplements, and accessories at member pricing</div>
+    </div>
+    <div class="amenity-item reveal" style="transition-delay:.4s">
+      <div class="amenity-icon">🎧</div>
+      <div class="amenity-name">DJ Booth</div>
+      <div class="amenity-desc">Live DJ sessions every Friday and Saturday evening</div>
+    </div>
+    <div class="amenity-item reveal" style="transition-delay:.45s">
+      <div class="amenity-icon">📷</div>
+      <div class="amenity-name">Content Studio</div>
+      <div class="amenity-desc">Dedicated photography backdrop and lighting rig — free for members</div>
+    </div>
+    <div class="amenity-item reveal" style="transition-delay:.5s">
+      <div class="amenity-icon">🌙</div>
+      <div class="amenity-name">24/7 Access</div>
+      <div class="amenity-desc">Forge &amp; Elite members get round-the-clock keycard access</div>
+    </div>
+    <div class="amenity-item reveal" style="transition-delay:.55s">
+      <div class="amenity-icon">♿</div>
+      <div class="amenity-name">Fully Accessible</div>
+      <div class="amenity-desc">ADA-compliant facility with adaptive equipment and trained staff</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════ -->
+<section id="contact">
+  <p class="section-eyebrow">Get In Touch</p>
+  <h2 class="section-title">VISIT OR<br><span style="color:var(--crimson)">CONTACT US</span></h2>
+  <div class="divider"></div>
+  <div class="contact-grid">
+    <div>
+      <form class="contact-form" onsubmit="submitContact(event)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <input type="text" placeholder="First Name" required>
+          <input type="text" placeholder="Last Name" required>
+        </div>
+        <input type="email" placeholder="Email Address" required>
+        <input type="tel" placeholder="Phone Number">
+        <select>
+          <option value="">Inquiry Type</option>
+          <option>Membership Information</option>
+          <option>Personal Training</option>
+          <option>Group Classes</option>
+          <option>Corporate Partnerships</option>
+          <option>Other</option>
+        </select>
+        <textarea placeholder="Tell us how we can help..."></textarea>
+        <button type="submit" class="btn-submit">Send Message</button>
+        <div id="contact-success" style="display:none;color:#52e07c;font-size:.82rem;margin-top:10px;text-align:center">
+          ✓ Message sent! We'll be in touch within 24 hours.
+        </div>
+      </form>
+    </div>
+    <div>
+      <div class="contact-info-block">
+        <h3>APEX ATHLETIC CLUB</h3>
+        <div class="info-row"><div class="info-icon">📍</div><div class="info-text">4821 Oleander Drive<br>Wilmington, NC 28403</div></div>
+        <div class="info-row"><div class="info-icon">📞</div><div class="info-text">(910) 555-0147</div></div>
+        <div class="info-row"><div class="info-icon">📧</div><div class="info-text">info@apexathleticclub.com</div></div>
+        <div class="info-row"><div class="info-icon">🌐</div><div class="info-text">www.apexathleticclub.com</div></div>
+      </div>
+      <div class="contact-info-block">
+        <h3>HOURS</h3>
+        <table class="hours-table">
+          <tr><td>Monday – Friday</td><td>5:00 AM – 11:00 PM</td></tr>
+          <tr><td>Saturday</td><td>6:00 AM – 10:00 PM</td></tr>
+          <tr><td>Sunday</td><td>7:00 AM – 9:00 PM</td></tr>
+          <tr><td style="color:var(--crimson)">Forge &amp; Elite (24/7)</td><td style="color:var(--crimson)">Anytime</td></tr>
+        </table>
+      </div>
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305!2d-77.896!3d34.225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDEzJzMwLjAiTiA3N8KwNTMnNDYuMCJX!5e0!3m2!1sen!2sus!4v1000000000000"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Apex Athletic Club Location">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="font-size:2.2rem">APE<span style="color:var(--crimson)">X</span></div>
+      <p>Where limits are broken. Wilmington's premier athletic facility since 2018. Built for athletes, welcoming to everyone.</p>
+      <div class="social-icons" style="margin-top:20px">
+        <div class="social-icon">𝕏</div>
+        <div class="social-icon">in</div>
+        <div class="social-icon">▶</div>
+        <div class="social-icon">📸</div>
+        <div class="social-icon">f</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Membership</h4>
+      <ul>
+        <li><a href="#memberships">Foundry Plan</a></li>
+        <li><a href="#memberships">Forge Plan</a></li>
+        <li><a href="#memberships">Apex Elite</a></li>
+        <li><a href="#contact">Corporate Rates</a></li>
+        <li><a href="#contact">Student Discount</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Training</h4>
+      <ul>
+        <li><a href="#classes">Group Fitness</a></li>
+        <li><a href="#trainers">Personal Training</a></li>
+        <li><a href="#calorie-calc">Nutrition Planning</a></li>
+        <li><a href="#floor-map">Gym Floor Map</a></li>
+        <li><a href="#amenities">Recovery Zone</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#contact">About Apex</a></li>
+        <li><a href="#contact">Careers</a></li>
+        <li><a href="#contact">Press</a></li>
+        <li><a href="#contact">Privacy Policy</a></li>
+        <li><a href="#contact">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Apex Athletic Club LLC. All rights reserved. Wilmington, NC.</div>
+    <div style="display:flex;gap:20px">
+      <a href="#contact" style="font-size:.75rem;color:rgba(255,255,255,0.3)">Privacy</a>
+      <a href="#contact" style="font-size:.75rem;color:rgba(255,255,255,0.3)">Terms</a>
+      <a href="#contact" style="font-size:.75rem;color:rgba(255,255,255,0.3)">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     AOM LEGAL NOTICE
+════════════════════════════════════════════ -->
+<div class="aom-notice">
+  <strong>FICTIONAL SITE DISCLAIMER</strong> — This website is a <strong>design mockup / preview</strong> created by <strong>Altitude Odyssey Media (AOM)</strong> for demonstration and portfolio purposes only. APEX ATHLETIC CLUB is a fictitious business name. All pricing, services, staff names, phone numbers, addresses, and class schedules depicted are entirely fabricated and for illustrative use only. This site does not represent a real gym, real membership offering, or real business entity. No financial transactions, memberships, or personal training agreements are available through this page. Any resemblance to real persons or existing businesses is coincidental. <strong style="color:var(--crimson)">© 2026 Altitude Odyssey Media · All Rights Reserved · Wilmington, NC</strong>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     AUTH MODAL
+════════════════════════════════════════════ -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-tabs">
+      <div class="modal-tab active" id="tab-signin" onclick="switchTab('signin')">Sign In</div>
+      <div class="modal-tab" id="tab-register" onclick="switchTab('register')">Create Account</div>
+    </div>
+    <!-- Sign In -->
+    <div class="modal-body" id="body-signin">
+      <div class="modal-title">WELCOME BACK</div>
+      <p class="modal-sub">Sign in to access your member dashboard.</p>
+      <div class="auth-err" id="signin-err">Invalid email or password.</div>
+      <input class="auth-input" type="email" id="si-email" placeholder="Email Address" autocomplete="email">
+      <input class="auth-input" type="password" id="si-password" placeholder="Password" autocomplete="current-password">
+      <button class="btn-auth" onclick="doSignIn()">Sign In</button>
+      <div class="modal-divider"><hr><span>or</span><hr></div>
+      <p style="text-align:center;font-size:.8rem;color:var(--gray3)">Don't have an account? <a href="#" onclick="switchTab('register')" style="color:var(--crimson)">Join now →</a></p>
+    </div>
+    <!-- Register -->
+    <div class="modal-body" id="body-register" style="display:none">
+      <div class="modal-title">START YOUR JOURNEY</div>
+      <p class="modal-sub">Create your Apex member account.</p>
+      <div class="auth-err" id="reg-err"></div>
+      <div class="auth-succ" id="reg-succ">Account created! Signing you in...</div>
+      <input class="auth-input" type="text" id="r-name" placeholder="Full Name" autocomplete="name">
+      <input class="auth-input" type="email" id="r-email" placeholder="Email Address" autocomplete="email">
+      <input class="auth-input" type="password" id="r-password" placeholder="Password (min 6 characters)" autocomplete="new-password">
+      <button class="btn-auth" onclick="doRegister()">Create Account</button>
+      <div class="modal-divider"><hr><span>or</span><hr></div>
+      <p style="text-align:center;font-size:.8rem;color:var(--gray3)">Already a member? <a href="#" onclick="switchTab('signin')" style="color:var(--crimson)">Sign in →</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CLASS MODAL
+════════════════════════════════════════════ -->
+<div class="modal-overlay" id="class-modal">
+  <div class="modal-box class-modal-box">
+    <button class="modal-close" onclick="closeClassModal()" style="z-index:10">×</button>
+    <div class="class-modal-header">
+      <h2 id="cm-name">Class Name</h2>
+      <p id="cm-sub">Trainer · Duration</p>
+    </div>
+    <div class="class-modal-body">
+      <div class="class-detail-grid">
+        <div class="cdetail"><div class="cdetail-val" id="cm-dur">—</div><div class="cdetail-label">Minutes</div></div>
+        <div class="cdetail"><div class="cdetail-val" id="cm-intensity">—</div><div class="cdetail-label">Intensity</div></div>
+        <div class="cdetail"><div class="cdetail-val" id="cm-spots">—</div><div class="cdetail-label">Spots Left</div></div>
+        <div class="cdetail"><div class="cdetail-val" id="cm-calories">—</div><div class="cdetail-label">Est. Calories</div></div>
+      </div>
+      <p id="cm-desc" style="font-size:.88rem;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:24px"></p>
+      <button class="btn-auth" onclick="bookClass()">Book This Class</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── NAV SCROLL ──────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── COUNTER ANIMATION ────────────────────────
+function animateCounter(el, target, duration=2000) {
+  const start = performance.now();
+  const update = (now) => {
+    const progress = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(ease * target).toLocaleString();
+    if (progress < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+const statsObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('[data-target]').forEach(el => {
+        animateCounter(el, parseInt(el.dataset.target));
+      });
+      statsObs.disconnect();
+    }
+  });
+}, { threshold: .3 });
+statsObs.observe(document.querySelector('.hero-stats'));
+
+// ── SCROLL REVEAL ────────────────────────────
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── AUTH MODAL ───────────────────────────────
+function openModal(tab='signin') {
+  switchTab(tab);
+  document.getElementById('auth-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('auth-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function switchTab(tab) {
+  document.getElementById('tab-signin').classList.toggle('active', tab==='signin');
+  document.getElementById('tab-register').classList.toggle('active', tab==='register');
+  document.getElementById('body-signin').style.display = tab==='signin' ? '' : 'none';
+  document.getElementById('body-register').style.display = tab==='register' ? '' : 'none';
+}
+document.getElementById('auth-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('auth-modal')) closeModal();
+});
+
+function getUsers() { return JSON.parse(localStorage.getItem('apexUsers') || '[]'); }
+function saveUsers(u) { localStorage.setItem('apexUsers', JSON.stringify(u)); }
+function setLoggedIn(user) {
+  localStorage.setItem('apexCurrentUser', JSON.stringify(user));
+  updateNavUser(user);
+  closeModal();
+}
+function updateNavUser(user) {
+  const av = document.getElementById('nav-user-avatar');
+  const si = document.getElementById('nav-signin-btn');
+  const jn = document.getElementById('nav-join-btn');
+  if (user) {
+    av.style.display = 'flex';
+    document.getElementById('avatar-initials').textContent = user.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+    document.getElementById('avatar-name').textContent = user.name.split(' ')[0];
+    si.style.display = 'none';
+    jn.textContent = 'My Account';
+    jn.onclick = () => alert(`Welcome, ${user.name}!\n\nMembership: Forge\nStatus: Active\n\nThis is a mockup — full dashboard coming soon.`);
+  } else {
+    av.style.display = 'none';
+    si.style.display = '';
+    jn.textContent = 'Join Now';
+    jn.onclick = () => openModal('register');
+  }
+}
+function openUserMenu() {
+  const user = JSON.parse(localStorage.getItem('apexCurrentUser') || 'null');
+  if (!user) return;
+  if (confirm(`Signed in as ${user.name}\n\nClick OK to sign out.`)) {
+    localStorage.removeItem('apexCurrentUser');
+    updateNavUser(null);
+  }
+}
+// init
+updateNavUser(JSON.parse(localStorage.getItem('apexCurrentUser') || 'null'));
+
+function doSignIn() {
+  const email = document.getElementById('si-email').value.trim();
+  const pass = document.getElementById('si-password').value;
+  const users = getUsers();
+  const user = users.find(u => u.email === email && u.password === pass);
+  const err = document.getElementById('signin-err');
+  if (!user) { err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  setLoggedIn(user);
+}
+function doRegister() {
+  const name = document.getElementById('r-name').value.trim();
+  const email = document.getElementById('r-email').value.trim();
+  const pass = document.getElementById('r-password').value;
+  const err = document.getElementById('reg-err');
+  const succ = document.getElementById('reg-succ');
+  if (!name || !email || !pass) { err.textContent = 'All fields required.'; err.style.display = 'block'; return; }
+  if (pass.length < 6) { err.textContent = 'Password must be at least 6 characters.'; err.style.display = 'block'; return; }
+  const users = getUsers();
+  if (users.find(u => u.email === email)) { err.textContent = 'An account with that email already exists.'; err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  const newUser = { name, email, password: pass, joined: new Date().toISOString() };
+  users.push(newUser);
+  saveUsers(users);
+  succ.style.display = 'block';
+  setTimeout(() => setLoggedIn(newUser), 1200);
+}
+
+// ── CALORIE CALCULATOR ───────────────────────
+function calcCalories() {
+  const age = parseFloat(document.getElementById('c-age').value);
+  const sex = document.getElementById('c-sex').value;
+  const weightLbs = parseFloat(document.getElementById('c-weight').value);
+  const heightIn = parseFloat(document.getElementById('c-height').value);
+  const activity = parseFloat(document.getElementById('c-activity').value);
+  const goal = document.getElementById('c-goal').value;
+  if (!age || !weightLbs || !heightIn) return alert('Please fill in all fields.');
+  const weightKg = weightLbs * 0.453592;
+  const heightCm = heightIn * 2.54;
+  let bmr;
+  if (sex === 'male') {
+    bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
+  } else {
+    bmr = 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+  }
+  const tdee = bmr * activity;
+  let target = tdee;
+  if (goal === 'cut') target = tdee - 500;
+  else if (goal === 'bulk') target = tdee + 300;
+  target = Math.round(target);
+
+  // Macros
+  let proteinRatio, carbRatio, fatRatio;
+  if (goal === 'cut') { proteinRatio = .35; carbRatio = .35; fatRatio = .30; }
+  else if (goal === 'bulk') { proteinRatio = .30; carbRatio = .45; fatRatio = .25; }
+  else { proteinRatio = .30; carbRatio = .40; fatRatio = .30; }
+  const proteinG = Math.round(target * proteinRatio / 4);
+  const carbsG = Math.round(target * carbRatio / 4);
+  const fatsG = Math.round(target * fatRatio / 9);
+
+  // Update DOM
+  document.getElementById('r-bmr').textContent = Math.round(bmr).toLocaleString() + ' cal';
+  document.getElementById('r-tdee').textContent = Math.round(tdee).toLocaleString() + ' cal';
+  document.getElementById('r-target').textContent = target.toLocaleString() + ' cal';
+  document.getElementById('m-protein').textContent = proteinG + 'g protein';
+  document.getElementById('m-carbs').textContent = carbsG + 'g carbs';
+  document.getElementById('m-fats').textContent = fatsG + 'g fats';
+
+  // Gauge
+  const maxCal = 4000;
+  const pct = Math.min(target / maxCal, 1);
+  const circumference = 2 * Math.PI * 85;
+  document.getElementById('gauge-ring').style.strokeDashoffset = circumference * (1 - pct);
+  document.getElementById('gauge-num').textContent = target.toLocaleString();
+
+  // Macro bars
+  setTimeout(() => {
+    document.getElementById('mb-protein').style.width = (proteinRatio * 100) + '%';
+    document.getElementById('mb-carbs').style.width = (carbRatio * 100) + '%';
+    document.getElementById('mb-fats').style.width = (fatRatio * 100) + '%';
+  }, 50);
+
+  document.getElementById('calc-results-panel').style.opacity = '1';
+}
+
+// ── GYM FLOOR MAP ────────────────────────────
+const zoneData = {
+  cardio: {
+    icon: '🏃', title: 'CARDIO ZONE', color: '#e63946',
+    desc: '24 premium cardio machines spanning two rows. Features the latest treadmills with built-in screens, stair climbers, rowers, and assault bikes. 4K TV walls and personal device docks on every machine.',
+    equip: ['12× Life Fitness Treadmills','6× StairMaster StepMills','4× Concept2 Rowers','2× Assault AirBikes','Heart rate monitoring zones','Personal entertainment screens']
+  },
+  freeweights: {
+    icon: '💪', title: 'FREE WEIGHTS', color: '#ff6b35',
+    desc: 'The heart of Apex. Dumbbells from 5–150 lbs, an Olympic lifting platform, 8 power racks, and dedicated benching stations. High-visibility mirrors and chalk buckets available.',
+    equip: ['Dumbbells 5–150 lbs','8× Power Racks','4× Olympic Platforms','6× Flat/Incline/Decline Benches','EZ bars, specialty bars','Kettlebells 8–64 kg']
+  },
+  resistance: {
+    icon: '⚙️', title: 'RESISTANCE MACHINES', color: '#4facde',
+    desc: '35 pin-loaded and plate-loaded isolation machines covering every major muscle group. Cable towers, Smith machines, and functional trainers for complete muscle development.',
+    equip: ['10× Technogym cable stations','6× Smith Machines','Leg Press, Hack Squat','Chest Flye, Pec Deck','Lat Pulldown, Seated Row','Leg Curl, Leg Extension']
+  },
+  functional: {
+    icon: '🔄', title: 'FUNCTIONAL ZONE', color: '#52e07c',
+    desc: 'Open floor turf area for functional movement, HIIT circuits, and sport-specific training. High ceilings, rig system, and dedicated warm-up space. Used for boot camps and personal training.',
+    equip: ['60ft Functional Training Rig','Plyo boxes, battle ropes','TRX suspension trainers','Sleds & prowlers','Medicine & slam balls','Agility ladders & cones']
+  },
+  studioa: {
+    icon: '🧘', title: 'STUDIO A', color: '#b87fff',
+    desc: 'Serene, wood-floor studio for mind-body classes. Sound-dampened walls, dimmable lighting, and aromatherapy diffusers. Classes include yoga, pilates, and meditation.',
+    equip: ['30× Yoga mats','Bolsters & blocks','Pilates reformers (6)','Ballet barre stations','Foam rollers','Resistance bands']
+  },
+  studiob: {
+    icon: '⚡', title: 'STUDIO B', color: '#ffe444',
+    desc: 'High-energy group fitness studio with premium sound system and DJ booth. Spin bikes, step platforms, and open floor for HIIT, dance cardio, and boxing classes.',
+    equip: ['25× Stages SC3 Spin Bikes','Step platforms','Speed bags','Punching bags (6)','Heart rate display wall','Bluetooth PA system']
+  },
+  recovery: {
+    icon: '♨️', title: 'RECOVERY ZONE', color: '#ff9f43',
+    desc: 'Elite recovery suite for serious athletes. Infrared sauna cabins, cold plunge tanks, compression therapy, and red light therapy. The secret weapon behind faster gains.',
+    equip: ['2× 4-person Infrared Sauna','2× Cold Plunge (40°F)','Normatec compression boots','Red light therapy panel','Massage gun station','Guided recovery app']
+  },
+  lockers: {
+    icon: '🔐', title: 'LOCKER ROOMS', color: '#888faa',
+    desc: 'Spacious, hotel-quality locker rooms for male, female, and gender-neutral users. Steam showers, private changing cubicles, vanity stations, and complimentary toiletries.',
+    equip: ['300+ electronic lockers','6 steam showers each side','Private changing cubicles','Blow dryers & vanity stations','Complimentary towel service','Luxury toiletries']
+  },
+  reception: {
+    icon: '🎯', title: 'RECEPTION & PRO SHOP', color: '#ff6b35',
+    desc: 'Your first stop at Apex. Check in with a tap of your card, grab a smoothie from the Fuel Bar, browse the pro shop for gear, or chat with our member services team.',
+    equip: ['Member check-in kiosks','Fuel Bar (smoothies, coffee)','Pro shop (apparel, supps)','Member services desk','Guest registration','Free water refill station']
+  }
+};
+
+function showZone(key) {
+  const z = zoneData[key];
+  const panel = document.getElementById('zone-panel');
+  panel.innerHTML = `
+    <div class="zone-icon-big">${z.icon}</div>
+    <div class="zone-title" style="color:${z.color}">${z.title}</div>
+    <div class="zone-desc">${z.desc}</div>
+    <ul class="zone-equip">${z.equip.map(e => `<li>${e}</li>`).join('')}</ul>
+  `;
+  // highlight selected zone
+  document.querySelectorAll('.zone-rect').forEach(r => {
+    r.style.opacity = r.dataset.zone === key ? '1' : '0.5';
+  });
+}
+
+// ── CLASS SCHEDULE ────────────────────────────
+const classData = [
+  { name:'Power Yoga', trainer:'Simone P.', time:'6:00 AM', day:1, color:'', dur:60, intensity:'Moderate', spots:8, cal:300, desc:'A dynamic flow connecting breath to movement. Build flexibility, balance, and mental clarity in this signature early-morning class.' },
+  { name:'HIIT Burn', trainer:'Jordan R.', time:'7:00 AM', day:2, color:'orange', dur:45, intensity:'High', spots:3, cal:550, desc:'45 minutes of maximum-intensity interval training. Tabata-style circuits burn fat and build cardiovascular power.' },
+  { name:'Spin Cycle', trainer:'Aaliyah B.', time:'6:30 AM', day:3, color:'blue', dur:50, intensity:'High', spots:12, cal:600, desc:'Rhythm-based indoor cycling to electrifying playlists. Great for all levels — you control the resistance.' },
+  { name:'Core & Flex', trainer:'Simone P.', time:'12:00 PM', day:1, color:'green', dur:30, intensity:'Low', spots:15, cal:180, desc:'30-minute focused core strengthening and full-body flexibility work. Perfect lunchtime reset.' },
+  { name:'Bootcamp', trainer:'Marcus C.', time:'8:00 AM', day:4, color:'orange', dur:60, intensity:'Very High', spots:2, cal:700, desc:'Military-style full-body conditioning. Expect sleds, battle ropes, and leaving everything on the turf.' },
+  { name:'Sculpt', trainer:'Aaliyah B.', time:'9:00 AM', day:2, color:'green', dur:45, intensity:'Moderate', spots:10, cal:280, desc:'Light-weight, high-rep resistance training targeting tone and endurance. Great for all experience levels.' },
+  { name:'Kickboxing', trainer:'Ethan C.', time:'6:00 PM', day:5, color:'orange', dur:60, intensity:'High', spots:7, cal:650, desc:'Cardio kickboxing combining strikes, combos, and footwork. Zero contact — pure cardio and confidence.' },
+  { name:'Mobility Flow', trainer:'Simone P.', time:'10:00 AM', day:6, color:'green', dur:60, intensity:'Low', spots:20, cal:200, desc:'Comprehensive joint mobility and movement prep. Essential for recovery between hard training sessions.' },
+  { name:'Olympic Lift', trainer:'Marcus C.', time:'11:00 AM', day:4, color:'', dur:75, intensity:'Very High', spots:6, cal:480, desc:'Technical barbell work: clean & jerk, snatch, and supplemental strength drills. Intermediate+ level.' },
+  { name:'Zumba', trainer:'Jordan R.', time:'7:00 PM', day:3, color:'blue', dur:55, intensity:'Moderate', spots:18, cal:420, desc:'Dance-fitness fusion with Latin rhythms. Burn calories while having the time of your life.' },
+  { name:'Pilates Core', trainer:'Simone P.', time:'9:30 AM', day:7, color:'green', dur:50, intensity:'Low-Mod', spots:12, cal:240, desc:'Reformer-inspired mat pilates focusing on deep core activation, posture, and spinal alignment.' },
+  { name:'Strength 101', trainer:'Derek M.', time:'2:00 PM', day:6, color:'', dur:60, intensity:'Moderate', spots:9, cal:350, desc:'Fundamental compound movements: squat, hinge, push, pull. Perfect for beginners building a solid foundation.' },
+];
+const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const times = ['6:00 AM','6:30 AM','7:00 AM','7:30 AM','8:00 AM','9:00 AM','9:30 AM','10:00 AM','11:00 AM','12:00 PM','2:00 PM','6:00 PM','7:00 PM'];
+
+function buildSchedule() {
+  const grid = document.getElementById('schedule-grid');
+  times.forEach(t => {
+    const timeEl = document.createElement('div');
+    timeEl.className = 'sched-time';
+    timeEl.textContent = t;
+    grid.appendChild(timeEl);
+    days.forEach((d, di) => {
+      const cell = document.createElement('div');
+      cell.className = 'sched-cell';
+      const cls = classData.filter(c => c.time === t && c.day === di+1);
+      cls.forEach(c => {
+        const pill = document.createElement('div');
+        pill.className = `class-pill ${c.color}`;
+        pill.innerHTML = `<div class="cp-name">${c.name}</div><div class="cp-time">${c.time} · ${c.dur}min</div><div class="cp-trainer">${c.trainer}</div>`;
+        pill.onclick = () => openClassModal(c);
+        cell.appendChild(pill);
+      });
+      grid.appendChild(cell);
+    });
+  });
+}
+buildSchedule();
+
+function openClassModal(c) {
+  document.getElementById('cm-name').textContent = c.name;
+  document.getElementById('cm-sub').textContent = `${c.trainer} · ${c.time} · ${days[c.day-1]}`;
+  document.getElementById('cm-dur').textContent = c.dur;
+  document.getElementById('cm-intensity').textContent = c.intensity;
+  document.getElementById('cm-spots').textContent = c.spots;
+  document.getElementById('cm-calories').textContent = c.cal;
+  document.getElementById('cm-desc').textContent = c.desc;
+  document.getElementById('class-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeClassModal() {
+  document.getElementById('class-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function bookClass() {
+  const user = JSON.parse(localStorage.getItem('apexCurrentUser') || 'null');
+  if (!user) {
+    closeClassModal();
+    openModal('signin');
+    return;
+  }
+  alert(`✓ Booked! See you in class, ${user.name.split(' ')[0]}!`);
+  closeClassModal();
+}
+document.getElementById('class-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('class-modal')) closeClassModal();
+});
+
+// ── CONTACT FORM ─────────────────────────────
+function submitContact(e) {
+  e.preventDefault();
+  document.getElementById('contact-success').style.display = 'block';
+  e.target.reset();
+  setTimeout(() => document.getElementById('contact-success').style.display = 'none', 5000);
+}
+</script>
+</body>
+</html>

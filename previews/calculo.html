@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALCULO - Financial Calculator Suite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0f1e; color: #f9fafb; }
+        .container { display: flex; min-height: 100vh; flex-direction: column; }
+        .main-content { display: flex; flex: 1; }
+        .sidebar { width: 260px; background: #111827; border-right: 1px solid #1f2937; overflow-y: auto; padding: 20px 0; }
+        .content { flex: 1; padding: 30px; overflow-y: auto; }
+        nav { background: #111827; border-bottom: 1px solid #1f2937; padding: 15px 30px; display: flex; align-items: center; gap: 30px; }
+        .logo { font-size: 24px; font-weight: 700; color: #3b82f6; letter-spacing: 2px; }
+        .search-bar { flex: 1; max-width: 400px; padding: 10px 15px; background: #0a0f1e; border: 1px solid #1f2937; border-radius: 6px; color: #f9fafb; }
+        .go-pro { padding: 10px 20px; background: #3b82f6; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        .go-pro:hover { background: #2563eb; }
+        .category-link { padding: 12px 20px; cursor: pointer; display: block; color: #d1d5db; text-decoration: none; border-left: 3px solid transparent; }
+        .category-link:hover, .category-link.active { background: #1f2937; border-left-color: #3b82f6; color: #f9fafb; }
+        .calc-header { margin-bottom: 30px; }
+        .calc-title { font-size: 32px; font-weight: 700; margin-bottom: 10px; }
+        .calc-form { background: #111827; padding: 30px; border-radius: 10px; border: 1px solid #1f2937; max-width: 600px; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px; }
+        .form-input { width: 100%; padding: 12px; background: #0a0f1e; border: 1px solid #1f2937; border-radius: 6px; color: #f9fafb; }
+        .form-input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .button-group { display: flex; gap: 10px; }
+        .btn { padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .btn-primary { background: #3b82f6; color: #fff; flex: 1; }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-secondary { background: #1f2937; color: #d1d5db; flex: 1; }
+        .btn-secondary:hover { background: #374151; }
+        .results { margin-top: 30px; background: #111827; padding: 30px; border-radius: 10px; border: 1px solid #1f2937; display: none; }
+        .results.show { display: block; }
+        .result-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #1f2937; }
+        .result-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .result-label { font-size: 14px; color: #9ca3af; margin-bottom: 5px; }
+        .result-value { font-size: 28px; font-weight: 700; color: #10b981; }
+        footer { background: #111827; border-top: 1px solid #1f2937; padding: 30px; text-align: center; font-size: 12px; color: #6b7280; }
+        .calc-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        .calc-btn { padding: 10px 16px; background: #1f2937; border: 1px solid #374151; border-radius: 6px; color: #d1d5db; cursor: pointer; font-size: 13px; }
+        .calc-btn:hover { background: #374151; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">CALCULO</div>
+            <input type="text" class="search-bar" id="searchInput" placeholder="Search calculators...">
+            <button class="go-pro">Go Pro $7.99/mo</button>
+        </nav>
+        <div class="main-content">
+            <div class="sidebar" id="sidebar"></div>
+            <div class="content" id="mainContent"></div>
+        </div>
+        <footer>
+            © 2026 Altitude Odyssey Media LLC · All Rights Reserved · Wilmington, NC · studio@altitudeodysseymedia.com<br>
+            Calculators are for informational purposes only. Not financial advice.
+        </footer>
+    </div>
+    <script>
+        const calculators = [
+            {cat:'Loans',name:'Auto Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (months)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (months)'])))/((1+i['Rate %']/100/12)**i['Term (months)']-1)})},
+            {cat:'Loans',name:'Car Affordability',fields:[{n:'Income',t:'number'},{n:'Down Payment',t:'number'},{n:'Rate %',t:'number'}],calc:(i)=>({maxPrice:i.Income*0.1/0.005,monthlyPayment:(i.Income*0.1)})},
+            {cat:'Loans',name:'Motorcycle Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (months)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (months)'])))/((1+i['Rate %']/100/12)**i['Term (months)']-1)})},
+            {cat:'Loans',name:'RV Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (months)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (months)'])))/((1+i['Rate %']/100/12)**i['Term (months)']-1)})},
+            {cat:'Loans',name:'Boat Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (months)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (months)'])))/((1+i['Rate %']/100/12)**i['Term (months)']-1)})},
+            {cat:'Loans',name:'Personal Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (months)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (months)'])))/((1+i['Rate %']/100/12)**i['Term (months)']-1)})},
+            {cat:'Loans',name:'Business Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (years)']*12)))/((1+i['Rate %']/100/12)**(i['Term (years)']*12)-1)})},
+            {cat:'Loans',name:'SBA Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (years)']*12)))/((1+i['Rate %']/100/12)**(i['Term (years)']*12)-1)})},
+            {cat:'Loans',name:'Student Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (years)']*12)))/((1+i['Rate %']/100/12)**(i['Term (years)']*12)-1)})},
+            {cat:'Loans',name:'Student Refinance',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (years)']*12)))/((1+i['Rate %']/100/12)**(i['Term (years)']*12)-1)})},
+            {cat:'Loans',name:'Debt Consolidation',fields:[{n:'Total Debt',t:'number'},{n:'Rate %',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>({payment:((i['Total Debt']*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (years)']*12)))/((1+i['Rate %']/100/12)**(i['Term (years)']*12)-1)})},
+            {cat:'Loans',name:'Home Equity Loan',fields:[{n:'Home Value',t:'number'},{n:'Mortgage Balance',t:'number'},{n:'Rate %',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>{const eq=i['Home Value']-i['Mortgage Balance'];return{equity:eq,payment:((eq*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (years)']*12)))/((1+i['Rate %']/100/12)**(i['Term (years)']*12)-1)}}},
+            {cat:'Loans',name:'HELOC',fields:[{n:'Home Value',t:'number'},{n:'Mortgage Balance',t:'number'},{n:'Rate %',t:'number'}],calc:(i)=>{const eq=i['Home Value']-i['Mortgage Balance'];return{availableCredit:eq*0.8,monthlyInterest:(eq*0.8)*i['Rate %']/100/12}}},
+            {cat:'Loans',name:'Construction Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (years)']*12)))/((1+i['Rate %']/100/12)**(i['Term (years)']*12)-1)})},
+            {cat:'Loans',name:'Equipment Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (years)']*12)))/((1+i['Rate %']/100/12)**(i['Term (years)']*12)-1)})},
+            {cat:'Loans',name:'Commercial Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (years)']*12)))/((1+i['Rate %']/100/12)**(i['Term (years)']*12)-1)})},
+            {cat:'Loans',name:'Loan Payment',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Term (months)',t:'number'}],calc:(i)=>({payment:((i.Amount*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (months)'])))/((1+i['Rate %']/100/12)**i['Term (months)']-1)})},
+            {cat:'Loans',name:'Affordability',fields:[{n:'Income',t:'number'},{n:'Down Payment',t:'number'},{n:'Rate %',t:'number'}],calc:(i)=>({maxLoan:i.Income*0.28/0.005})},
+            {cat:'Loans',name:'Interest Only',fields:[{n:'Principal',t:'number'},{n:'Rate %',t:'number'},{n:'Months',t:'number'}],calc:(i)=>({monthlyInterest:i.Principal*(i['Rate %']/100/12),totalInterest:i.Principal*(i['Rate %']/100/12)*i.Months})},
+            {cat:'Loans',name:'Payoff Time',fields:[{n:'Balance',t:'number'},{n:'Payment',t:'number'},{n:'Rate %',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=-Math.log(1-i.Balance*m/i.Payment)/Math.log(1+m);return{months:Math.ceil(n),years:(Math.ceil(n)/12).toFixed(1)}}},
+            {cat:'Loans',name:'Extra Payment Impact',fields:[{n:'Balance',t:'number'},{n:'Rate %',t:'number'},{n:'Monthly Payment',t:'number'},{n:'Extra Payment',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=-Math.log(1-i.Balance*m/(i['Monthly Payment']+i['Extra Payment']))/Math.log(1+m);return{monthsSaved:360-Math.ceil(n)}}},
+            {cat:'Loans',name:'Debt Snowball',fields:[{n:'Debt 1',t:'number'},{n:'Debt 2',t:'number'},{n:'Debt 3',t:'number'},{n:'Payment/Month',t:'number'}],calc:(i)=>({total:i['Debt 1']+i['Debt 2']+i['Debt 3'],months:(i['Debt 1']+i['Debt 2']+i['Debt 3'])/i['Payment/Month']})},
+            {cat:'Loans',name:'Debt Avalanche',fields:[{n:'Debt 1',t:'number'},{n:'Debt 2',t:'number'},{n:'Rate 1 %',t:'number'},{n:'Rate 2 %',t:'number'},{n:'Payment',t:'number'}],calc:(i)=>({highestRate:Math.max(i['Rate 1 %'],i['Rate 2 %'])})},
+            {cat:'Loans',name:'Balloon Payment',fields:[{n:'Principal',t:'number'},{n:'Rate %',t:'number'},{n:'Term (months)',t:'number'},{n:'Balloon',t:'number'}],calc:(i)=>({payment:((i.Principal*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (months)'])))/((1+i['Rate %']/100/12)**i['Term (months)']-1)})},
+            {cat:'Loans',name:'Secured Loan',fields:[{n:'Collateral Value',t:'number'},{n:'LTV %',t:'number'},{n:'Rate %',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>{const loan=i['Collateral Value']*i['LTV %']/100;return{maxLoan:loan,payment:((loan*(i['Rate %']/100/12)*(1+i['Rate %']/100/12)**(i['Term (years)']*12)))/((1+i['Rate %']/100/12)**(i['Term (years)']*12)-1)}}},
+            {cat:'Loans',name:'Unsecured Loan',fields:[{n:'Amount',t:'number'},{n:'Credit Score',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>{const rate=i['Credit Score']>750?8:i['Credit Score']>700?12:16;return{estimatedRate:rate,monthlyPayment:((i.Amount*(rate/100/12)*(1+rate/100/12)**(i['Term (years)']*12)))/((1+rate/100/12)**(i['Term (years)']*12)-1)}}},
+            {cat:'Mortgage',name:'Mortgage Payment',fields:[{n:'Home Price',t:'number'},{n:'Down Payment %',t:'number'},{n:'Rate %',t:'number'},{n:'Term (years)',t:'number'}],calc:(i)=>{const prin=i['Home Price']*(1-i['Down Payment %']/100);const m=i['Rate %']/100/12;const n=i['Term (years)']*12;return{principal:prin,payment:(prin*m*(1+m)**n)/((1+m)**n-1)}}},
+            {cat:'Mortgage',name:'Affordability',fields:[{n:'Income',t:'number'},{n:'Debts',t:'number'}],calc:(i)=>({maxPrice:i.Income*0.28/0.005})},
+            {cat:'Mortgage',name:'Refinance',fields:[{n:'Balance',t:'number'},{n:'Current Rate %',t:'number'},{n:'New Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m1=i['Current Rate %']/100/12;const m2=i['New Rate %']/100/12;const n=i.Years*12;const oldPayment=(i.Balance*m1*(1+m1)**n)/((1+m1)**n-1);const newPayment=(i.Balance*m2*(1+m2)**n)/((1+m2)**n-1);return{savings:(oldPayment-newPayment)*n}}},
+            {cat:'Mortgage',name:'Amortization',fields:[{n:'Loan Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=i.Years*12;const payment=(i['Loan Amount']*m*(1+m)**n)/((1+m)**n-1);return{payment:payment,totalInterest:payment*n-i['Loan Amount']}}},
+            {cat:'Mortgage',name:'Mortgage Comparison',fields:[{n:'Price',t:'number'},{n:'Rate 1 %',t:'number'},{n:'Rate 2 %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const p=i.Price*0.8;const calc=(r)=>{const m=r/100/12;const n=i.Years*12;return(p*m*(1+m)**n)/((1+m)**n-1)};return{payment1:calc(i['Rate 1 %']),payment2:calc(i['Rate 2 %'])}}},
+            {cat:'Mortgage',name:'ARM Calculator',fields:[{n:'Principal',t:'number'},{n:'Initial Rate %',t:'number'},{n:'Years Fixed',t:'number'}],calc:(i)=>{const m1=i['Initial Rate %']/100/12;const n1=i['Years Fixed']*12;return{initialPayment:(i.Principal*m1*(1+m1)**n1)/((1+m1)**n1-1)}}},
+            {cat:'Mortgage',name:'FHA Loan',fields:[{n:'Price',t:'number'},{n:'Down Payment %',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const prin=i.Price*(1-i['Down Payment %']/100);const m=i['Rate %']/100/12;const n=i.Years*12;return{principal:prin,payment:(prin*m*(1+m)**n)/((1+m)**n-1)}}},
+            {cat:'Mortgage',name:'VA Loan',fields:[{n:'Price',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=i.Years*12;const fee=i.Price*0.03;const prin=i.Price+fee;return{fundingFee:fee,payment:(prin*m*(1+m)**n)/((1+m)**n-1)}}},
+            {cat:'Mortgage',name:'USDA Loan',fields:[{n:'Price',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=i.Years*12;const fee=i.Price*0.02;return{guarantee:fee,payment:((i.Price+fee)*m*(1+m)**n)/((1+m)**n-1)}}},
+            {cat:'Mortgage',name:'Jumbo Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=i.Years*12;return{payment:(i.Amount*m*(1+m)**n)/((1+m)**n-1)}}},
+            {cat:'Mortgage',name:'Biweekly Payment',fields:[{n:'Principal',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/26;const n=i.Years*26;return{biweeklyPayment:(i.Principal*m*(1+m)**n)/((1+m)**n-1)}}},
+            {cat:'Mortgage',name:'Rent vs Buy',fields:[{n:'Home Price',t:'number'},{n:'Rent/Month',t:'number'},{n:'Down Payment',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=i.Years*12;const prin=i['Home Price']-i['Down Payment'];const mortgage=(prin*m*(1+m)**n)/((1+m)**n-1);return{rentTotal:i['Rent/Month']*n,buyTotal:mortgage*n+i['Down Payment']}}},
+            {cat:'Mortgage',name:'Property Tax',fields:[{n:'Home Value',t:'number'},{n:'Tax Rate %',t:'number'}],calc:(i)=>({annualTax:i['Home Value']*i['Tax Rate %']/100})},
+            {cat:'Mortgage',name:'Home Equity',fields:[{n:'Home Value',t:'number'},{n:'Mortgage Balance',t:'number'}],calc:(i)=>({equity:i['Home Value']-i['Mortgage Balance']})},
+            {cat:'Mortgage',name:'Closing Costs',fields:[{n:'Purchase Price',t:'number'}],calc:(i)=>({percent2:i['Purchase Price']*0.02})},
+            {cat:'Mortgage',name:'Down Payment',fields:[{n:'Home Price',t:'number'},{n:'Down Payment %',t:'number'}],calc:(i)=>({downPayment:i['Home Price']*i['Down Payment %']/100})},
+            {cat:'Mortgage',name:'PMI',fields:[{n:'Home Price',t:'number'},{n:'Down Payment %',t:'number'}],calc:(i)=>{const ltv=1-i['Down Payment %']/100;const pmiRate=ltv>0.95?0.015:0;return{pmiMonthly:i['Home Price']*pmiRate/12}}},
+            {cat:'Mortgage',name:'Appreciation',fields:[{n:'Current Value',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>({futureValue:i['Current Value']*(1+i['Rate %']/100)**i.Years})},
+            {cat:'Mortgage',name:'Payoff Schedule',fields:[{n:'Balance',t:'number'},{n:'Rate %',t:'number'},{n:'Payment',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=-Math.log(1-i.Balance*m/i.Payment)/Math.log(1+m);return{months:Math.ceil(n)}}},
+            {cat:'Savings',name:'Compound Interest',fields:[{n:'Principal',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'},{n:'Compounds/Year',t:'number'}],calc:(i)=>({amount:i.Principal*(1+i['Rate %']/100/i['Compounds/Year'])**(i['Compounds/Year']*i.Years)})},
+            {cat:'Savings',name:'Simple Interest',fields:[{n:'Principal',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>({total:i.Principal+i.Principal*i['Rate %']/100*i.Years})},
+            {cat:'Savings',name:'Savings Goal',fields:[{n:'Target',t:'number'},{n:'Annual Savings',t:'number'}],calc:(i)=>({years:i.Target/i['Annual Savings']})},
+            {cat:'Savings',name:'Emergency Fund',fields:[{n:'Monthly Expenses',t:'number'},{n:'Months Coverage',t:'number'}],calc:(i)=>({target:i['Monthly Expenses']*i['Months Coverage']})},
+            {cat:'Savings',name:'CD Calculator',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>({maturity:i.Amount*(1+i['Rate %']/100)**i.Years})},
+            {cat:'Savings',name:'APY Calculator',fields:[{n:'APR %',t:'number'},{n:'Compounds/Year',t:'number'}],calc:(i)=>({apy:(Math.pow(1+i['APR %']/100/i['Compounds/Year'],i['Compounds/Year'])-1)*100})},
+            {cat:'Savings',name:'APR to APY',fields:[{n:'APR %',t:'number'},{n:'Compounds/Year',t:'number'}],calc:(i)=>({apy:(Math.pow(1+i['APR %']/100/i['Compounds/Year'],i['Compounds/Year'])-1)*100})},
+            {cat:'Savings',name:'Effective Rate',fields:[{n:'Rate %',t:'number'},{n:'Compounds/Year',t:'number'}],calc:(i)=>({effective:(Math.pow(1+i['Rate %']/100/i['Compounds/Year'],i['Compounds/Year'])-1)*100})},
+            {cat:'Savings',name:'Future Value',fields:[{n:'Present Value',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>({future:i['Present Value']*(1+i['Rate %']/100)**i.Years})},
+            {cat:'Savings',name:'Present Value',fields:[{n:'Future Value',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>({present:i['Future Value']/(1+i['Rate %']/100)**i.Years})},
+            {cat:'Savings',name:'Money Doubling',fields:[{n:'Rate %',t:'number'}],calc:(i)=>({years:72/i['Rate %']})},
+            {cat:'Savings',name:'Rule of 72',fields:[{n:'Rate %',t:'number'}],calc:(i)=>({doubleYears:72/i['Rate %']})},
+            {cat:'Savings',name:'Inflation Impact',fields:[{n:'Amount',t:'number'},{n:'Inflation %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>({purchasingPower:i.Amount/(1+i['Inflation %']/100)**i.Years})},
+            {cat:'Savings',name:'Purchasing Power',fields:[{n:'Amount',t:'number'},{n:'Inflation %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>({power:i.Amount/(1+i['Inflation %']/100)**i.Years})},
+            {cat:'Savings',name:'Recurring Deposit',fields:[{n:'Monthly Deposit',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=i.Years*12;return{total:i['Monthly Deposit']*((1+m)**n-1)/m}}},
+            {cat:'Savings',name:'Savings Rate',fields:[{n:'Savings',t:'number'},{n:'Income',t:'number'}],calc:(i)=>({rate:i.Savings/i.Income*100})},
+            {cat:'Savings',name:'HYSA',fields:[{n:'Deposit',t:'number'},{n:'APY %',t:'number'},{n:'Months',t:'number'}],calc:(i)=>({total:i.Deposit*(1+i['APY %']/100/12)**i.Months})},
+            {cat:'Investing',name:'Investment Growth',fields:[{n:'Initial',t:'number'},{n:'Monthly',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=i.Years*12;return{future:i.Initial*(1+m)**n+i.Monthly*((1+m)**n-1)/m}}},
+            {cat:'Investing',name:'Return Calculator',fields:[{n:'Initial',t:'number'},{n:'Final',t:'number'},{n:'Years',t:'number'}],calc:(i)=>({return:i.Final-i.Initial,annualized:((i.Final/i.Initial)**(1/i.Years)-1)*100})},
+            {cat:'Investing',name:'ROI',fields:[{n:'Gain',t:'number'},{n:'Investment',t:'number'}],calc:(i)=>({roi:i.Gain/i.Investment*100})},
+            {cat:'Investing',name:'Annualized Return',fields:[{n:'Starting',t:'number'},{n:'Ending',t:'number'},{n:'Years',t:'number'}],calc:(i)=>({annual:((i.Ending/i.Starting)**(1/i.Years)-1)*100})},
+            {cat:'Investing',name:'Dividend Reinvestment',fields:[{n:'Shares',t:'number'},{n:'Price',t:'number'},{n:'Dividend %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const val=i.Shares*i.Price;return{futureValue:val*(1+i['Dividend %']/100)**i.Years}}},
+            {cat:'Investing',name:'Stock Average Cost',fields:[{n:'Shares 1',t:'number'},{n:'Price 1',t:'number'},{n:'Shares 2',t:'number'},{n:'Price 2',t:'number'}],calc:(i)=>({avgCost:(i['Shares 1']*i['Price 1']+i['Shares 2']*i['Price 2'])/(i['Shares 1']+i['Shares 2'])})},
+            {cat:'Investing',name:'Stock Profit',fields:[{n:'Shares',t:'number'},{n:'Buy Price',t:'number'},{n:'Sell Price',t:'number'}],calc:(i)=>({profit:i.Shares*(i['Sell Price']-i['Buy Price'])})},
+            {cat:'Investing',name:'Capital Gains',fields:[{n:'Cost Basis',t:'number'},{n:'Sale Price',t:'number'},{n:'Tax Rate %',t:'number'}],calc:(i)=>{const gain=i['Sale Price']-i['Cost Basis'];return{gain:gain,tax:gain*i['Tax Rate %']/100}}},
+            {cat:'Investing',name:'Net Worth',fields:[{n:'Assets',t:'number'},{n:'Liabilities',t:'number'}],calc:(i)=>({netWorth:i.Assets-i.Liabilities})},
+            {cat:'Investing',name:'Retirement Savings',fields:[{n:'Monthly',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=i.Years*12;return{future:i.Monthly*((1+m)**n-1)/m}}},
+            {cat:'Investing',name:'Retirement Income',fields:[{n:'Savings',t:'number'},{n:'Rate %',t:'number'}],calc:(i)=>({annual:i.Savings*i['Rate %']/100})},
+            {cat:'Investing',name:'401k Calculator',fields:[{n:'Salary',t:'number'},{n:'Contribution %',t:'number'},{n:'Employer Match %',t:'number'},{n:'Years',t:'number'},{n:'Return %',t:'number'}],calc:(i)=>{const annual=i.Salary*i['Contribution %']/100;const match=i.Salary*i['Employer Match %']/100;const r=i['Return %']/100;return{total:(annual+match)*((1+r)**i.Years-1)/r}}},
+            {cat:'Investing',name:'IRA Calculator',fields:[{n:'Annual Contribution',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100;return{future:i['Annual Contribution']*((1+m)**i.Years-1)/m}}},
+            {cat:'Investing',name:'Roth IRA',fields:[{n:'Annual Contribution',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100;return{future:i['Annual Contribution']*((1+m)**i.Years-1)/m}}},
+            {cat:'Investing',name:'Pension Calculator',fields:[{n:'Salary',t:'number'},{n:'Years Service',t:'number'},{n:'Multiplier %',t:'number'}],calc:(i)=>({annualBenefit:i.Salary*i['Years Service']*i['Multiplier %']/100})},
+            {cat:'Investing',name:'FIRE Number',fields:[{n:'Annual Expenses',t:'number'},{n:'Safe Withdrawal %',t:'number'}],calc:(i)=>({fireNumber:i['Annual Expenses']*100/i['Safe Withdrawal %']})},
+            {cat:'Investing',name:'Financial Independence',fields:[{n:'Current Savings',t:'number'},{n:'Annual Savings',t:'number'},{n:'Annual Expenses',t:'number'}],calc:(i)=>({target:i['Annual Expenses']*25})},
+            {cat:'Investing',name:'Investment Fee Impact',fields:[{n:'Investment',t:'number'},{n:'Return %',t:'number'},{n:'Fee %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const noFee=i.Investment*(1+i['Return %']/100)**i.Years;const withFee=i.Investment*(1+(i['Return %']-i['Fee %'])/100)**i.Years;return{costOfFees:noFee-withFee}}},
+            {cat:'Investing',name:'Dollar Cost Averaging',fields:[{n:'Monthly Investment',t:'number'},{n:'Starting Price',t:'number'},{n:'Months',t:'number'},{n:'Ending Price',t:'number'}],calc:(i)=>{const avgPrice=(i['Starting Price']+i['Ending Price'])/2;const sharesBought=(i['Monthly Investment']*i.Months)/avgPrice;return{totalInvested:i['Monthly Investment']*i.Months,finalValue:sharesBought*i['Ending Price']}}},
+            {cat:'Debt/Credit',name:'Credit Card Payoff',fields:[{n:'Balance',t:'number'},{n:'Rate %',t:'number'},{n:'Payment',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=-Math.log(1-i.Balance*m/i.Payment)/Math.log(1+m);return{months:Math.ceil(n)}}},
+            {cat:'Debt/Credit',name:'Credit Card Interest',fields:[{n:'Balance',t:'number'},{n:'Rate %',t:'number'}],calc:(i)=>({monthlyInterest:i.Balance*i['Rate %']/100/12})},
+            {cat:'Debt/Credit',name:'Credit Utilization',fields:[{n:'Used',t:'number'},{n:'Limit',t:'number'}],calc:(i)=>({utilization:i.Used/i.Limit*100})},
+            {cat:'Debt/Credit',name:'Debt-to-Income',fields:[{n:'Monthly Debt',t:'number'},{n:'Monthly Income',t:'number'}],calc:(i)=>({dti:i['Monthly Debt']/i['Monthly Income']*100})},
+            {cat:'Debt/Credit',name:'Minimum Payment',fields:[{n:'Balance',t:'number'},{n:'Rate %',t:'number'}],calc:(i)=>({minimum:Math.max(i.Balance*0.02,i.Balance*i['Rate %']/100/12+1)})},
+            {cat:'Debt/Credit',name:'Debt Reduction',fields:[{n:'Debt',t:'number'},{n:'Payment',t:'number'},{n:'Rate %',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=-Math.log(1-i.Debt*m/i.Payment)/Math.log(1+m);return{months:Math.ceil(n)}}},
+            {cat:'Debt/Credit',name:'Settlement Offer',fields:[{n:'Debt',t:'number'},{n:'Settlement %',t:'number'}],calc:(i)=>({settlement:i.Debt*i['Settlement %']/100})},
+            {cat:'Debt/Credit',name:'Credit Score',fields:[{n:'Payment History %',t:'number'},{n:'Utilization %',t:'number'},{n:'Age (years)',t:'number'}],calc:(i)=>({score:Math.min(850,300+i['Payment History %']*4.5)})},
+            {cat:'Debt/Credit',name:'Rewards Value',fields:[{n:'Spending',t:'number'},{n:'Rewards %',t:'number'},{n:'Annual Fee',t:'number'}],calc:(i)=>({netValue:i.Spending*i['Rewards %']/100-i['Annual Fee']})},
+            {cat:'Income/Tax',name:'Paycheck Calculator',fields:[{n:'Gross',t:'number'},{n:'Federal Tax %',t:'number'},{n:'State Tax %',t:'number'},{n:'FICA %',t:'number'}],calc:(i)=>{const fed=i.Gross*i['Federal Tax %']/100;const state=i.Gross*i['State Tax %']/100;const fica=i.Gross*i['FICA %']/100;return{netPay:i.Gross-fed-state-fica}}},
+            {cat:'Income/Tax',name:'Salary Calculator',fields:[{n:'Annual',t:'number'},{n:'Tax Rate %',t:'number'}],calc:(i)=>({monthly:i.Annual/12})},
+            {cat:'Income/Tax',name:'Hourly to Salary',fields:[{n:'Hourly Rate',t:'number'},{n:'Hours/Week',t:'number'}],calc:(i)=>({annual:i['Hourly Rate']*i['Hours/Week']*52})},
+            {cat:'Income/Tax',name:'Salary to Hourly',fields:[{n:'Annual',t:'number'},{n:'Hours/Week',t:'number'}],calc:(i)=>({hourly:i.Annual/(i['Hours/Week']*52)})},
+            {cat:'Income/Tax',name:'Overtime Pay',fields:[{n:'Hourly',t:'number'},{n:'OT Hours',t:'number'}],calc:(i)=>({otPay:i.Hourly*1.5*i['OT Hours']})},
+            {cat:'Income/Tax',name:'Commission Calculator',fields:[{n:'Sales',t:'number'},{n:'Commission %',t:'number'}],calc:(i)=>({commission:i.Sales*i['Commission %']/100})},
+            {cat:'Income/Tax',name:'Bonus After Tax',fields:[{n:'Bonus',t:'number'},{n:'Tax Rate %',t:'number'}],calc:(i)=>({afterTax:i.Bonus*(1-i['Tax Rate %']/100)})},
+            {cat:'Income/Tax',name:'Self-Employment Tax',fields:[{n:'Net Income',t:'number'}],calc:(i)=>({seTax:i['Net Income']*0.153})},
+            {cat:'Income/Tax',name:'Federal Tax',fields:[{n:'Income',t:'number'}],calc:(i)=>({estimate:i.Income*0.22})},
+            {cat:'Income/Tax',name:'State Tax',fields:[{n:'Income',t:'number'}],calc:(i)=>({estimate:i.Income*0.05})},
+            {cat:'Income/Tax',name:'Social Security',fields:[{n:'Income',t:'number'}],calc:(i)=>({tax:i.Income*0.062})},
+            {cat:'Income/Tax',name:'Payroll Tax',fields:[{n:'Gross',t:'number'}],calc:(i)=>({total:i.Gross*0.0765})},
+            {cat:'Income/Tax',name:'Take-Home Pay',fields:[{n:'Gross',t:'number'},{n:'Total Tax %',t:'number'}],calc:(i)=>({takehome:i.Gross*(1-i['Total Tax %']/100)})},
+            {cat:'Income/Tax',name:'Tax Refund',fields:[{n:'Withholding',t:'number'},{n:'Tax Owed',t:'number'}],calc:(i)=>({refund:i.Withholding-i['Tax Owed']})},
+            {cat:'Income/Tax',name:'Withholding',fields:[{n:'Annual Income',t:'number'}],calc:(i)=>({weekly:i['Annual Income']/52*0.12})},
+            {cat:'Vehicles',name:'Lease Payment',fields:[{n:'MSRP',t:'number'},{n:'Residual %',t:'number'},{n:'Money Factor',t:'number'},{n:'Months',t:'number'}],calc:(i)=>{const depn=(i.MSRP-i.MSRP*i['Residual %']/100)/i.Months;return{payment:depn}}},
+            {cat:'Vehicles',name:'Lease vs Buy',fields:[{n:'Lease Monthly',t:'number'},{n:'Months',t:'number'},{n:'Buy Price',t:'number'}],calc:(i)=>({leaseCost:i['Lease Monthly']*i.Months,buyCost:i['Buy Price']})},
+            {cat:'Vehicles',name:'Depreciation',fields:[{n:'Purchase Price',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const y1=i['Purchase Price']*0.20;return{year1Loss:y1}}},
+            {cat:'Vehicles',name:'Trade-In Value',fields:[{n:'Original Price',t:'number'},{n:'Age (years)',t:'number'}],calc:(i)=>({value:i['Original Price']*0.5**(i['Age (years)']/5)})},
+            {cat:'Vehicles',name:'Fuel Cost',fields:[{n:'Distance',t:'number'},{n:'MPG',t:'number'},{n:'Price/Gallon',t:'number'}],calc:(i)=>({cost:i.Distance/i.MPG*i['Price/Gallon']})},
+            {cat:'Vehicles',name:'Road Trip Cost',fields:[{n:'Miles',t:'number'},{n:'MPG',t:'number'},{n:'Price/Gallon',t:'number'}],calc:(i)=>({cost:i.Miles/i.MPG*i['Price/Gallon']})},
+            {cat:'Vehicles',name:'EV Charging Cost',fields:[{n:'kWh Needed',t:'number'},{n:'Cost/kWh',t:'number'}],calc:(i)=>({cost:i['kWh Needed']*i['Cost/kWh']})},
+            {cat:'Vehicles',name:'Cost Per Mile',fields:[{n:'Purchase Price',t:'number'},{n:'Miles',t:'number'},{n:'Fuel Cost',t:'number'},{n:'Maintenance',t:'number'}],calc:(i)=>({costPerMile:(i['Purchase Price']+i['Fuel Cost']+i.Maintenance)/i.Miles})},
+            {cat:'Business',name:'Cash Flow',fields:[{n:'Revenue',t:'number'},{n:'Expenses',t:'number'}],calc:(i)=>({cashFlow:i.Revenue-i.Expenses})},
+            {cat:'Business',name:'Break-Even',fields:[{n:'Fixed Costs',t:'number'},{n:'Unit Price',t:'number'},{n:'Unit Cost',t:'number'}],calc:(i)=>({units:i['Fixed Costs']/(i['Unit Price']-i['Unit Cost'])})},
+            {cat:'Business',name:'Profit Margin',fields:[{n:'Revenue',t:'number'},{n:'Profit',t:'number'}],calc:(i)=>({margin:i.Profit/i.Revenue*100})},
+            {cat:'Business',name:'Markup',fields:[{n:'Cost',t:'number'},{n:'Margin %',t:'number'}],calc:(i)=>({price:i.Cost*(1+i['Margin %']/100)})},
+            {cat:'Business',name:'Inventory Turnover',fields:[{n:'COGS',t:'number'},{n:'Average Inventory',t:'number'}],calc:(i)=>({turnover:i.COGS/i['Average Inventory']})},
+            {cat:'Business',name:'Business Valuation',fields:[{n:'Annual Profit',t:'number'},{n:'Multiple',t:'number'}],calc:(i)=>({value:i['Annual Profit']*i.Multiple})},
+            {cat:'Business',name:'Startup Costs',fields:[{n:'Equipment',t:'number'},{n:'Inventory',t:'number'},{n:'Operating',t:'number'}],calc:(i)=>({total:i.Equipment+i.Inventory+i.Operating})},
+            {cat:'Business',name:'Cash-on-Cash Return',fields:[{n:'Investment',t:'number'},{n:'Annual Cash',t:'number'}],calc:(i)=>({return:i['Annual Cash']/i.Investment*100})},
+            {cat:'Business',name:'Cap Rate',fields:[{n:'Net Income',t:'number'},{n:'Property Value',t:'number'}],calc:(i)=>({capRate:i['Net Income']/i['Property Value']*100})},
+            {cat:'Business',name:'Rental Property',fields:[{n:'Purchase Price',t:'number'},{n:'Monthly Rent',t:'number'},{n:'Expenses',t:'number'}],calc:(i)=>({monthlyProfit:i['Monthly Rent']-i.Expenses})},
+            {cat:'Business',name:'Rental Yield',fields:[{n:'Monthly Rent',t:'number'},{n:'Property Value',t:'number'}],calc:(i)=>({annualYield:i['Monthly Rent']*12/i['Property Value']*100})},
+            {cat:'Business',name:'Property Management',fields:[{n:'Monthly Rent',t:'number'},{n:'Management %',t:'number'}],calc:(i)=>({fee:i['Monthly Rent']*i['Management %']/100})},
+            {cat:'Business',name:'Commercial ROI',fields:[{n:'Net Profit',t:'number'},{n:'Investment',t:'number'}],calc:(i)=>({roi:i['Net Profit']/i.Investment*100})},
+            {cat:'Education',name:'College Cost',fields:[{n:'Annual Tuition',t:'number'},{n:'Years',t:'number'},{n:'Inflation %',t:'number'}],calc:(i)=>{let total=0;for(let y=0;y<i.Years;y++)total+=i['Annual Tuition']*(1+i['Inflation %']/100)**y;return{total:total}}},
+            {cat:'Education',name:'Student Budget',fields:[{n:'Tuition',t:'number'},{n:'Living',t:'number'},{n:'Books',t:'number'}],calc:(i)=>({annual:(i.Tuition+i.Living+i.Books)*2})},
+            {cat:'Education',name:'529 Savings',fields:[{n:'Target',t:'number'},{n:'Annual Contribution',t:'number'},{n:'Return %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Return %']/100;const accum=i['Annual Contribution']*((1+m)**i.Years-1)/m;return{onTrack:accum>=i.Target?'Yes':'No'}}},
+            {cat:'Education',name:'Tuition Loan',fields:[{n:'Amount',t:'number'},{n:'Rate %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=i.Years*12;return{payment:(i.Amount*m*(1+m)**n)/((1+m)**n-1)}}},
+            {cat:'Budgeting',name:'Monthly Budget',fields:[{n:'Income',t:'number'},{n:'Housing %',t:'number'},{n:'Food %',t:'number'},{n:'Transport %',t:'number'},{n:'Savings %',t:'number'}],calc:(i)=>({housing:i.Income*i['Housing %']/100,food:i.Income*i['Food %']/100,transport:i.Income*i['Transport %']/100})},
+            {cat:'Budgeting',name:'Expense Tracker',fields:[{n:'Expense 1',t:'number'},{n:'Expense 2',t:'number'},{n:'Expense 3',t:'number'}],calc:(i)=>({total:i['Expense 1']+i['Expense 2']+i['Expense 3']})},
+            {cat:'Budgeting',name:'Sinking Fund',fields:[{n:'Target',t:'number'},{n:'Months',t:'number'}],calc:(i)=>({monthly:i.Target/i.Months})},
+            {cat:'Budgeting',name:'Financial Goal',fields:[{n:'Target',t:'number'},{n:'Current',t:'number'},{n:'Monthly Savings',t:'number'}],calc:(i)=>({months:(i.Target-i.Current)/i['Monthly Savings']})},
+            {cat:'Budgeting',name:'Emergency Savings',fields:[{n:'Monthly Expenses',t:'number'},{n:'Months',t:'number'}],calc:(i)=>({target:i['Monthly Expenses']*i.Months})},
+            {cat:'Budgeting',name:'Cost of Living',fields:[{n:'Rent',t:'number'},{n:'Utilities',t:'number'},{n:'Food',t:'number'},{n:'Transport',t:'number'}],calc:(i)=>({monthly:i.Rent+i.Utilities+i.Food+i.Transport})},
+            {cat:'Budgeting',name:'Net Income',fields:[{n:'Gross Income',t:'number'},{n:'Total Deductions %',t:'number'}],calc:(i)=>({net:i['Gross Income']*(1-i['Total Deductions %']/100)})},
+            {cat:'Budgeting',name:'Wealth Projection',fields:[{n:'Current Assets',t:'number'},{n:'Annual Savings',t:'number'},{n:'Return %',t:'number'},{n:'Years',t:'number'}],calc:(i)=>{const m=i['Return %']/100;return{future:i['Current Assets']*(1+m)**i.Years}}},
+            {cat:'Budgeting',name:'Financial Health Score',fields:[{n:'Assets',t:'number'},{n:'Debts',t:'number'},{n:'Income',t:'number'}],calc:(i)=>({score:Math.min(100,(i.Assets-i.Debts)/(i.Income/12))})},
+            {cat:'Budgeting',name:'Retirement Readiness',fields:[{n:'Retirement Savings',t:'number'},{n:'Annual Expenses',t:'number'}],calc:(i)=>({multiple:i['Retirement Savings']/(i['Annual Expenses']*25)})},
+            {cat:'Time/Misc',name:'Days Between Dates',fields:[{n:'Start Date',t:'date'},{n:'End Date',t:'date'}],calc:(i)=>({days:Math.floor((new Date(i['End Date'])-new Date(i['Start Date']))/86400000)})},
+            {cat:'Time/Misc',name:'Business Days',fields:[{n:'Start',t:'date'},{n:'End',t:'date'}],calc:(i)=>({businessDays:Math.floor((new Date(i.End)-new Date(i.Start))/86400000/7*5)})},
+            {cat:'Time/Misc',name:'Age Calculator',fields:[{n:'Birth Date',t:'date'}],calc:(i)=>({age:Math.floor((Date.now()-new Date(i['Birth Date']))/31536000000)})},
+            {cat:'Time/Misc',name:'Inflation Since',fields:[{n:'Year',t:'number'},{n:'Amount',t:'number'},{n:'Inflation %',t:'number'}],calc:(i)=>({current:i.Amount*(1+i['Inflation %']/100)**(new Date().getFullYear()-i.Year)})},
+            {cat:'Time/Misc',name:'Currency Conversion',fields:[{n:'Amount',t:'number'},{n:'Rate',t:'number'}],calc:(i)=>({converted:i.Amount*i.Rate})},
+            {cat:'Time/Misc',name:'Percentage',fields:[{n:'Amount',t:'number'},{n:'Percent %',t:'number'}],calc:(i)=>({result:i.Amount*i['Percent %']/100})},
+            {cat:'Time/Misc',name:'Percentage Change',fields:[{n:'Old',t:'number'},{n:'New',t:'number'}],calc:(i)=>({change:(i.New-i.Old)/i.Old*100})},
+            {cat:'Time/Misc',name:'Tip Calculator',fields:[{n:'Bill',t:'number'},{n:'Tip %',t:'number'}],calc:(i)=>({total:i.Bill+i.Bill*i['Tip %']/100})},
+            {cat:'Time/Misc',name:'Sales Tax',fields:[{n:'Price',t:'number'},{n:'Tax %',t:'number'}],calc:(i)=>({total:i.Price+i.Price*i['Tax %']/100})},
+            {cat:'Time/Misc',name:'Unit Price',fields:[{n:'Price',t:'number'},{n:'Quantity',t:'number'}],calc:(i)=>({unitPrice:i.Price/i.Quantity})},
+            {cat:'Premium',name:'Can I Afford This?',fields:[{n:'Price',t:'number'},{n:'Income/Month',t:'number'},{n:'Current Debt',t:'number'}],calc:(i)=>({afford:(i['Current Debt']+i.Price*0.1)/(i['Income/Month']*3)<0.43?'Yes':'No'})},
+            {cat:'Premium',name:'When Can I Retire?',fields:[{n:'Current Savings',t:'number'},{n:'Annual Savings',t:'number'},{n:'Annual Expenses',t:'number'}],calc:(i)=>({yearsToRetire:Math.ceil((i['Annual Expenses']*25-i['Current Savings'])/i['Annual Savings'])})},
+            {cat:'Premium',name:'Pay Cash or Finance?',fields:[{n:'Price',t:'number'},{n:'Rate %',t:'number'},{n:'Months',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const payment=(i.Price*m*(1+m)**i.Months)/((1+m)**i.Months-1);return{totalFinanced:payment*i.Months,cashCost:i.Price}}},
+            {cat:'Premium',name:'How Long Until Debt Free?',fields:[{n:'Total Debt',t:'number'},{n:'Monthly Payment',t:'number'},{n:'Rate %',t:'number'}],calc:(i)=>{const m=i['Rate %']/100/12;const n=-Math.log(1-i['Total Debt']*m/i['Monthly Payment'])/Math.log(1+m);return{years:(Math.ceil(n)/12).toFixed(1)}}},
+            {cat:'Premium',name:'Millionaire Timeline',fields:[{n:'Current Net Worth',t:'number'},{n:'Annual Savings',t:'number'},{n:'Return %',t:'number'}],calc:(i)=>{const r=i['Return %']/100;const years=Math.log(1000000/i['Current Net Worth'])/Math.log(1+r);return{yearsToMillion:Math.ceil(years)}}}
+        ];
+
+        const cats=['Loans','Mortgage','Savings','Investing','Debt/Credit','Income/Tax','Vehicles','Business','Education','Budgeting','Time/Misc','Premium'];
+
+        function renderSidebar(){
+            const sidebar=document.getElementById('sidebar');
+            sidebar.innerHTML=cats.map(c=>`<a href="#" class="category-link" data-cat="${c}">${c}</a>`).join('');
+            document.querySelectorAll('.category-link').forEach(link=>{
+                link.addEventListener('click',(e)=>{
+                    e.preventDefault();
+                    document.querySelectorAll('.category-link').forEach(l=>l.classList.remove('active'));
+                    link.classList.add('active');
+                    const cat=link.dataset.cat;
+                    const calcs=calculators.filter(c=>c.cat===cat);
+                    renderCalcList(calcs);
+                });
+            });
+        }
+
+        function renderCalcList(calcs){
+            const content=document.getElementById('mainContent');
+            content.innerHTML=`<div class="calc-header"><h2 class="calc-title">${calcs[0].cat}</h2></div><div class="calc-buttons">${calcs.map(c=>`<button class="calc-btn" onclick="showCalc(${calculators.indexOf(c)})">${c.name}</button>`).join('')}</div><div id="calcContainer"></div>`;
+        }
+
+        window.showCalc=function(idx){
+            const calc=calculators[idx];
+            const html=`<div class="calc-form"><h3 style="margin-bottom:20px">${calc.name}</h3>${calc.fields.map((f,i)=>`<div class="form-group"><label class="form-label">${f.n}</label><input type="${f.t}" class="form-input" id="field${i}"></div>`).join('')}<div class="button-group"><button class="btn btn-primary" onclick="calculate(${idx})">Calculate</button><button class="btn btn-secondary" onclick="reset()">Reset</button></div></div><div class="results" id="results"></div>`;
+            document.getElementById('calcContainer').innerHTML=html;
+        };
+
+        window.calculate=function(idx){
+            const calc=calculators[idx];
+            const input={};
+            calc.fields.forEach((f,i)=>{const v=document.getElementById(`field${i}`).value;input[f.n]=f.t==='date'?v:parseFloat(v)});
+            const result=calc.calc(input);
+            const html=Object.entries(result).map(([k,v])=>`<div class="result-item"><div class="result-label">${k}</div><div class="result-value">${typeof v==='number'?'$'+v.toFixed(2):v}</div></div>`).join('');
+            document.getElementById('results').innerHTML=html;
+            document.getElementById('results').classList.add('show');
+        };
+
+        window.reset=function(){
+            document.getElementById('results').classList.remove('show');
+        };
+
+        document.getElementById('searchInput').addEventListener('input',(e)=>{
+            const q=e.target.value.toLowerCase();
+            const results=calculators.filter(c=>c.name.toLowerCase().includes(q));
+            if(results.length>0)renderCalcList(results);
+        });
+
+        renderSidebar();
+        document.querySelector('.category-link').click();
+    </script>
+</body>
+</html>

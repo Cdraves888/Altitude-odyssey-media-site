@@ -166,32 +166,6 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   opacity:0.8;
   flex-shrink:0;
 }
-.bp-spine-from{
-  font-family:'Cinzel',Georgia,serif;
-  font-size:6px;
-  letter-spacing:0.2em;
-  color:var(--gold-dim);
-  opacity:0.5;
-  text-transform:uppercase;
-  writing-mode:vertical-rl;
-  transform:rotate(180deg);
-  white-space:nowrap;
-}
-.bp-spine-dest{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:11px;
-  font-weight:400;
-  letter-spacing:0.12em;
-  color:var(--white);
-  text-transform:uppercase;
-  writing-mode:vertical-rl;
-  transform:rotate(180deg);
-  white-space:nowrap;
-  opacity:0.85;
-  flex:1;
-  display:flex;
-  align-items:center;
-}
 .bp-spine-cabin{
   writing-mode:vertical-rl;
   transform:rotate(180deg);
@@ -276,11 +250,24 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   padding:10px 12px 8px;
 }
 
-/* ── IFRAME WINDOW ── */
+/* ── HERO IMAGE WINDOW ── */
 .bp-window{
   flex:1;
   position:relative;
   overflow:hidden;
+}
+
+.bp-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.bp-hero-img.loaded {
+  opacity: 1;
 }
 
 .bp-window-grad{
@@ -305,38 +292,6 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   color:var(--gold);
   opacity:0.6;
   text-transform:uppercase;
-}
-
-.bp-iframe-overlay{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-  pointer-events:none;
-}
-
-.bp-iframe{
-  width:1280px;
-  height:800px;
-  transform:scale(0.37);
-  transform-origin:top left;
-  pointer-events:none;
-  border:none;
-  opacity:0;
-  transition:opacity 0.6s ease;
-}
-
-/* Skeleton shimmer while iframe loads */
-.bp-skeleton{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(90deg, #1c1408 25%, #251c0e 50%, #1c1408 75%);
-  background-size:200% 100%;
-  animation:bpShimmer 1.6s infinite;
-  z-index:1;
-}
-@keyframes bpShimmer{
-  0%{background-position:-200% 0;}
-  100%{background-position:200% 0;}
 }
 
 /* ── CARD CAPTION ── */
@@ -376,6 +331,250 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   margin:0 auto 44px;
 }
 
+/* ── SHARE PREVIEW SECTION ── */
+.share-section {
+  padding: 80px 10vw;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 2;
+}
+.share-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 56px;
+}
+.share-eyebrow {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.share-eyebrow::before, .share-eyebrow::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+}
+.share-headline {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.share-headline em { font-style: italic; color: var(--gold-light); }
+.share-subhead {
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  line-height: 1.9;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.share-module {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 48px;
+  align-items: start;
+  max-width: 860px;
+  margin: 0 auto;
+}
+/* LEFT — PICKER */
+.share-picker-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.share-picker-label {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 8px;
+  letter-spacing: 0.35em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.share-picker {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+}
+.share-picker-item {
+  padding: 14px 18px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 17px;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  cursor: none;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  user-select: none;
+}
+.share-picker-item:last-child { border-bottom: none; }
+.share-picker-item::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.share-picker-item:hover {
+  color: var(--text);
+  background: rgba(201,168,76,0.04);
+}
+.share-picker-item.active {
+  color: var(--white);
+  background: rgba(201,168,76,0.07);
+  border-left: 2px solid var(--gold);
+  padding-left: 16px;
+}
+.share-picker-item.active::before { background: var(--gold); }
+
+/* RIGHT — PREVIEW */
+.share-preview-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.share-bubble-wrap {
+  position: relative;
+}
+.share-bubble {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px 16px 16px 4px;
+  padding: 12px;
+  max-width: 320px;
+}
+.share-unfurl {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.share-unfurl.transitioning {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.share-unfurl-img {
+  width: 100%;
+  aspect-ratio: 1.91 / 1;
+  object-fit: cover;
+  display: block;
+}
+.share-unfurl-body {
+  padding: 10px 12px 12px;
+}
+.share-unfurl-url {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.share-unfurl-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.share-unfurl-desc {
+  font-size: 10px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+}
+
+/* CONTRAST CUE */
+.share-contrast {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.share-contrast-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.share-contrast-box {
+  width: 80px;
+  height: 52px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.2);
+}
+.share-contrast-box.typical {
+  background: rgba(255,255,255,0.04);
+}
+.share-contrast-box.aom {
+  background: rgba(201,168,76,0.08);
+  border-color: rgba(201,168,76,0.3);
+  color: var(--gold);
+}
+.share-contrast-label {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  font-family: 'Cinzel', Georgia, serif;
+  text-align: center;
+}
+.share-contrast-vs {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* TEXT BUTTON */
+.share-sms-btn {
+  display: inline-block;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  padding: 12px 24px;
+  text-decoration: none;
+  cursor: none;
+  transition: border-color 0.3s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.share-sms-btn:hover {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+.share-sms-btn .btn-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.12) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform .5s;
+}
+.share-sms-btn:hover .btn-shine { transform: translateX(100%); }
+
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   nav{padding:18px 24px;}
@@ -387,6 +586,12 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   footer{flex-direction:column;gap:14px;text-align:center;padding:36px 6vw;}
   body{cursor:auto;}
   #cur-dot,#cur-ring{display:none;}
+}
+@media(max-width:860px){
+  .share-module { grid-template-columns: 1fr; gap: 32px; }
+  .share-bubble { max-width: 100%; }
+  .share-picker-item { cursor: pointer; }
+  .share-sms-btn { cursor: pointer; }
 }
 @media(max-width:600px){
   .bp-spine{width:56px;min-width:56px;}
@@ -453,9 +658,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="Shore Polish">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
-            <span class="bp-spine-from">AOM Media</span>
-            <span class="bp-spine-dest">Shore Polish</span>
-            <span class="bp-spine-cabin">Landing Class</span>
+            <span class="bp-spine-cabin">The Landing</span>
           </div>
           <div class="bp-perf">
             <div class="bp-notch bp-notch-top"></div>
@@ -465,9 +668,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
             <div class="bp-window">
-              <div class="bp-iframe-overlay">
-                <div class="bp-skeleton"></div>
-              </div>
+              <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1200&q=80" alt="Shore Polish" class="bp-hero-img" loading="lazy">
               <div class="bp-window-grad">
                 <span class="bp-visit">Visit &rarr;</span>
               </div>
@@ -487,9 +688,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="Smoke & Salt">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
-            <span class="bp-spine-from">AOM Media</span>
-            <span class="bp-spine-dest">Smoke &amp; Salt</span>
-            <span class="bp-spine-cabin">Landing Class</span>
+            <span class="bp-spine-cabin">The Landing</span>
           </div>
           <div class="bp-perf">
             <div class="bp-notch bp-notch-top"></div>
@@ -499,9 +698,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
             <div class="bp-window">
-              <div class="bp-iframe-overlay">
-                <div class="bp-skeleton"></div>
-              </div>
+              <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=1200&q=80" alt="Smoke &amp; Salt" class="bp-hero-img" loading="lazy">
               <div class="bp-window-grad">
                 <span class="bp-visit">Visit &rarr;</span>
               </div>
@@ -536,9 +733,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="The Undertow">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
-            <span class="bp-spine-from">AOM Media</span>
-            <span class="bp-spine-dest">The Undertow</span>
-            <span class="bp-spine-cabin">Presence Class</span>
+            <span class="bp-spine-cabin">The Presence</span>
           </div>
           <div class="bp-perf">
             <div class="bp-notch bp-notch-top"></div>
@@ -548,9 +743,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
             <div class="bp-window">
-              <div class="bp-iframe-overlay">
-                <div class="bp-skeleton"></div>
-              </div>
+              <img src="https://previews.altitudeodysseymedia.com/the-undertow/hero.jpg" alt="The Undertow" class="bp-hero-img" loading="lazy">
               <div class="bp-window-grad">
                 <span class="bp-visit">Visit &rarr;</span>
               </div>
@@ -570,9 +763,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="The Cove">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
-            <span class="bp-spine-from">AOM Media</span>
-            <span class="bp-spine-dest">The Cove</span>
-            <span class="bp-spine-cabin">Presence Class</span>
+            <span class="bp-spine-cabin">The Presence</span>
           </div>
           <div class="bp-perf">
             <div class="bp-notch bp-notch-top"></div>
@@ -582,9 +773,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
             <div class="bp-window">
-              <div class="bp-iframe-overlay">
-                <div class="bp-skeleton"></div>
-              </div>
+              <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1200&q=80" alt="The Cove" class="bp-hero-img" loading="lazy">
               <div class="bp-window-grad">
                 <span class="bp-visit">Visit &rarr;</span>
               </div>
@@ -618,9 +807,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="Haven Estates">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
-            <span class="bp-spine-from">AOM Media</span>
-            <span class="bp-spine-dest">Haven Estates</span>
-            <span class="bp-spine-cabin">Platform Class</span>
+            <span class="bp-spine-cabin">The Platform</span>
           </div>
           <div class="bp-perf">
             <div class="bp-notch bp-notch-top"></div>
@@ -630,9 +817,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
             <div class="bp-window">
-              <div class="bp-iframe-overlay">
-                <div class="bp-skeleton"></div>
-              </div>
+              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80" alt="Haven Estates" class="bp-hero-img" loading="lazy">
               <div class="bp-window-grad">
                 <span class="bp-visit">Visit &rarr;</span>
               </div>
@@ -652,9 +837,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="Altitude Flight Academy">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
-            <span class="bp-spine-from">AOM Media</span>
-            <span class="bp-spine-dest">Flight Academy</span>
-            <span class="bp-spine-cabin">Platform Class</span>
+            <span class="bp-spine-cabin">The Platform</span>
           </div>
           <div class="bp-perf">
             <div class="bp-notch bp-notch-top"></div>
@@ -664,9 +847,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
             <div class="bp-window">
-              <div class="bp-iframe-overlay">
-                <div class="bp-skeleton"></div>
-              </div>
+              <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=80" alt="Altitude Flight Academy" class="bp-hero-img" loading="lazy">
               <div class="bp-window-grad">
                 <span class="bp-visit">Visit &rarr;</span>
               </div>
@@ -676,6 +857,59 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
         <p class="bp-caption">Course catalog, scheduling, and application flows.</p>
       </div>
 
+    </div>
+  </section>
+
+  <!-- SHARE PREVIEW SECTION -->
+  <section class="share-section">
+    <div class="share-header reveal">
+      <div class="share-eyebrow">The Detail Others Miss</div>
+      <h2 class="share-headline">See how your link looks<br>when you <em>share it.</em></h2>
+      <p class="share-subhead">Most sites unfurl as a blank gray box. Ours don't. Pick a build and see what your customers see.</p>
+    </div>
+    <div class="share-module reveal">
+      <!-- LEFT: PICKER -->
+      <div class="share-picker-col">
+        <p class="share-picker-label">Choose a build</p>
+        <div class="share-picker" id="share-picker">
+          <div class="share-picker-item active" data-demo="shore-polish">Shore Polish</div>
+          <div class="share-picker-item" data-demo="smoke-salt">Smoke &amp; Salt</div>
+          <div class="share-picker-item" data-demo="undertow">The Undertow</div>
+          <div class="share-picker-item" data-demo="cove">The Cove</div>
+          <div class="share-picker-item" data-demo="haven">Haven Estates</div>
+          <div class="share-picker-item" data-demo="flight">Altitude Flight Academy</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: PREVIEW -->
+      <div class="share-preview-col">
+        <div class="share-bubble-wrap">
+          <div class="share-bubble">
+            <div class="share-unfurl" id="share-unfurl">
+              <img src="" alt="" class="share-unfurl-img" id="share-unfurl-img">
+              <div class="share-unfurl-body">
+                <p class="share-unfurl-url">previews.altitudeodysseymedia.com</p>
+                <p class="share-unfurl-title" id="share-unfurl-title"></p>
+                <p class="share-unfurl-desc" id="share-unfurl-desc"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- CONTRAST CUE -->
+        <div class="share-contrast">
+          <div class="share-contrast-chip">
+            <div class="share-contrast-box typical">No preview</div>
+            <span class="share-contrast-label">Typical site</span>
+          </div>
+          <span class="share-contrast-vs">vs</span>
+          <div class="share-contrast-chip">
+            <div class="share-contrast-box aom">&#x2191; Live card</div>
+            <span class="share-contrast-label">Built by AOM</span>
+          </div>
+        </div>
+        <!-- TEXT TO SELF -->
+        <a href="#" class="share-sms-btn" id="share-sms-btn"><span class="btn-shine"></span>Text this to your phone</a>
+      </div>
     </div>
   </section>
 
@@ -747,43 +981,99 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 // ── BOARDING PASS CARDS ──
 document.querySelectorAll('.bp-card').forEach(card => {
-  const overlay = card.querySelector('.bp-iframe-overlay');
-  const skeleton = overlay.querySelector('.bp-skeleton');
-  const url = card.dataset.url;
-  let iframeMounted = false;
-
-  // Load iframe when scrolled into view
-  const io = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting && !iframeMounted) {
-      iframeMounted = true;
-      const iframe = document.createElement('iframe');
-      iframe.src = url;
-      iframe.title = card.dataset.name;
-      iframe.loading = 'lazy';
-      iframe.className = 'bp-iframe';
-      iframe.addEventListener('load', () => {
-        iframe.style.opacity = '1';
-        if (skeleton) {
-          skeleton.style.opacity = '0';
-          setTimeout(() => { skeleton.style.display = 'none'; }, 500);
-        }
-      });
-      overlay.appendChild(iframe);
-      io.disconnect();
-    }
-  }, { threshold: 0.05 });
-  io.observe(card);
-
-  // Tilt on mousemove
   card.addEventListener('mousemove', e => {
     const rect = card.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     card.style.transform = `perspective(900px) rotateY(${x * 7}deg) rotateX(${-y * 7}deg) translateZ(3px)`;
   });
-  card.addEventListener('mouseleave', e => {
+  card.addEventListener('mouseleave', () => {
     card.style.transform = '';
   });
+});
+
+// ── HERO IMAGE FADE-IN ──
+document.querySelectorAll('.bp-hero-img').forEach(img => {
+  if (img.complete) {
+    img.classList.add('loaded');
+  } else {
+    img.addEventListener('load', () => img.classList.add('loaded'));
+    img.addEventListener('error', () => img.style.opacity = '0.15');
+  }
+});
+
+// ── SHARE PREVIEW MODULE ──
+const DEMO_DATA = {
+  'shore-polish': {
+    title: 'Shore Polish — Nail Studio & Spa',
+    desc: 'Expert nail care, gel, acrylics, and spa treatments in a relaxing boutique setting.',
+    img: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1200&q=80',
+    url: 'https://previews.altitudeodysseymedia.com/shore-polish/'
+  },
+  'smoke-salt': {
+    title: 'Smoke & Salt — Coastal BBQ & Seafood Kitchen',
+    desc: 'Fire-kissed. Ocean-fresh. Worth the wait. Wilmington, NC.',
+    img: 'https://images.unsplash.com/photo-1567521464027-f127ff144326?w=1200&q=80',
+    url: 'https://previews.altitudeodysseymedia.com/smoke-and-salt/'
+  },
+  'undertow': {
+    title: "The Undertow — Surf City's Premier Nightclub",
+    desc: "Where the Night Pulls You In. North Carolina's premier oceanfront nightclub experience.",
+    img: 'https://previews.altitudeodysseymedia.com/the-undertow/hero.jpg',
+    url: 'https://previews.altitudeodysseymedia.com/the-undertow/'
+  },
+  'cove': {
+    title: 'The Cove — Luxury Oceanfront Rental',
+    desc: 'Where the sea meets sanctuary. Private pool, 4 bed, sleeps 8. Surf City, NC.',
+    img: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1200&q=80',
+    url: 'https://previews.altitudeodysseymedia.com/the-cove/'
+  },
+  'haven': {
+    title: 'Haven Estates — Luxury Real Estate',
+    desc: "Discover exceptional properties in Wilmington's most prestigious communities.",
+    img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80',
+    url: 'https://previews.altitudeodysseymedia.com/haven-estates/'
+  },
+  'flight': {
+    title: 'Altitude Flight Academy — Where Pilots Are Born',
+    desc: 'FAA Part 141 Approved flight school in Wilmington, NC. Train with the best CFIs in the southeast.',
+    img: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=80',
+    url: 'https://previews.altitudeodysseymedia.com/altitude-flight-academy/'
+  }
+};
+
+function setShareDemo(key) {
+  const d = DEMO_DATA[key];
+  if (!d) return;
+  const unfurl = document.getElementById('share-unfurl');
+  unfurl.classList.add('transitioning');
+  setTimeout(() => {
+    document.getElementById('share-unfurl-img').src = d.img;
+    document.getElementById('share-unfurl-img').alt = d.title;
+    document.getElementById('share-unfurl-title').textContent = d.title;
+    document.getElementById('share-unfurl-desc').textContent = d.desc;
+    const msg = encodeURIComponent('Check out this site: ' + d.url);
+    document.getElementById('share-sms-btn').href = 'sms:?&body=' + msg;
+    unfurl.classList.remove('transitioning');
+  }, 200);
+}
+
+// Init with first demo
+setShareDemo('shore-polish');
+
+// Picker clicks
+document.querySelectorAll('.share-picker-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.share-picker-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    setShareDemo(item.dataset.demo);
+  });
+});
+
+// Add hovering class for cursor
+document.querySelectorAll('.share-picker-item, .share-sms-btn').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
 });
 </script>
 <script src="chat.js?v=3"></script>

@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="canonical" href="https://altitudeodysseymedia.com/showcase.html">
+<title>Our Work | Altitude Odyssey Media</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@200;300;400;500&subset=latin,latin-ext&display=swap" rel="stylesheet">
+
+<meta name="description" content="Custom website demo concepts built to showcase our design range — for businesses across coastal North Carolina. See The Landing, The Presence, and The Platform.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://altitudeodysseymedia.com/showcase.html">
+<meta property="og:title" content="Our Work | Altitude Odyssey Media">
+<meta property="og:description" content="Custom website demo concepts built to showcase our design range. See what we build for coastal NC businesses.">
+<meta property="og:image" content="https://altitudeodysseymedia.com/android-chrome-192x192.png">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#c9a84c;--gold-light:#e2c47a;--gold-dim:#7a6030;
+  --black:#0a0806;--dark:#111009;--card:rgba(255,255,255,0.03);
+  --border:rgba(201,168,76,0.18);--text:#d4c9b0;--text-dim:#7a7260;
+  --white:#fffaf4;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--text);font-family:'Raleway','Helvetica Neue',Arial,sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+
+/* NOISE */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:9000;}
+
+/* FIXED LOGO WATERMARK */
+#fixed-logo{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(70vw,640px);height:min(70vw,640px);opacity:0.07;pointer-events:none;z-index:0;filter:drop-shadow(0 0 60px rgba(201,168,76,0.06));transition:transform 0.8s cubic-bezier(.16,1,.3,1);}
+
+/* CURSOR */
+#cur-dot{position:fixed;width:5px;height:5px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;}
+#cur-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(201,168,76,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
+body.hovering #cur-dot{width:10px;height:10px;background:var(--gold-light);}
+body.hovering #cur-ring{width:56px;height:56px;border-color:var(--gold);}
+
+/* PARTICLES */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:1;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:24px 48px;transition:background 0.4s,border-color 0.4s;border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(10,8,6,0.92);backdrop-filter:blur(14px);border-bottom-color:var(--border);}
+.nav-logo{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:10px;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:10px;text-decoration:none;cursor:none;}
+.nav-logo img{width:26px;height:26px;opacity:.85;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:9px;letter-spacing:.25em;color:var(--text-dim);text-decoration:none;text-transform:uppercase;transition:color .3s;position:relative;cursor:none;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:10px 24px;text-decoration:none;cursor:none;transition:background .3s;}
+.nav-cta:hover{background:var(--gold-light);}
+
+/* SHOWCASE PAGE STYLES */
+.showcase-main{position:relative;z-index:2;padding-top:96px;}
+
+/* HERO */
+.sc-hero{max-width:800px;margin:0 auto;padding:72px 24px 56px;text-align:center;}
+.sc-eyebrow{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.45em;color:var(--gold);text-transform:uppercase;margin-bottom:24px;opacity:0;animation:scFadeUp 0.9s ease 0.2s forwards;}
+.sc-headline{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-weight:300;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.15;color:var(--white);margin:0 0 22px;opacity:0;animation:scFadeUp 0.9s ease 0.4s forwards;}
+.sc-headline em{font-style:italic;color:var(--gold-light);}
+.sc-subhead{font-size:0.95rem;color:var(--text-dim);max-width:520px;margin:0 auto 14px;line-height:1.75;letter-spacing:.04em;opacity:0;animation:scFadeUp 0.9s ease 0.6s forwards;}
+.sc-disclaimer{font-size:0.72rem;color:var(--text-dim);font-style:italic;opacity:0;animation:scFadeUp 0.9s ease 0.75s forwards;}
+.sc-disclaimer::before{content:'';display:inline-block;width:20px;height:1px;background:var(--gold-dim);margin-right:8px;vertical-align:middle;}
+@keyframes scFadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* TIER SECTIONS */
+.sc-tier{max-width:1160px;margin:0 auto;padding:72px 24px;border-top:1px solid var(--border);}
+.sc-tier-header{margin-bottom:44px;}
+.sc-tier-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px;}
+.sc-tier-num{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.35em;color:var(--gold-dim);text-transform:uppercase;}
+.sc-tier-name{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:2rem;color:var(--white);font-weight:300;}
+.sc-badge{display:inline-block;background:var(--gold);color:var(--black);font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:8px;letter-spacing:.2em;padding:4px 12px;font-weight:600;vertical-align:middle;margin-left:4px;}
+.sc-tier-desc{font-size:0.9rem;color:var(--text-dim);max-width:480px;line-height:1.7;letter-spacing:.03em;margin-top:6px;}
+.sc-card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;}
+
+/* BOARDING PASS CARD */
+.bp-wrapper{display:flex;flex-direction:column;align-items:center;}
+.bp-card{
+  --card-bg:#0e0c09;
+  --card-surface:#161310;
+  --card-gold:#c9a84c;
+  --card-gold-light:#e8c97a;
+  --card-gold-dim:rgba(201,168,76,0.15);
+  --card-cream:#f0e8d5;
+  --card-muted:rgba(240,232,213,0.45);
+  --card-perf:rgba(201,168,76,0.32);
+
+  display:flex;
+  flex-direction:row;
+  width:100%;
+  max-width:560px;
+  height:280px;
+  background:var(--card-bg);
+  border:1px solid rgba(201,168,76,0.22);
+  border-radius:6px;
+  overflow:hidden;
+  text-decoration:none;
+  color:var(--card-cream);
+  position:relative;
+  transition:transform 0.2s ease, box-shadow 0.2s ease;
+  will-change:transform;
+  cursor:none;
+}
+.bp-card:hover{
+  box-shadow:0 0 40px rgba(201,168,76,0.16), 0 8px 32px rgba(0,0,0,0.6);
+}
+.bp-card.awake{
+  box-shadow:0 0 48px rgba(201,168,76,0.22), 0 12px 40px rgba(0,0,0,0.7);
+}
+
+/* SPINE */
+.bp-spine{
+  width:72px;
+  min-width:72px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 0;
+  position:relative;
+  background:linear-gradient(180deg,#1a1508 0%,#0e0c09 100%);
+  flex-shrink:0;
+}
+/* Subtle guilloché stripe texture on spine */
+.bp-spine::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(201,168,76,0.03) 3px,
+    rgba(201,168,76,0.03) 4px
+  );
+  pointer-events:none;
+}
+.bp-emblem{
+  width:36px;
+  height:36px;
+  object-fit:contain;
+  opacity:0.82;
+  position:relative;
+  z-index:1;
+}
+.bp-cabin{
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-family:'Cinzel',Georgia,'Times New Roman',serif;
+  font-size:8px;
+  letter-spacing:.22em;
+  color:var(--card-gold);
+  text-transform:uppercase;
+  opacity:0.65;
+  position:relative;
+  z-index:1;
+}
+
+/* PERFORATION */
+.bp-perf{
+  width:12px;
+  min-width:12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  flex-shrink:0;
+  position:relative;
+}
+.bp-notch-top,.bp-notch-bot{
+  width:12px;
+  height:7px;
+  flex-shrink:0;
+  background:var(--black);
+  border:1px solid rgba(201,168,76,0.28);
+}
+.bp-notch-top{
+  border-radius:0 0 7px 7px;
+  border-top:none;
+}
+.bp-notch-bot{
+  border-radius:7px 7px 0 0;
+  border-bottom:none;
+}
+.bp-dash{
+  flex:1;
+  width:0;
+  border-left:1px dashed rgba(201,168,76,0.28);
+}
+
+/* MAIN AREA */
+.bp-main{
+  flex:1;
+  padding:18px 20px 16px 14px;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+  min-width:0;
+}
+/* Faint watermark emblem in main area */
+.bp-main::before{
+  content:'';
+  position:absolute;
+  right:-18px;
+  bottom:-18px;
+  width:150px;
+  height:150px;
+  background:url('aom-emblem.png') center/contain no-repeat;
+  opacity:0.04;
+  pointer-events:none;
+}
+
+.bp-issuer{
+  font-family:'Cinzel',Georgia,'Times New Roman',serif;
+  font-size:7px;
+  letter-spacing:.28em;
+  color:var(--card-gold);
+  opacity:0.5;
+  margin:0;
+  text-transform:uppercase;
+  flex-shrink:0;
+}
+
+/* Content visible when dormant */
+.bp-content{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  transition:opacity 0.3s ease;
+  min-width:0;
+}
+.bp-card.awake .bp-content{
+  opacity:0;
+}
+
+.bp-name{
+  font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  font-size:clamp(22px,2.2vw,28px);
+  font-weight:400;
+  color:var(--card-cream);
+  margin:0 0 12px;
+  line-height:1.1;
+}
+.bp-divider{
+  height:1px;
+  width:36px;
+  background:linear-gradient(90deg,var(--card-gold),transparent);
+  margin-bottom:10px;
+  flex-shrink:0;
+}
+.bp-tag{
+  font-size:11px;
+  color:var(--card-muted);
+  margin:0;
+  line-height:1.45;
+  font-style:italic;
+}
+
+.bp-board-cue{
+  font-family:'Cinzel',Georgia,'Times New Roman',serif;
+  font-size:8px;
+  letter-spacing:.22em;
+  color:var(--card-gold);
+  opacity:0.45;
+  margin:8px 0 0;
+  text-align:right;
+  transition:opacity 0.2s ease;
+  flex-shrink:0;
+}
+.bp-card:hover .bp-board-cue{
+  opacity:1;
+}
+
+/* IFRAME OVERLAY */
+.bp-iframe-overlay{
+  position:absolute;
+  inset:0;
+  left:0; /* overlay covers just the main area via CSS from parent */
+  opacity:0;
+  transition:opacity 0.4s ease;
+  pointer-events:none;
+  overflow:hidden;
+  border-radius:0;
+}
+.bp-card.awake .bp-iframe-overlay{
+  opacity:1;
+}
+.bp-iframe{
+  width:1280px;
+  height:900px;
+  transform:scale(0.305);
+  transform-origin:top left;
+  pointer-events:none;
+  border:none;
+  transition:opacity 0.35s ease;
+  display:block;
+}
+.bp-skeleton{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,#181208 25%,#221c0d 50%,#181208 75%);
+  background-size:200% 100%;
+  animation:bpShimmer 1.5s infinite;
+}
+@keyframes bpShimmer{
+  0%{background-position:-200% 0;}
+  100%{background-position:200% 0;}
+}
+
+/* CARD CAPTION */
+.bp-caption{
+  font-size:11px;
+  color:rgba(212,201,176,0.32);
+  margin:9px auto 0;
+  text-align:center;
+  font-style:italic;
+  letter-spacing:.03em;
+  max-width:480px;
+}
+
+/* CLOSING CTA */
+.sc-cta{
+  text-align:center;
+  padding:88px 24px;
+  border-top:1px solid var(--border);
+  position:relative;
+  z-index:2;
+}
+.sc-cta-headline{
+  font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  font-weight:300;
+  font-size:clamp(1.9rem,4vw,2.9rem);
+  color:var(--white);
+  line-height:1.15;
+  margin-bottom:14px;
+}
+.sc-cta-headline em{
+  font-style:italic;
+  color:var(--gold-light);
+}
+.sc-cta-sub{
+  color:var(--text-dim);
+  font-size:0.95rem;
+  margin-bottom:36px;
+  letter-spacing:.04em;
+}
+.sc-cta-btn{
+  display:inline-block;
+  font-family:'Cinzel',Georgia,'Times New Roman',serif;
+  font-size:9px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  padding:16px 40px;
+  background:var(--gold);
+  color:var(--black);
+  font-weight:600;
+  text-decoration:none;
+  cursor:none;
+  transition:background 0.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+.sc-cta-btn:hover{
+  background:var(--gold-light);
+}
+.sc-cta-btn-shine{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.18) 50%,transparent 60%);
+  transform:translateX(-100%);
+  transition:transform .5s;
+  pointer-events:none;
+}
+.sc-cta-btn:hover .sc-cta-btn-shine{
+  transform:translateX(100%);
+}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;}
+.footer-logo{font-family:'Cinzel',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:.3em;color:var(--gold);}
+.footer-tag{font-size:10px;color:var(--text-dim);letter-spacing:.1em;}
+.footer-copy{font-size:10px;color:var(--text-dim);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:20px 24px;}
+  .nav-links,.nav-cta{display:none;}
+  body{cursor:auto;}
+  #cur-dot,#cur-ring{display:none;}
+  .sc-hero{padding:48px 20px 40px;}
+  .sc-tier{padding:48px 20px;}
+  .sc-card-grid{grid-template-columns:1fr;}
+  .bp-card{height:auto;min-height:220px;}
+  .bp-name{font-size:20px;}
+  footer{flex-direction:column;gap:14px;text-align:center;padding:36px 6vw;}
+}
+@media(max-width:480px){
+  .sc-headline{font-size:1.9rem;}
+  .sc-cta-headline{font-size:1.7rem;}
+}
+</style>
+</head>
+<body>
+
+<img id="fixed-logo" src="android-chrome-192x192.png" alt=""/>
+<canvas id="particles"></canvas>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="android-chrome-192x192.png" alt="AOM"/>
+    Altitude Odyssey Media
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#builds">Web Design</a></li>
+    <li><a href="services.html">Pricing</a></li>
+    <li><a href="index.html#drone">Aerial</a></li>
+    <li><a href="index.html#founder">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="services.html#packages" class="nav-cta">Get a Quote</a>
+</nav>
+
+<!-- MAIN -->
+<main class="showcase-main">
+
+  <!-- HERO -->
+  <section class="sc-hero">
+    <p class="sc-eyebrow">Our Work</p>
+    <h1 class="sc-headline">
+      You've seen the card. Now see what we <em>build.</em>
+    </h1>
+    <p class="sc-subhead">
+      Custom design concepts built to showcase our range — for businesses across coastal North Carolina.
+    </p>
+    <p class="sc-disclaimer">
+      Demo concepts created to showcase our design range. The businesses shown are fictional.
+    </p>
+  </section>
+
+  <!-- TIER SECTIONS -->
+  <div id="tier-container"></div>
+
+  <!-- CLOSING CTA -->
+  <section class="sc-cta reveal">
+    <h2 class="sc-cta-headline">Find your tier. Let's build <em>yours.</em></h2>
+    <p class="sc-cta-sub">Every build above started as a blank page. Yours can too.</p>
+    <a href="services.html#packages" class="sc-cta-btn">
+      <span class="sc-cta-btn-shine"></span>
+      Get a Quote
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-logo">Altitude Odyssey Media LLC</div>
+  <div class="footer-tag">Web Design &middot; Aerial Visuals</div>
+  <div class="footer-copy">&copy; 2026 &middot; Our Work</div>
+</footer>
+
+<script>
+// ─── DEMO DATA ───────────────────────────────────────────────────────────────
+const DEMOS = [
+  {
+    tier: '01',
+    tierName: 'The Landing',
+    tierDesc: 'Single-page custom sites — everything that matters, one beautiful scroll.',
+    badge: null,
+    demos: [
+      {
+        name: 'Shore Polish',
+        tag: 'Clean single-scroll — beauty that books by tap.',
+        url: 'https://previews.altitudeodysseymedia.com/shore-polish/',
+        cabin: 'LANDING CLASS',
+      },
+      {
+        name: 'Smoke & Salt',
+        tag: 'One scroll — menu, mood, and a reason to drive over.',
+        url: 'https://previews.altitudeodysseymedia.com/smoke-and-salt/',
+        cabin: 'LANDING CLASS',
+      },
+    ],
+  },
+  {
+    tier: '02',
+    tierName: 'The Presence',
+    tierDesc: 'Full multi-section sites with custom animation and interaction.',
+    badge: 'MOST POPULAR',
+    demos: [
+      {
+        name: 'The Undertow',
+        tag: 'Neon, motion, custom cursor — built to feel like the room.',
+        url: 'https://previews.altitudeodysseymedia.com/the-undertow/',
+        cabin: 'PRESENCE CLASS',
+      },
+      {
+        name: 'The Cove',
+        tag: 'Cinematic scroll reveals with a booking-led flow.',
+        url: 'https://previews.altitudeodysseymedia.com/the-cove/',
+        cabin: 'PRESENCE CLASS',
+      },
+    ],
+  },
+  {
+    tier: '03',
+    tierName: 'The Platform',
+    tierDesc: 'Full custom builds — booking, listings, calculators, application flows.',
+    badge: null,
+    demos: [
+      {
+        name: 'Haven Estates',
+        tag: 'Listings, agent profiles, schedule-a-showing — a real system.',
+        url: 'https://previews.altitudeodysseymedia.com/haven-estates/',
+        cabin: 'PLATFORM CLASS',
+      },
+      {
+        name: 'Altitude Flight Academy',
+        tag: 'Course catalog, scheduling, and application flows.',
+        url: 'https://previews.altitudeodysseymedia.com/altitude-flight-academy/',
+        cabin: 'PLATFORM CLASS',
+      },
+    ],
+  },
+];
+
+// ─── BUILD TIER SECTIONS ─────────────────────────────────────────────────────
+function buildTiers() {
+  const container = document.getElementById('tier-container');
+
+  DEMOS.forEach(function(tier) {
+    const section = document.createElement('section');
+    section.className = 'sc-tier reveal';
+
+    // Header
+    const headerRow = document.createElement('div');
+    headerRow.className = 'sc-tier-row';
+
+    const numEl = document.createElement('span');
+    numEl.className = 'sc-tier-num';
+    numEl.textContent = 'Tier ' + tier.tier;
+    headerRow.appendChild(numEl);
+
+    const nameEl = document.createElement('span');
+    nameEl.className = 'sc-tier-name';
+    nameEl.textContent = tier.tierName;
+    headerRow.appendChild(nameEl);
+
+    if (tier.badge) {
+      const badgeEl = document.createElement('span');
+      badgeEl.className = 'sc-badge';
+      badgeEl.textContent = tier.badge;
+      headerRow.appendChild(badgeEl);
+    }
+
+    const desc = document.createElement('p');
+    desc.className = 'sc-tier-desc';
+    desc.textContent = tier.tierDesc;
+
+    const header = document.createElement('div');
+    header.className = 'sc-tier-header';
+    header.appendChild(headerRow);
+    header.appendChild(desc);
+    section.appendChild(header);
+
+    // Card grid
+    const grid = document.createElement('div');
+    grid.className = 'sc-card-grid';
+
+    tier.demos.forEach(function(demo) {
+      grid.appendChild(buildCard(demo));
+    });
+
+    section.appendChild(grid);
+    container.appendChild(section);
+  });
+}
+
+// ─── BUILD BOARDING PASS CARD ─────────────────────────────────────────────────
+function buildCard(demo) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'bp-wrapper';
+
+  const link = document.createElement('a');
+  link.href = demo.url;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.className = 'bp-card';
+
+  // ── SPINE ──
+  const spine = document.createElement('div');
+  spine.className = 'bp-spine';
+
+  const emblem = document.createElement('img');
+  emblem.src = 'aom-emblem.png';
+  emblem.alt = 'AOM';
+  emblem.className = 'bp-emblem';
+  spine.appendChild(emblem);
+
+  const cabin = document.createElement('span');
+  cabin.className = 'bp-cabin';
+  cabin.textContent = demo.cabin;
+  spine.appendChild(cabin);
+  link.appendChild(spine);
+
+  // ── PERFORATION ──
+  const perf = document.createElement('div');
+  perf.className = 'bp-perf';
+
+  const notchTop = document.createElement('div');
+  notchTop.className = 'bp-notch-top';
+  const dash = document.createElement('div');
+  dash.className = 'bp-dash';
+  const notchBot = document.createElement('div');
+  notchBot.className = 'bp-notch-bot';
+
+  perf.appendChild(notchTop);
+  perf.appendChild(dash);
+  perf.appendChild(notchBot);
+  link.appendChild(perf);
+
+  // ── MAIN AREA ──
+  const main = document.createElement('div');
+  main.className = 'bp-main';
+
+  const issuer = document.createElement('p');
+  issuer.className = 'bp-issuer';
+  issuer.textContent = 'Altitude Odyssey Media';
+  main.appendChild(issuer);
+
+  // Dormant content
+  const content = document.createElement('div');
+  content.className = 'bp-content';
+
+  const demoName = document.createElement('h3');
+  demoName.className = 'bp-name';
+  demoName.textContent = demo.name;
+  content.appendChild(demoName);
+
+  const divider = document.createElement('div');
+  divider.className = 'bp-divider';
+  content.appendChild(divider);
+
+  const tag = document.createElement('p');
+  tag.className = 'bp-tag';
+  tag.textContent = demo.tag;
+  content.appendChild(tag);
+
+  main.appendChild(content);
+
+  const boardCue = document.createElement('p');
+  boardCue.className = 'bp-board-cue';
+  boardCue.textContent = 'BOARD \u2192';
+  main.appendChild(boardCue);
+
+  // iframe overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'bp-iframe-overlay';
+
+  const skeleton = document.createElement('div');
+  skeleton.className = 'bp-skeleton';
+  overlay.appendChild(skeleton);
+
+  main.appendChild(overlay);
+  link.appendChild(main);
+  wrapper.appendChild(link);
+
+  // Caption
+  const caption = document.createElement('p');
+  caption.className = 'bp-caption';
+  caption.textContent = demo.tag;
+  wrapper.appendChild(caption);
+
+  // ── INTERSECTION OBSERVER (lazy iframe load) ──
+  let iframeSrc = null;
+  let iframeEl = null;
+
+  const ioLazy = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      iframeSrc = demo.url;
+      iframeEl = document.createElement('iframe');
+      iframeEl.src = iframeSrc;
+      iframeEl.title = demo.name;
+      iframeEl.loading = 'lazy';
+      iframeEl.className = 'bp-iframe';
+      iframeEl.style.opacity = '0';
+      iframeEl.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+      iframeEl.addEventListener('load', function() {
+        iframeEl.style.opacity = '1';
+        skeleton.style.display = 'none';
+      });
+      overlay.appendChild(iframeEl);
+      ioLazy.disconnect();
+    }
+  }, { threshold: 0.1 });
+  ioLazy.observe(link);
+
+  // ── MOUSE INTERACTION ──
+  link.addEventListener('mouseenter', function() {
+    link.classList.add('awake');
+    document.body.classList.add('hovering');
+  });
+
+  link.addEventListener('mouseleave', function(e) {
+    link.classList.remove('awake');
+    link.style.transform = '';
+    document.body.classList.remove('hovering');
+  });
+
+  link.addEventListener('mousemove', function(e) {
+    const rect = link.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    link.style.transform = 'perspective(1000px) rotateY(' + (x * 7) + 'deg) rotateX(' + (-y * 7) + 'deg) translateZ(4px)';
+  });
+
+  return wrapper;
+}
+
+// ─── CURSOR ───────────────────────────────────────────────────────────────────
+const dot = document.getElementById('cur-dot');
+const ring = document.getElementById('cur-ring');
+let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+let rx = mx, ry = my;
+document.addEventListener('mousemove', function(e) {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+});
+(function animR() {
+  rx += (mx - rx) * 0.10; ry += (my - ry) * 0.10;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animR);
+})();
+
+// ─── PARTICLES ───────────────────────────────────────────────────────────────
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+let pts = [];
+document.addEventListener('mousemove', function(e) {
+  if (Math.random() > 0.5) return;
+  pts.push({ x: e.clientX, y: e.clientY, vx: (Math.random() - 0.5) * 1.4, vy: (Math.random() - 0.5) * 1.4 - 0.6, life: 1, r: Math.random() * 1.8 + 0.4 });
+});
+(function animP() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  pts = pts.filter(function(p) { return p.life > 0.01; });
+  pts.forEach(function(p) {
+    p.x += p.vx; p.y += p.vy; p.life -= 0.02;
+    ctx.save(); ctx.globalAlpha = p.life * 0.55; ctx.fillStyle = '#c9a84c';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r * p.life, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+  });
+  requestAnimationFrame(animP);
+})();
+
+// ─── LOGO PARALLAX ────────────────────────────────────────────────────────────
+document.addEventListener('mousemove', function(e) {
+  const xP = (e.clientX / window.innerWidth - 0.5) * 18;
+  const yP = (e.clientY / window.innerHeight - 0.5) * 18;
+  document.getElementById('fixed-logo').style.transform = 'translate(calc(-50% + ' + xP + 'px), calc(-50% + ' + yP + 'px))';
+});
+
+// ─── NAV SCROLL ───────────────────────────────────────────────────────────────
+window.addEventListener('scroll', function() {
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 50);
+});
+
+// ─── HOVER CURSOR EFFECT ON NAV/FOOTER LINKS ─────────────────────────────────
+document.querySelectorAll('a,button').forEach(function(el) {
+  el.addEventListener('mouseenter', function() { document.body.classList.add('hovering'); });
+  el.addEventListener('mouseleave', function() { document.body.classList.remove('hovering'); });
+});
+
+// ─── SCROLL REVEAL ────────────────────────────────────────────────────────────
+const revObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e, i) {
+    if (e.isIntersecting) {
+      e.target.style.transitionDelay = (i * 0.06) + 's';
+      e.target.classList.add('visible');
+      revObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(function(el) { revObs.observe(el); });
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+buildTiers();
+
+// Re-observe newly added .reveal elements after building tiers
+document.querySelectorAll('.sc-tier.reveal').forEach(function(el) {
+  revObs.observe(el);
+});
+</script>
+
+<script src="particles.js"></script>
+<script src="chat.js?v=3"></script>
+</body>
+</html>

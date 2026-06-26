@@ -304,7 +304,6 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 .bp-iframe-overlay{
   position:absolute;
   inset:0;
-  left:81px; /* after spine + perf */
   opacity:0;
   transition:opacity .5s ease;
   pointer-events:none;
@@ -317,7 +316,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 .bp-iframe{
   width:1280px;
   height:800px;
-  transform:scale(0.345);
+  transform:scale(0.37);
   transform-origin:top left;
   pointer-events:none;
   border:none;
@@ -391,7 +390,6 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 @media(max-width:600px){
   .bp-spine{width:56px;min-width:56px;}
   .bp-spine-cabin{font-size:6.5px;}
-  .bp-iframe-overlay{left:69px;}
   .bp-card{height:220px;}
 }
 </style>
@@ -761,7 +759,7 @@ document.querySelectorAll('.bp-card').forEach(card=>{
       iframe.style.opacity = '0';
       iframe.addEventListener('load',()=>{
         iframe.style.opacity = '1';
-        if(skeleton) skeleton.style.opacity = '0';
+        if(skeleton){ skeleton.style.opacity = '0'; setTimeout(()=>{ skeleton.style.display='none'; },500); }
       });
       overlay.appendChild(iframe);
       ioCard.disconnect();

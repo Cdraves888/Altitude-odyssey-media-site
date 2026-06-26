@@ -140,7 +140,7 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
     repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(201,168,76,0.015) 3px, rgba(201,168,76,0.015) 4px),
     repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(201,168,76,0.008) 3px, rgba(201,168,76,0.008) 4px);
 }
-.bp-card:hover,.bp-card.awake{
+.bp-card:hover{
   border-color:rgba(201,168,76,0.5);
   box-shadow:0 0 48px rgba(201,168,76,0.12), 0 12px 40px rgba(0,0,0,0.7);
 }
@@ -165,6 +165,32 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   object-fit:contain;
   opacity:0.8;
   flex-shrink:0;
+}
+.bp-spine-from{
+  font-family:'Cinzel',Georgia,serif;
+  font-size:6px;
+  letter-spacing:0.2em;
+  color:var(--gold-dim);
+  opacity:0.5;
+  text-transform:uppercase;
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  white-space:nowrap;
+}
+.bp-spine-dest{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:0.12em;
+  color:var(--white);
+  text-transform:uppercase;
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  white-space:nowrap;
+  opacity:0.85;
+  flex:1;
+  display:flex;
+  align-items:center;
 }
 .bp-spine-cabin{
   writing-mode:vertical-rl;
@@ -217,7 +243,6 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
 /* ── MAIN AREA ── */
 .bp-main{
   flex:1;
-  padding:18px 20px 14px 12px;
   display:flex;
   flex-direction:column;
   position:relative;
@@ -245,73 +270,49 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   color:var(--gold);
   opacity:.45;
   text-transform:uppercase;
-  margin-bottom:auto;
   position:relative;
-  z-index:1;
+  z-index:3;
+  flex-shrink:0;
+  padding:10px 12px 8px;
 }
 
-/* Pass content — visible when dormant */
-.bp-content{
+/* ── IFRAME WINDOW ── */
+.bp-window{
   flex:1;
+  position:relative;
+  overflow:hidden;
+}
+
+.bp-window-grad{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:40px;
+  background:linear-gradient(to top, #100d09 0%, transparent 100%);
+  z-index:3;
+  pointer-events:none;
   display:flex;
-  flex-direction:column;
-  justify-content:center;
-  transition:opacity .35s ease, transform .35s ease;
-  position:relative;
-  z-index:1;
-}
-.bp-card.awake .bp-content{
-  opacity:0;
-  transform:translateY(-4px);
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding:0 10px 6px;
 }
 
-.bp-name{
-  font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;
-  font-size:clamp(20px,3vw,28px);
-  font-weight:400;
-  color:var(--white);
-  line-height:1.1;
-  margin-bottom:10px;
-}
-.bp-divider{
-  height:1px;
-  width:32px;
-  background:linear-gradient(90deg, var(--gold), transparent);
-  margin-bottom:9px;
-}
-.bp-tag{
-  font-size:10.5px;
-  color:var(--text-dim);
-  font-style:italic;
-  line-height:1.5;
-}
-
-.bp-board{
-  font-family:'Cinzel',Georgia,'Times New Roman',serif;
-  font-size:8px;
-  letter-spacing:.22em;
+.bp-visit{
+  font-family:'Cinzel',Georgia,serif;
+  font-size:7px;
+  letter-spacing:0.2em;
   color:var(--gold);
-  opacity:.38;
-  text-align:right;
-  margin-top:8px;
-  transition:opacity .25s ease;
-  position:relative;
-  z-index:1;
+  opacity:0.6;
+  text-transform:uppercase;
 }
-.bp-card:hover .bp-board,.bp-card.awake .bp-board{opacity:.85;}
 
-/* ── IFRAME OVERLAY ── */
 .bp-iframe-overlay{
   position:absolute;
   inset:0;
-  opacity:0;
-  transition:opacity .5s ease;
-  pointer-events:none;
   overflow:hidden;
-  z-index:2;
-  background:#100d09;
+  pointer-events:none;
 }
-.bp-card.awake .bp-iframe-overlay{opacity:1;}
 
 .bp-iframe{
   width:1280px;
@@ -320,7 +321,8 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   transform-origin:top left;
   pointer-events:none;
   border:none;
-  transition:opacity .4s ease;
+  opacity:0;
+  transition:opacity 0.6s ease;
 }
 
 /* Skeleton shimmer while iframe loads */
@@ -379,7 +381,6 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
   nav{padding:18px 24px;}
   .nav-links{display:none;}
   .bp-card{height:240px;}
-  .bp-name{font-size:20px;}
   .tier-section{padding:60px 6vw;}
   .card-grid{grid-template-columns:1fr;}
   .sc-hero{padding:60px 6vw 48px;}
@@ -452,6 +453,8 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="Shore Polish">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
+            <span class="bp-spine-from">AOM Media</span>
+            <span class="bp-spine-dest">Shore Polish</span>
             <span class="bp-spine-cabin">Landing Class</span>
           </div>
           <div class="bp-perf">
@@ -461,14 +464,13 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           </div>
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
-            <div class="bp-content">
-              <h3 class="bp-name">Shore Polish</h3>
-              <div class="bp-divider"></div>
-              <p class="bp-tag">Single-scroll nail studio — clean, bookable, beautiful.</p>
-            </div>
-            <p class="bp-board">Board &rarr;</p>
-            <div class="bp-iframe-overlay">
-              <div class="bp-skeleton"></div>
+            <div class="bp-window">
+              <div class="bp-iframe-overlay">
+                <div class="bp-skeleton"></div>
+              </div>
+              <div class="bp-window-grad">
+                <span class="bp-visit">Visit &rarr;</span>
+              </div>
             </div>
           </div>
         </a>
@@ -485,6 +487,8 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="Smoke & Salt">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
+            <span class="bp-spine-from">AOM Media</span>
+            <span class="bp-spine-dest">Smoke &amp; Salt</span>
             <span class="bp-spine-cabin">Landing Class</span>
           </div>
           <div class="bp-perf">
@@ -494,14 +498,13 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           </div>
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
-            <div class="bp-content">
-              <h3 class="bp-name">Smoke &amp; Salt</h3>
-              <div class="bp-divider"></div>
-              <p class="bp-tag">Menu, mood, and a reason to drive over.</p>
-            </div>
-            <p class="bp-board">Board &rarr;</p>
-            <div class="bp-iframe-overlay">
-              <div class="bp-skeleton"></div>
+            <div class="bp-window">
+              <div class="bp-iframe-overlay">
+                <div class="bp-skeleton"></div>
+              </div>
+              <div class="bp-window-grad">
+                <span class="bp-visit">Visit &rarr;</span>
+              </div>
             </div>
           </div>
         </a>
@@ -533,6 +536,8 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="The Undertow">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
+            <span class="bp-spine-from">AOM Media</span>
+            <span class="bp-spine-dest">The Undertow</span>
             <span class="bp-spine-cabin">Presence Class</span>
           </div>
           <div class="bp-perf">
@@ -542,14 +547,13 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           </div>
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
-            <div class="bp-content">
-              <h3 class="bp-name">The Undertow</h3>
-              <div class="bp-divider"></div>
-              <p class="bp-tag">Built to feel like the room.</p>
-            </div>
-            <p class="bp-board">Board &rarr;</p>
-            <div class="bp-iframe-overlay">
-              <div class="bp-skeleton"></div>
+            <div class="bp-window">
+              <div class="bp-iframe-overlay">
+                <div class="bp-skeleton"></div>
+              </div>
+              <div class="bp-window-grad">
+                <span class="bp-visit">Visit &rarr;</span>
+              </div>
             </div>
           </div>
         </a>
@@ -566,6 +570,8 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="The Cove">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
+            <span class="bp-spine-from">AOM Media</span>
+            <span class="bp-spine-dest">The Cove</span>
             <span class="bp-spine-cabin">Presence Class</span>
           </div>
           <div class="bp-perf">
@@ -575,14 +581,13 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           </div>
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
-            <div class="bp-content">
-              <h3 class="bp-name">The Cove</h3>
-              <div class="bp-divider"></div>
-              <p class="bp-tag">Cinematic scroll reveals. Booking-led flow.</p>
-            </div>
-            <p class="bp-board">Board &rarr;</p>
-            <div class="bp-iframe-overlay">
-              <div class="bp-skeleton"></div>
+            <div class="bp-window">
+              <div class="bp-iframe-overlay">
+                <div class="bp-skeleton"></div>
+              </div>
+              <div class="bp-window-grad">
+                <span class="bp-visit">Visit &rarr;</span>
+              </div>
             </div>
           </div>
         </a>
@@ -613,6 +618,8 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="Haven Estates">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
+            <span class="bp-spine-from">AOM Media</span>
+            <span class="bp-spine-dest">Haven Estates</span>
             <span class="bp-spine-cabin">Platform Class</span>
           </div>
           <div class="bp-perf">
@@ -622,14 +629,13 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           </div>
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
-            <div class="bp-content">
-              <h3 class="bp-name">Haven Estates</h3>
-              <div class="bp-divider"></div>
-              <p class="bp-tag">Listings, agent profiles, schedule-a-showing.</p>
-            </div>
-            <p class="bp-board">Board &rarr;</p>
-            <div class="bp-iframe-overlay">
-              <div class="bp-skeleton"></div>
+            <div class="bp-window">
+              <div class="bp-iframe-overlay">
+                <div class="bp-skeleton"></div>
+              </div>
+              <div class="bp-window-grad">
+                <span class="bp-visit">Visit &rarr;</span>
+              </div>
             </div>
           </div>
         </a>
@@ -646,6 +652,8 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
            data-name="Altitude Flight Academy">
           <div class="bp-spine">
             <img src="aom-emblem.png" alt="AOM" class="bp-spine-emblem">
+            <span class="bp-spine-from">AOM Media</span>
+            <span class="bp-spine-dest">Flight Academy</span>
             <span class="bp-spine-cabin">Platform Class</span>
           </div>
           <div class="bp-perf">
@@ -655,14 +663,13 @@ footer{border-top:1px solid var(--border);padding:44px 10vw;display:flex;justify
           </div>
           <div class="bp-main">
             <p class="bp-issuer">Altitude Odyssey Media</p>
-            <div class="bp-content">
-              <h3 class="bp-name">Altitude Flight Academy</h3>
-              <div class="bp-divider"></div>
-              <p class="bp-tag">Course catalog, scheduling, application flows.</p>
-            </div>
-            <p class="bp-board">Board &rarr;</p>
-            <div class="bp-iframe-overlay">
-              <div class="bp-skeleton"></div>
+            <div class="bp-window">
+              <div class="bp-iframe-overlay">
+                <div class="bp-skeleton"></div>
+              </div>
+              <div class="bp-window-grad">
+                <span class="bp-visit">Visit &rarr;</span>
+              </div>
             </div>
           </div>
         </a>
@@ -739,66 +746,44 @@ const obs=new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 // ── BOARDING PASS CARDS ──
-// Per card: mount iframe when scrolled into view, wake on hover
-document.querySelectorAll('.bp-card').forEach(card=>{
+document.querySelectorAll('.bp-card').forEach(card => {
   const overlay = card.querySelector('.bp-iframe-overlay');
-  const skeleton = card.querySelector('.bp-skeleton');
+  const skeleton = overlay.querySelector('.bp-skeleton');
   const url = card.dataset.url;
   let iframeMounted = false;
-  let awake = false;
 
-  // IntersectionObserver: pre-load iframe when card enters viewport
-  const ioCard = new IntersectionObserver(entries=>{
-    if(entries[0].isIntersecting && !iframeMounted){
+  // Load iframe when scrolled into view
+  const io = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !iframeMounted) {
       iframeMounted = true;
       const iframe = document.createElement('iframe');
       iframe.src = url;
       iframe.title = card.dataset.name;
       iframe.loading = 'lazy';
       iframe.className = 'bp-iframe';
-      iframe.style.opacity = '0';
-      iframe.addEventListener('load',()=>{
+      iframe.addEventListener('load', () => {
         iframe.style.opacity = '1';
-        if(skeleton){ skeleton.style.opacity = '0'; setTimeout(()=>{ skeleton.style.display='none'; },500); }
+        if (skeleton) {
+          skeleton.style.opacity = '0';
+          setTimeout(() => { skeleton.style.display = 'none'; }, 500);
+        }
       });
       overlay.appendChild(iframe);
-      ioCard.disconnect();
+      io.disconnect();
     }
-  },{threshold:0.05});
-  ioCard.observe(card);
+  }, { threshold: 0.05 });
+  io.observe(card);
 
-  // Hover to wake (desktop)
-  card.addEventListener('mouseenter',()=>{
-    awake = true;
-    card.classList.add('awake');
-  });
-  card.addEventListener('mouseleave',()=>{
-    awake = false;
-    card.classList.remove('awake');
-    // reset tilt
-    card.style.transform = '';
-  });
-
-  // Tilt on mouse move
-  card.addEventListener('mousemove',e=>{
+  // Tilt on mousemove
+  card.addEventListener('mousemove', e => {
     const rect = card.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    card.style.transform = `perspective(900px) rotateY(${x*7}deg) rotateX(${-y*7}deg) translateZ(3px)`;
+    card.style.transform = `perspective(900px) rotateY(${x * 7}deg) rotateX(${-y * 7}deg) translateZ(3px)`;
   });
-
-  // Touch: first tap wakes, second tap navigates (default link)
-  let tapped = false;
-  card.addEventListener('touchstart',e=>{
-    if(!awake && !tapped){
-      e.preventDefault();
-      tapped = true;
-      awake = true;
-      card.classList.add('awake');
-      // auto-dismiss after 3s if no second tap
-      setTimeout(()=>{ tapped=false; awake=false; card.classList.remove('awake'); }, 3000);
-    }
-  },{passive:false});
+  card.addEventListener('mouseleave', e => {
+    card.style.transform = '';
+  });
 });
 </script>
 <script src="chat.js?v=3"></script>
